@@ -538,7 +538,7 @@ html, body { overflow-x:hidden; }
 <button id="importBtn">📥 Carica link</button>
 <button id="clearAllBtn" title="Pulisci tutte le sezioni, link e OP">🧹 Pulisci tutto</button>
 
-<button id=\"saveRepoBtn\">💾 Salva su repo</button>
+<button id=\"saveRepoBtn\">💾 Salva su repo (Actions)</button>
 </div>
 </div>
 </header>
@@ -983,7 +983,47 @@ function clearAll(){ if(!confirm('Confermi? Saranno eliminati TUTTI i link, TUTT
 var SEC_FILTER_KEY='linkhub.secFilter.v1'; function getVisibleSectionsSet(){ try{ var raw=localStorage.getItem(SEC_FILTER_KEY); if(!raw) return null; var arr=JSON.parse(raw); if(!Array.isArray(arr)||arr.length===0) return null; return new Set(arr); }catch(e){ return null; } }
 function setVisibleSections(ids){ try{ if(!ids || ids.length===0 || ids.length===state.sections.length){ localStorage.removeItem(SEC_FILTER_KEY); } else { localStorage.setItem(SEC_FILTER_KEY, JSON.stringify(ids)); } }catch(e){} }
 function updateFilterSectionsBtn(){ var btn=document.getElementById('filterSectionsBtn'); if(!btn) return; btn.textContent='🏠 Menu'; try{ var vis=getVisibleSectionsSet(); var total= state && state.sections ? state.sections.length : 0; var all=(!vis || (vis && vis.size===total)); var label = all ? 'Tutte ('+total+')' : ('Filtrate: '+vis.size+'/'+total); btn.title='Selezione sezioni: '+label; }catch(e){} }
-function openFilterSectionsDialog(){ try{ var dlg=document.getElementById('filterSectionsDlg'); var menu=document.getElementById('filterMenu'); var items=[]; items.push('<button class="menu-btn" data-id="ALL"><div class="label"><span class="ico">🏠</span><div class="text"><div class="name">Tutte</div><div class="desc">Mostra tutte le sezioni</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_OP"><div class="label"><span class="ico">📝</span><div class="text"><div class="name">Solo Open Points</div><div class="desc">Nasconde tutte le sezioni link</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_SVC"><div class="label"><span class="ico">🛠</span><div class="text"><div class="name">Solo Servizi</div><div class="desc">Nasconde le sezioni link</div></div></div></button>'); Array.prototype.push.apply(items, state.sections.map(function(s){ var icon=(s.icon&&String(s.icon).trim())? String(s.icon).trim() : '📁'; var desc=(s.desc&&String(s.desc).trim())? ('<div class="desc">'+escapeHtml(String(s.desc).trim())+'</div>') : ''; return '<button class="menu-btn" data-id="'+s.id+'"><div class="label"><span class="ico">'+escapeHtml(icon)+'</span><div class="text"><div class="name">'+escapeHtml(s.name)+'</div>'+desc+'</div></div></button>'; })); menu.innerHTML = items.join(''); Array.prototype.forEach.call(menu.querySelectorAll('button.menu-btn'), function(btn){ btn.onclick=function(){ var id=btn.getAttribute('data-id'); if(id==='ALL') setVisibleSections(null); else if(id==='SOLO_OP' || id==='SOLO_SVC') setVisibleSections(['__NONE__']); else setVisibleSections([id]); render(); updateFilterSectionsBtn(); dlg.close(); }; }); var fsClose=document.getElementById('fsCloseBtn'); if(fsClose) fsClose.onclick=function(){ dlg.close(); }; dlg.showModal(); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } }
+
+// --- Utility: mostra/nascondi sezioni speciali OP / SVC e salva su UI state
+function setMainSectionsVisibility(opVisible, svcVisible) {
+  var ui = loadUIState() || {};
+  ui.opCollapsed  = !opVisible;
+  ui.svcCollapsed = !svcVisible;
+  saveUIState(ui);
+  // OP
+  var opBody   = document.getElementById('opBody');
+  var opToggle = document.getElementById('opToggle');
+  if (opBody && opToggle) {
+    opBody.classList.toggle('hidden', !opVisible);
+    opToggle.textContent = opVisible ? '▾' : '▸';
+  }
+  // SVC
+  var svcBody   = document.getElementById('svcBody');
+  var svcToggle = document.getElementById('svcToggle');
+  if (svcBody && svcToggle) {
+    svcBody.classList.toggle('hidden', !svcVisible);
+    svcToggle.textContent = svcVisible ? '▾' : '▸';
+  }
+}
+function openFilterSectionsDialog(){ try{ var dlg=document.getElementById('filterSectionsDlg'); var menu=document.getElementById('filterMenu'); var items=[]; items.push('<button class="menu-btn" data-id="ALL"><div class="label"><span class="ico">🏠</span><div class="text"><div class="name">Tutte</div><div class="desc">Mostra tutte le sezioni</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_OP"><div class="label"><span class="ico">📝</span><div class="text"><div class="name">Solo Open Points</div><div class="desc">Nasconde tutte le sezioni link</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_SVC"><div class="label"><span class="ico">🛠</span><div class="text"><div class="name">Solo Servizi</div><div class="desc">Nasconde le sezioni link</div></div></div></button>'); Array.prototype.push.apply(items, state.sections.map(function(s){ var icon=(s.icon&&String(s.icon).trim())? String(s.icon).trim() : '📁'; var desc=(s.desc&&String(s.desc).trim())? ('<div class="desc">'+escapeHtml(String(s.desc).trim())+'</div>') : ''; return '<button class="menu-btn" data-id="'+s.id+'"><div class="label"><span class="ico">'+escapeHtml(icon)+'</span><div class="text"><div class="name">'+escapeHtml(s.name)+'</div>'+desc+'</div></div></button>'; })); menu.innerHTML = items.join(''); Array.prototype.forEach.call(menu.querySelectorAll('button.menu-btn'), function(btn){ btn.onclick = function () {
+  var id = btn.getAttribute('data-id');
+  if (id === 'ALL') {
+    setVisibleSections(null);
+    setMainSectionsVisibility(true, true);
+  } else if (id === 'SOLO_OP') {
+    setVisibleSections(['__NONE__']);
+    setMainSectionsVisibility(true, false);
+  } else if (id === 'SOLO_SVC') {
+    setVisibleSections(['__NONE__']);
+    setMainSectionsVisibility(false, true);
+  } else {
+    setVisibleSections([id]);
+    setMainSectionsVisibility(true, true);
+  }
+  render();
+  updateFilterSectionsBtn();
+  dlg.close();
+}; }); var fsClose=document.getElementById('fsCloseBtn'); if(fsClose) fsClose.onclick=function(){ dlg.close(); }; dlg.showModal(); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } }
 
 // Drag & drop for cards
 var dragState={id:null}; var caretEl=null; var rafId=0; function setupDragAndDrop(){ Array.prototype.forEach.call(document.querySelectorAll('.drag-handle'), function(h){ h.addEventListener('dragstart', onHandleDragStart); h.addEventListener('dragend', onHandleDragEnd); }); Array.prototype.forEach.call(document.querySelectorAll('.card'), function(card){ card.addEventListener('dragover', onCardDragOver); card.addEventListener('dragleave', onCardDragLeave); card.addEventListener('drop', onCardDrop); }); Array.prototype.forEach.call(document.querySelectorAll('.section'), function(sectionEl){ sectionEl.addEventListener('dragover', onSectionDragOver); sectionEl.addEventListener('dragleave', onSectionDragLeave); sectionEl.addEventListener('drop', onSectionDrop); }); }
@@ -1179,36 +1219,57 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
   }
 })();
 </script>
+<script>
+// === v44.0: GitHub Actions autosave via Issue (no token) + debounce/anti-spam ===
+(function(){
+  const LS_CFG = 'autosave.repo';        // {owner,repo}
+  const LS_LAST = 'autosave.last';       // {ts, hash}
+  const LABEL = 'autosave';              // label watched by the Action
+  let inFlight = false;
+  function djb2(str){ let h=5381; for(let i=0;i<str.length;i++){ h=((h<<5)+h) + str.charCodeAt(i); h=h|0; } return (h>>>0).toString(16);}
+  function toast(msg){ try{ var t=document.createElement('div'); t.textContent=msg; t.style.position='fixed'; t.style.bottom='18px'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.background='#0b1227'; t.style.border='1px solid #334155'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=99; t.style.color='#e5e7eb'; document.body.appendChild(t); setTimeout(()=>t.remove(),1600);}catch(e){} }
+  function getRepoCfg(){ try{ const raw=localStorage.getItem(LS_CFG); if(raw){ const cfg=JSON.parse(raw); if(cfg && cfg.owner && cfg.repo) return cfg; } }catch(e){}
+    const owner = prompt('GitHub OWNER/ORG (es. my-org o mio-utente):',''); if(!owner) throw new Error('Owner mancante');
+    const repo  = prompt('GitHub REPO (es. linkhub):',''); if(!repo) throw new Error('Repo mancante');
+    const cfg={owner:String(owner).trim(), repo:String(repo).trim()}; localStorage.setItem(LS_CFG, JSON.stringify(cfg)); return cfg; }
+  function buildPayload(){ const slim = { sections: (window.state && Array.isArray(state.sections)) ? state.sections : [], links: (window.state && Array.isArray(state.links)) ? state.links : [], openPoints:(window.state && Array.isArray(state.openPoints)) ? state.openPoints : [], services: (window.state && Array.isArray(state.services)) ? state.services : [] }; return JSON.stringify(slim); }
+  function openIssueURL(owner, repo, title, labels, body){ const base = 'https://github.com/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/issues/new'; const params = new URLSearchParams(); params.set('title', title); if(labels && labels.length) params.set('labels', labels.join(',')); params.set('body', body); const url = base + '?' + params.toString(); window.open(url, '_blank', 'noopener'); }
+  function copyToClipboard(text){ try{ navigator.clipboard.writeText(text); return true; }catch(e){ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); const ok=document.execCommand('copy'); ta.remove(); return ok; } }
+  function debounced(fn, ms){ let t=null; return function(){ clearTimeout(t); const ctx=this, args=arguments; t=setTimeout(()=>fn.apply(ctx,args), ms); }; }
+  async function handleSave(){ if(inFlight){ toast('Operazione in corso…'); return; } inFlight=true; const btn=document.getElementById('saveRepoBtn'); if(btn){ btn.disabled=true; btn.style.opacity='.7'; } try{
+      const cfg=getRepoCfg(); const json=buildPayload(); const ts=new Date().toISOString();
+      // anti-spam (20s per identico contenuto)
+      try{ const lastRaw=localStorage.getItem(LS_LAST); if(lastRaw){ const last=JSON.parse(lastRaw); if(last && last.hash===djb2(json) && (Date.now()-last.ts)<20000){ toast('Attendi qualche secondo prima di ripetere il salvataggio'); return; } } }catch(e){}
+      const pretty=JSON.stringify(JSON.parse(json), null, 2); const compactHash=djb2(json); const header='Autosave payload\n\nTimestamp: '+ts+'\nContent-Hash: '+compactHash; const bodyBlock='```json\n'+pretty+'\n```'; let issueBody=header+'\n\n'+bodyBlock+'\n\n<!-- linkhub-autosave -->';
+      const MAX_URL_BODY=6500; const safeBodyForURL = issueBody.length <= MAX_URL_BODY ? issueBody : null;
+      if(safeBodyForURL){ openIssueURL(cfg.owner, cfg.repo, 'autosave '+ts, [LABEL], safeBodyForURL); toast('Si apre GitHub: conferma la creazione dell'Issue'); }
+      else { const ok=copyToClipboard(issueBody); if(ok){ const smallBody='**Incolla il payload negli appunti tra i marker qui sotto e premi Submit.**\n\n```json\nPASTE_HERE\n```\n\nTimestamp: '+ts+'  \\nContent-Hash: '+compactHash+'\n\n<!-- linkhub-autosave -->'; openIssueURL(cfg.owner, cfg.repo, 'autosave '+ts, [LABEL], smallBody); toast('Payload copiato: incollalo nel corpo dell'Issue'); } else { alert('Copia negli appunti non riuscita: prova a ripetere o ridurre i dati'); } }
+      try{ localStorage.setItem(LS_LAST, JSON.stringify({ ts: Date.now(), hash: djb2(json) })); }catch(e){}
+    }catch(e){ alert('Salvataggio non riuscito: '+(e&&e.message?e.message:e)); } finally { inFlight=false; const btn=document.getElementById('saveRepoBtn'); if(btn){ btn.disabled=false; btn.style.opacity=''; } } }
+  window.addEventListener('DOMContentLoaded', function(){ const btn=document.getElementById('saveRepoBtn'); if(btn){ btn.title='Crea un'Issue su GitHub con i dati correnti'; btn.addEventListener('click', debounced(handleSave, 500)); } });
+})();
+</script>
 
 <script>
-// === v43.3: Commit su GitHub (via Function) — inline ===
-(async function(){
-  async function saveRepo(path, data, message){
-    const endpoints = [
-      '/.netlify/functions/save-to-github', // Netlify
-      '/api/save-to-github'                 // Vercel
+// === v44.1: Autoload dai file in /data (sempre all'avvio) ===
+(function(){
+  function safeJSON(t){ try{ return JSON.parse(t); }catch(e){ throw new Error('JSON non valido'); } }
+  async function safeFetchJSON(url){ const r=await fetch(url,{cache:'no-cache'}); if(!r.ok) throw new Error('HTTP '+r.status+' '+url); const t=await r.text(); return safeJSON(t); }
+  async function autoload(){
+    if(!location || !/^https?:/i.test(location.protocol)) return;
+    const base = new URL('./data/', location.href).href;
+    const files = [
+      {name:'linkhub-links.json', map:(data,acc)=>{ if(Array.isArray(data)){ acc.links=data; } else { if(data.sections) acc.sections = Array.isArray(data.sections)? data.sections : acc.sections; if(data.links) acc.links = Array.isArray(data.links)? data.links : acc.links; }}},
+      {name:'open-points.json',   map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.openPoints)? data.openPoints : []); acc.openPoints = arr; }},
+      {name:'services.json',      map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.services)? data.services : []); acc.services = arr; }},
+      {name:'data.json',          map:(data,acc)=>{ if(data.sections) acc.sections = data.sections; if(data.links) acc.links = data.links; if(data.openPoints) acc.openPoints = Array.isArray(data.openPoints)? data.openPoints : acc.openPoints; if(data.services) acc.services = Array.isArray(data.services)? data.services : acc.services; }}
     ];
-    let lastErr;
-    for (const url of endpoints){
-      try{
-        const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ path, data, message })});
-        if (r.ok) return await r.json();
-        lastErr = await r.text();
-      }catch(e){ lastErr = String(e); }
-    }
-    throw new Error('Nessun endpoint disponibile: '+lastErr);
+    let acc={sections:[],links:[],openPoints:[],services:[]}; let any=false;
+    for(const f of files){ try{ const j = await safeFetchJSON(base+f.name); f.map(j, acc); any=true; }catch(e){} }
+    if(!any) return;
+    try{ if(typeof normalizeState==='function'){ const norm = normalizeState(acc); if(norm){ window.state = norm; save(state); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); } } }catch(e){}
   }
-  async function saveAllToRepo(){
-    try{
-      await saveRepo('linkhub-links.json', { sections: state.sections, links: state.links }, 'Autosave links');
-      await saveRepo('open-points.json',   { openPoints: state.openPoints }, 'Autosave OP');
-      await saveRepo('services.json',      { services: state.services }, 'Autosave servizi');
-      if (typeof toast==='function') toast('Salvato su repo'); else alert('Salvato su repo');
-    }catch(e){ alert('Salvataggio su repo non riuscito: '+e.message); }
-  }
-  window.addEventListener('DOMContentLoaded', function(){
-    var b = document.getElementById('saveRepoBtn'); if(b) b.onclick = saveAllToRepo;
-  });
+  document.addEventListener('DOMContentLoaded', autoload);
 })();
 </script>
 
