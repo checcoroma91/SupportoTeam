@@ -1,10 +1,247 @@
 <!DOCTYPE html>
+
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Team Sistemi Anagrafici (v19_7c)</title>
-<style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>BPER Banca – Team Sistemi Anagrafici (v37 – Servizi multilinea + Parametri In/Out)</title>
+<style>:root{ --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#22c55e; --danger:#ef4444; --chip:#1f2937; --space:18px; --edge:clamp(8px, 2vw, 16px); --op-max:60vh; }
+*{box-sizing:border-box} html, body { max-width:100%; overflow-x:hidden; }
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,#0b1023,#0f172a);color:var(--text)}
+.wrap{max-width:none;margin:0;padding:var(--space) var(--edge)} header{position:sticky;top:0;background:rgba(15,23,42,.8);backdrop-filter:blur(8px);border-bottom:1px solid #1f2937;z-index:20}
+h1{margin:0;font-size:22px;display:flex;align-items:center;gap:10px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center}
+input[type="search"], select, button, .chip {border:1px solid #263041;background:#0b1328;color:var(--text);padding:10px 12px;border-radius:10px}
+input[type="search"]{flex:1;min-width:220px;margin-left:20px} button{cursor:pointer}
+main{padding:var(--space) var(--edge)} .section{border:1px solid #1f2937;border-radius:14px;margin-bottom:16px;background:linear-gradient(180deg,#0e142a,#091026); overflow:hidden}
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #1f2937; background:linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02));}
+.section-title{display:flex;align-items:center;gap:10px;font-weight:600} .section-title .toggle{width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #263041;border-radius:8px;background:#0a1227}
+.section-actions{display:flex;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:14px; position:relative;}
+.card{background:#0b1023;border:1px solid #1f2937;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.card-head{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.drag-handle{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid #334155;background:#0a1227;color:#cbd5e1;border-radius:8px;cursor:grab}
+.drag-handle:active{cursor:grabbing} .card h3{margin:0;font-size:16px;display:flex;align-items:center;gap:8px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.actions{display:flex;gap:8px;margin-top:6px} .actions button{background:#0a1227} .actions .danger{border-color:#3a1b1b;background:#1b0f10;color:#fecaca}
+a{ color:#38bdf8; text-decoration-color: rgba(56,189,248,.6); } a:visited{ color:#f59e0b; } a:hover{ color:#7dd3fc; text-decoration-color: currentColor; } a:active{ color:#22c55e; } a:focus-visible{ outline:2px dashed #22c55e; outline-offset:2px; border-radius:4px; }
+dialog{border:none;border-radius:14px;padding:0;max-width:560px;width:100%} .modal{background:#0b1023;color:var(--text);border:1px solid #1f2937;border-radius:14px;overflow:hidden} .modal .content{padding:16px}
+.row{display:flex;gap:10px;margin-bottom:10px} .row input, .row textarea, .row select{flex:1;width:100%;border:1px solid #263041;background:#0a1227;color:var(--text);padding:10px;border-radius:10px} .row textarea{min-height:80px}
+.empty{color:#94a3b8;text-align:center;padding:40px} footer{color:#94a3b8;font-size:12px;text-align:center;padding:22px} .kbd{border:1px solid #334155;background:#0a1227;border-radius:6px;padding:2px 6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.dragging{ opacity:.6; } .section.drop-target{ outline: 2px dashed rgba(34,197,94,.35); } .insert-caret{ position:absolute; width:3px; border-radius:2px; background: #22c55e; box-shadow:0 0 0 2px rgba(34,197,94,.25), 0 0 18px rgba(34,197,94,.35); pointer-events:none; z-index:5; }
+.hidden{ display:none; }
+@media (max-width: 900px){ :root{ --space:14px } .grid{ gap:12px; padding:12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } }
+@media (max-width: 640px){ h1{ font-size:20px } .toolbar{ flex-direction:column; align-items:stretch; gap:8px; } .toolbar > *{ width:100%; } input[type="search"]{ margin-left:0; min-width:0; } button, select, input[type="search"]{ padding:8px 10px; } .section-header{ flex-direction:column; align-items:stretch; gap:8px; } .section-actions{ justify-content:flex-end; } .grid{ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } .card{ padding:12px } .section-title .toggle{ width:24px; height:24px } }
+@media (max-width: 420px){ .grid{ grid-template-columns: 1fr; } }
+@media (max-width: 640px){ dialog{ margin:0; width:100vw; height:100vh; max-width:100vw; max-height:100vh; } .modal{ height:100%; border-radius:0; border-left:none; border-right:none; display:flex; flex-direction:column; } .modal-bar{ position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:12px var(--edge); background:#0b1023; border-bottom:1px solid #1f2937; } .modal-bar .title{ font-weight:600; } .modal-bar .close{ appearance:none; background:transparent; color:var(--text); border:1px solid #334155; width:36px; height:36px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; } .modal .content{ flex:1; overflow:auto; padding:12px var(--edge); } .row{ gap:8px; margin-bottom:8px } #cancelBtn{ display:none } }
+dialog::backdrop{ background: rgba(2,6,23,.6) }
+.modal-bar{ display:grid; grid-template-columns: 1fr auto; align-items:center; padding:12px var(--edge); background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border-bottom:1px solid #1f2937; }
+.modal-bar .title{ margin:0; padding-left:8px; font-weight:600; line-height:1.2; } .modal-bar .close{ justify-self:end; width:36px; height:36px; border-radius:10px; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border: 1px solid #1f2937; padding: 8px 10px; font-size: 13px; vertical-align: top; }
+.table th { background: #0a1227; text-align: left; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid #263041; background: var(--chip); color: #cbd5e1; }
+.badge.state { background:#0a1227; color:#cbd5e1; border-color:#334155; }
+.badge.max { background:#5b1c33; color:#ffd1dc; border-color:#7a2a49; }
+.table-actions { display: inline-flex; gap: 8px; }
+.table-actions button { background: #0a1227; border: 1px solid #263041; color: var(--text); padding: 6px 8px; border-radius: 8px; }
+.table-actions .danger { border-color: #3a1b1b; background: #1b0f10; color: #fecaca; }
+#opBody > .grid { display:block; }
+#opTableWrap { width:100%; overflow:auto; max-height: var(--op-max); }
+#opSummaryBar { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid #1f2937; background: #0a1227; position:sticky; top:0; z-index:1; }
+#opSummaryBar .count { color: var(--muted); font-size:13px; }
+.col-id{ display:none; }
+th.sortable{ cursor:pointer; user-select:none; }
+th.sortable .arrow{ opacity:.7; margin-left:6px; }
+/* Services full width */
+#svcBody > .grid { display:block; }
+#svcTableWrap { width:100%; overflow:auto; max-height: var(--op-max); }
+/* Multiline columns */
+.col-operation{ white-space: pre-wrap; word-break: break-word; }
+.col-multiline{ white-space: pre-wrap; word-break: break-word; }
+
+/* === v15: applicativo -1%, azioni +1% === */
+#svcTable{ table-layout: fixed; width: 100%; }
+#svcTable th, #svcTable td{ box-sizing: border-box; }
+#svcTable td, #svcTable th{ white-space: normal; overflow-wrap:anywhere; word-break: break-word; }
+#svcTable col.w-routine{     width: 7%; }
+#svcTable col.w-tipo{        width: 5%; }
+#svcTable col.w-servizio{    width: 15%; }
+#svcTable col.w-oper{        width: 18%; }
+#svcTable col.w-fallback{    width: 6%; }
+#svcTable col.w-descr{       width: 22%; }
+#svcTable col.w-ambito{      width: 5%; }
+#svcTable col.w-applicativo{ width: 7%; }  /* reduced by 1% */
+#svcTable col.w-in{          width: 5%; }
+#svcTable col.w-out{         width: 5%; }
+#svcTable col.w-azioni{      width: 5%; }  /* increased by 1% */
+
+
+
+/* === v25 (from v15): Dialog improvements for Sections === */
+
+#sectionsDlg .modal-bar { position: sticky; top: 0; z-index: 2; }
+
+#sectionsDlg #sectionsList .list-item {
+  display: grid;
+  grid-template-columns: 1.6fr 2.4fr minmax(140px,0.8fr) minmax(170px,0.9fr) minmax(250px, auto);
+  gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid #1f2937;
+}
+#sectionsDlg #sectionsList .list-item > input, #sectionsDlg #sectionsList .list-item > select { min-width: 0; padding-left: 8px; padding-right: 8px; }
+#sectionsDlg #sectionsList .iconSel { width: 120px; }
+#sectionsDlg #sectionsList .controls { display:inline-flex; flex-wrap: nowrap; gap:8px; white-space: nowrap; }
+#sectionsDlg #sectionsList .controls button { flex: 0 0 auto; }
+
+/* Filter menu: wide + grid 5 cols */
+
+#filterSectionsDlg .modal-bar { position: sticky; top: 0; z-index: 2; }
+
+
+
+
+
+#filterMenu .menu-btn .text { flex:1; min-width:0; }
+
+@media (min-width: 1600px){   }
+@media (max-width: 1000px){  }
+@media (max-width: 640px){  }
+
+/* === v38: Grid definitiva: controlli auto, Nome/Descr minmax, niente x-scroll === */
+#sectionsDlg #sectionsList .list-item {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1fr)   /* Nome */
+    minmax(320px, 2fr)   /* Descrizione */
+    auto                 /* Icona */
+    auto                 /* Colore */
+    auto;                /* Azioni */
+  gap: 8px;
+  align-items: center;
+}
+#sectionsDlg .content > .row {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1fr)
+    minmax(320px, 2fr)
+    auto
+    auto
+    auto;
+  gap: 8px;
+  align-items: center;
+}
+#sectionsDlg input,
+#sectionsDlg select { min-width: 0; width: 100%; }
+#sectionsDlg .controls { display: inline-flex; width: auto; gap: 6px; }
+#sectionsDlg .modal, 
+
+
+/* === v39: fix selettori che dilatano le colonne auto; controlli a misura contenuto === */
+/* 1) Lasciare input a larghezza piena nella propria cella, ma NON i select */
+#sectionsDlg input { min-width: 0; width: 100%; }
+#sectionsDlg select { width: max-content; max-width: 100%; min-width: 0; }
+#sectionsDlg #sectionsList .iconSel { width: max-content; }
+
+/* 2) Le colonne di controllo (auto) devono misurare il contenuto reale */
+#sectionsDlg #sectionsList .controls { display: inline-flex; gap: 6px; white-space: nowrap; width: max-content; }
+#sectionsDlg #sectionsList .controls button { width: 26px; height: 26px; }
+
+/* 3) Griglia definitiva: Nome/Descr minmax, controlli auto */
+#sectionsDlg #sectionsList .list-item {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1fr)   /* Nome */
+    minmax(320px, 2fr)   /* Descrizione */
+    auto                 /* Icona */
+    auto                 /* Colore */
+    auto;                /* Azioni */
+  gap: 8px;
+  align-items: center;
+}
+#sectionsDlg .content > .row {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1fr)
+    minmax(320px, 2fr)
+    auto
+    auto
+    auto;
+  gap: 8px;
+  align-items: center;
+}
+
+/* 4) Mai scrollbar orizzontale nella dialog */
+#sectionsDlg .modal, 
+
+
+/* === v40: no-x-scroll robusto + colonne controlli a misura + contenitore sicuro === */
+html, body { overflow-x: hidden; }
+
+
+
+
+/* Grid: Nome/Descr elastiche, controlli auto */
+#sectionsDlg #sectionsList .list-item,
+#sectionsDlg .content > .row {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1fr)
+    minmax(320px, 2fr)
+    auto
+    auto
+    auto;
+  gap: 8px;
+  align-items: center;
+}
+/* Evita che i figli forzino la larghezza della traccia */
+#sectionsDlg #sectionsList .list-item > *,
+#sectionsDlg .content > .row > * { min-width: 0; }
+
+/* Input riempiono la cella; select/azioni "a misura" */
+#sectionsDlg input { width: 100%; }
+#sectionsDlg select { width: auto; max-width: 100%; }
+#sectionsDlg #sectionsList .iconSel { width: auto; }
+#sectionsDlg #sectionsList .controls { width: auto; display: inline-flex; gap: 6px; white-space: nowrap; }
+#sectionsDlg #sectionsList .controls button { width: 26px; height: 26px; }
+
+
+/* === v41: dimensioni come mock: colonne fisse a misura, dialog responsive === */
+:root{
+  --col-name: clamp(180px, 22vw, 240px);
+  --col-desc: clamp(260px, 34vw, 380px);
+  --col-icon: clamp(80px, 10vw, 110px);
+  --col-color: clamp(120px, 14vw, 180px);
+  --col-actions: clamp(170px, 20vw, 220px);
+}
+
+/* Dialog size like screenshots */
+
+
+
+
+/* Grid: colonne con variabili per matchare il mock */
+#sectionsDlg #sectionsList .list-item,
+#sectionsDlg .content > .row{
+  display: grid;
+  grid-template-columns: var(--col-name) var(--col-desc) var(--col-icon) var(--col-color) var(--col-actions);
+  gap: 12px; align-items: center;
+}
+
+/* Elementi interni: non forzare overflow, riempire la cella */
+#sectionsDlg #sectionsList .list-item > *,
+#sectionsDlg .content > .row > *{ min-width: 0; }
+#sectionsDlg input, #sectionsDlg select { width: 100%; }
+#sectionsDlg #sectionsList .controls{ display:flex; gap:8px; justify-content:flex-start; width:100%; }
+#sectionsDlg #sectionsList .controls button{ width:32px; height:32px; border-radius:9px; }
+
+/* Filtro: barra a griglia come mock (cards) */
+
+
+@media (max-width: 1200px){  }
+@media (max-width: 900px){  }
+
+
+/* === injected from Team_Sistemi_Anagrafici.html (dialogs) === */
+
 :root{ --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#22c55e; --danger:#ef4444; --chip:#1f2937; --space:18px; --edge:clamp(8px, 2vw, 16px); }
 *{box-sizing:border-box} html, body { max-width:100%; overflow-x:hidden; }
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,#0b1023,#0f172a);color:var(--text)}
@@ -30,7 +267,6 @@ dialog{border:none;border-radius:14px;padding:0;max-width:560px;width:100%} .mod
 .row{display:flex;gap:10px;margin-bottom:10px} .row input, .row textarea, .row select{flex:1;width:100%;border:1px solid #263041;background:#0a1227;color:var(--text);padding:10px;border-radius:10px} .row textarea{min-height:80px}
 .empty{color:#94a3b8;text-align:center;padding:40px} footer{color:#94a3b8;font-size:12px;text-align:center;padding:22px} .kbd{border:1px solid #334155;background:#0a1227;border-radius:6px;padding:2px 6px;font-family:ui-monospace,Menlo,Consolas,monospace}
 .dragging{ opacity:.6; } .section.drop-target{ outline: 2px dashed rgba(34,197,94,.35); } .insert-caret{ position:absolute; width:3px; border-radius:2px; background: #22c55e; box-shadow:0 0 0 2px rgba(34,197,94,.25), 0 0 18px rgba(34,197,94,.35); pointer-events:none; z-index:5; }
-.hidden{ display:none; }
 @media (max-width: 900px){ :root{ --space:14px } .grid{ gap:12px; padding:12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } }
 @media (max-width: 640px){ h1{ font-size:20px } .toolbar{ flex-direction:column; align-items:stretch; gap:8px; } .toolbar > *{ width:100%; } input[type="search"]{ margin-left:0; min-width:0; } button, select, input[type="search"]{ padding:8px 10px; } .section-header{ flex-direction:column; align-items:stretch; gap:8px; } .section-actions{ justify-content:flex-end; } .grid{ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } .card{ padding:12px } .section-title .toggle{ width:24px; height:24px } }
 @media (max-width: 420px){ .grid{ grid-template-columns: 1fr; } }
@@ -38,6 +274,12 @@ dialog{border:none;border-radius:14px;padding:0;max-width:560px;width:100%} .mod
 dialog::backdrop{ background: rgba(2,6,23,.6) }
 .modal-bar{ display:grid; grid-template-columns: 1fr auto; align-items:center; padding:12px var(--edge); background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border-bottom:1px solid #1f2937; }
 .modal-bar .title{ margin:0; padding-left:8px; font-weight:600; line-height:1.2; } .modal-bar .close{ justify-self:end; width:36px; height:36px; border-radius:10px; }
+  
+#sectionsDlg #sectionsList{ display:flex; flex-direction:column; gap:16px; }
+#sectionsDlg #sectionsList .list-item{ display:grid; grid-template-columns: 1.2fr 1.4fr 120px 180px auto; align-items:center; gap:14px; padding:12px 14px; background:#0b1023; border:1px solid #1f2937; border-radius:12px; }
+#sectionsDlg #sectionsList .controls{ display:inline-flex; gap:10px; justify-self:end; } #sectionsDlg #sectionsList .controls button{ min-width:36px; height:36px; border-radius:10px; }
+#sectionsDlg .content > .row:last-child{ margin-top:22px; padding-top:14px; border-top:1px solid #1f2937; display:grid; grid-template-columns: 1.2fr 1.4fr 120px 180px auto; gap:14px; align-items:center; }
+#sectionsDlg #newSectionName, #sectionsDlg #newSectionColor{ height:36px; } #sectionsDlg #addSectionBtn{ height:36px; border-radius:10px; }
 .toolbar button#exportBtn{ border-color:#2563eb; box-shadow:0 0 0 1px rgba(37,99,235,.25) inset; } .toolbar button#importBtn{ border-color:#059669; box-shadow:0 0 0 1px rgba(5,150,105,.25) inset; }
 .toolbar button#exportBtn:hover{ background:#0b1023; color:#bfdbfe; } .toolbar button#importBtn:hover{ background:#0b1023; color:#a7f3d0; }
 .menu-btn { display:flex; align-items:flex-start; justify-content:space-between; width:100%; padding:10px 12px; border:1px solid #1f2937; background:#0b1023; color:var(--text); border-radius:10px; }
@@ -45,394 +287,696 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
 .menu-btn .label{ display:grid; grid-template-columns: 48px 1fr; grid-template-rows: auto auto; column-gap:8px; align-items:start; } .menu-btn .text{ grid-column:2; grid-row:1/span 2; padding-left:0; text-align:left; align-self:start; }
 .menu-btn .ico{ grid-row:1/span 2; grid-column:1; display:flex; align-items:center; justify-content:center; box-sizing:border-box; width:48px; height:48px; padding:8px; font-size:1.2rem; background:#0a1227; border:1px solid #1f2937; border-radius:10px; } .menu-btn .text .name{ margin:0; padding:0; font-weight:700; font-size:15px; line-height:1.2; text-align:left; } .menu-btn .text .desc{ display:block; color: var(--muted); font-size:12px; margin:4px 0 0 0; padding:0; text-align:left; }
 #sectionsDlg select.iconSel{ min-width:120px; }
-#filterSectionsDlg { max-width: 1200px; width: min(96vw, 1200px); }
-#filterSectionsDlg .content { padding-top: 14px; }
-#filterMenu.menu-grid { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
-#filterMenu .menu-btn { height: 100%; display: flex; align-items: stretch; justify-content: space-between; text-align: left; }
-#filterMenu .menu-btn .label { display: grid; grid-template-columns: 48px 1fr; grid-template-rows: auto auto; column-gap: 8px; align-items: start; }
-@media (max-width: 1100px) { #filterMenu.menu-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (max-width: 900px) { #filterMenu.menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 700px) { #filterMenu.menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 480px) { #filterMenu.menu-grid { grid-template-columns: 1fr; } }
+
+/* ===== Menu "Filtra sezioni" in orizzontale (max 5 colonne) ===== */
+#filterSectionsDlg {
+  /* un po' più largo per poter ospitare fino a 5 colonne */
+  max-width: 1200px;
+  width: min(96vw, 1200px);
+}
+
+
+
+/* La griglia del menu */
+
+
+/* Le card-bottone del menu riempiono la cella in altezza */
+
+
+/* Manteniamo il layout interno compatto anche su più colonne */
+
+
+/* Responsive: scala il numero di colonne quando lo spazio si riduce */
+@media (max-width: 1100px) {
+  
+}
+@media (max-width: 900px) {
+  
+}
+@media (max-width: 700px) {
+  
+}
+@media (max-width: 480px) {
+  
+}
+
 .toolbar button#clearAllBtn{ border-color:#7F1D1D; box-shadow:0 0 0 1px rgba(127,29,29,.25) inset; color:#FECACA; background:#1B0F10; }
 .toolbar button#clearAllBtn:hover{ background:#260F12; }
-.table { width: 100%; border-collapse: collapse; }
-.table th, .table td { border: 1px solid #1f2937; padding: 8px 10px; font-size: 13px; vertical-align: top; }
-.table th { background: #0a1227; text-align: left; }
-.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid #263041; background: var(--chip); color: #cbd5e1; }
-.badge.prio-low { background: #0b1328; color: #93c5fd; border-color:#1d3a5f; }
-.badge.prio-medium { background: #0b1328; color: #fde68a; border-color:#7a5a1a; }
-.badge.prio-high { background: #1b0f10; color: #fecaca; border-color:#3a1b1b; }
-.badge.prio-critical{ background: #3a1021; color: #ffd1dc; border-color:#5b1c33; }
-.table-actions { display: inline-flex; gap: 8px; }
-.table-actions button { background: #0a1227; border: 1px solid #263041; color: var(--text); padding: 6px 8px; border-radius: 8px; }
-.table-actions .danger { border-color: #3a1b1b; background: #1b0f10; color: #fecaca; }
-:root{ --op-max: 60vh; }
-#opBody > .grid { display: block; }
-#opTableWrap { width:100%; overflow:auto; max-height: var(--op-max); }
-#opSummaryBar { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid #1f2937; background: #0a1227; position:sticky; top:0; z-index:1; }
-#opSummaryBar .count { color: var(--muted); font-size:13px; }
-.badge.state { background:#0a1227; color:#cbd5e1; border-color:#334155; }
-.badge.max { background:#5b1c33; color:#ffd1dc; border-color:#7a2a49; }
-.col-id{ display:none; }
-th.sortable{ cursor:pointer; user-select:none; }
-th.sortable .arrow{ opacity:.7; margin-left:6px; }
-/* NEW: one-row layout for Gestisci sezioni */
-#sectionsList .list-item{
-  display: grid;
-  grid-template-columns: minmax(160px, 1.4fr) minmax(200px, 2fr) 110px 140px auto;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+
+/* === v41 FIX (Jan 2026): Gestisci sezioni & Menu senza scrollbar su desktop === */
+
+
+/* === Soluzione 2 (Jan 2026): Container Queries + cqw per 'Gestisci sezioni' e 'Menu sezioni' === */
+/* Le dialog diventano container: le unità cqw/cqh si riferiscono alla LARGHEZZA della dialog */
+#sectionsDlg .modal, 
+
+/* Tipografia e spaziature proporzionali alla larghezza del container */
+#sectionsDlg .modal .content,
+#filterSectionsDlg .modal .content { padding: clamp(12px, 2cqw, 24px); }
+
+#sectionsDlg .modal .title,
+#filterSectionsDlg .modal .title { font-size: clamp(16px, 2.8cqw, 22px); }
+
+#sectionsDlg .modal .content .row input,
+#sectionsDlg .modal .content .row select,
+#sectionsDlg .modal .content .row textarea,
+#filterSectionsDlg .modal .content .menu-btn { border-radius: clamp(8px, 1.2cqw, 12px); padding: clamp(8px, 1.4cqw, 14px); }
+
+/* Lista Gestisci sezioni: griglia con gap e dimensioni fluide ma vincoli locali già presenti */
+#sectionsDlg #sectionsList { gap: clamp(8px, 1.2cqw, 14px); }
+#sectionsDlg #sectionsList .list-item { border-radius: clamp(8px, 1.2cqw, 12px); padding: clamp(8px, 1.4cqw, 14px); }
+#sectionsDlg #sectionsList .controls button { width: clamp(26px, 2.4cqw, 36px); height: clamp(26px, 2.4cqw, 36px); border-radius: clamp(6px, 1cqw, 10px); }
+
+/* Riga di creazione nuova sezione */
+#sectionsDlg .content > .row:last-child { gap: clamp(8px, 1.2cqw, 14px); }
+#sectionsDlg #newSectionName, #sectionsDlg #newSectionColor, #sectionsDlg #addSectionBtn { height: clamp(32px, 3.2cqw, 40px); }
+
+/* Menu Sezioni: griglia responsive già definita. Usiamo cqw per card */
+
+
+
+
+
+
+/* Bottoni azione in fondo alle dialog */
+#sectionsDlg .content .primary,
+#sectionsDlg .content button,
+#filterSectionsDlg .content .primary,
+#filterSectionsDlg .content button { font-size: clamp(12px, 1.8cqw, 16px); padding: clamp(8px, 1.4cqw, 12px) clamp(10px, 2cqw, 16px); border-radius: clamp(8px, 1.2cqw, 12px); }
+
+/* === Auto fit-to-container (Jan 2026) per sectionsDlg & filterSectionsDlg === */
+#sectionsDlg .modal, 
+#sectionsDlg .modal .content, #filterSectionsDlg .modal .content { flex:1; overflow:hidden; }
+.fit-viewport { position: relative; width:100%; height:100%; display:block; overflow:hidden; }
+.fit-content { transform-origin: 0 0; will-change: transform; }
+
+
+/* === Canonical dialogs (cleaned Jan 2026) === */
+/* Larghezza dialog: override del max-width generico del <dialog> */
+#sectionsDlg, #filterSectionsDlg { max-width: none; }
+#sectionsDlg { width: clamp(900px, 92vw, 1240px); }
+#filterSectionsDlg { width: clamp(900px, 96vw, 1400px); }
+
+/* Container Queries + layout flessibile */
+#sectionsDlg .modal, #filterSectionsDlg .modal { display:flex; flex-direction:column; container-type: inline-size; }
+#sectionsDlg .modal .content, #filterSectionsDlg .modal .content { flex:1; overflow:hidden; padding: clamp(12px, 2cqw, 24px); }
+
+/* Auto-fit viewport (no centratura, niente spazio vuoto) */
+.fit-viewport { position: relative; width:100%; height:100%; display:block; overflow:hidden; }
+.fit-content  { transform-origin: 0 0; will-change: transform; }
+
+/* Menu compatto dentro #filterSectionsDlg */
+#filterMenu.menu-grid { display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: clamp(6px, 0.8cqw, 10px); align-items: stretch; }
+#filterMenu .menu-btn { height:100%; display:flex; align-items:stretch; justify-content:space-between; text-align:left; padding: clamp(6px, 1cqw, 10px); border-radius: clamp(6px, 1cqw, 10px); }
+#filterMenu .menu-btn .label { display:grid; grid-template-columns: 40px 1fr; grid-template-rows: auto auto; column-gap: clamp(4px, 0.8cqw, 8px); align-items:start; }
+#filterMenu .menu-btn .ico { font-size: clamp(18px, 2.2cqw, 28px); width: clamp(32px, 5cqw, 40px); height: clamp(32px, 5cqw, 40px); padding: clamp(4px, 0.8cqw, 6px); }
+#filterMenu .menu-btn .name { font-size: clamp(12px, 1.8cqw, 14px); font-weight:600; }
+#filterMenu .menu-btn .desc { font-size: clamp(11px, 1.6cqw, 13px); color: var(--muted); }
+
+/* Responsive colonne (solo numero di colonne) */
+@media (max-width: 1100px) { #filterMenu.menu-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+@media (max-width: 900px)  { #filterMenu.menu-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 700px)  { #filterMenu.menu-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 480px)  { #filterMenu.menu-grid { grid-template-columns: 1fr; } }
+
+/* === SectionsDlg polish (Jan 2026): allinea icone bottoni e distanzia la riga 'nuova sezione' === */
+/* 1) Icone nei bottoni (blocchi spostamento/elimina) centrati perfettamente */
+#sectionsDlg #sectionsList .controls { display:inline-flex; gap: clamp(6px, 1cqw, 10px); }
+#sectionsDlg #sectionsList .controls button {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: clamp(26px, 2.6cqw, 32px); height: clamp(26px, 2.6cqw, 32px);
+  padding: 0; line-height: 1; /* evita decentramenti verticali */
 }
-#sectionsList .list-item input,
-#sectionsList .list-item select{ width: 100%; }
-#sectionsList .list-item .controls{ display:flex; gap:8px; justify-content:flex-end; }
-@media (max-width: 720px){
-  #sectionsList { overflow-x:auto; }
-  #sectionsList .list-item{ min-width: 720px; }
+#sectionsDlg #sectionsList .controls button > * { pointer-events: none; }
+
+/* 2) Allineamento verticale coerente di select e input nella grid */
+#sectionsDlg #sectionsList .list-item > select,
+#sectionsDlg #sectionsList .list-item > input { align-self: center; }
+
+/* 3) Sezione 'nuova sezione': più respiro e separatore visivo */
+#sectionsDlg .content > .row:last-child {
+  margin-top: clamp(14px, 2.4cqw, 20px) !important;
+  padding-top: clamp(10px, 2cqw, 16px) !important;
+  border-top: 1px dashed #1f2937; /* separatore leggero coerente col tema */
+}
+#sectionsDlg #newSectionName,
+#sectionsDlg #newSectionDesc,
+#sectionsDlg #newSectionIcon,
+#sectionsDlg #newSectionColor,
+#sectionsDlg #addSectionBtn {
+  height: clamp(34px, 3.2cqw, 40px);
 }
 
-/* ===== OP FILTER layout migliorato (v19_7f) ===== */
-#opFilterDlg{ max-width: 1100px; width: min(96vw, 1100px); }
-.opf-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
-.opf-card{ border:1px solid #1f2937; background:#0a1227; border-radius:12px; padding:12px; }
-.opf-card h4{ margin:0 0 10px 0; font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:#cbd5e1; }
-.opf-checks{ display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:8px; }
-.opf-row{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
-.opf-actions{ display:flex; justify-content:flex-end; gap:10px; }
-@media (max-width: 780px){ .opf-grid{ grid-template-columns:1fr; } .opf-row{ grid-template-columns:1fr; } }
-
-/* ===== OP TABLE COLUMN TUNING (v19_7f.1) ===== */
-#opTable { table-layout:auto; }
-#opTable th.col-created, #opTable td.col-created,
-#opTable th.col-due,     #opTable td.col-due{
-  width:1%;
-  white-space:nowrap;
+/* 4) Micro-affinamenti: bordo e raggio coerenti nelle list-item */
+#sectionsDlg #sectionsList .list-item {
+  border: 1px solid #1f2937; border-radius: 12px; padding: clamp(10px, 1.6cqw, 14px);
 }
-#opTable th.col-title, #opTable td.col-title{ width:auto; }
-@media (max-width: 900px){
-  #opTable th.col-created, #opTable td.col-created,
-  #opTable th.col-due,     #opTable td.col-due{ width:auto; }
-}
-
-/* ===== SECTIONS DIALOG WIDER (v19_7f) ===== */
-#sectionsDlg{ max-width: 980px; width: min(96vw, 980px); }
-#sectionsDlg .content{ overflow:auto; }
-
 </style>
+
+<style>
+/* === v41.1: OP date columns single-line & min width === */
+#opTable th:nth-child(8), #opTable td.col-created { white-space: nowrap; min-width: 120px; } /* Inserito il */
+#opTable th:nth-child(9), #opTable td.col-due     { white-space: nowrap; min-width: 120px; } /* Scadenza */
+#opTable { table-layout: auto; }
+
+/* === v41.2: Gestisci sezioni → maggiore distacco riga "Nuova sezione" === */
+#sectionsDlg #sectionsList { margin-bottom: clamp(10px, 2cqw, 16px); }
+#sectionsDlg .content > .row:last-child {
+  margin-top: clamp(28px, 3.6cqw, 40px) !important;
+  padding-top: clamp(14px, 2.4cqw, 22px) !important;
+  border-top: 1px dashed #1f2937;
+}
+/* Evita taglio verticale select Icona/Colore */
+#sectionsDlg select, #sectionsDlg .content > .row select { padding: 8px 10px; min-height: 36px; height: auto; line-height: 1.2; }
+#sectionsDlg #newSectionIcon, #sectionsDlg #newSectionColor { padding-top: 8px; padding-bottom: 8px; min-height: 36px; }
+
+/* === v41.3: Servizi → nuova colonna STATO + rebalance larghezze === */
+/* Colonne contate includendo la colonna ID (hidden) come 1ª */
+#svcTable th:nth-child(3),  #svcTable td:nth-child(3)  { width: 64px; }      /* TIPO */
+#svcTable th:nth-child(6),  #svcTable td:nth-child(6)  { width: 120px; }     /* fallback JDBC/SWP */
+#svcTable th:nth-child(12), #svcTable td:nth-child(12) { width: 140px; }     /* STATO (wrap) */
+#svcTable th:nth-child(13), #svcTable td:nth-child(13) { width: 96px; white-space: nowrap; } /* Azioni */
+</style>
+
+<style>
+/* === v41.4a: TIPO leggermente più largo, spazio preso da APPLICATIVO === */
+#svcTable th:nth-child(3), #svcTable td:nth-child(3) { width: 84px; }      /* TIPO */
+#svcTable th:nth-child(9), #svcTable td:nth-child(9) { width: 120px; }     /* APPLICATIVO */
+</style>
+
+
+
+
+<style>
+/* === v43: OP Filter (compact 2 cols, dense) === */
+#opFilterDlg .modal { display:flex; flex-direction:column; }
+#opFilterDlg .modal .content { flex:1; overflow:auto; padding: clamp(12px, 2cqw, 24px); }
+#opFilterDlg .content { display:grid; grid-template-columns: 1fr 1fr; grid-auto-flow: row dense; gap: clamp(10px, 1cqw, 14px); align-items: start; }
+#opFilterDlg .opf-grid { display: contents; }
+#opFilterDlg .opf-card { background:#0b1023; border:1px solid #1f2937; border-radius: clamp(8px, 1cqw, 12px); padding: clamp(10px, 1.2cqw, 12px); }
+#opFilterDlg .opf-card h4 { margin:0 0 8px 0; font-size: clamp(13px, 2cqw, 15px); font-weight: 600; }
+#opFilterDlg .opf-row { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1cqw, 12px); }
+#opFilterDlg .row>input, #opFilterDlg .opf-row>input { min-width:0; width:100%; padding:10px 12px; border:1px solid #263041; background:#0a1227; color: var(--text); border-radius:10px; }
+#opFilterDlg .opf-checks label { display:flex; align-items:center; gap:8px; margin: 4px 0; }
+#opFilterDlg .opf-actions { grid-column: 1 / -1; position: sticky; bottom: 0; display:flex; justify-content:flex-end; gap:8px; padding:10px 0 0 0; margin-top:12px; background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top:1px solid #1f2937; }
+@media (max-width: 900px){ #opFilterDlg .content{ grid-template-columns: 1fr; } }
+</style>
+
+<style>
+/* === v43: Servizi Filter (ISOLATED — svcf-*) 3→2→1 colonne, no display:contents === */
+#svcFilterDlg .modal { display:flex; flex-direction:column; }
+#svcFilterDlg .modal .content { flex:1; overflow:auto; padding: clamp(12px, 2cqw, 24px); }
+#svcFilterDlg .svcf-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: clamp(10px, 1.2cqw, 16px); align-items: start; }
+@media (max-width: 1000px){ #svcFilterDlg .svcf-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px){ #svcFilterDlg .svcf-grid{ grid-template-columns: 1fr; } }
+#svcFilterDlg .svcf-card{ background:#0b1023; border:1px solid #1f2937; border-radius: clamp(8px, 1cqw, 12px); padding: clamp(10px, 1.4cqw, 14px); }
+#svcFilterDlg .svcf-card h4{ margin:0 0 8px 0; font-size: clamp(13px, 2cqw, 15px); font-weight:600; }
+#svcFilterDlg .svcf-row{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1cqw, 12px); }
+#svcFilterDlg .row>input, #svcFilterDlg .svcf-row>input{ min-width:0; width:100%; padding:10px 12px; border:1px solid #263041; background:#0a1227; color: var(--text); border-radius:10px; }
+#svcFilterDlg .svcf-checks label{ display:flex; align-items:center; gap:8px; margin: 4px 0; }
+#svcFilterDlg .svcf-actions{ position: sticky; bottom: 0; display:flex; justify-content:flex-end; gap:8px; padding:10px 0 0 0; margin-top:12px; background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top:1px solid #1f2937; }
+#svcFilterDlg .svcf-actions .primary{ border-color:#2563eb; box-shadow:0 0 0 1px rgba(37,99,235,.25) inset; }
+#svcFilterDlg, #svcFilterDlg *{ overflow-wrap:anywhere; }
+</style>
+
+
+<style>
+/* === v43.1: Svc Filter — dialog più larga (campi ampi) === */
+#svcFilterDlg{ max-width:none; width: clamp(900px, 96vw, 1400px); }
+#svcFilterDlg .modal{ container-type:inline-size; }
+#svcFilterDlg .modal .title{ font-size: clamp(16px, 2.6cqw, 22px); }
+#svcFilterDlg .modal .content{ padding: clamp(12px, 2cqw, 24px); }
+/* Su schermi molto stretti resta comunque full-viewport */
+@media (max-width: 640px){ #svcFilterDlg{ width: 100vw; height: 100vh; max-width:100vw; max-height:100vh; } }
+</style>
+
+
+<style>
+/* === v43.1: OP Filter — dialog più larga (campi ampi) === */
+#opFilterDlg{ max-width:none; width: clamp(900px, 96vw, 1200px); }
+#opFilterDlg .modal{ container-type:inline-size; }
+#opFilterDlg .modal .title{ font-size: clamp(16px, 2.6cqw, 22px); }
+#opFilterDlg .modal .content{ padding: clamp(12px, 2cqw, 24px); }
+@media (max-width: 640px){ #opFilterDlg{ width: 100vw; height: 100vh; max-width:100vw; max-height:100vh; } }
+</style>
+
 </head>
 <body>
 <header>
- <div class="wrap">
- <h1><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);"></span>Team Sistemi Anagrafici</h1>
- <div class="toolbar">
- <input id="q" type="search" placeholder="Cerca per titolo, tag o descrizione… (⌘/Ctrl + K)" />
- <button id="filterSectionsBtn" title="Apri menu sezioni">🏠 Menu</button>
- <button id="newBtn">➕ Nuovo link</button>
- <button id="manageSectionsBtn">📂 Gestisci sezioni</button>
- <button id="exportBtn">💾 Salva link</button>
- <button id="importBtn">📥 Carica link</button>
- <button id="saveToGitHubBtn" title="Committa su GitHub via funzione serverless">⬆️ Salva su GitHub</button>
- <button id="clearAllBtn" title="Pulisci tutte le sezioni, link e OP">🧹 Pulisci tutto</button>
- </div>
- </div>
+<div class="wrap">
+<h1><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);"></span>BPER Banca – Team Sistemi Anagrafici</h1>
+<div class="toolbar">
+<input id="q" placeholder="Cerca per titolo, tag o descrizione… (⌘/Ctrl + K)" type="search"/>
+<button id="filterSectionsBtn" title="Apri menu sezioni">🏠 Menu</button>
+<button id="newBtn">➕ Nuovo link</button>
+<button id="manageSectionsBtn">📂 Gestisci sezioni</button>
+<button id="exportBtn">💾 Salva link</button>
+<button id="importBtn">📥 Carica link</button>
+<button id="clearAllBtn" title="Pulisci tutte le sezioni, link e OP">🧹 Pulisci tutto</button>
+</div>
+</div>
 </header>
 <main class="wrap">
- <section id="opSection" class="section">
- <div class="section-header" style="background: linear-gradient(90deg, #0b3a68, #0f447a); border-bottom: 1px solid #0f447a80;">
- <div class="section-title">
- <button class="toggle" id="opToggle">▾</button>
- <span>📝</span> <span>Open Points</span>
- </div>
- <div class="section-actions">
- <button onclick="openOpDialog()">➕ Nuovo</button>
- <button onclick="(window.showSaveFilePicker? saveOPWithPicker() : openSaveOPDialog())">💾 Salva OP</button>
- <button onclick="importOpenPointsFromFile()">📥 Carica OP</button>
- <button onclick="openOpFilterDialog()">🔎 Filtra</button>
- <button onclick="exportOpenPointsToCSV()">📤 Export CSV</button>
- <button onclick="exportOpenPointsToExcel()">📤 Export Excel (.xls)</button>
- <button class="danger" onclick="clearOpenPoints()">🧹 Pulisci OP</button>
- </div>
- </div>
- <div id="opBody">
- <div class="grid" style="padding:0">
- <div id="opSummaryBar"><div class="count" id="opCount">0 risultati su 0</div></div>
- <div id="opTableWrap">
- <table class="table" id="opTable"></table>
- </div>
- </div>
- </div>
- </section>
- <div id="container"></div>
+<!-- ===== SEZIONE: OPEN POINTS ===== -->
+<section class="section" id="opSection">
+<div class="section-header" style="background: linear-gradient(90deg, #0b3a68, #0f447a); border-bottom: 1px solid #0f447a80;">
+<div class="section-title">
+<button class="toggle" id="opToggle">▾</button>
+<span>📝</span> <span>Open Points</span>
+</div>
+<div class="section-actions">
+<button onclick="openOpDialog()">➕ Nuovo</button>
+<button onclick="(window.showSaveFilePicker? saveOPWithPicker() : openSaveOPDialog())">💾 Salva OP</button>
+<button onclick="importOpenPointsFromFile()">📥 Carica OP</button>
+<button onclick="openOpFilterDialog()">🔎 Filtra</button>
+<button onclick="exportOpenPointsToCSV()">📤 Export CSV</button>
+<button onclick="exportOpenPointsToExcel()">📤 Export Excel (.xls)</button>
+<button class="danger" onclick="clearOpenPoints()">🧹 Pulisci OP</button>
+</div>
+</div>
+<div id="opBody">
+<div class="grid" style="padding:0">
+<div id="opSummaryBar"><div class="count" id="opCount">0 risultati su 0</div></div>
+<div id="opTableWrap">
+<table class="table" id="opTable"></table>
+</div>
+</div>
+</div>
+</section>
+<!-- ===== SEZIONE: SERVIZI ===== -->
+<section class="section" id="servicesSection">
+<div class="section-header" style="background: linear-gradient(90deg, #0e3a43, #0b4a56); border-bottom: 1px solid #0b4a5680;">
+<div class="section-title">
+<button class="toggle" id="svcToggle">▾</button>
+<span>🛠</span> <span>Servizi (REST/SOAP)</span>
+</div>
+<div class="section-actions">
+<button onclick="openServiceDialog()">➕ Nuovo</button>
+<button onclick="exportServicesToFile()">💾 Salva</button>
+<button onclick="importServicesFromFile()">📥 Carica</button>
+<button onclick="openSvcFilterDialog()">🔎 Filtra</button>
+<button onclick="exportServicesToCSV()">📤 CSV</button>
+<button onclick="exportServicesToExcel()">📤 Excel (.xls)</button>
+<button class="danger" onclick="clearServices()">🧹 Pulisci</button>
+</div>
+</div>
+<div id="svcBody">
+<div class="grid" style="padding:0">
+<div id="svcTableWrap">
+<table class="table" id="svcTable"></table>
+</div>
+</div>
+</div>
+</section>
+<div id="container"></div>
 </main>
 <footer>Suggerimento: premi <span class="kbd">⌘/Ctrl</span> + <span class="kbd">K</span> per cercare velocemente. Le modifiche sono salvate nel browser (localStorage).</footer>
+<!-- Dialog: Link -->
 <dialog id="dialog"><div class="modal">
- <header class="modal-bar"><span class="title" id="dlgTitle">Nuovo link</span><button id="closeXBtn" class="close" aria-label="Chiudi">✕</button></header>
- <div class="content">
- <div class="row"><input id="fTitle" placeholder="Titolo" /></div>
- <div class="row"><input id="fUrl" placeholder="URL (https://…)" /></div>
- <div class="row"><textarea id="fDesc" placeholder="Descrizione (opzionale)"></textarea></div>
- <div class="row"><input id="fTags" placeholder="Tag separati da virgola (es. progetto, clienti)" /></div>
- <div class="row"><select id="fSection"></select></div>
- <div class="row" style="justify-content:flex-end"><button id="cancelBtn">Annulla</button><button id="saveBtn" class="primary">Salva</button></div>
- </div>
+<header class="modal-bar"><span class="title" id="dlgTitle">Nuovo link</span><button aria-label="Chiudi" class="close" id="closeXBtn">✕</button></header>
+<div class="content">
+<div class="row"><input id="fTitle" placeholder="Titolo"/></div>
+<div class="row"><input id="fUrl" placeholder="URL (https://…)"/></div>
+<div class="row"><textarea id="fDesc" placeholder="Descrizione (opzionale)"></textarea></div>
+<div class="row"><input id="fTags" placeholder="Tag separati da virgola (es. progetto, clienti)"/></div>
+<div class="row"><select id="fSection"></select></div>
+<div class="row" style="justify-content:flex-end"><button id="cancelBtn">Annulla</button><button class="primary" id="saveBtn">Salva</button></div>
+</div>
 </div></dialog>
+<!-- Dialog: Gestisci sezioni -->
 <dialog id="sectionsDlg"><div class="modal">
- <header class="modal-bar"><span class="title">Gestisci sezioni</span><button id="closeSectionsBtn" class="close" aria-label="Chiudi">✕</button></header>
- <div class="content">
- <div id="sectionsList" class="list"></div>
- <div class="row">
- <input id="newSectionName" placeholder="Nome nuova sezione" />
- <input id="newSectionDesc" placeholder="Descrizione (opzionale)" />
- <select id="newSectionIcon" class="iconSel">
- <option value="">Icona (auto)</option>
- <option>📁</option><option>👥</option><option>🧩</option><option>📂</option><option>📝</option><option>📌</option><option>📊</option><option>📎</option><option>🛠</option><option>🗃</option><option>📅</option><option>🧪</option><option>💡</option><option>✅</option><option>⚙</option>
- </select>
- <select id="newSectionColor"></select>
- <button id="addSectionBtn" class="primary">Aggiungi</button>
- </div>
- </div>
-</div></dialog>
+<header class="modal-bar"><span class="title">Gestisci sezioni</span><button aria-label="Chiudi" class="close" id="closeSectionsBtn">✕</button></header>
+<div class="content">
+    <div class="fit-viewport" data-fit="true" data-max-scale="1">
+      <div class="fit-content">
+<div class="list" id="sectionsList"></div>
+<div class="row">
+<input id="newSectionName" placeholder="Nome nuova sezione"/>
+<input id="newSectionDesc" placeholder="Descrizione (opzionale)"/>
+<select class="iconSel" id="newSectionIcon">
+<option value="">Icona (auto)</option>
+<option>📁</option><option>👥</option><option>🧩</option><option>📂</option><option>📝</option><option>📌</option><option>📊</option><option>📎</option><option>🛠</option><option>🗃</option><option>📅</option><option>🧪</option><option>💡</option><option>✅</option><option>⚙</option>
+</select>
+<select id="newSectionColor"><option value="">Colore (auto)</option></select>
+<button class="primary" id="addSectionBtn">Aggiungi</button>
+</div>
+</div>
+</div>
+    </div>
+    </div></dialog>
+<!-- Dialog: Menù sezioni -->
 <dialog id="filterSectionsDlg"><div class="modal">
- <header class="modal-bar"><span class="title">Filtra sezioni</span><button id="fsCloseBtn" class="close" aria-label="Chiudi">✕</button></header>
- <div class="content">
- <div id="filterMenu" class="list menu-grid"></div>
- </div>
-</div></dialog>
+<header class="modal-bar"><span class="title">Filtra sezioni</span><button aria-label="Chiudi" class="close" id="fsCloseBtn">✕</button></header>
+<div class="content">
+    <div class="fit-viewport" data-fit="true" data-max-scale="1">
+      <div class="fit-content">
+<div class="list menu-grid" id="filterMenu"></div>
+</div>
+</div>
+    </div>
+    </div></dialog>
+<!-- Dialog: Open Points -->
 <dialog id="opDialog"><div class="modal">
- <header class="modal-bar">
- <span class="title" id="opDlgTitle">Nuovo open point</span>
- <button id="opCloseXBtn" class="close" aria-label="Chiudi">✕</button>
- </header>
- <div class="content">
- <div class="row"><input id="opTitle" placeholder="Titolo *" /></div>
- <div class="row"><input id="opProject" placeholder="Progetto" /></div>
- <div class="row"><input id="opAssignees" placeholder="Assegnatari (separati da virgola)" /></div>
- <div class="row">
- <select id="opPriority">
- <option value="low">Priorità: Bassa</option>
- <option value="medium" selected>Priorità: Media</option>
- <option value="high">Priorità: Alta</option>
- <option value="critical">Priorità: Critica</option>
- </select>
- </div>
- <div class="row">
- <select id="opStatus">
- <option value="Nuovo" selected>Stato: Nuovo</option>
- <option value="Da fare">Stato: Da fare</option>
- <option value="In corso">Stato: In corso</option>
- <option value="Schedulato">Stato: Schedulato</option>
- <option value="Completato">Stato: Completato</option>
- </select>
- <label style="display:inline-flex;align-items:center;gap:8px;margin-left:10px">
- <input type="checkbox" id="opMaxPrio" /> Priorità massima
+<header class="modal-bar">
+<span class="title" id="opDlgTitle">Nuovo open point</span>
+<button aria-label="Chiudi" class="close" id="opCloseXBtn">✕</button>
+</header>
+<div class="content">
+<div class="row"><input id="opTitle" placeholder="Titolo *"/></div>
+<div class="row"><input id="opProject" placeholder="Progetto"/></div>
+<div class="row"><input id="opAssignees" placeholder="Assegnatari (separati da virgola)"/></div>
+<div class="row">
+<select id="opPriority">
+<option value="low">Priorità: Bassa</option>
+<option selected="" value="medium">Priorità: Media</option>
+<option value="high">Priorità: Alta</option>
+<option value="critical">Priorità: Critica</option>
+</select>
+</div>
+<div class="row">
+<select id="opStatus">
+<option selected="" value="Nuovo">Stato: Nuovo</option>
+<option value="Da fare">Stato: Da fare</option>
+<option value="In corso">Stato: In corso</option>
+<option value="Schedulato">Stato: Schedulato</option>
+<option value="Completato">Stato: Completato</option>
+</select>
+<label style="display:inline-flex;align-items:center;gap:8px;margin-left:10px">
+<input id="opMaxPrio" type="checkbox"/> Priorità massima
  </label>
- </div>
- <div class="row">
- <input id="opCreatedAt" type="date" placeholder="Data inserimento" />
- <input id="opDueAt" type="date" placeholder="Scadenza" />
- </div>
- <div class="row"><textarea id="opDesc" placeholder="Descrizione"></textarea></div>
- <div class="row"><textarea id="opNotes" placeholder="Note"></textarea></div>
- <div class="row" style="justify-content:flex-end">
- <button id="opCancelBtn">Annulla</button>
- <button id="opSaveBtn" class="primary">Salva</button>
- </div>
- </div>
+</div>
+<div class="row">
+<input id="opCreatedAt" placeholder="Data inserimento" type="date"/>
+<input id="opDueAt" placeholder="Scadenza" type="date"/>
+</div>
+<div class="row"><textarea id="opDesc" placeholder="Descrizione"></textarea></div>
+<div class="row"><textarea id="opNotes" placeholder="Note"></textarea></div>
+<div class="row" style="justify-content:flex-end">
+<button id="opCancelBtn">Annulla</button>
+<button class="primary" id="opSaveBtn">Salva</button>
+</div>
+</div>
+</div></dialog>
+<!-- Dialog: Filtro OP -->
+<dialog id="opFilterDlg"><div class="modal">
+  <header class="modal-bar"><span class="title">Filtra Open Points</span><button aria-label="Chiudi" class="close" id="opFilterCloseXBtn">✕</button></header>
+  <div class="content">
+    <div class="row"><input id="opfText" placeholder="Cerca in titolo, progetto, assegnatari, descrizione, note"/></div>
+    <div class="opf-grid">
+      <div class="opf-card">
+        <h4>Priorità</h4>
+        <div class="opf-checks" id="opfPrioGroup">
+          <label><input type="checkbox" value="low"/> Bassa</label>
+          <label><input type="checkbox" value="medium"/> Media</label>
+          <label><input type="checkbox" value="high"/> Alta</label>
+          <label><input type="checkbox" value="critical"/> Critica</label>
+        </div>
+      </div>
+      <div class="opf-card">
+        <h4>Stato</h4>
+        <div class="opf-checks" id="opfStatusGroup">
+          <label><input type="checkbox" value="Nuovo"/> Nuovo</label>
+          <label><input type="checkbox" value="Da fare"/> Da fare</label>
+          <label><input type="checkbox" value="In corso"/> In corso</label>
+          <label><input type="checkbox" value="Schedulato"/> Schedulato</label>
+          <label><input type="checkbox" value="Completato"/> Completato</label>
+        </div>
+      </div>
+      <div class="opf-card">
+        <h4>Date inserimento</h4>
+        <div class="opf-row">
+          <input id="opfCreatedFrom" placeholder="Creato dal" type="date"/>
+          <input id="opfCreatedTo" placeholder="Creato al" type="date"/>
+        </div>
+      </div>
+      <div class="opf-card">
+        <h4>Scadenza</h4>
+        <div class="opf-row">
+          <input id="opfDueFrom" placeholder="Scadenza da" type="date"/>
+          <input id="opfDueTo" placeholder="Scadenza a" type="date"/>
+        </div>
+      </div>
+      <div class="opf-card">
+        <h4>Assegnatari / Progetti</h4>
+        <div class="opf-row">
+          <input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
+          <input id="opfProjects" placeholder="Progetti (virgole)"/>
+        </div>
+      </div>
+      <div class="opf-card">
+        <h4>Altre opzioni</h4>
+        <label style="display:flex;align-items:center;gap:8px"><input id="opfMaxOnly" type="checkbox"/> Solo Priorità massima</label>
+      </div>
+    </div>
+    <div class="opf-actions" style="margin-top:12px">
+      <button id="opfResetBtn">Azzera</button>
+      <button class="primary" id="opfApplyBtn">Applica</button>
+    </div>
+  </div>
+</div></dialog>
+<!-- Dialog: Salva link -->
+<dialog id="saveLinksDlg"><div class="modal">
+<header class="modal-bar">
+<span class="title">Salva link</span>
+<button aria-label="Chiudi" class="close" id="saveLinksCloseBtn">✕</button>
+</header>
+<div class="content">
+<div class="row">
+<input id="saveLinksFileName" placeholder="Nome file" value="linkhub-links.json"/>
+</div>
+<div class="row" style="justify-content:flex-end">
+<button id="saveLinksCancelBtn">Annulla</button>
+<button class="primary" id="saveLinksOkBtn">Salva</button>
+</div>
+</div>
+</div></dialog>
+<!-- Dialog: Salva OP -->
+<dialog id="saveOPDlg"><div class="modal">
+<header class="modal-bar">
+<span class="title">Salva Open Points</span>
+<button aria-label="Chiudi" class="close" id="saveOPCloseBtn">✕</button>
+</header>
+<div class="content">
+<div class="row">
+<input id="saveOPFileName" placeholder="Nome file" value="open-points.json"/>
+</div>
+<div class="row" style="justify-content:flex-end">
+<button id="saveOPCancelBtn">Annulla</button>
+<button class="primary" id="saveOPOkBtn">Salva</button>
+</div>
+</div>
+</div></dialog>
+<!-- Dialog: Servizi -->
+<dialog id="serviceDialog"><div class="modal">
+<header class="modal-bar">
+<span class="title" id="svcDlgTitle">Nuovo servizio</span>
+<button aria-label="Chiudi" class="close" id="svcCloseXBtn">✕</button>
+</header>
+<div class="content">
+<div class="row"><input id="svcRoutine" placeholder="ROUTINE *"/></div>
+<div class="row">
+<select id="svcTipo">
+<option selected="" value="REST">TIPO: REST</option>
+<option value="SOAP">TIPO: SOAP</option>
+</select>
+</div>
+<div class="row"><input id="svcServizio" placeholder="SERVIZIO *"/></div>
+<div class="row"><textarea id="svcOperation" placeholder="OPERATION / PARAMETRI (una per riga)"></textarea></div>
+<div class="row"><input id="svcFallback" placeholder="fallback JDBC/SWP"/></div>
+<div class="row"><textarea id="svcDescrizione" placeholder="DESCRIZIONE"></textarea></div>
+<div class="row"><input id="svcAmbito" placeholder="AMBITO"/></div>
+<div class="row"><input id="svcApplicativo" placeholder="APPLICATIVO"/></div>
+<div class="row"><textarea id="svcParamsIn" placeholder="PARAMETRI DI INGRESSO (uno per riga)"></textarea></div>
+<div class="row"><textarea id="svcOutput" placeholder="OUTPUT DEL SERVIZIO (uno per riga)"></textarea></div>
+<div class="row" style="justify-content:flex-end">
+<button id="svcCancelBtn">Annulla</button>
+<button class="primary" id="svcSaveBtn">Salva</button>
+</div>
+</div>
+</div></dialog>
+<!-- Dialog: Filtro Servizi -->
+<dialog id="svcFilterDlg"><div class="modal">
+  <header class="modal-bar">
+    <span class="title">Filtra Servizi</span>
+    <button aria-label="Chiudi" class="close" id="svcFilterCloseXBtn">✕</button>
+  </header>
+  <div class="content">
+    <div class="row"><input id="svcfText" placeholder="Cerca in routine, servizio, operation, fallback, descrizione, ambito, applicativo, parametri ingresso, output, stato"/></div>
+    <div class="svcf-grid">
+      <div class="svcf-card">
+        <h4>Tipo</h4>
+        <div class="svcf-checks" id="svcfTipoGroup">
+          <label><input type="checkbox" value="REST"/> REST</label>
+          <label><input type="checkbox" value="SOAP"/> SOAP</label>
+        </div>
+      </div>
+      <div class="svcf-card">
+        <h4>Ambiti / Routine / Servizi</h4>
+        <div class="svcf-row">
+          <input id="svcfAmbiti" placeholder="Ambiti (virgole)"/>
+          <input id="svcfRoutine" placeholder="Routine (virgole)"/>
+        </div>
+        <div class="row">
+          <input id="svcfServizi" placeholder="Servizi (virgole)"/>
+        </div>
+      </div>
+      <div class="svcf-card">
+        <h4>Applicativo / Fallback</h4>
+        <div class="svcf-row">
+          <input id="svcfApplicativi" placeholder="Applicativi (virgole)"/>
+          <input id="svcfFallback" placeholder="Fallback (virgole)"/>
+        </div>
+      </div>
+      <div class="svcf-card">
+        <h4>Operation / Parametri</h4>
+        <div class="row">
+          <input id="svcfOperation" placeholder="Operation / Parametri (virgole)"/>
+        </div>
+      </div>
+      <div class="svcf-card">
+        <h4>Parametri & Output</h4>
+        <div class="svcf-row">
+          <input id="svcfParamsIn" placeholder="Parametri ingresso (virgole)"/>
+          <input id="svcfOutput" placeholder="Output servizio (virgole)"/>
+        </div>
+      </div>
+      <div class="svcf-card">
+        <h4>Stato</h4>
+        <div class="row">
+          <input id="svcfStati" placeholder="Stati (virgole)"/>
+        </div>
+      </div>
+    </div>
+    <div class="svcf-actions" style="margin-top:12px">
+      <button id="svcfResetBtn">Azzera</button>
+      <button class="primary" id="svcfApplyBtn">Applica</button>
+    </div>
+  </div>
 </div></dialog>
 <script>
+// Polyfills & utils
 if(!window.structuredClone){ window.structuredClone = (obj)=> JSON.parse(JSON.stringify(obj)); }
 if(!window.crypto){ window.crypto = {}; }
 if(!crypto.randomUUID){ crypto.randomUUID = ()=> 'id-' + Math.random().toString(16).slice(2) + '-' + Date.now(); }
-function escapeHtml(s){ s=String(s||''); return s.replace(/[&<>"']/g, (m)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m])); }
-function escapeAttr(s){ s=String(s||''); return s.replace(/\"/g,'&quot;'); }
+function escapeHtml(s){ s = String(s || ''); return s.replace(/[&<>"']/g, function(m){ switch(m){ case '&': return '&amp;'; case '<': return '&lt;'; case '>': return '&gt;'; case '"': return '&quot;'; case "'": return '&#39;'; default: return m; } }); }
+function escapeAttr(s){ s=String(s||''); return s.replace(/\"/g,'"'); }
 function todayISO(){ try{ return new Date().toISOString().slice(0,10); }catch(_){ return ''; } }
 function toast(msg){ var t=document.createElement('div'); t.textContent=msg; t.style.position='fixed'; t.style.bottom='18px'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.background='#0b1227'; t.style.border='1px solid #334155'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=99; t.style.color='#e5e7eb'; document.body.appendChild(t); setTimeout(()=>{ t.remove(); },1600); }
-var PALETTE = [
- { id:'emerald', c1:'#064e3b', c2:'#065f46' },
- { id:'blue', c1:'#0b3a68', c2:'#0f447a' },
- { id:'indigo', c1:'#312e81', c2:'#3730a3' },
- { id:'cyan', c1:'#0e3a43', c2:'#0b4a56' },
- { id:'violet', c1:'#4c1d95', c2:'#5b21b6' },
- { id:'amber', c1:'#78350f', c2:'#92400e' },
- { id:'rose', c1:'#7f1d1d', c2:'#991b1b' }
-];
+
+// Palette & storage
+var PALETTE = [ { id:'emerald', c1:'#064e3b', c2:'#065f46' }, { id:'blue', c1:'#0b3a68', c2:'#0f447a' }, { id:'indigo', c1:'#312e81', c2:'#3730a3' }, { id:'cyan', c1:'#0e3a43', c2:'#0b4a56' }, { id:'violet', c1:'#4c1d95', c2:'#5b21b6' }, { id:'amber', c1:'#78350f', c2:'#92400e' }, { id:'rose', c1:'#7f1d1d', c2:'#991b1b' } ];
 var STORAGE_KEY_V2 = 'linkhub.v2';
+
 function save(st){ try{ localStorage.setItem(STORAGE_KEY_V2, JSON.stringify(st || state)); }catch(e){ console.error('save:', e); } }
-function loadState(){ try{
- var raw = localStorage.getItem(STORAGE_KEY_V2); if(raw){ return normalizeState(JSON.parse(raw)); }
- var demo={ sections:[
- {id: crypto.randomUUID(), name:'Team', desc:'Contatti, orari, riunioni', icon:'👥', collapsed:false, color:{id:'emerald', c1:'#064e3b', c2:'#065f46'}},
- {id: crypto.randomUUID(), name:'Progetti', desc:'Piani, task, roadmap', icon:'🧩', collapsed:false, color:{id:'blue', c1:'#0b3a68', c2:'#0f447a'}},
- {id: crypto.randomUUID(), name:'File', desc:'Documenti e cartelle', icon:'📁', collapsed:false, color:{id:'indigo', c1:'#312e81', c2:'#3730a3'}}
- ], links:[], openPoints:[] };
- localStorage.setItem(STORAGE_KEY_V2, JSON.stringify(demo));
- return normalizeState(demo);
-}catch(e){ console.error('load:', e); return { sections:[], links:[], openPoints:[] }; } }
+function loadState(){ try{ var raw = localStorage.getItem(STORAGE_KEY_V2); if(raw){ return normalizeState(JSON.parse(raw)); }
+  var demo={ sections:[ {id: crypto.randomUUID(), name:'Team', desc:'Contatti, orari, riunioni', icon:'👥', collapsed:false, color:{id:'emerald', c1:'#064e3b', c2:'#065f46'}}, {id: crypto.randomUUID(), name:'Progetti', desc:'Piani, task, roadmap', icon:'🧩', collapsed:false, color:{id:'blue', c1:'#0b3a68', c2:'#0f447a'}}, {id: crypto.randomUUID(), name:'File', desc:'Documenti e cartelle', icon:'📁', collapsed:false, color:{id:'indigo', c1:'#312e81', c2:'#3730a3'}} ], links:[], openPoints:[], services:[] };
+  localStorage.setItem(STORAGE_KEY_V2, JSON.stringify(demo));
+  return normalizeState(demo);
+ }catch(e){ console.error('load:', e); return { sections:[], links:[], openPoints:[], services:[] }; } }
 function normalizeState(x){
- var sections = Array.isArray(x.sections)? x.sections.map(function(s,i){ return {
- id: s.id || crypto.randomUUID(),
- name: String(s.name||'Senza nome').trim()||'Senza nome',
- collapsed: !!s.collapsed,
- color: (s.color&&s.color.c1&&s.color.c2)? s.color : PALETTE[i%PALETTE.length],
- desc: String(s.desc||'').trim(),
- icon: String(s.icon||'').trim()
- }; }) : [{id: crypto.randomUUID(), name:'Generale', collapsed:false, color:PALETTE[0], desc:'', icon:'📁'}];
- var ids = new Set(sections.map(function(s){return s.id;}));
- var fallback = sections[0]? sections[0].id : '';
- var links = Array.isArray(x.links)? x.links.map(function(l){ return {
- id: l.id || crypto.randomUUID(),
- title: String(l.title||'').trim(),
- url: String(l.url||'').trim(),
- desc: String(l.desc||'').trim(),
- tags: (l.tags||[]).map(function(t){return String(t).trim();}).filter(Boolean),
- sectionId: ids.has(l.sectionId)? l.sectionId : fallback
- }; }) : [];
- function nOP(o){ var a=(o.assignees||o.assegnatari||''); var arr=Array.isArray(a)? a : String(a).split(',').map(function(s){return s.trim();}).filter(Boolean); return {
- id: o.id || crypto.randomUUID(),
- title: String(o.title||o.titolo||'').trim(),
- project: String(o.project||o.progetto||'').trim(),
- assignees: arr,
- priority: (o.priority||o.priorita||o['priorità']||'medium').toLowerCase(),
- status: String(o.status||o.stato||'Nuovo').trim(),
- maxPriority: !!(o.maxPriority||o.max||o['prioritàMassima']),
- createdAt: String(o.createdAt||o.dataInserimento||'').trim(),
- dueAt: String(o.dueAt||o.dataScadenza||'').trim(),
- desc: String(o.desc||o.descrizione||'').trim(),
- notes: String(o.notes||o.note||'').trim()
- }; }
- var openPoints = Array.isArray(x.openPoints)? x.openPoints.map(nOP) : [];
- return { sections:sections, links:links, openPoints:openPoints };
+  var PL = (PALETTE && PALETTE.length) ? PALETTE.length : 7;
+  var sections = Array.isArray(x.sections)? x.sections.map(function(s,i){ return {
+    id: s.id || crypto.randomUUID(),
+    name: String(s.name||'Senza nome').trim()||'Senza nome',
+    collapsed: !!s.collapsed,
+    color: (s.color&&s.color.c1&&s.color.c2)? s.color : PALETTE[i%PL],
+    desc: String(s.desc||'').trim(),
+    icon: String(s.icon||'').trim()
+  }; }) : [{id: crypto.randomUUID(), name:'Generale', collapsed:false, color:PALETTE[0], desc:'', icon:'📁'}];
+  var ids = new Set(sections.map(function(s){return s.id;})); var fallback = sections[0]? sections[0].id : '';
+  var links = Array.isArray(x.links)? x.links.map(function(l){ return { id: l.id || crypto.randomUUID(), title: (l.title||'').trim(), url: (l.url||'').trim(), desc: (l.desc||'').trim(), tags: (l.tags||[]).map(function(t){return String(t).trim();}).filter(Boolean), sectionId: ids.has(l.sectionId)? l.sectionId : fallback }; }) : [];
+  function nOP(o){ var a=(o.assignees||o.assegnatari||''); var arr=Array.isArray(a)? a : String(a).split(',').map(function(s){return s.trim();}).filter(Boolean); return { id: o.id || crypto.randomUUID(), title: String(o.title||o.titolo||'').trim(), project: String(o.project||o.progetto||'').trim(), assignees: arr, priority: (o.priority||o.priorita||o['priorità']||'medium').toLowerCase(), status: String(o.status||o.stato||'Nuovo').trim(), maxPriority: !!(o.maxPriority||o.max||o['prioritàMassima']), createdAt: String(o.createdAt||o.dataInserimento||'').trim(), dueAt: String(o.dueAt||o.dataScadenza||'').trim(), desc: String(o.desc||o.descrizione||'').trim(), notes: String(o.notes||o.note||'').trim() }; }
+  var openPoints = Array.isArray(x.openPoints)? x.openPoints.map(nOP) : [];
+  function nService(s){ return { id: s.id || crypto.randomUUID(), routine: String(s.routine || '').trim(), tipo: (s.tipo || '').toString().toUpperCase() === 'SOAP' ? 'SOAP' : 'REST', servizio: String(s.servizio || '').trim(), operation: String(s.operation || s['operation / parametro'] || '').trim(), fallback: String(s.fallback || s['fallback JDBC/SWP'] || '').trim(), descrizione: String(s.descrizione || '').trim(), ambito: String(s.ambito || '').trim(), applicativo: String(s.applicativo || s['applicativo'] || '').trim(), paramsIngresso: String(s.paramsIngresso || s['paramsIngresso'] || s['parametriIngresso'] || '').trim(), outputServizio: String(s.outputServizio || s['outputServizio'] || s['output'] || '').trim() }; }
+  var services = Array.isArray(x.services) ? x.services.map(nService) : [];
+  return { sections:sections, links:links, openPoints:openPoints, services:services };
 }
-var state=null;
+
+// UI state
+function loadUIState(){ try { return JSON.parse(localStorage.getItem(UI_STATE_KEY)) || {}; } catch(e){ return {}; } }
+function saveUIState(ui){ try { localStorage.setItem(UI_STATE_KEY, JSON.stringify(ui)); } catch(e){} }
+var state=null; var UI_STATE_KEY='ui.state.v1';
+
+// Init
 window.addEventListener('DOMContentLoaded', initApp);
 function initApp(){
- state = loadState();
- render();
- renderOpenPoints();
- updateFilterSectionsBtn();
- tryAutoLoadOnStartup();
- var q=document.getElementById('q'); if(q) q.addEventListener('input', render);
- window.addEventListener('keydown', function(e){ if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); if(q) q.focus(); } });
- document.getElementById('exportBtn').onclick = function(){ if(window.showSaveFilePicker) saveLinksWithPicker(); else openSaveLinksDialog(); }; // changed: open dialog
- document.getElementById('importBtn').onclick = importFullJSON;
- document.getElementById('clearAllBtn').onclick = clearAll;
- document.getElementById('filterSectionsBtn').onclick = openFilterSectionsDialog;
- document.getElementById('newBtn').onclick = function(){ openDialog(); };
- document.getElementById('manageSectionsBtn').onclick = function(){ try{ renderSectionsList(); sectionsDlg.showModal(); setTimeout(function(){ var el=document.getElementById('newSectionName'); if(el) el.focus(); }, 50); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } };
- var opToggle=document.getElementById('opToggle'), opBody=document.getElementById('opBody');
- if(opToggle && opBody){ opToggle.addEventListener('click', function(){ if(opBody.classList.contains('hidden')){ opBody.classList.remove('hidden'); opToggle.textContent='▾'; } else { opBody.classList.add('hidden'); opToggle.textContent='▸'; } }); }
- document.getElementById('cancelBtn').onclick = function(){ dialog.close(); };
- document.getElementById('saveBtn').onclick = saveDialog;
- document.getElementById('closeXBtn').onclick = function(){ dialog.close(); };
- document.getElementById('closeSectionsBtn').onclick = function(){ sectionsDlg.close(); };
- document.getElementById('addSectionBtn').onclick = addSection;
- fillColorsSelect();
- document.getElementById('opCancelBtn').onclick = function(){ opDialog.close(); };
- document.getElementById('opSaveBtn').onclick = saveOpDialog;
- document.getElementById('opCloseXBtn').onclick = function(){ opDialog.close(); };
+  state = loadState();
+  (function restoreSectionUI(){ var ui = loadUIState(); if (!ui.sectionCollapsed) return; try { state.sections.forEach(function(s){ if (ui.sectionCollapsed.hasOwnProperty(s.id)) s.collapsed = ui.sectionCollapsed[s.id]; }); } catch(e){} })();
+  render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn();
+  var q=document.getElementById('q'); if(q) q.addEventListener('input', render);
+  window.addEventListener('keydown', function(e){ if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); if(q) q.focus(); } });
+  document.getElementById('exportBtn').onclick = function(){ if(window.showSaveFilePicker) saveLinksWithPicker(); else openSaveLinksDialog(); };
+  document.getElementById('importBtn').onclick = importFullJSON;
+  document.getElementById('clearAllBtn').onclick = clearAll;
+  document.getElementById('filterSectionsBtn').onclick = openFilterSectionsDialog;
+  document.getElementById('newBtn').onclick = function(){ openDialog(); };
+  document.getElementById('manageSectionsBtn').onclick = function(){ try{ renderSectionsList(); sectionsDlg.showModal(); setTimeout(function(){ var el=document.getElementById('newSectionName'); if(el) el.focus(); }, 50); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } };
+  var opToggle=document.getElementById('opToggle'), opBody=document.getElementById('opBody'); if(opToggle && opBody){ var uiState = loadUIState(); if (uiState.opCollapsed) { opBody.classList.add('hidden'); opToggle.textContent='▸'; } else { opBody.classList.remove('hidden'); opToggle.textContent='▾'; } opToggle.addEventListener('click', function(){ var collapsed = opBody.classList.toggle('hidden'); opToggle.textContent = collapsed ? '▸' : '▾'; uiState.opCollapsed = collapsed; saveUIState(uiState); }); }
+  var svcToggle=document.getElementById('svcToggle'), svcBody=document.getElementById('svcBody'); if(svcToggle && svcBody){ var uiState2 = loadUIState(); if (uiState2.svcCollapsed){ svcBody.classList.add('hidden'); svcToggle.textContent='▸'; } else { svcBody.classList.remove('hidden'); svcToggle.textContent='▾'; } svcToggle.addEventListener('click', function(){ var collapsed = svcBody.classList.toggle('hidden'); svcToggle.textContent = collapsed ? '▸' : '▾'; uiState2.svcCollapsed = collapsed; saveUIState(uiState2); }); }
+  // Link dialog
+  document.getElementById('cancelBtn').onclick = function(){ dialog.close(); };
+  document.getElementById('saveBtn').onclick = saveDialog;
+  document.getElementById('closeXBtn').onclick = function(){ dialog.close(); };
+  // Sections dialog
+  document.getElementById('closeSectionsBtn').onclick = function(){ sectionsDlg.close(); };
+  document.getElementById('addSectionBtn').onclick = addSection;
+  fillColorsSelect();
+  // OP dialog
+  document.getElementById('opCancelBtn').onclick = function(){ opDialog.close(); };
+  document.getElementById('opSaveBtn').onclick = saveOpDialog;
+  document.getElementById('opCloseXBtn').onclick = function(){ opDialog.close(); };
+  // Service dialog close handlers
+  try{
+    document.getElementById('svcCancelBtn').onclick = function(){ serviceDialog.close(); };
+    document.getElementById('svcCloseXBtn').onclick = function(){ serviceDialog.close(); };
+    document.getElementById('svcSaveBtn').onclick = saveServiceDialog;
+  }catch(e){}
 }
-async function exportFullJSON(fileName){ const data = JSON.stringify(state, null, 2); const blob = new Blob([data], {type:'application/json'});
- const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download= (String(fileName||'').trim() || 'linkhub-links.json'); document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();}, 400); toast('Download avviato'); }
-function openSaveLinksDialog(){
-  try {
-    var fn = 'linkhub-links.json';
-    var dlg = document.getElementById('saveLinksDlg');
-    var inp = document.getElementById('saveLinksFileName');
-    var closeX = document.getElementById('saveLinksCloseBtn');
-    var cancel = document.getElementById('saveLinksCancelBtn');
-    var ok = document.getElementById('saveLinksOkBtn');
-    inp.value = fn;
-    dlg.showModal();
-    closeX.onclick = function(){ dlg.close(); };
-    cancel.onclick = function(){ dlg.close(); };
-    ok.onclick = function(){ var chosen = String(inp.value||'').trim() || fn; exportFullJSON(chosen); dlg.close(); };
-  } catch(e){ alert('Apri il file nel browser per usare questa finestra.'); }
-}
-async function importFullJSON(){ try{ var inp=document.createElement('input'); inp.type='file'; inp.accept='application/json'; inp.onchange=async function(){ var f=inp.files[0]; if(!f) return; var text=await f.text(); try{ var json=JSON.parse(text); var imported=normalizeState(json); state=imported; save(); render(); renderOpenPoints(); updateFilterSectionsBtn();
- tryAutoLoadOnStartup(); toast('Caricato da file'); }catch(err){ alert('Errore import: '+err.message); } }; inp.click(); }catch(e){ alert('Caricamento non riuscito: '+e.message); } }
-var sectionsDlg=document.getElementById('sectionsDlg');
-var sectionsList=document.getElementById('sectionsList');
-var newSectionColor=document.getElementById('newSectionColor');
-function fillColorsSelect(){ newSectionColor.innerHTML = '<option value="">Colore (auto)</option>'+PALETTE.map(function(p){return '<option value="'+p.id+'">'+p.id.toUpperCase()+'</option>';}).join(''); }
+
+// Export/Import links
+async function exportFullJSON(fileName){ const data = JSON.stringify({sections: state.sections||[], links: state.links||[]}, null, 2); const blob = new Blob([data], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(String(fileName||'').trim()||'linkhub-links.json'); document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},400); toast('Download avviato'); }
+function openSaveLinksDialog(){ try { var fn = 'linkhub-links.json'; var dlg = document.getElementById('saveLinksDlg'); var inp = document.getElementById('saveLinksFileName'); var closeX = document.getElementById('saveLinksCloseBtn'); var cancel = document.getElementById('saveLinksCancelBtn'); var ok = document.getElementById('saveLinksOkBtn'); inp.value = fn; dlg.showModal(); closeX.onclick = function(){ dlg.close(); }; cancel.onclick = function(){ dlg.close(); }; ok.onclick = function(){ var chosen = String(inp.value||'').trim() || fn; exportFullJSON(chosen); dlg.close(); }; } catch(e){ alert('Apri il file nel browser per usare questa finestra.'); } }
+async function importFullJSON(){ try{ var inp=document.createElement('input'); inp.type='file'; inp.accept='application/json'; inp.onchange=async function(){ var f=inp.files[0]; if(!f) return; var text=await f.text(); try{ var json=JSON.parse(text); var imported=normalizeState(json);
+  var existingOP = Array.isArray(state && state.openPoints)? state.openPoints : [];
+  if(!('openPoints' in json)){ imported.openPoints = existingOP; } else {
+    var map=new Map();
+    function keyOf(o){ return (o && o.id) ? ('id:'+o.id) : ('k:'+[o.title||'', o.project||'', o.createdAt||''].join('\n')); }
+    (existingOP||[]).concat(imported.openPoints||[]).forEach(function(op){ map.set(keyOf(op), op); });
+    imported.openPoints = Array.from(map.values());
+  }
+  var existingSvc = Array.isArray(state && state.services)? state.services : [];
+  if(!('services' in json)){ imported.services = existingSvc; }
+  state = imported; save(); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); toast('Caricato da file (sezioni+link). Open Points/Servizi preservati'); }catch(err){ alert('Errore import: '+err.message); } }; inp.click(); }catch(e){ alert('Caricamento non riuscito: '+e.message); } }
+
+// Sections helpers
+var sectionsDlg=document.getElementById('sectionsDlg'); var sectionsList=document.getElementById('sectionsList'); var newSectionColor=document.getElementById('newSectionColor'); function fillColorsSelect(){ newSectionColor.innerHTML = '<option value="">Colore (auto)</option>'+PALETTE.map(function(p){return '<option value="'+p.id+'">'+p.id.toUpperCase()+'</option>';}).join(''); }
 function headerStyle(sec){ var c1=(sec.color&&sec.color.c1)||'#0b1328', c2=(sec.color&&sec.color.c2)||'#0b1328'; return 'background: linear-gradient(90deg, '+c1+', '+c2+'); border-bottom: 1px solid '+c2+'80'; }
-function render(){ var container=document.getElementById('container'); var term=(document.getElementById('q').value||'').trim().toLowerCase(); var vis=getVisibleSectionsSet();
- var groups = state.sections.map(function(sec){ return { sec:sec, items: state.links.filter(function(it){ var inTerm= !term || [it.title,it.desc,(it.tags||[]).join(' ')].join(' ').toLowerCase().includes(term); var inSec = !vis || vis.has(it.sectionId); return inTerm && inSec && it.sectionId===sec.id; }) }; });
- var anyItem = groups.some(function(g){return g.items.length;});
- if(!anyItem){ container.innerHTML='<div class="empty">Nessun link trovato.</div>'; return; }
- container.innerHTML = groups.map(function(g){ if(g.items.length===0) return ''; var icon=g.sec.collapsed?'▸':'▾'; var grid = g.sec.collapsed? '' : '<div class="grid">'+g.items.map(cardTemplate).join('')+'</div>'; return (
-'<section class="section" data-sec="'+g.sec.id+'">\n'
-+' <div class="section-header" style="'+headerStyle(g.sec)+'">\n'
-+' <div class="section-title">\n'
-+' <button class="toggle" onclick="toggleSection(\''+g.sec.id+'\')">'+icon+'</button>\n'
-+' <span>'+(g.sec.icon && String(g.sec.icon).trim()?String(g.sec.icon).trim():'📁')+'</span> <span>'+escapeHtml(g.sec.name)+'</span>\n'
-+' </div>\n'
-+' <div class="section-actions">\n'
-+' <button onclick="openDialog(undefined,\''+g.sec.id+'\')">➕ Link</button>\n'
-+' </div>\n'
-+' </div>\n'
-+ grid + '\n'
-+'</section>'
- ); }).join('');
- setupDragAndDrop();
-}
-function cardTemplate(item){ return (
-'<div class="card" data-id="'+item.id+'">\n'
-+' <div class="card-head">\n'
-+' <h3>🔗 <a href="'+escapeAttr(item.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(item.title)+'</a></h3>\n'
-+' <button class="drag-handle" draggable="true" title="Trascina" aria-label="Trascina" data-id="'+item.id+'">⋮⋮</button>\n'
-+' </div>\n'
-+ (item.desc?'<p>'+escapeHtml(item.desc)+'</p>':'')
-+' <div class="actions">\n'
-+' <button title="Modifica" aria-label="Modifica" onclick="editItem(\''+item.id+'\')">✏️</button>\n'
-+' <button class="danger" title="Elimina" aria-label="Elimina" onclick="removeItem(\''+item.id+'\')">🗑️</button>\n'
-+' </div>\n'
-+'</div>'
- ); }
+function render(){ var container=document.getElementById('container'); var term=(document.getElementById('q').value||'').trim().toLowerCase(); var vis=getVisibleSectionsSet(); var groups = state.sections.map(function(sec){ return { sec:sec, items: state.links.filter(function(it){ var inTerm= !term || [it.title,it.desc,(it.tags||[]).join(' ')].join(' ').toLowerCase().includes(term); var inSec = !vis || vis.has(it.sectionId); return inTerm && inSec && it.sectionId===sec.id; }) }; }); var anyItem = groups.some(function(g){return g.items.length;}); if(!anyItem){ container.innerHTML='<div class="empty">Nessun link trovato.</div>'; return; } container.innerHTML = groups.map(function(g){ if(g.items.length===0) return ''; var icon=g.sec.collapsed?'▸':'▾'; var grid = g.sec.collapsed? '' : '<div class="grid">'+g.items.map(cardTemplate).join('')+'</div>'; return ('<section class="section" data-sec="'+g.sec.id+'">\n' +' <div class="section-header" style="'+headerStyle(g.sec)+'">\n' +' <div class="section-title">\n' +' <button class="toggle" onclick="toggleSection(\''+g.sec.id+'\')">'+icon+'</button>\n' +' <span>'+(g.sec.icon && String(g.sec.icon).trim()?String(g.sec.icon).trim():'📁')+'</span> <span>'+escapeHtml(g.sec.name)+'</span>\n' +' </div>\n' +' <div class="section-actions">\n' +' <button onclick="openDialog(undefined,\''+g.sec.id+'\')">➕ Link</button>\n' +' </div>\n' +' </div>\n' + grid + '\n' +'</section>'); }).join(''); setupDragAndDrop(); }
+function cardTemplate(item){ return ('<div class="card" data-id="'+item.id+'">\n' +' <div class="card-head">\n' +' <h3>🔗 <a href="'+escapeAttr(item.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(item.title)+'</a></h3>\n' +' <button class="drag-handle" draggable="true" title="Trascina" aria-label="Trascina" data-id="'+item.id+'">⋮⋮</button>\n' +' </div>\n' + (item.desc?'<p>'+escapeHtml(item.desc)+'</p>':'') +' <div class="actions">\n' +' <button title="Modifica" aria-label="Modifica" onclick="editItem(\''+item.id+'\')">✏️</button>\n' +' <button class="danger" title="Elimina" aria-label="Elimina" onclick="removeItem(\''+item.id+'\')">🗑️</button>\n' +' </div>\n' +'</div>'); }
 function openDialog(item, defaultSectionId){ try{ dlgTitle.textContent = item? 'Modifica link' : 'Nuovo link'; fSection.innerHTML = state.sections.map(function(s){ return '<option value="'+s.id+'">'+escapeHtml(s.name)+'</option>'; }).join(''); var secId=(item&&item.sectionId)||defaultSectionId||(state.sections[0]?state.sections[0].id:''); fSection.value=secId; dialog.showModal(); fTitle.value=(item&&item.title)||''; fUrl.value=(item&&item.url)||''; fDesc.value=(item&&item.desc)||''; fTags.value=((item&&item.tags)||[]).join(', '); dialog.dataset.editing=item?item.id:''; setTimeout(function(){ fTitle.focus(); },50); }catch(e){ alert('Apri il file nel browser per usare questa finestra.'); }}
 window.openDialog = openDialog;
 function normalizeLink(x){ return { id: x.id || crypto.randomUUID(), title:(x.title||'').trim(), url:(x.url||'').trim(), desc:(x.desc||'').trim(), tags:(x.tags||[]).map(function(t){return String(t).trim();}).filter(Boolean), sectionId:x.sectionId }; }
 function saveDialog(){ var obj=normalizeLink({title:fTitle.value,url:fUrl.value,desc:fDesc.value,tags:fTags.value.split(','), sectionId:fSection.value}); if(!obj.title||!obj.url){ alert('Titolo e URL sono obbligatori'); return; } if(!obj.sectionId){ alert('Seleziona una sezione'); return; } var id=dialog.dataset.editing; if(id){ var i=state.links.findIndex(function(l){return l.id===id;}); if(i>=0) state.links[i]=Object.assign({}, obj, {id:id}); } else { state.links.unshift(obj); } dialog.close(); refreshAll(); }
-window.copyUrl = async function(url){ try{ await navigator.clipboard.writeText(url); toast('URL copiato'); }catch(e){ alert('Copia non riuscita'); } };
 window.removeItem = function(id){ if(!confirm('Eliminare questo link?')) return; state.links = state.links.filter(function(l){return l.id!==id;}); refreshAll(); };
 window.editItem = function(id){ var item=state.links.find(function(l){return l.id===id;}); openDialog(item, item&&item.sectionId); };
-window.toggleSection = function(id){ var s=state.sections.find(function(x){return x.id===id;}); if(s){ s.collapsed=!s.collapsed; refreshAll(); } };
-function addSection(){ var name=(document.getElementById('newSectionName').value||'').trim(); if(!name) return; var desc=(document.getElementById('newSectionDesc').value||'').trim(); var icon=(document.getElementById('newSectionIcon').value||'').trim(); var colorChoice=newSectionColor.value; var paletteItem = colorChoice? PALETTE.find(function(p){return p.id===colorChoice;}) : PALETTE[state.sections.length % PALETTE.length]; state.sections.push({id:crypto.randomUUID(), name:name, desc:desc, icon:icon, collapsed:false, color:paletteItem}); document.getElementById('newSectionName').value=''; document.getElementById('newSectionDesc').value=''; document.getElementById('newSectionIcon').value=''; newSectionColor.value=''; renderSectionsList(); refreshAll(); }
-function renderSectionsList(){ sectionsList.innerHTML = state.sections.map(function(s){ return (
-'<div class="list-item" data-id="'+s.id+'">\n'
-+' <input value="'+escapeAttr(s.name)+'" oninput="renameSection(\''+s.id+'\', this.value)" placeholder="Nome"/>\n'
-+' <input value="'+escapeAttr(s.desc||'')+'" oninput="redescSection(\''+s.id+'\', this.value)" placeholder="Descrizione (opzionale)"/>\n'
-+' <select class="iconSel" onchange="reiconSection(\''+s.id+'\', this.value)">'+["📁","👥","🧩","📂","📝","📌","📊","📎","🛠","🗃","📅","🧪","💡","✅","⚙"].map(function(e){return '<option '+(s.icon===e?'selected':'')+'>'+e+'</option>';}).join('')+'</select>\n'
-+' <select onchange="recolorSection(\''+s.id+'\', this.value)">'+PALETTE.map(function(p){ return '<option value="'+p.id+'" '+(((s.color&&s.color.id)===p.id)?'selected':'')+'>'+p.id.toUpperCase()+'</option>'; }).join('')+'</select>\n'
-+' <div class="controls">\n'
-+' <button onclick="moveSection(\''+s.id+'\', -1)">⬆️</button>\n'
-+' <button onclick="moveSection(\''+s.id+'\', 1)">⬇️</button>\n'
-+' <button class="danger" onclick="deleteSection(\''+s.id+'\')">🗑️</button>\n'
-+' </div>\n'
-+'</div>'
- ); }).join(''); }
+window.toggleSection = function(id){ var s = state.sections.find(function(x){return x.id===id;}); if(!s) return; s.collapsed = !s.collapsed; var ui = loadUIState(); ui.sectionCollapsed = ui.sectionCollapsed || {}; ui.sectionCollapsed[id] = s.collapsed; saveUIState(ui); refreshAll(); };
+function addSection(){ var name=(document.getElementById('newSectionName').value||'').trim(); if(!name) return; var desc=(document.getElementById('newSectionDesc').value||'').trim(); var icon=(document.getElementById('newSectionIcon').value||'').trim(); var colorChoice=newSectionColor.value; var paletteItem = colorChoice? PALETTE.find(function(p){return p.id===colorChoice;}) : PALETTE[state.sections.length % (PALETTE.length||7)]; state.sections.push({id:crypto.randomUUID(), name:name, desc:desc, icon:icon, collapsed:false, color:paletteItem}); document.getElementById('newSectionName').value=''; document.getElementById('newSectionDesc').value=''; document.getElementById('newSectionIcon').value=''; newSectionColor.value=''; renderSectionsList(); refreshAll(); }
+function renderSectionsList(){ sectionsList.innerHTML = state.sections.map(function(s){ return ('<div class="list-item" data-id="'+s.id+'">\n' +' <input value="'+escapeAttr(s.name)+'" oninput="renameSection(\''+s.id+'\', this.value)" placeholder="Nome"/>\n' +' <input value="'+escapeAttr(s.desc||'')+'" oninput="redescSection(\''+s.id+'\', this.value)" placeholder="Descrizione (opzionale)"/>\n' +' <select class="iconSel" onchange="reiconSection(\''+s.id+'\', this.value)">'+["📁","👥","🧩","📂","📝","📌","📊","📎","🛠","🗃","📅","🧪","💡","✅","⚙"].map(function(e){return '<option '+(s.icon===e?'selected':'')+'>'+e+'</option>';}).join('')+'</select>\n' +' <select onchange="recolorSection(\''+s.id+'\', this.value)">'+PALETTE.map(function(p){ return '<option value="'+p.id+'" '+(((s.color&&s.color.id)===p.id)?'selected':'')+'>'+p.id.toUpperCase()+'</option>'; }).join('')+'</select>\n' +' <div class="controls">\n' +' <button onclick="moveSection(\''+s.id+'\', -1)">⬆️</button>\n' +' <button onclick="moveSection(\''+s.id+'\', 1)">⬇️</button>\n' +' <button class="danger" onclick="deleteSection(\''+s.id+'\')">🗑️</button>\n' +' </div>\n' +'</div>'); }).join(''); }
 window.recolorSection=function(id,pid){ var s=state.sections.find(function(x){return x.id===id;}); var p=PALETTE.find(function(x){return x.id===pid;}); if(!s||!p) return; s.color=p; refreshAll(); };
-window.redescSection=function(id,val){ var s=state.sections.find(function(x){return x.id===id;}); if(!s) return; s.desc=String(val||'').trim(); save(); updateFilterSectionsBtn();
- tryAutoLoadOnStartup(); };
+window.redescSection=function(id,val){ var s=state.sections.find(function(x){return x.id===id;}); if(!s) return; s.desc=String(val||'').trim(); save(); updateFilterSectionsBtn(); };
 window.reiconSection=function(id,val){ var s=state.sections.find(function(x){return x.id===id;}); if(!s) return; s.icon=String(val||'').trim(); refreshAll(); };
-window.renameSection=function(id,val){ var s=state.sections.find(function(x){return x.id===id;}); if(!s) return; s.name=String(val||'').trim()||'Senza nome'; save(); updateFilterSectionsBtn();
- tryAutoLoadOnStartup(); };
+window.renameSection=function(id,val){ var s=state.sections.find(function(x){return x.id===id;}); if(!s) return; s.name=String(val||'').trim()||'Senza nome'; save(); updateFilterSectionsBtn(); };
 window.moveSection=function(id,delta){ var i=state.sections.findIndex(function(x){return x.id===id;}); if(i<0) return; var j=i+delta; if(j<0||j>=state.sections.length) return; var tmp=state.sections[i]; state.sections[i]=state.sections[j]; state.sections[j]=tmp; renderSectionsList(); refreshAll(); };
 window.deleteSection=function(id){ if(state.sections.length===1){ alert('Deve esistere almeno una sezione.'); return; } var s=state.sections.find(function(x){return x.id===id;}); if(!s) return; if(!confirm('Eliminare la sezione "'+s.name+'"? I link saranno spostati nella prima sezione.')) return; var target=state.sections.find(function(x){return x.id!==id;}); state.links = state.links.map(function(l){ return l.sectionId===id ? Object.assign({}, l, {sectionId: target.id}) : l; }); state.sections = state.sections.filter(function(x){return x.id!==id;}); renderSectionsList(); refreshAll(); };
-function refreshAll(){ save(); render(); renderOpenPoints(); updateFilterSectionsBtn();
- tryAutoLoadOnStartup(); }
-function clearAll(){ if(!confirm('Confermi? Saranno eliminati TUTTI i link, TUTTE le sezioni e TUTTI gli Open Points. Operazione irreversibile.')) return; var base={ id:crypto.randomUUID(), name:'Generale', desc:'', icon:'📁', collapsed:false, color:PALETTE[0] }; state={ sections:[base], links:[], openPoints:[] }; try{ localStorage.removeItem('linkhub.secFilter.v1'); }catch(_){ } save(); render(); renderOpenPoints(); updateFilterSectionsBtn();
- tryAutoLoadOnStartup(); toast('Ripulito'); }
-var SEC_FILTER_KEY='linkhub.secFilter.v1';
-function getVisibleSectionsSet(){ try{ var raw=localStorage.getItem(SEC_FILTER_KEY); if(!raw) return null; var arr=JSON.parse(raw); if(!Array.isArray(arr)||arr.length===0) return null; return new Set(arr); }catch(e){ return null; } }
+function refreshAll(){ save(); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); }
+function clearAll(){ if(!confirm('Confermi? Saranno eliminati TUTTI i link, TUTTE le sezioni e TUTTI gli Open Points. Operazione irreversibile.')) return; var base={ id:crypto.randomUUID(), name:'Generale', desc:'', icon:'📁', collapsed:false, color:PALETTE[0] }; state={ sections:[base], links:[], openPoints:[], services:[] }; try{ localStorage.removeItem('linkhub.secFilter.v1'); }catch(_){ } save(); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); toast('Ripulito'); }
+var SEC_FILTER_KEY='linkhub.secFilter.v1'; function getVisibleSectionsSet(){ try{ var raw=localStorage.getItem(SEC_FILTER_KEY); if(!raw) return null; var arr=JSON.parse(raw); if(!Array.isArray(arr)||arr.length===0) return null; return new Set(arr); }catch(e){ return null; } }
 function setVisibleSections(ids){ try{ if(!ids || ids.length===0 || ids.length===state.sections.length){ localStorage.removeItem(SEC_FILTER_KEY); } else { localStorage.setItem(SEC_FILTER_KEY, JSON.stringify(ids)); } }catch(e){} }
 function updateFilterSectionsBtn(){ var btn=document.getElementById('filterSectionsBtn'); if(!btn) return; btn.textContent='🏠 Menu'; try{ var vis=getVisibleSectionsSet(); var total= state && state.sections ? state.sections.length : 0; var all=(!vis || (vis && vis.size===total)); var label = all ? 'Tutte ('+total+')' : ('Filtrate: '+vis.size+'/'+total); btn.title='Selezione sezioni: '+label; }catch(e){} }
-function openFilterSectionsDialog(){ try{ var dlg=document.getElementById('filterSectionsDlg'); var menu=document.getElementById('filterMenu'); var items=[]; items.push('<button class="menu-btn" data-id="ALL"><div class="label"><span class="ico">🏠</span><div class="text"><div class="name">Tutte</div><div class="desc">Mostra tutte le sezioni</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_OP"><div class="label"><span class="ico">📝</span><div class="text"><div class="name">Solo Open Points</div><div class="desc">Nasconde tutte le sezioni link</div></div></div></button>'); Array.prototype.push.apply(items, state.sections.map(function(s){ var icon=(s.icon&&String(s.icon).trim())? String(s.icon).trim() : '📁'; var desc=(s.desc&&String(s.desc).trim())? ('<div class="desc">'+escapeHtml(String(s.desc).trim())+'</div>') : ''; return '<button class="menu-btn" data-id="'+s.id+'"><div class="label"><span class="ico">'+escapeHtml(icon)+'</span><div class="text"><div class="name">'+escapeHtml(s.name)+'</div>'+desc+'</div></div></button>'; })); menu.innerHTML = items.join(''); Array.prototype.forEach.call(menu.querySelectorAll('button.menu-btn'), function(btn){ btn.onclick=function(){ var id=btn.getAttribute('data-id'); if(id==='ALL') setVisibleSections(null); else if(id==='SOLO_OP') setVisibleSections(['__NONE__']); else setVisibleSections([id]); render(); updateFilterSectionsBtn();
- tryAutoLoadOnStartup(); dlg.close(); }; }); var fsClose=document.getElementById('fsCloseBtn'); if(fsClose) fsClose.onclick=function(){ dlg.close(); }; dlg.showModal(); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } }
-window.openFilterSectionsDialog = openFilterSectionsDialog;
-var dragState={id:null}; var caretEl=null; var rafId=0;
-function setupDragAndDrop(){ Array.prototype.forEach.call(document.querySelectorAll('.drag-handle'), function(h){ h.addEventListener('dragstart', onHandleDragStart); h.addEventListener('dragend', onHandleDragEnd); }); Array.prototype.forEach.call(document.querySelectorAll('.card'), function(card){ card.addEventListener('dragover', onCardDragOver); card.addEventListener('dragleave', onCardDragLeave); card.addEventListener('drop', onCardDrop); }); Array.prototype.forEach.call(document.querySelectorAll('.section'), function(sectionEl){ sectionEl.addEventListener('dragover', onSectionDragOver); sectionEl.addEventListener('dragleave', onSectionDragLeave); sectionEl.addEventListener('drop', onSectionDrop); }); }
+function openFilterSectionsDialog(){ try{ var dlg=document.getElementById('filterSectionsDlg'); var menu=document.getElementById('filterMenu'); var items=[]; items.push('<button class="menu-btn" data-id="ALL"><div class="label"><span class="ico">🏠</span><div class="text"><div class="name">Tutte</div><div class="desc">Mostra tutte le sezioni</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_OP"><div class="label"><span class="ico">📝</span><div class="text"><div class="name">Solo Open Points</div><div class="desc">Nasconde tutte le sezioni link</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_SVC"><div class="label"><span class="ico">🛠</span><div class="text"><div class="name">Solo Servizi</div><div class="desc">Nasconde le sezioni link</div></div></div></button>'); Array.prototype.push.apply(items, state.sections.map(function(s){ var icon=(s.icon&&String(s.icon).trim())? String(s.icon).trim() : '📁'; var desc=(s.desc&&String(s.desc).trim())? ('<div class="desc">'+escapeHtml(String(s.desc).trim())+'</div>') : ''; return '<button class="menu-btn" data-id="'+s.id+'"><div class="label"><span class="ico">'+escapeHtml(icon)+'</span><div class="text"><div class="name">'+escapeHtml(s.name)+'</div>'+desc+'</div></div></button>'; })); menu.innerHTML = items.join(''); Array.prototype.forEach.call(menu.querySelectorAll('button.menu-btn'), function(btn){ btn.onclick=function(){ var id=btn.getAttribute('data-id'); if(id==='ALL') setVisibleSections(null); else if(id==='SOLO_OP' || id==='SOLO_SVC') setVisibleSections(['__NONE__']); else setVisibleSections([id]); render(); updateFilterSectionsBtn(); dlg.close(); }; }); var fsClose=document.getElementById('fsCloseBtn'); if(fsClose) fsClose.onclick=function(){ dlg.close(); }; dlg.showModal(); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } }
+
+// Drag & drop for cards
+var dragState={id:null}; var caretEl=null; var rafId=0; function setupDragAndDrop(){ Array.prototype.forEach.call(document.querySelectorAll('.drag-handle'), function(h){ h.addEventListener('dragstart', onHandleDragStart); h.addEventListener('dragend', onHandleDragEnd); }); Array.prototype.forEach.call(document.querySelectorAll('.card'), function(card){ card.addEventListener('dragover', onCardDragOver); card.addEventListener('dragleave', onCardDragLeave); card.addEventListener('drop', onCardDrop); }); Array.prototype.forEach.call(document.querySelectorAll('.section'), function(sectionEl){ sectionEl.addEventListener('dragover', onSectionDragOver); sectionEl.addEventListener('dragleave', onSectionDragLeave); sectionEl.addEventListener('drop', onSectionDrop); }); }
 function onHandleDragStart(e){ var handle=e.currentTarget; var card=handle.closest('.card'); dragState.id=(card&&card.dataset.id)||handle.dataset.id; if(card) card.classList.add('dragging'); try{ e.dataTransfer.setData('text/plain', dragState.id); }catch(_){ } if(e.dataTransfer) e.dataTransfer.effectAllowed='move'; }
 function onHandleDragEnd(e){ var card=e.currentTarget.closest('.card'); if(card) card.classList.remove('dragging'); hideCaret(); dragState.id=null; }
 function onCardDragOver(e){ if(!dragState.id) return; e.preventDefault(); e.stopPropagation(); var card=e.currentTarget; placeCaret(card, e.clientX); }
@@ -447,294 +991,342 @@ function showCaretAt(grid, absLeft, absTop, height){ var grect=grid.getBoundingC
 function hideCaret(){ if(caretEl){ caretEl.style.display='none'; } }
 function moveRelative(dragId, targetId, where){ var di=state.links.findIndex(function(l){return l.id===dragId;}); var ti=state.links.findIndex(function(l){return l.id===targetId;}); if(di<0||ti<0) return; var dragged=state.links[di]; var target=state.links[ti]; if(dragged.sectionId!==target.sectionId){ dragged.sectionId=target.sectionId; } state.links.splice(di,1); var insertAt; if(where==='after') insertAt = (di < ti) ? ti : ti+1; else insertAt = (di < ti) ? ti-1 : ti; insertAt = Math.max(0, Math.min(insertAt, state.links.length)); state.links.splice(insertAt,0,dragged); save(); }
 function moveToSectionEnd(dragId, sectionId){ var di=state.links.findIndex(function(l){return l.id===dragId;}); if(di<0) return; var dragged=state.links[di]; dragged.sectionId=sectionId; state.links.splice(di,1); var last=-1; for(var i=0;i<state.links.length;i++){ if(state.links[i].sectionId===sectionId) last=i; } var insertAt = last===-1? state.links.length : last+1; state.links.splice(insertAt,0,dragged); save(); }
-var opDialog=document.getElementById('opDialog');
-var opTitle=document.getElementById('opTitle');
-var opProject=document.getElementById('opProject');
-var opAssignees=document.getElementById('opAssignees');
-var opPriority=document.getElementById('opPriority');
-var opStatus=document.getElementById('opStatus');
-var opMaxPrio=document.getElementById('opMaxPrio');
-var opCreatedAt=document.getElementById('opCreatedAt');
-var opDueAt=document.getElementById('opDueAt');
-var opDesc=document.getElementById('opDesc');
-var opNotes=document.getElementById('opNotes');
+
+// ===== OP =====
+var opDialog=document.getElementById('opDialog'); var opTitle=document.getElementById('opTitle'); var opProject=document.getElementById('opProject'); var opAssignees=document.getElementById('opAssignees'); var opPriority=document.getElementById('opPriority'); var opStatus=document.getElementById('opStatus'); var opMaxPrio=document.getElementById('opMaxPrio'); var opCreatedAt=document.getElementById('opCreatedAt'); var opDueAt=document.getElementById('opDueAt'); var opDesc=document.getElementById('opDesc'); var opNotes=document.getElementById('opNotes');
 function openOpDialog(item){ try{ document.getElementById('opDlgTitle').textContent=item?'Modifica open point':'Nuovo open point'; opTitle.value=(item&&item.title)||''; opProject.value=(item&&item.project)||''; opAssignees.value=(item&&Array.isArray(item.assignees)?item.assignees.join(', '):(item&&item.assignees)||''); opPriority.value=(item&&item.priority)||'medium'; opStatus.value=(item&&item.status)||'Nuovo'; opMaxPrio.checked=!!(item&&item.maxPriority); opCreatedAt.value=(item&&item.createdAt)||todayISO(); opDueAt.value=(item&&item.dueAt)||''; opDesc.value=(item&&item.desc)||''; opNotes.value=(item&&item.notes)||''; opDialog.dataset.editing=item?item.id:''; opDialog.showModal(); setTimeout(function(){opTitle.focus();},50); }catch(e){ alert('Apri il file nel browser per usare questa finestra.'); }}
 function normalizeOPInput(){ var ass=String(opAssignees.value||'').split(',').map(function(s){return s.trim();}).filter(Boolean); return { id:crypto.randomUUID(), title:String(opTitle.value||'').trim(), project:String(opProject.value||'').trim(), assignees:ass, priority:String(opPriority.value||'medium').toLowerCase(), status:String(opStatus.value||'Nuovo'), maxPriority:!!opMaxPrio.checked, createdAt:String(opCreatedAt.value||'').trim(), dueAt:String(opDueAt.value||'').trim(), desc:String(opDesc.value||'').trim(), notes:String(opNotes.value||'').trim() }; }
 function saveOpDialog(){ var obj=normalizeOPInput(); if(!obj.title){ alert('Il Titolo è obbligatorio'); return; } if(!obj.createdAt) obj.createdAt=todayISO(); var id=opDialog.dataset.editing; if(id){ var i=state.openPoints.findIndex(function(o){return o.id===id;}); if(i>=0) state.openPoints[i]=Object.assign({}, obj, {id:id}); } else { state.openPoints.unshift(obj); } opDialog.close(); refreshAll(); }
 window.editOpenPoint = function(id){ var item=state.openPoints.find(function(o){return o.id===id;}); if(item) openOpDialog(item); };
 window.deleteOpenPoint = function(id){ if(!confirm('Eliminare questo open point?')) return; state.openPoints = state.openPoints.filter(function(o){return o.id!==id;}); refreshAll(); };
 function clearOpenPoints(){ if(!confirm('Confermi? Saranno eliminati TUTTI gli Open Points. Operazione irreversibile.')) return; state.openPoints=[]; refreshAll(); }
-var OPF_KEY='openpoints.filter.v1';
-function defaultOpFilter(){ return { text:'', priorities:['medium','high','critical','low'], statuses:['Nuovo','Da fare','In corso','Schedulato','Completato'], maxOnly:false, createdFrom:'', createdTo:'', dueFrom:'', dueTo:'', assignees:[], projects:[] }; }
+var OPF_KEY='openpoints.filter.v1'; function defaultOpFilter(){ return { text:'', priorities:['medium','high','critical','low'], statuses:['Nuovo','Da fare','In corso','Schedulato','Completato'], maxOnly:false, createdFrom:'', createdTo:'', dueFrom:'', dueTo:'', assignees:[], projects:[] }; }
 function loadOpFilter(){ try{ var raw=localStorage.getItem(OPF_KEY); if(!raw) return defaultOpFilter(); var f=JSON.parse(raw); return Object.assign(defaultOpFilter(), f); }catch(e){ return defaultOpFilter(); } }
 function saveOpFilter(f){ try{ localStorage.setItem(OPF_KEY, JSON.stringify(f || defaultOpFilter())); }catch(e){} }
 var opFilter=loadOpFilter();
-function openOpFilterDialog(){ try{ var dlg=document.getElementById('opFilterDlg'); if(!dlg) return alert('Dialog non disponibile'); document.getElementById('opfText').value=opFilter.text||'';
- // set checkboxes (priorità)
- Array.prototype.forEach.call(document.querySelectorAll('#opfPrioGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter.priorities||[]).indexOf(cb.value) >= 0; });
- // set checkboxes (stato)
- Array.prototype.forEach.call(document.querySelectorAll('#opfStatusGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter.statuses||[]).indexOf(cb.value) >= 0; });
- document.getElementById('opfMaxOnly').checked=!!opFilter.maxOnly; document.getElementById('opfCreatedFrom').value=opFilter.createdFrom||''; document.getElementById('opfCreatedTo').value=opFilter.createdTo||''; document.getElementById('opfDueFrom').value=opFilter.dueFrom||''; document.getElementById('opfDueTo').value=opFilter.dueTo||''; document.getElementById('opfAssignees').value=(opFilter.assignees||[]).join(', '); document.getElementById('opfProjects').value=(opFilter.projects||[]).join(', ');
- document.getElementById('opFilterCloseXBtn').onclick=function(){ dlg.close(); }; document.getElementById('opfResetBtn').onclick=function(){ opFilter=defaultOpFilter(); saveOpFilter(opFilter); renderOpenPoints(); dlg.close(); }; document.getElementById('opfApplyBtn').onclick=function(){ function getChecked(containerId){ var box=document.getElementById(containerId); return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), function(o){return o.checked;}).map(function(o){return o.value;}); }
- opFilter={ text:String(document.getElementById('opfText').value||'').trim().toLowerCase(), priorities:getChecked('opfPrioGroup'), statuses:getChecked('opfStatusGroup'), maxOnly:!!document.getElementById('opfMaxOnly').checked, createdFrom:String(document.getElementById('opfCreatedFrom').value||'').trim(), createdTo:String(document.getElementById('opfCreatedTo').value||'').trim(), dueFrom:String(document.getElementById('opfDueFrom').value||'').trim(), dueTo:String(document.getElementById('opfDueTo').value||'').trim(), assignees:String(document.getElementById('opfAssignees').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), projects:String(document.getElementById('opfProjects').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean) }; saveOpFilter(opFilter); renderOpenPoints(); dlg.close(); }; dlg.showModal(); }catch(e){ alert('Apri il file nel browser per usare il filtro OP.'); } }
+
+
+window.openOpFilterDialog = function(){
+  var dlg = document.getElementById('opFilterDlg');
+  if(!dlg){ console.warn('Dialog OP non trovato'); return; }
+  try{
+    document.getElementById('opfText').value = (opFilter && opFilter.text)||'';
+    Array.prototype.forEach.call(document.querySelectorAll('#opfPrioGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter && opFilter.priorities||[]).indexOf(cb.value)>=0; });
+    Array.prototype.forEach.call(document.querySelectorAll('#opfStatusGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter && opFilter.statuses||[]).indexOf(cb.value)>=0; });
+    document.getElementById('opfMaxOnly').checked = !!(opFilter && opFilter.maxOnly);
+    var setVal=function(id,v){ var el=document.getElementById(id); if(el) el.value=v||''; };
+    setVal('opfCreatedFrom', opFilter && opFilter.createdFrom);
+    setVal('opfCreatedTo',   opFilter && opFilter.createdTo);
+    setVal('opfDueFrom',     opFilter && opFilter.dueFrom);
+    setVal('opfDueTo',       opFilter && opFilter.dueTo);
+    setVal('opfAssignees',   (opFilter && opFilter.assignees||[]).join(', '));
+    setVal('opfProjects',    (opFilter && opFilter.projects||[]).join(', '));
+  }catch(e){ console.warn('Prefill OP error:', e); }
+  var closeX = document.getElementById('opFilterCloseXBtn'); if(closeX) closeX.onclick=function(){ try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
+  var reset = document.getElementById('opfResetBtn'); if(reset) reset.onclick=function(){ opFilter = defaultOpFilter(); saveOpFilter(opFilter); renderOpenPoints(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
+  var apply = document.getElementById('opfApplyBtn'); if(apply) apply.onclick=function(){
+    function getChecked(containerId){ var box=document.getElementById(containerId); if(!box) return []; return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), function(o){return o.checked;}).map(function(o){return o.value;}); }
+    opFilter = {
+      text: String((document.getElementById('opfText')||{}).value||'').trim().toLowerCase(),
+      priorities: getChecked('opfPrioGroup'),
+      statuses: getChecked('opfStatusGroup'),
+      maxOnly: !!((document.getElementById('opfMaxOnly')||{}).checked),
+      createdFrom: String((document.getElementById('opfCreatedFrom')||{}).value||'').trim(),
+      createdTo:   String((document.getElementById('opfCreatedTo')||{}).value||'').trim(),
+      dueFrom:     String((document.getElementById('opfDueFrom')||{}).value||'').trim(),
+      dueTo:       String((document.getElementById('opfDueTo')||{}).value||'').trim(),
+      assignees:   String((document.getElementById('opfAssignees')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean),
+      projects:    String((document.getElementById('opfProjects')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean)
+    };
+    saveOpFilter(opFilter); renderOpenPoints(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); }
+  };
+  try{ dlg.showModal(); }catch(e){ dlg.setAttribute('open',''); }
+};
+
 function inDateRange(val, from, to){ if(!val) return true; try{ var v=new Date(val).toISOString().slice(0,10); if(from && v<from) return false; if(to && v>to) return false; return true; }catch(e){ return true; } }
 function applyOpFilters(rows){ var f=opFilter||defaultOpFilter(); return rows.filter(function(o){ var text=(f.text||''); if(text){ var bag=[o.title||'', o.project||'', o.desc||'', o.notes||'', Array.isArray(o.assignees)? o.assignees.join(' '): (o.assignees||'')].join(' ').toLowerCase(); if(bag.indexOf(text)===-1) return false; } var pr=(o.priority||'medium').toLowerCase(); if(Array.isArray(f.priorities)&&f.priorities.length&&f.priorities.indexOf(pr)===-1) return false; var st=(o.status||'Nuovo'); if(Array.isArray(f.statuses)&&f.statuses.length&&f.statuses.indexOf(st)===-1) return false; if(!!f.maxOnly && !o.maxPriority) return false; if(!inDateRange(o.createdAt||'', f.createdFrom||'', f.createdTo||'')) return false; if(!inDateRange(o.dueAt||'', f.dueFrom||'', f.dueTo||'')) return false; if(Array.isArray(f.assignees)&&f.assignees.length){ var a = Array.isArray(o.assignees)? o.assignees.map(function(x){return String(x).toLowerCase();}) : String(o.assignees||'').toLowerCase(); var ok=false; f.assignees.forEach(function(x){ var k=String(x).toLowerCase(); if(Array.isArray(a)){ if(a.indexOf(k)>=0) ok=true; } else { if(a.indexOf(k)>=0) ok=true; } }); if(!ok) return false; } if(Array.isArray(f.projects)&&f.projects.length){ var p=String(o.project||'').toLowerCase(); var okp=false; f.projects.forEach(function(x){ var k=String(x).toLowerCase(); if(k && p.indexOf(k)>=0) okp=true; }); if(!okp) return false; } return true; }); }
-var opSort={ key:'createdAt', dir:'desc' };
-var PRIO_ORDER={low:1, medium:2, high:3, critical:4};
-var STATUS_ORDER={'Nuovo':1, 'Da fare':2, 'In corso':3, 'Schedulato':4, 'Completato':5};
+var opSort={ key:'createdAt', dir:'desc' }; var PRIO_ORDER={low:1, medium:2, high:3, critical:4}; var STATUS_ORDER={'Nuovo':1, 'Da fare':2, 'In corso':3, 'Schedulato':4, 'Completato':5};
 function cmp(a,b){ return a<b? -1 : a>b? 1 : 0; }
 function cmpDate(a,b){ try{ a=a? new Date(a).toISOString().slice(0,10):''; b=b? new Date(b).toISOString().slice(0,10):''; }catch(_){ } return cmp(a,b); }
 function sortRows(rows){ var k=opSort.key, d=(opSort.dir==='desc'?-1:1); return rows.slice().sort(function(x,y){ var r=0; if(k==='title'||k==='project') r=cmp(String(x[k]||'').toLowerCase(), String(y[k]||'').toLowerCase()); else if(k==='assignees'){ r=cmp(String((Array.isArray(x.assignees)?x.assignees.join(', '):x.assignees)||'').toLowerCase(), String((Array.isArray(y.assignees)?y.assignees.join(', '):y.assignees)||'').toLowerCase()); } else if(k==='priority'){ r=cmp(PRIO_ORDER[(x.priority||'medium')], PRIO_ORDER[(y.priority||'medium')]); } else if(k==='status'){ r=cmp(STATUS_ORDER[(x.status||'Nuovo')], STATUS_ORDER[(y.status||'Nuovo')]); } else if(k==='maxPriority'){ r=cmp(!!x.maxPriority, !!y.maxPriority); } else if(k==='createdAt'||k==='dueAt'){ r=cmpDate(x[k]||'', y[k]||''); } else if(k==='id'){ r=cmp(String(x.id||''), String(y.id||'')); } return r*d; }); }
 function setOpSort(key){ if(opSort.key===key){ opSort.dir=(opSort.dir==='asc'?'desc':'asc'); } else { opSort.key=key; opSort.dir=(key==='createdAt'||key==='dueAt')?'desc':'asc'; } renderOpenPoints(); }
 function sortArrowFor(key){ if(opSort.key!==key) return ''; return ' <span class="arrow">'+(opSort.dir==='asc'?'↑':'↓')+'</span>'; }
-function renderOpenPoints(){ var tbl=document.getElementById('opTable'); if(!tbl) return; var all=state.openPoints||[]; var filtered=applyOpFilters(all); var rows=sortRows(filtered); document.getElementById('opCount').textContent = rows.length + ' risultati su ' + all.length; var thead = '<thead><tr>'
- + '<th class="col-id sortable" onclick="setOpSort(\'id\')">ID'+sortArrowFor('id')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'title\')">Titolo'+sortArrowFor('title')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'project\')">Progetto'+sortArrowFor('project')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'assignees\')">Assegnatari'+sortArrowFor('assignees')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'priority\')">Priorità'+sortArrowFor('priority')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'status\')">Stato'+sortArrowFor('status')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'maxPriority\')">Max'+sortArrowFor('maxPriority')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'createdAt\')">Inserito il'+sortArrowFor('createdAt')+'</th>'
- + '<th class="sortable" onclick="setOpSort(\'dueAt\')">Scadenza'+sortArrowFor('dueAt')+'</th>'
- + '<th>Azioni</th>'
- + '</tr></thead>';
- if(rows.length===0){ tbl.innerHTML = thead + '<tbody><tr><td colspan="10"><div class="empty">Nessun open point</div></td></tr></tbody>'; return; }
- var tbody = '<tbody>' + rows.map(function(o){ var prioCls='prio-'+(o.priority||'medium'); var assTxt=Array.isArray(o.assignees)? o.assignees.join(', ') : (o.assignees||''); return '<tr>'
- + '<td class="col-id">'+escapeHtml(o.id)+'</td>'
- + '<td class="col-title"><strong>'+escapeHtml(o.title)+'</strong>' + (o.desc? '<br><span style="color:var(--muted)">'+escapeHtml(o.desc)+'</span>':'' ) + (o.notes? '<br><span style="color:var(--muted)"><em>Note:</em> '+escapeHtml(o.notes)+'</span>':'' ) + '</td>'
- + '<td>'+escapeHtml(o.project||'')+'</td>'
- + '<td>'+escapeHtml(assTxt)+'</td>'
- + '<td><span class="badge '+prioCls+'">'+escapeHtml((o.priority||'medium').toUpperCase())+'</span></td>'
- + '<td><span class="badge state">'+escapeHtml(o.status||'Nuovo')+'</span></td>'
- + '<td>'+(o.maxPriority? '<span class="badge max">MAX</span>' : '')+'</td>'
- + '<td class="col-created">'+escapeHtml(o.createdAt||'')+'</td>'
- + '<td class="col-due">'+escapeHtml(o.dueAt||'')+'</td>'
- + '<td><div class="table-actions">'
- + '<button title="Modifica" onclick="editOpenPoint(\''+o.id+'\')">✏️</button>'
- + '<button class="danger" title="Elimina" onclick="deleteOpenPoint(\''+o.id+'\')">🗑️</button>'
- + '</div></td>'
- + '</tr>'; }).join('') + '</tbody>';
- tbl.innerHTML = thead + tbody;
-}
+function renderOpenPoints(){ var tbl=document.getElementById('opTable'); if(!tbl) return; var all=state.openPoints||[]; var filtered=applyOpFilters(all); var rows=sortRows(filtered); document.getElementById('opCount').textContent = rows.length + ' risultati su ' + all.length; var thead = '<thead><tr>' + '<th class="col-id sortable" onclick="setOpSort(\'id\')">ID'+sortArrowFor('id')+'</th>' + '<th class="sortable" onclick="setOpSort(\'title\')">Titolo'+sortArrowFor('title')+'</th>' + '<th class="sortable" onclick="setOpSort(\'project\')">Progetto'+sortArrowFor('project')+'</th>' + '<th class="sortable" onclick="setOpSort(\'assignees\')">Assegnatari'+sortArrowFor('assignees')+'</th>' + '<th class="sortable" onclick="setOpSort(\'priority\')">Priorità'+sortArrowFor('priority')+'</th>' + '<th class="sortable" onclick="setOpSort(\'status\')">Stato'+sortArrowFor('status')+'</th>' + '<th class="sortable" onclick="setOpSort(\'maxPriority\')">Max'+sortArrowFor('maxPriority')+'</th>' + '<th class="sortable" onclick="setOpSort(\'createdAt\')">Inserito il'+sortArrowFor('createdAt')+'</th>' + '<th class="sortable" onclick="setOpSort(\'dueAt\')">Scadenza'+sortArrowFor('dueAt')+'</th>' + '<th>Azioni</th>' + '</tr></thead>'; if(rows.length===0){ tbl.innerHTML = thead + '<tbody><tr><td colspan="10"><div class="empty">Nessun open point</div></td></tr></tbody>'; return; } var tbody = '<tbody>' + rows.map(function(o){ var assTxt=Array.isArray(o.assignees)? o.assignees.join(', ') : (o.assignees||''); return '<tr>' + '<td class="col-id">'+escapeHtml(o.id)+'</td>' + '<td class="col-title"><strong>'+escapeHtml(o.title)+'</strong>' + (o.desc? '<br><span style="color:var(--muted)">'+escapeHtml(o.desc)+'</span>':'' ) + (o.notes? '<br><span style="color:var(--muted)"><em>Note:</em> '+escapeHtml(o.notes)+'</span>':'' ) + '</td>' + '<td>'+escapeHtml(o.project||'')+'</td>' + '<td>'+escapeHtml(assTxt)+'</td>' + '<td><span class="badge">'+escapeHtml((o.priority||'medium').toUpperCase())+'</span></td>' + '<td><span class="badge state">'+escapeHtml(o.status||'Nuovo')+'</span></td>' + '<td>'+(o.maxPriority? '<span class="badge max">MAX</span>' : '')+'</td>' + '<td class="col-created">'+escapeHtml(o.createdAt||'')+'</td>' + '<td class="col-due">'+escapeHtml(o.dueAt||'')+'</td>' + '<td><div class="table-actions">' + '<button title="Modifica" onclick="editOpenPoint(\''+o.id+'\')">✏️</button>' + '<button class="danger" title="Elimina" onclick="deleteOpenPoint(\''+o.id+'\')">🗑️</button>' + '</div></td>' + '</tr>'; }).join('') + '</tbody>'; tbl.innerHTML = thead + tbody; }
 async function exportOpenPointsToFile(fileName){ try{ var data=JSON.stringify({openPoints: state.openPoints||[]}, null, 2); var blob=new Blob([data], {type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=String(fileName||'open-points.json'); document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},400); toast('Download OP avviato'); }catch(e){ alert('Salvataggio OP non riuscito: '+(e&&e.message?e.message:e)); } }
-async function importOpenPointsFromFile(){ try{ var inp=document.createElement('input'); inp.type='file'; inp.accept='application/json'; inp.onchange=async function(){ var f=inp.files[0]; if(!f) return; var text=await f.text(); try{ var json=JSON.parse(text); var arr=Array.isArray(json)? json : (Array.isArray(json.openPoints)? json.openPoints : null); if(!arr){ alert('JSON non valido: atteso array o { openPoints: [...] }'); return; } state.openPoints = arr.map(function(o){ return { id:o.id||crypto.randomUUID(), title:String(o.title||o.titolo||'').trim(), project:String(o.project||o.progetto||'').trim(), assignees:Array.isArray(o.assignees||o.assegnatari)? (o.assignees||o.assegnatari) : String(o.assignees||o.assegnatari||'').split(',').map(function(s){return s.trim();}).filter(Boolean), priority:(o.priority||o.priorita||o['priorità']||'medium').toLowerCase(), status:String(o.status||o.stato||'Nuovo').trim(), maxPriority:!!(o.maxPriority||o.max||o['prioritàMassima']), createdAt:String(o.createdAt||o.dataInserimento||'').trim(), dueAt:String(o.dueAt||o.dataScadenza||'').trim(), desc:String(o.desc||o.descrizione||'').trim(), notes:String(o.notes||o.note||'').trim() }; }); refreshAll(); toast('Open Points caricati da file'); }catch(err){ alert('Errore import OP: '+err.message); } }; inp.click(); }catch(e){ alert('Caricamento OP fallito: '+e.message); } }
+window.importOpenPointsFromFile = async function(){ try{ var inp=document.createElement('input'); inp.type='file'; inp.accept='application/json'; inp.onchange=async function(){ var f=inp.files[0]; if(!f) return; var text=await f.text(); try{ var json=JSON.parse(text); var arr=Array.isArray(json)? json : (Array.isArray(json.openPoints)? json.openPoints : null); if(!arr){ alert('JSON non valido: atteso array o { openPoints: [...] }'); return; } state.openPoints = arr.map(function(o){ return { id:o.id||crypto.randomUUID(), title:String(o.title||o.titolo||'').trim(), project:String(o.project||o.progetto||'').trim(), assignees:Array.isArray(o.assignees||o.assegnatari)? (o.assignees||o.assegnatari) : String(o.assignees||o.assegnatari||'').split(',').map(function(s){return s.trim();}).filter(Boolean), priority:(o.priority||o.priorita||o['priorità']||'medium').toLowerCase(), status:String(o.status||o.stato||'Nuovo').trim(), maxPriority:!!(o.maxPriority||o.max||o['prioritàMassima']), createdAt:String(o.createdAt||o.dataInserimento||'').trim(), dueAt:String(o.dueAt||o.dataScadenza||'').trim(), desc:String(o.desc||o.descrizione||'').trim(), notes:String(o.notes||o.note||'').trim() }; }); refreshAll(); toast('Open Points caricati da file'); }catch(err){ alert('Errore import OP: '+err.message); } }; inp.click(); }catch(e){ alert('Caricamento OP fallito: '+e.message); } }
 function opRowsFiltered(){ return sortRows(applyOpFilters(state.openPoints||[])); }
 function quoteCSV(v){ v=(v==null? '' : String(v)); if(/["\n;]/.test(v)) return '"'+v.replace(/"/g,'""')+'"'; return v; }
-function exportOpenPointsToCSV(){ var rows=opRowsFiltered(); var head=['ID','Titolo','Progetto','Assegnatari','Priorita','Stato','MaxPriority','InseritoIl','Scadenza','Descrizione','Note']; var csv = head.join(';') + '\n' + rows.map(function(o){ var ass=Array.isArray(o.assignees)? o.assignees.join(', ') : (o.assignees||''); var line=[o.id, o.title, o.project, ass, (o.priority||'').toUpperCase(), (o.status||''), (o.maxPriority?'1':'0'), o.createdAt||'', o.dueAt||'', o.desc||'', o.notes||''].map(quoteCSV).join(';'); return line; }).join('\n'); var blob=new Blob([csv], {type:'text/csv;charset=utf-8;'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='open-points.csv'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400); }
-function exportOpenPointsToExcel(){ var rows=opRowsFiltered(); function xmlEscape(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/\</g,'&lt;').replace(/\>/g,'&gt;'); } function cell(v,type){ type=type||'String'; return '<Cell><Data ss:Type="'+type+'">'+xmlEscape(v)+'</Data></Cell>'; } var head=['ID','Titolo','Progetto','Assegnatari','Priorità','Stato','MaxPriority','Inserito il','Scadenza','Descrizione','Note']; var xml='<?xml version="1.0"?>\n' + '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n' + '<Worksheet ss:Name="OpenPoints"><Table>'; xml += '<Row>' + head.map(function(h){return cell(h); }).join('') + '</Row>'; rows.forEach(function(o){ var ass=Array.isArray(o.assignees)? o.assignees.join(', ') : (o.assignees||''); xml += '<Row>' + cell(o.id) + cell(o.title) + cell(o.project) + cell(ass) + cell((o.priority||'').toUpperCase()) + cell(o.status||'') + cell(o.maxPriority?'1':'0', 'Number') + cell(o.createdAt||'') + cell(o.dueAt||'') + cell(o.desc||'') + cell(o.notes||'') + '</Row>'; }); xml += '</Table></Worksheet></Workbook>'; var blob=new Blob([xml], {type:'application/vnd.ms-excel'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='open-points.xls'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400); }
+window.exportOpenPointsToCSV = function(){ var rows=opRowsFiltered(); var head=['ID','Titolo','Progetto','Assegnatari','Priorita','Stato','MaxPriority','InseritoIl','Scadenza','Descrizione','Note']; var csv = head.join(';') + '\n' + rows.map(function(o){ var ass=Array.isArray(o.assignees)? o.assignees.join(', ') : (o.assignees||''); var line=[o.id, o.title, o.project, ass, (o.priority||'').toUpperCase(), (o.status||''), (o.maxPriority?'1':'0'), o.createdAt||'', o.dueAt||'', o.desc||'', o.notes||''].map(quoteCSV).join(';'); return line; }).join('\n'); var blob=new Blob([csv], {type:'text/csv;charset=utf-8;'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='open-points.csv'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400); }
+window.exportOpenPointsToExcel = function(){ var rows=opRowsFiltered(); function xmlEscape(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/\</g,'&lt;').replace(/\>/g,'&gt;'); } function cell(v,type){ type=type||'String'; return '<Cell><Data ss:Type="'+type+'">'+xmlEscape(v)+'</Data></Cell>'; } var head=['ID','Titolo','Progetto','Assegnatari','Priorità','Stato','MaxPriority','Inserito il','Scadenza','Descrizione','Note']; var xml='<?xml version="1.0"?>\n' + '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n' + '<Worksheet ss:Name="OpenPoints"><Table>'; xml += '<Row>' + head.map(function(h){return cell(h); }).join('') + '</Row>'; rows.forEach(function(o){ var ass=Array.isArray(o.assignees)? o.assignees.join(', ') : (o.assignees||''); xml += '<Row>' + cell(o.id) + cell(o.title) + cell(o.project) + cell(ass) + cell((o.priority||'').toUpperCase()) + cell(o.status||'') + cell(o.maxPriority?'1':'0', 'Number') + cell(o.createdAt||'') + cell(o.dueAt||'') + cell(o.desc||'') + cell(o.notes||'') + '</Row>'; }); xml += '</Table></Worksheet></Workbook>'; var blob=new Blob([xml], {type:'application/vnd.ms-excel'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='open-points.xls'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400); }
 
-function openSaveOPDialog(){
+// ===== SERVICES =====
+var serviceDialog = document.getElementById('serviceDialog'); var svcRoutine = document.getElementById('svcRoutine'); var svcTipo = document.getElementById('svcTipo'); var svcServizio = document.getElementById('svcServizio'); var svcOperation = document.getElementById('svcOperation'); var svcFallback = document.getElementById('svcFallback'); var svcDescrizione = document.getElementById('svcDescrizione'); var svcAmbito = document.getElementById('svcAmbito');
+function openServiceDialog(item){ try{ document.getElementById('svcDlgTitle').textContent = item ? 'Modifica servizio' : 'Nuovo servizio';
+  svcRoutine.value     = (item && item.routine) || '';
+  svcTipo.value        = (item && item.tipo) || 'REST';
+  svcServizio.value    = (item && item.servizio) || '';
+  svcOperation.value   = (item && item.operation) || '';
+  svcFallback.value    = (item && item.fallback) || '';
+  svcDescrizione.value = (item && item.descrizione) || '';
+  svcAmbito.value      = (item && item.ambito) || '';
+  var svcApplicativoEl=document.getElementById('svcApplicativo'); if(svcApplicativoEl) svcApplicativoEl.value=(item&&item.applicativo)||'';
+  var svcParamsInEl=document.getElementById('svcParamsIn'); if(svcParamsInEl) svcParamsInEl.value=(item&&item.paramsIngresso)||'';
+  var svcOutputEl=document.getElementById('svcOutput'); if(svcOutputEl) svcOutputEl.value=(item&&item.outputServizio)||'';
+  serviceDialog.dataset.editing = item ? item.id : '';
+  serviceDialog.showModal(); setTimeout(function(){ svcRoutine.focus(); }, 50);
+ }catch(e){ alert('Apri il file nel browser per usare questa finestra.'); } }
+function normalizeServiceInput(){ return { id: crypto.randomUUID(), routine: String(svcRoutine.value || '').trim(), tipo: (String(svcTipo.value || 'REST').toUpperCase() === 'SOAP') ? 'SOAP' : 'REST', servizio: String(svcServizio.value || '').trim(), operation: String(svcOperation.value || '').trim(), fallback: String(svcFallback.value || '').trim(), descrizione: String(svcDescrizione.value || '').trim(), ambito: String(svcAmbito.value || '').trim(), applicativo: (document.getElementById('svcApplicativo')? String(document.getElementById('svcApplicativo').value||'').trim() : ''), paramsIngresso: (document.getElementById('svcParamsIn')? String(document.getElementById('svcParamsIn').value||'').trim() : ''), outputServizio: (document.getElementById('svcOutput')? String(document.getElementById('svcOutput').value||'').trim() : '') }; }
+function saveServiceDialog(){ var obj = normalizeServiceInput(); if(!obj.routine || !obj.servizio){ alert('ROUTINE e SERVIZIO sono obbligatori'); return; } var id = serviceDialog.dataset.editing; if(id){ var i = state.services.findIndex(function(s){ return s.id === id; }); if(i >= 0) state.services[i] = Object.assign({}, obj, { id: id }); }else{ state.services.unshift(obj); } serviceDialog.close(); refreshAll(); }
+window.editService = function(id){ var item = state.services.find(function(s){ return s.id === id; }); if(item) openServiceDialog(item); };
+window.deleteService = function(id){ if(!confirm('Eliminare questo servizio?')) return; state.services = state.services.filter(function(s){ return s.id !== id; }); refreshAll(); };
+function clearServices(){ if(!confirm('Confermi? Saranno eliminati TUTTI i Servizi. Operazione irreversibile.')) return; state.services = []; refreshAll(); }
+
+var SVCF_KEY = 'services.filter.v1'; function defaultSvcFilter(){ return { text:'', tipi:['REST','SOAP'], ambiti:[], routine:[], servizi:[], applicativi:[], fallback:[], operations:[], params:[], outputs:[], stati:[] }; }
+function loadSvcFilter(){ try{ var raw=localStorage.getItem(SVCF_KEY); if(!raw) return defaultSvcFilter(); var f=JSON.parse(raw); return Object.assign(defaultSvcFilter(), f); }catch(e){ return defaultSvcFilter(); } }
+function saveSvcFilter(f){ try{ localStorage.setItem(SVCF_KEY, JSON.stringify(f || defaultSvcFilter())); }catch(e){} }
+var svcFilter = loadSvcFilter();
+
+
+window.openSvcFilterDialog = function(){
+  var dlg=document.getElementById('svcFilterDlg');
+  if(!dlg){ console.warn('Dialog Servizi non disponibile'); return; }
+  try{ var clone=dlg.cloneNode(true); dlg.replaceWith(clone); dlg=document.getElementById('svcFilterDlg'); }catch(e){}
   try{
-    var dlg=document.getElementById('saveOPDlg');
-    var inp=document.getElementById('saveOPFileName');
-    var closeX=document.getElementById('saveOPCloseBtn');
-    var cancel=document.getElementById('saveOPCancelBtn');
-    var ok=document.getElementById('saveOPOkBtn');
-    if(!dlg||!inp){ alert('Dialog non disponibile'); return; }
-    if(!inp.value) inp.value='open-points.json';
-    dlg.showModal();
-    closeX.onclick=function(){ dlg.close(); };
-    cancel.onclick=function(){ dlg.close(); };
-    ok.onclick=function(){ var name=String(inp.value||'').trim()||'open-points.json'; exportOpenPointsToFile(name); dlg.close(); };
-  }catch(e){ alert('Apri il file nel browser per usare questa finestra.'); }
-}
-
-
-// ===== File Save: Native Save As (File System Access API) con fallback =====
-async function saveBlobWithPicker(blob, suggestedName, types){
-  try{
-    if(window.showSaveFilePicker){
-      const handle = await window.showSaveFilePicker({
-        suggestedName: suggestedName || 'download.json',
-        types: types || [
-          { description: 'JSON',        accept: { 'application/json': ['.json'] } },
-          { description: 'CSV',         accept: { 'text/csv':        ['.csv'] } },
-          { description: 'Excel (XML)', accept: { 'application/vnd.ms-excel': ['.xls'] } }
-        ]
-      });
-      const writable = await handle.createWritable();
-      await writable.write(blob);
-      await writable.close();
-      toast('File salvato');
-      return true;
-    }
-  }catch(e){ if(e && e.name==='AbortError') return true; console.warn('Picker non disponibile/fallito. Fallback al download.', e); }
-  try{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=suggestedName||'download.json'; document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},400); toast('Download avviato'); return true; }catch(err){ alert('Salvataggio non riuscito: '+(err&&err.message?err.message:err)); return false; }
-}
-async function saveLinksWithPicker(){ try{ const data=JSON.stringify(state, null, 2); const blob=new Blob([data], {type:'application/json'}); await saveBlobWithPicker(blob, 'linkhub-links.json'); }catch(e){ alert('Salvataggio link non riuscito: '+(e&&e.message?e.message:e)); } }
-async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: state.openPoints||[]}, null, 2); const blob=new Blob([data], {type:'application/json'}); await saveBlobWithPicker(blob, 'open-points.json'); }catch(e){ alert('Salvataggio OP non riuscito: '+(e&&e.message?e.message:e)); } }
-
-
-// ===== Auto-load files (no localStorage fallback if missing) =====
-async function readJSONFromRelative(path){
-  const res = await fetch(path, { cache: 'no-store' });
-  if(!res.ok) throw new Error('HTTP '+res.status+' for '+path);
-  return await res.json();
-}
-function mapSections(json){
-  try{
-    const arr = Array.isArray(json) ? json : (Array.isArray(json.sections)? json.sections : null);
-    if(!arr) return null;
-    return arr.map(function(s){ return { id: s.id, name:s.name, desc:s.desc, icon:s.icon, collapsed:!!s.collapsed, color:s.color } });
-  }catch(_){ return null; }
-}
-function mapOP(json){
-  try{
-    const arr = Array.isArray(json) ? json : (Array.isArray(json.openPoints)? json.openPoints : null);
-    if(!arr) return null;
-    return arr;
-  }catch(_){ return null; }
-}
-
-// Directory handle persistence (File System Access API)
-const __FS_DB = 'linkhubFS.v1'; const __FS_STORE = 'handles';
-function __idb(){ return new Promise(function(resolve, reject){ const req = indexedDB.open(__FS_DB, 1); req.onupgradeneeded = function(){ req.result.createObjectStore(__FS_STORE); }; req.onsuccess = function(){ resolve(req.result); }; req.onerror = function(){ reject(req.error); }; }); }
-async function idbSet(key, val){ const db=await __idb(); return new Promise(function(resolve,reject){ const tx=db.transaction(__FS_STORE,'readwrite'); tx.objectStore(__FS_STORE).put(val, key); tx.oncomplete=function(){ resolve(); }; tx.onerror=function(){ reject(tx.error); }; }); }
-async function idbGet(key){ const db=await __idb(); return new Promise(function(resolve,reject){ const tx=db.transaction(__FS_STORE,'readonly'); const rq=tx.objectStore(__FS_STORE).get(key); rq.onsuccess=function(){ resolve(rq.result); }; rq.onerror=function(){ reject(rq.error); }; }); }
-async function verifyPerm(handle, mode){ try{ const q=await handle.queryPermission({mode:mode||'read'}); if(q==='granted') return true; const r=await handle.requestPermission({mode:mode||'read'}); return r==='granted'; }catch(_){ return false; } }
-async function getOrAskDataDirectory(){ try{ let dir=await idbGet('dataDir'); if(dir){ if(await verifyPerm(dir,'read')) return dir; } }catch(_){ } try{ if(window.showDirectoryPicker){ const picked=await window.showDirectoryPicker(); if(await verifyPerm(picked,'read')){ try{ await idbSet('dataDir', picked); }catch(_){ } return picked; } } }catch(_){ } return null; }
-async function readJSONFromDir(dirHandle, fileName){ const fh=await dirHandle.getFileHandle(fileName); const f=await fh.getFile(); const text=await f.text(); return JSON.parse(text); }
-
-async function tryAutoLoadOnStartup(){
-  if(!AUTO_LOAD || !AUTO_LOAD.enabled) return;
-  try{
-    let sectionsLoaded=false, opLoaded=false;
-
-    if(location.protocol==='http:' || location.protocol==='https:'){
-      try{ const sjson=await readJSONFromRelative('./'+AUTO_LOAD.sectionsFile); const secs=mapSections(sjson); if(secs){ state.sections = normalizeState({ sections: secs, links: state.links, openPoints: state.openPoints }).sections; sectionsLoaded=true; } }catch(_){ }
-      try{ const ojson=await readJSONFromRelative('./'+AUTO_LOAD.opFile); const ops=mapOP(ojson); if(ops){ state.openPoints = normalizeState({ sections: state.sections, links: state.links, openPoints: ops }).openPoints; opLoaded=true; } }catch(_){ }
-    } else if(window.showDirectoryPicker){
-      const dir = await getOrAskDataDirectory();
-      if(dir){
-        try{ const sjson=await readJSONFromDir(dir, AUTO_LOAD.sectionsFile); const secs=mapSections(sjson); if(secs){ state.sections = normalizeState({ sections: secs, links: state.links, openPoints: state.openPoints }).sections; sectionsLoaded=true; } }catch(_){ }
-        try{ const ojson=await readJSONFromDir(dir, AUTO_LOAD.opFile); const ops=mapOP(ojson); if(ops){ state.openPoints = normalizeState({ sections: state.sections, links: state.links, openPoints: ops }).openPoints; opLoaded=true; } }catch(_){ }
-      }
-    }
-
-    if(!sectionsLoaded){ state.sections = []; }
-    if(!opLoaded){ state.openPoints = []; }
-
-    save();
-    refreshAll();
-  }catch(e){ console.warn('Auto-load fallito:', e); }
-}
-
-
-// ===== Salvataggio su GitHub via funzione serverless =====
-var GH_API_ENDPOINT = '/api/save-to-github'; // se deployi altrove, sostituisci con l'URL completo
-async function saveToGitHub(){
-  try{
-    var payload = {
-      sections: state && Array.isArray(state.sections) ? state.sections : [],
-      openPoints: state && Array.isArray(state.openPoints) ? state.openPoints : []
+    document.getElementById('svcfText').value = (svcFilter && svcFilter.text)||'';
+    Array.prototype.forEach.call(document.querySelectorAll('#svcfTipoGroup input[type=checkbox]'), function(cb){ cb.checked = (svcFilter && Array.isArray(svcFilter.tipi)) ? svcFilter.tipi.indexOf(cb.value)>=0 : true; });
+    function setVal(id, arr){ var el=document.getElementById(id); if(!el) return; el.value = Array.isArray(arr)? arr.join(', ') : (arr||''); }
+    setVal('svcfAmbiti', svcFilter && svcFilter.ambiti);
+    setVal('svcfRoutine', svcFilter && svcFilter.routine);
+    setVal('svcfServizi', svcFilter && svcFilter.servizi);
+    setVal('svcfApplicativi', svcFilter && svcFilter.applicativi);
+    setVal('svcfFallback', svcFilter && svcFilter.fallback);
+    setVal('svcfOperation', svcFilter && svcFilter.operations);
+    setVal('svcfParamsIn', svcFilter && svcFilter.params);
+    setVal('svcfOutput', svcFilter && svcFilter.outputs);
+    setVal('svcfStati', svcFilter && svcFilter.stati);
+  }catch(e){ console.warn('Prefill Servizi error:', e); }
+  var closeX=document.getElementById('svcFilterCloseXBtn'); if(closeX) closeX.onclick=function(){ try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
+  var reset=document.getElementById('svcfResetBtn'); if(reset) reset.onclick=function(){ svcFilter=defaultSvcFilter(); saveSvcFilter(svcFilter); renderServices(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
+  var apply=document.getElementById('svcfApplyBtn'); if(apply) apply.onclick=function(){
+    function getChecked(containerId){ var box=document.getElementById(containerId); if(!box) return []; return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), function(o){return o.checked;}).map(function(o){return o.value;}); }
+    function splitVals(id){ var el=document.getElementById(id); var v = el? String(el.value||'') : ''; return v.split(',').map(function(s){return s.trim();}).filter(Boolean); }
+    svcFilter = {
+      text: String((document.getElementById('svcfText')||{}).value||'').trim().toLowerCase(),
+      tipi: getChecked('svcfTipoGroup'),
+      ambiti: splitVals('svcfAmbiti'),
+      routine: splitVals('svcfRoutine'),
+      servizi: splitVals('svcfServizi'),
+      applicativi: splitVals('svcfApplicativi'),
+      fallback: splitVals('svcfFallback'),
+      operations: splitVals('svcfOperation'),
+      params: splitVals('svcfParamsIn'),
+      outputs: splitVals('svcfOutput'),
+      stati: splitVals('svcfStati')
     };
-    var res = await fetch(GH_API_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      credentials: 'omit',
-      cache: 'no-store'
-    });
-    var out = {};
-    try{ out = await res.json(); }catch(_){ }
-    if(!res.ok){ throw new Error(out && out.error ? out.error : (res.status+' '+res.statusText)); }
-    toast('Commit effettuato su GitHub');
-  }catch(e){
-    alert('Salvataggio su GitHub fallito: '+(e && e.message ? e.message : e));
+    saveSvcFilter(svcFilter); renderServices(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); }
+  };
+  try{ dlg.showModal(); }catch(e){ dlg.setAttribute('open',''); }
+};
+
+function applySvcFilters(rows){ var f=svcFilter||defaultSvcFilter(); return (rows||[]).filter(function(s){ var text=(f.text||''); if(text){ var bag=[s.routine||'', s.tipo||'', s.servizio||'', s.operation||'', s.fallback||'', s.descrizione||'', s.ambito||'', s.applicativo||'', s.paramsIngresso||'', s.outputServizio||'', s.stato||''].join(' ').toLowerCase(); if(bag.indexOf(text)===-1) return false; } if(Array.isArray(f.tipi)&&f.tipi.length){ if(f.tipi.indexOf((s.tipo||'').toUpperCase())===-1) return false; } if(Array.isArray(f.ambiti)&&f.ambiti.length){ var amb=(s.ambito||'').toLowerCase(); var ok=false; f.ambiti.forEach(function(a){ var k=String(a).toLowerCase(); if(k && amb.indexOf(k)>=0) ok=true; }); if(!ok) return false; } if(Array.isArray(f.routine)&&f.routine.length){ var r=(s.routine||'').toLowerCase(); var okr=false; f.routine.forEach(function(a){ var k=String(a).toLowerCase(); if(k && r.indexOf(k)>=0) okr=true; }); if(!okr) return false; } if(Array.isArray(f.servizi)&&f.servizi.length){ var sv=(s.servizio||'').toLowerCase(); var oks=false; f.servizi.forEach(function(a){ var k=String(a).toLowerCase(); if(k && sv.indexOf(k)>=0) oks=true; }); if(!oks) return false; } if(Array.isArray(f.applicativi)&&f.applicativi.length){ var app=(s.applicativo||'').toLowerCase(); var okapp=false; f.applicativi.forEach(function(a){ var k=String(a).toLowerCase(); if(k && app.indexOf(k)>=0) okapp=true; }); if(!okapp) return false; } if(Array.isArray(f.fallback)&&f.fallback.length){ var fb=(s.fallback||'').toLowerCase(); var okfb=false; f.fallback.forEach(function(a){ var k=String(a).toLowerCase(); if(k && fb.indexOf(k)>=0) okfb=true; }); if(!okfb) return false; } if(Array.isArray(f.operations)&&f.operations.length){ var op=(s.operation||'').toLowerCase(); var okop=false; f.operations.forEach(function(a){ var k=String(a).toLowerCase(); if(k && op.indexOf(k)>=0) okop=true; }); if(!okop) return false; } if(Array.isArray(f.params)&&f.params.length){ var pin=(s.paramsIngresso||'').toLowerCase(); var okpi=false; f.params.forEach(function(a){ var k=String(a).toLowerCase(); if(k && pin.indexOf(k)>=0) okpi=true; }); if(!okpi) return false; } if(Array.isArray(f.outputs)&&f.outputs.length){ var out=(s.outputServizio||'').toLowerCase(); var okout=false; f.outputs.forEach(function(a){ var k=String(a).toLowerCase(); if(k && out.indexOf(k)>=0) okout=true; }); if(!okout) return false; } if(Array.isArray(f.stati)&&f.stati.length){ var st=(s.stato||'').toLowerCase(); var okst=false; f.stati.forEach(function(a){ var k=String(a).toLowerCase(); if(k && st.indexOf(k)>=0) okst=true; }); if(!okst) return false; } return true; }); }
+var svcSort = { key:'routine', dir:'asc' }; function svcCmp(a,b){ return a<b? -1 : a>b? 1 : 0; }
+function sortSvcRows(rows){ var k=svcSort.key, d=(svcSort.dir==='desc'?-1:1); return rows.slice().sort(function(x,y){ var r=0; if(k==='routine'||k==='servizio'||k==='operation'||k==='fallback'||k==='descrizione'||k==='ambito'||k==='applicativo'||k==='paramsIngresso'||k==='outputServizio'
+    || k==='stato'){ r=svcCmp(String(x[k]||'').toLowerCase(), String(y[k]||'').toLowerCase()); } else if(k==='tipo'){ r=svcCmp(String(x.tipo||'REST'), String(y.tipo||'REST')); } else if(k==='id'){ r=svcCmp(String(x.id||''), String(y.id||'')); } return r*d; }); }
+function setSvcSort(key){ if(svcSort.key===key){ svcSort.dir=(svcSort.dir==='asc'?'desc':'asc'); } else { svcSort.key=key; svcSort.dir='asc'; } renderServices(); }
+function svcSortArrowFor(key){ if(svcSort.key!==key) return ''; return ' <span class="arrow">'+(svcSort.dir==='asc'?'↑':'↓')+'</span>'; }
+function svcRowsFiltered(){ return sortSvcRows(applySvcFilters(state.services||[])); }
+
+function renderServices(){
+  var tbl=document.getElementById('svcTable'); if(!tbl) return;
+  var rows = svcRowsFiltered();
+  var all = state.services||[];
+  var thead = '<thead><tr>'
+    + '<th class="col-id sortable" onclick="setSvcSort(\'id\')">ID'+svcSortArrowFor('id')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'routine\')">ROUTINE'+svcSortArrowFor('routine')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'tipo\')">TIPO'+svcSortArrowFor('tipo')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'servizio\')">SERVIZIO'+svcSortArrowFor('servizio')+'</th>'
+    + '<th class="sortable col-operation" onclick="setSvcSort(\'operation\')">OPERATION / PARAMETRI'+svcSortArrowFor('operation')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'fallback\')">fallback JDBC/SWP'+svcSortArrowFor('fallback')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'descrizione\')">DESCRIZIONE'+svcSortArrowFor('descrizione')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'ambito\')">AMBITO'+svcSortArrowFor('ambito')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'applicativo\')">APPLICATIVO'+svcSortArrowFor('applicativo')+'</th>'
+    + '<th class="sortable col-multiline" onclick="setSvcSort(\'paramsIngresso\')">PARAMETRI INGRESSO'+svcSortArrowFor('paramsIngresso')+'</th>'
+    + '<th class="sortable col-multiline" onclick="setSvcSort(\'outputServizio\')">OUTPUT SERVIZIO'+svcSortArrowFor('outputServizio')+'</th>'
+    + '<th class="sortable" onclick="setSvcSort(\'stato\')">STATO'+svcSortArrowFor('stato')+'</th>'
+    + '<th>Azioni</th>'
+    + '</tr></thead>';
+  if(rows.length===0){
+    tbl.innerHTML = thead + '<tbody><tr><td colspan="13"><div class="empty">Nessun servizio (filtrati '+rows.length+' su '+all.length+')</div></td></tr></tbody>';
+    return;
   }
+  var tbody = '<tbody>' + rows.map(function(s){
+    return '<tr>'
+      + '<td class="col-id">'+escapeHtml(s.id)+'</td>'
+      + '<td>'+escapeHtml(s.routine || '')+'</td>'
+      + '<td><span class="badge">'+escapeHtml(s.tipo || '')+'</span></td>'
+      + '<td>'+escapeHtml(s.servizio || '')+'</td>'
+      + '<td class="col-operation">'+escapeHtml(s.operation || '')+'</td>'
+      + '<td>'+escapeHtml(s.fallback || '')+'</td>'
+      + '<td>'+escapeHtml(s.descrizione || '')+'</td>'
+      + '<td>'+escapeHtml(s.ambito || '')+'</td>'
+      + '<td>'+escapeHtml(s.applicativo || '')+'</td>'
+      + '<td class="col-multiline">'+escapeHtml(s.paramsIngresso || '')+'</td>'
+      + '<td class="col-multiline">'+escapeHtml(s.outputServizio || '')+'</td>'
+      + '<td>'+escapeHtml(s.stato || '')+'</td>'
+      + '<td><div class="table-actions">'
+        + '<button title="Modifica" onclick="editService(\''+ s.id +'\')">✏️</button>'
+        + '<button class="danger" title="Elimina" onclick="deleteService(\''+ s.id +'\')">🗑️</button>'
+      + '</div></td>'
+    + '</tr>';
+  }).join('') + '</tbody>';
+  tbl.innerHTML = thead + tbody;
 }
-(function(){ try{ var b=document.getElementById('saveToGitHubBtn'); if(b) b.onclick = saveToGitHub; }catch(_){ } })();
+// Export/Import Servizi
+async function exportServicesToFile(fileName){ try{ var data = JSON.stringify({ services: state.services || [] }, null, 2); var blob = new Blob([data], {type:'application/json'}); await saveBlobWithPicker(blob, fileName || 'services.json', [ { description: 'JSON', accept: { 'application/json': ['.json'] } } ]); }catch(e){ alert('Salvataggio servizi non riuscito: ' + (e && e.message ? e.message : e)); } }
+window.importServicesFromFile = async function(){ try{ var inp = document.createElement('input'); inp.type='file'; inp.accept='application/json'; inp.onchange = async function(){ var f = inp.files[0]; if(!f) return; var text = await f.text(); try{ var json = JSON.parse(text); var arr = Array.isArray(json) ? json : (Array.isArray(json.services) ? json.services : null); if(!arr){ alert('JSON non valido: atteso array o { services: [...] }'); return; } state.services = arr.map(function(s){ return { id: s.id || crypto.randomUUID(), routine: String(s.routine || '').trim(), tipo: (String(s.tipo || '').toUpperCase() === 'SOAP') ? 'SOAP' : 'REST', servizio: String(s.servizio || '').trim(), operation: String(s.operation || s['operation / parametro'] || '').trim(), fallback: String(s.fallback || s['fallback JDBC/SWP'] || '').trim(), descrizione: String(s.descrizione || '').trim(), ambito: String(s.ambito || '').trim(), applicativo: String(s.applicativo || s['applicativo'] || '').trim(), paramsIngresso: String(s.paramsIngresso || s['paramsIngresso'] || s['parametriIngresso'] || '').trim(), outputServizio: String(s.outputServizio || s['outputServizio'] || s['output'] || '').trim() }; }); refreshAll(); toast('Servizi caricati da file'); }catch(err){ alert('Errore import servizi: ' + err.message); } }; inp.click(); }catch(e){ alert('Caricamento servizi fallito: ' + e.message); } };
+window.exportServicesToCSV = function(){ var rows = svcRowsFiltered(); var head = ['ID','ROUTINE','TIPO','SERVIZIO','OPERATION / PARAMETRI','fallback JDBC/SWP','DESCRIZIONE','AMBITO','APPLICATIVO','PARAMETRI INGRESSO','OUTPUT SERVIZIO']; var csv = head.join(';') + '\n' + rows.map(function(s){ var line = [ s.id, s.routine, s.tipo, s.servizio, s.operation, s.fallback, s.descrizione, s.ambito, s.applicativo, s.paramsIngresso, s.outputServizio ].map(quoteCSV).join(';'); return line; }).join('\n'); var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='servizi.csv'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 400); };
+window.exportServicesToExcel = function(){ var rows = svcRowsFiltered(); function xmlEscape(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/\</g,'&lt;').replace(/\>/g,'&gt;'); } function cell(v,type){ type=type||'String'; return '<Cell><Data ss:Type="'+type+'">'+xmlEscape(v)+'</Data></Cell>'; } var head = ['ID','ROUTINE','TIPO','SERVIZIO','OPERATION / PARAMETRI','fallback JDBC/SWP','DESCRIZIONE','AMBITO','APPLICATIVO','PARAMETRI INGRESSO','OUTPUT SERVIZIO']; var xml='<?xml version="1.0"?>\n' + '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n' + '<Worksheet ss:Name="Servizi"><Table>'; xml += '<Row>' + head.map(function(h){ return cell(h); }).join('') + '</Row>'; rows.forEach(function(s){ xml += '<Row>' + cell(s.id) + cell(s.routine) + cell(s.tipo) + cell(s.servizio) + cell(s.operation) + cell(s.fallback) + cell(s.descrizione) + cell(s.ambito) + cell(s.applicativo) + cell(s.paramsIngresso) + cell(s.outputServizio) + '</Row>'; }); xml += '</Table></Worksheet></Workbook>'; var blob=new Blob([xml], {type:'application/vnd.ms-excel'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='servizi.xls'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 400); };
 
+// Save helpers
+async function saveBlobWithPicker(blob, suggestedName, types){ try{ if(window.showSaveFilePicker){ const handle = await window.showSaveFilePicker({ suggestedName: suggestedName || 'download.json', types: types || [ { description: 'JSON', accept: { 'application/json': ['.json'] } }, { description: 'CSV', accept: { 'text/csv': ['.csv'] } }, { description: 'Excel (XML)', accept: { 'application/vnd.ms-excel': ['.xls'] } } ] }); const writable = await handle.createWritable(); await writable.write(blob); await writable.close(); toast('File salvato'); return true; } }catch(e){ if(e && e.name === 'AbortError') return true; console.warn('Picker non disponibile/fallito. Fallback al download.', e); } try{ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=suggestedName||'download.json'; document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},400); toast('Download avviato'); return true; }catch(err){ alert('Salvataggio non riuscito: '+(err && err.message ? err.message : err)); return false; } }
+async function saveLinksWithPicker(){ try{ const data = JSON.stringify({sections: state.sections||[], links: state.links||[]}, null, 2); const blob = new Blob([data], {type:'application/json'}); await saveBlobWithPicker(blob, 'linkhub-links.json'); }catch(e){ alert('Salvataggio link non riuscito: '+(e&&e.message?e.message:e)); } }
+async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: state.openPoints||[]}, null, 2); const blob=new Blob([data], {type:'application/json'}); await saveBlobWithPicker(blob, 'open-points.json'); }catch(e){ alert('Salvataggio OP non riuscito: '+(e&&e.message?e.message:e)); } }
 </script>
-<dialog id="opFilterDlg"><div class="modal">
-  <header class="modal-bar"><span class="title">Filtra Open Points</span><button id="opFilterCloseXBtn" class="close" aria-label="Chiudi">✕</button></header>
-  <div class="content">
-    <div class="row"><input id="opfText" placeholder="Cerca in titolo, progetto, assegnatari, descrizione, note"/></div>
-    <div class="opf-grid">
-      <div class="opf-card">
-        <h4>Priorità</h4>
-        <div id="opfPrioGroup" class="opf-checks">
-          <label><input type="checkbox" value="low"> Bassa</label>
-          <label><input type="checkbox" value="medium"> Media</label>
-          <label><input type="checkbox" value="high"> Alta</label>
-          <label><input type="checkbox" value="critical"> Critica</label>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Stato</h4>
-        <div id="opfStatusGroup" class="opf-checks">
-          <label><input type="checkbox" value="Nuovo"> Nuovo</label>
-          <label><input type="checkbox" value="Da fare"> Da fare</label>
-          <label><input type="checkbox" value="In corso"> In corso</label>
-          <label><input type="checkbox" value="Schedulato"> Schedulato</label>
-          <label><input type="checkbox" value="Completato"> Completato</label>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Date inserimento</h4>
-        <div class="opf-row">
-          <input id="opfCreatedFrom" type="date" placeholder="Creato dal"/>
-          <input id="opfCreatedTo" type="date" placeholder="Creato al"/>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Scadenza</h4>
-        <div class="opf-row">
-          <input id="opfDueFrom" type="date" placeholder="Scadenza da"/>
-          <input id="opfDueTo" type="date" placeholder="Scadenza a"/>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Altre opzioni</h4>
-        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="opfMaxOnly"/> Solo Priorità massima</label>
-      </div>
-      <div class="opf-card">
-        <h4>Assegnatari / Progetti</h4>
-        <div class="opf-row">
-          <input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
-          <input id="opfProjects" placeholder="Progetti (virgole)"/>
-        </div>
-      </div>
-    </div>
-    <div class="opf-actions" style="margin-top:12px">
-      <button id="opfResetBtn">Azzera</button>
-      <button id="opfApplyBtn" class="primary">Applica</button>
-    </div>
-  </div>
-</div></dialog>
-<!-- NEW Dialog: Salva link con nome file -->
-<dialog id="saveLinksDlg"><div class="modal">
-  <header class="modal-bar">
-    <span class="title">Salva link</span>
-    <button id="saveLinksCloseBtn" class="close" aria-label="Chiudi">✕</button>
-  </header>
-  <div class="content">
-    <div class="row">
-      <input id="saveLinksFileName" placeholder="Nome file" value="linkhub-links.json"/>
-    </div>
-    <div class="row" style="justify-content:flex-end">
-      <button id="saveLinksCancelBtn">Annulla</button>
-      <button id="saveLinksOkBtn" class="primary">Salva</button>
-    </div>
-  </div>
-</div></dialog>
 
-<dialog id="saveOPDlg"><div class="modal">
-  <header class="modal-bar">
-    <span class="title">Salva Open Points</span>
-    <button id="saveOPCloseBtn" class="close" aria-label="Chiudi">✕</button>
-  </header>
-  <div class="content">
-    <div class="row">
-      <input id="saveOPFileName" placeholder="Nome file" value="open-points.json"/>
-    </div>
-    <div class="row" style="justify-content:flex-end">
-      <button id="saveOPCancelBtn">Annulla</button>
-      <button id="saveOPOkBtn" class="primary">Salva</button>
-    </div>
-  </div>
-</div></dialog>
+<script>
+(function(){
+  function setupFit(root){
+    var vps = root.querySelectorAll('.fit-viewport');
+    vps.forEach(function(vp){
+      var content = vp.querySelector('.fit-content');
+      if(!content) return;
+      var maxScale = parseFloat(vp.getAttribute('data-max-scale')||'1');
+      var minScale = parseFloat(vp.getAttribute('data-min-scale')||'0.2');
+
+      function measureNatural(){
+        // Temporarily reset transform to measure natural size
+        var prev = content.style.transform;
+        content.style.transform = 'none';
+        // Use scrollWidth/Height to account for contents
+        var natW = content.scrollWidth;
+        var natH = content.scrollHeight;
+        content.style.transform = prev;
+        return {natW:natW, natH:natH};
+      }
+
+      function applyFit(){
+        var rect = vp.getBoundingClientRect();
+        var W = rect.width, H = rect.height;
+        if(W<=0 || H<=0) return;
+        var m = measureNatural();
+        var s = Math.min(W / (m.natW||1), H / (m.natH||1));
+        if(!isFinite(s) || s<=0) s = 1;
+        if(maxScale>0) s = Math.min(s, maxScale);
+        if(minScale>0) s = Math.max(s, minScale);
+        var center = vp.getAttribute('data-center') === 'true';
+        var tx = center ? (W - m.natW * s) / 2 : 0;
+        var ty = center ? (H - m.natH * s) / 2 : 0;
+        content.style.transform = 'translate(' + Math.floor(tx) + 'px,' + Math.floor(ty) + 'px) scale(' + s + ')';
+      }
+
+      var ro = new ResizeObserver(function(){ applyFit(); });
+      ro.observe(vp);
+      // If dialog is closed/opened, re-apply
+      var dlg = vp.closest('dialog');
+      if(dlg){ dlg.addEventListener('close', applyFit); }
+      window.addEventListener('resize', applyFit);
+      // Initial after paint
+      requestAnimationFrame(applyFit);
+      setTimeout(applyFit, 60);
+    });
+  }
+
+  // Setup on DOM ready
+  if(document.readyState === 'complete' || document.readyState === 'interactive'){
+    setupFit(document);
+  }else{
+    document.addEventListener('DOMContentLoaded', function(){ setupFit(document); });
+  }
+})();
+</script>
+
+<script>
+// === v43.2: Auto-caricamento JSON dalla stessa cartella (una sola volta per browser) ===
+(function(){
+  const RUN_KEY = 'linkhub.autoload.v1';
+  if (localStorage.getItem(RUN_KEY) === 'done') return; // già fatto
+  if (!location || !/^https?:/i.test(location.protocol)) {
+    console.warn('Autoload JSON disattivato: protocollo non http/https');
+    return; // evitare fetch su file:// che spesso è bloccato
+  }
+  const CANDIDATES = [
+    'linkhub-links.json',       // formato {sections,links}
+    'open-points.json',         // formato {openPoints:[...]} oppure [...]
+    'services.json',            // formato {services:[...]} oppure [...]
+    'data.json'                 // formato libero combinato
+  ];
+  const baseUrl = (function(){
+    try { return new URL('.', location.href).href; } catch(e) { return ''; }
+  })();
+
+  function safeFetch(url){
+    return fetch(url, {cache:'no-cache'})
+      .then(r => r.ok ? r.text() : Promise.reject(new Error('HTTP '+r.status)))
+      .then(t => { try{ return JSON.parse(t); }catch(e){ throw new Error('JSON non valido in '+url+': '+e.message); } });
+  }
+
+  function mergeState(cur, inc){
+    // Preserva OP/Servizi esistenti se il file non li definisce
+    try{
+      if (Array.isArray(inc)) inc = { openPoints: inc };
+      if (inc.sections || inc.links) {
+        // Non sovrascrivo OP/SVC: solo sezioni+link
+        cur.sections = Array.isArray(inc.sections) ? inc.sections : cur.sections;
+        cur.links    = Array.isArray(inc.links)    ? inc.links    : cur.links;
+      }
+      if (inc.openPoints) {
+        const arr = Array.isArray(inc.openPoints) ? inc.openPoints : [];
+        cur.openPoints = arr;
+      }
+      if (inc.services) {
+        const arr = Array.isArray(inc.services) ? inc.services : [];
+        cur.services = arr;
+      }
+      return cur;
+    }catch(e){ console.warn('mergeState error:', e); return cur; }
+  }
+
+  (async function(){
+    try{
+      let merged = null; let any = false;
+      for(const name of CANDIDATES){
+        try{
+          const url = baseUrl + name;
+          const data = await safeFetch(url);
+          merged = mergeState(merged || {sections:[],links:[],openPoints:[],services:[]}, data);
+          any = true;
+        }catch(e){ /* file mancante o non valido: ignora e prosegui */ }
+      }
+      if (any && merged){
+        // Salva in localStorage con i normalizzatori già presenti nell'app
+        try{
+          localStorage.setItem('linkhub.v2', JSON.stringify(merged));
+        }catch(e){ console.warn('salvataggio autoload fallito:', e); }
+        // Forza refresh UI se l'app è già inizializzata
+        try{
+          if (typeof normalizeState === 'function') {
+            var norm = normalizeState(merged);
+            if (norm) { state = norm; save(state); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); }
+          }
+        }catch(e){ /* se non ancora inizializzato, initApp lo ricaricherà da localStorage */ }
+        // Segna come eseguito per non ripetere su ogni reload
+        localStorage.setItem(RUN_KEY, 'done');
+        console.info('Autoload JSON eseguito.');
+      }
+    }catch(e){ console.warn('Autoload JSON non riuscito:', e); }
+  })();
+})();
+</script>
 
 </body>
 </html>
