@@ -1423,7 +1423,7 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
     const files = [
       {name:'linkhub-links.json', map:(data,acc)=>{ if(Array.isArray(data)){ acc.links=data; } else { if(data.sections) acc.sections = Array.isArray(data.sections)? data.sections : acc.sections; if(data.links) acc.links = Array.isArray(data.links)? data.links : acc.links; }}},
       {name:'open-points.json',   map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.openPoints)? data.openPoints : []); acc.openPoints = arr; }},
-      {name:'services.json',      map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.services)? data.services : []); acc.services = arr; }}}
+      {name:'services.json',      map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.services)? data.services : []); acc.services = arr; }}
     ];
     let acc={sections:[],links:[],openPoints:[],services:[]}; let any=false;
     for(const f of files){ try{ const j = await safeFetchJSON(base+f.name); f.map(j, acc); any=true; }catch(e){} }
