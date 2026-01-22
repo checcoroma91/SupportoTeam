@@ -464,60 +464,64 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
 #svcTable th:nth-child(9), #svcTable td:nth-child(9) { width: 120px; }     /* APPLICATIVO */
 </style>
 
-
-
-
 <style>
-/* === v43: OP Filter (compact 2 cols, dense) === */
-#opFilterDlg .modal { display:flex; flex-direction:column; }
-#opFilterDlg .modal .content { flex:1; overflow:auto; padding: clamp(12px, 2cqw, 24px); }
-#opFilterDlg .content { display:grid; grid-template-columns: 1fr 1fr; grid-auto-flow: row dense; gap: clamp(10px, 1cqw, 14px); align-items: start; }
-#opFilterDlg .opf-grid { display: contents; }
-#opFilterDlg .opf-card { background:#0b1023; border:1px solid #1f2937; border-radius: clamp(8px, 1cqw, 12px); padding: clamp(10px, 1.2cqw, 12px); }
-#opFilterDlg .opf-card h4 { margin:0 0 8px 0; font-size: clamp(13px, 2cqw, 15px); font-weight: 600; }
-#opFilterDlg .opf-row { display:grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1cqw, 12px); }
-#opFilterDlg .row>input, #opFilterDlg .opf-row>input { min-width:0; width:100%; padding:10px 12px; border:1px solid #263041; background:#0a1227; color: var(--text); border-radius:10px; }
-#opFilterDlg .opf-checks label { display:flex; align-items:center; gap:8px; margin: 4px 0; }
-#opFilterDlg .opf-actions { grid-column: 1 / -1; position: sticky; bottom: 0; display:flex; justify-content:flex-end; gap:8px; padding:10px 0 0 0; margin-top:12px; background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top:1px solid #1f2937; }
-@media (max-width: 900px){ #opFilterDlg .content{ grid-template-columns: 1fr; } }
-</style>
-
-<style>
-/* === v43: Servizi Filter (ISOLATED — svcf-*) 3→2→1 colonne, no display:contents === */
+/* === v41.4b: Impaginazione dialog "Filtra Servizi" — compatta, a griglia, senza x-scroll === */
+/* Contenitore e tipografia coerenti con le altre dialog */
 #svcFilterDlg .modal { display:flex; flex-direction:column; }
 #svcFilterDlg .modal .content { flex:1; overflow:auto; padding: clamp(12px, 2cqw, 24px); }
-#svcFilterDlg .svcf-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: clamp(10px, 1.2cqw, 16px); align-items: start; }
-@media (max-width: 1000px){ #svcFilterDlg .svcf-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 640px){ #svcFilterDlg .svcf-grid{ grid-template-columns: 1fr; } }
-#svcFilterDlg .svcf-card{ background:#0b1023; border:1px solid #1f2937; border-radius: clamp(8px, 1cqw, 12px); padding: clamp(10px, 1.4cqw, 14px); }
-#svcFilterDlg .svcf-card h4{ margin:0 0 8px 0; font-size: clamp(13px, 2cqw, 15px); font-weight:600; }
-#svcFilterDlg .svcf-row{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 1cqw, 12px); }
-#svcFilterDlg .row>input, #svcFilterDlg .svcf-row>input{ min-width:0; width:100%; padding:10px 12px; border:1px solid #263041; background:#0a1227; color: var(--text); border-radius:10px; }
-#svcFilterDlg .svcf-checks label{ display:flex; align-items:center; gap:8px; margin: 4px 0; }
-#svcFilterDlg .svcf-actions{ position: sticky; bottom: 0; display:flex; justify-content:flex-end; gap:8px; padding:10px 0 0 0; margin-top:12px; background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top:1px solid #1f2937; }
-#svcFilterDlg .svcf-actions .primary{ border-color:#2563eb; box-shadow:0 0 0 1px rgba(37,99,235,.25) inset; }
-#svcFilterDlg, #svcFilterDlg *{ overflow-wrap:anywhere; }
-</style>
 
+/* Griglia delle card del filtro (3 colonne su desktop, 2 su tablet, 1 su mobile) */
+#svcFilterDlg .opf-grid { 
+  display:grid; 
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.2cqw, 16px);
+  align-items: start;
+}
+@media (max-width: 1000px){ #svcFilterDlg .opf-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px){ #svcFilterDlg .opf-grid{ grid-template-columns: 1fr; } }
 
-<style>
-/* === v43.1: Svc Filter — dialog più larga (campi ampi) === */
-#svcFilterDlg{ max-width:none; width: clamp(900px, 96vw, 1400px); }
-#svcFilterDlg .modal{ container-type:inline-size; }
-#svcFilterDlg .modal .title{ font-size: clamp(16px, 2.6cqw, 22px); }
-#svcFilterDlg .modal .content{ padding: clamp(12px, 2cqw, 24px); }
-/* Su schermi molto stretti resta comunque full-viewport */
-@media (max-width: 640px){ #svcFilterDlg{ width: 100vw; height: 100vh; max-width:100vw; max-height:100vh; } }
-</style>
+/* Card del filtro: sfondo, bordo e raggio coerenti con il tema */
+#svcFilterDlg .opf-card{
+  background:#0b1023; 
+  border:1px solid #1f2937; 
+  border-radius: clamp(8px, 1cqw, 12px);
+  padding: clamp(10px, 1.4cqw, 14px);
+}
+#svcFilterDlg .opf-card h4{ 
+  margin: 0 0 8px 0; 
+  font-size: clamp(13px, 2cqw, 15px); 
+  font-weight: 600; 
+}
 
+/* Righe interne con due colonne per input affiancati */
+#svcFilterDlg .opf-row{ 
+  display:grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: clamp(8px, 1cqw, 12px);
+}
+#svcFilterDlg .row > input,
+#svcFilterDlg .opf-row > input{
+  min-width: 0; width: 100%; 
+  padding: 10px 12px; 
+  border:1px solid #263041; 
+  background:#0a1227; color: var(--text); 
+  border-radius: 10px;
+}
+#svcFilterDlg .opf-checks label{ display:flex; align-items:center; gap:8px; margin: 4px 0; }
 
-<style>
-/* === v43.1: OP Filter — dialog più larga (campi ampi) === */
-#opFilterDlg{ max-width:none; width: clamp(900px, 96vw, 1200px); }
-#opFilterDlg .modal{ container-type:inline-size; }
-#opFilterDlg .modal .title{ font-size: clamp(16px, 2.6cqw, 22px); }
-#opFilterDlg .modal .content{ padding: clamp(12px, 2cqw, 24px); }
-@media (max-width: 640px){ #opFilterDlg{ width: 100vw; height: 100vh; max-width:100vw; max-height:100vh; } }
+/* Barra azioni sempre visibile al fondo della finestra */
+#svcFilterDlg .opf-actions{
+  position: sticky; bottom: 0; 
+  display:flex; justify-content:flex-end; gap: 8px; 
+  padding: 10px 0 0 0; margin-top: 12px; 
+  background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%);
+  border-top: 1px solid #1f2937; 
+}
+#svcFilterDlg .opf-actions .primary{ border-color:#2563eb; box-shadow:0 0 0 1px rgba(37,99,235,.25) inset; }
+
+/* Niente scroll orizzontale nella dialog */
+#svcFilterDlg, #svcFilterDlg *{ overflow-wrap: anywhere; }
+html, body { overflow-x:hidden; }
 </style>
 
 </head>
@@ -533,6 +537,8 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
 <button id="exportBtn">💾 Salva link</button>
 <button id="importBtn">📥 Carica link</button>
 <button id="clearAllBtn" title="Pulisci tutte le sezioni, link e OP">🧹 Pulisci tutto</button>
+
+<button id=\"saveRepoBtn\">💾 Salva su repo</button>
 </div>
 </div>
 </header>
@@ -679,60 +685,90 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
 </div></dialog>
 <!-- Dialog: Filtro OP -->
 <dialog id="opFilterDlg"><div class="modal">
-  <header class="modal-bar"><span class="title">Filtra Open Points</span><button aria-label="Chiudi" class="close" id="opFilterCloseXBtn">✕</button></header>
-  <div class="content">
-    <div class="row"><input id="opfText" placeholder="Cerca in titolo, progetto, assegnatari, descrizione, note"/></div>
-    <div class="opf-grid">
-      <div class="opf-card">
-        <h4>Priorità</h4>
-        <div class="opf-checks" id="opfPrioGroup">
-          <label><input type="checkbox" value="low"/> Bassa</label>
-          <label><input type="checkbox" value="medium"/> Media</label>
-          <label><input type="checkbox" value="high"/> Alta</label>
-          <label><input type="checkbox" value="critical"/> Critica</label>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Stato</h4>
-        <div class="opf-checks" id="opfStatusGroup">
-          <label><input type="checkbox" value="Nuovo"/> Nuovo</label>
-          <label><input type="checkbox" value="Da fare"/> Da fare</label>
-          <label><input type="checkbox" value="In corso"/> In corso</label>
-          <label><input type="checkbox" value="Schedulato"/> Schedulato</label>
-          <label><input type="checkbox" value="Completato"/> Completato</label>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Date inserimento</h4>
-        <div class="opf-row">
-          <input id="opfCreatedFrom" placeholder="Creato dal" type="date"/>
-          <input id="opfCreatedTo" placeholder="Creato al" type="date"/>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Scadenza</h4>
-        <div class="opf-row">
-          <input id="opfDueFrom" placeholder="Scadenza da" type="date"/>
-          <input id="opfDueTo" placeholder="Scadenza a" type="date"/>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Assegnatari / Progetti</h4>
-        <div class="opf-row">
-          <input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
-          <input id="opfProjects" placeholder="Progetti (virgole)"/>
-        </div>
-      </div>
-      <div class="opf-card">
-        <h4>Altre opzioni</h4>
-        <label style="display:flex;align-items:center;gap:8px"><input id="opfMaxOnly" type="checkbox"/> Solo Priorità massima</label>
+<header class="modal-bar"><span class="title">Filtra Open Points</span><button aria-label="Chiudi" class="close" id="opFilterCloseXBtn">✕</button></header>
+<div class="content">
+<div class="row"><input id="opfText" placeholder="Cerca in titolo, progetto, assegnatari, descrizione, note"/></div>
+<div class="opf-grid">
+<div class="opf-card">
+<h4>Priorità</h4>
+<div class="opf-checks" id="opfPrioGroup">
+<label><input type="checkbox" value="low"/> Bassa</label>
+<label><input type="checkbox" value="medium"/> Media</label>
+<label><input type="checkbox" value="high"/> Alta</label>
+<label><input type="checkbox" value="critical"/> Critica</label>
+
+    <div class="opf-card">
+      <h4>Applicativo / Fallback</h4>
+      <div class="opf-row">
+        <input id="svcfApplicativi" placeholder="Applicativi (virgole)"/>
+        <input id="svcfFallback" placeholder="Fallback (virgole)"/>
       </div>
     </div>
-    <div class="opf-actions" style="margin-top:12px">
-      <button id="opfResetBtn">Azzera</button>
-      <button class="primary" id="opfApplyBtn">Applica</button>
+
+    <div class="opf-card">
+      <h4>Operation / Parametri</h4>
+      <div class="row">
+        <input id="svcfOperation" placeholder="Operation / Parametri (virgole)"/>
+      </div>
     </div>
-  </div>
+
+    <div class="opf-card">
+      <h4>Parametri & Output</h4>
+      <div class="opf-row">
+        <input id="svcfParamsIn" placeholder="Parametri ingresso (virgole)"/>
+        <input id="svcfOutput" placeholder="Output servizio (virgole)"/>
+      </div>
+    </div>
+
+    <div class="opf-card">
+      <h4>Stato</h4>
+      <div class="row">
+        <input id="svcfStati" placeholder="Stati (virgole)"/>
+      </div>
+    </div>
+</div>
+</div>
+<div class="opf-card">
+<h4>Stato</h4>
+<div class="opf-checks" id="opfStatusGroup">
+<label><input type="checkbox" value="Nuovo"/> Nuovo</label>
+<label><input type="checkbox" value="Da fare"/> Da fare</label>
+<label><input type="checkbox" value="In corso"/> In corso</label>
+<label><input type="checkbox" value="Schedulato"/> Schedulato</label>
+<label><input type="checkbox" value="Completato"/> Completato</label>
+</div>
+</div>
+<div class="opf-card">
+<h4>Date inserimento</h4>
+<div class="opf-row">
+<input id="opfCreatedFrom" placeholder="Creato dal" type="date"/>
+<input id="opfCreatedTo" placeholder="Creato al" type="date"/>
+</div>
+</div>
+<div class="opf-card">
+<h4 class="col-due">Scadenza</h4>
+<div class="opf-row">
+<input id="opfDueFrom" placeholder="Scadenza da" type="date"/>
+<input id="opfDueTo" placeholder="Scadenza a" type="date"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Altre opzioni</h4>
+<label style="display:flex;align-items:center;gap:8px"><input id="opfMaxOnly" type="checkbox"/> Solo Priorità massima</label>
+</div>
+<div class="opf-card">
+<h4>Assegnatari / Progetti</h4>
+<div class="opf-row">
+<input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
+<input id="opfProjects" placeholder="Progetti (virgole)"/>
+</div>
+</div>
+</div>
+<div class="opf-actions" style="margin-top:12px">
+<button id="opfResetBtn">Azzera</button>
+<button class="primary" id="opfApplyBtn">Applica</button>
+</div>
+</div>
 </div></dialog>
 <!-- Dialog: Salva link -->
 <dialog id="saveLinksDlg"><div class="modal">
@@ -796,62 +832,36 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
 </div></dialog>
 <!-- Dialog: Filtro Servizi -->
 <dialog id="svcFilterDlg"><div class="modal">
-  <header class="modal-bar">
-    <span class="title">Filtra Servizi</span>
-    <button aria-label="Chiudi" class="close" id="svcFilterCloseXBtn">✕</button>
-  </header>
-  <div class="content">
-    <div class="row"><input id="svcfText" placeholder="Cerca in routine, servizio, operation, fallback, descrizione, ambito, applicativo, parametri ingresso, output, stato"/></div>
-    <div class="svcf-grid">
-      <div class="svcf-card">
-        <h4>Tipo</h4>
-        <div class="svcf-checks" id="svcfTipoGroup">
-          <label><input type="checkbox" value="REST"/> REST</label>
-          <label><input type="checkbox" value="SOAP"/> SOAP</label>
-        </div>
-      </div>
-      <div class="svcf-card">
-        <h4>Ambiti / Routine / Servizi</h4>
-        <div class="svcf-row">
-          <input id="svcfAmbiti" placeholder="Ambiti (virgole)"/>
-          <input id="svcfRoutine" placeholder="Routine (virgole)"/>
-        </div>
-        <div class="row">
-          <input id="svcfServizi" placeholder="Servizi (virgole)"/>
-        </div>
-      </div>
-      <div class="svcf-card">
-        <h4>Applicativo / Fallback</h4>
-        <div class="svcf-row">
-          <input id="svcfApplicativi" placeholder="Applicativi (virgole)"/>
-          <input id="svcfFallback" placeholder="Fallback (virgole)"/>
-        </div>
-      </div>
-      <div class="svcf-card">
-        <h4>Operation / Parametri</h4>
-        <div class="row">
-          <input id="svcfOperation" placeholder="Operation / Parametri (virgole)"/>
-        </div>
-      </div>
-      <div class="svcf-card">
-        <h4>Parametri & Output</h4>
-        <div class="svcf-row">
-          <input id="svcfParamsIn" placeholder="Parametri ingresso (virgole)"/>
-          <input id="svcfOutput" placeholder="Output servizio (virgole)"/>
-        </div>
-      </div>
-      <div class="svcf-card">
-        <h4>Stato</h4>
-        <div class="row">
-          <input id="svcfStati" placeholder="Stati (virgole)"/>
-        </div>
-      </div>
-    </div>
-    <div class="svcf-actions" style="margin-top:12px">
-      <button id="svcfResetBtn">Azzera</button>
-      <button class="primary" id="svcfApplyBtn">Applica</button>
-    </div>
-  </div>
+<header class="modal-bar">
+<span class="title">Filtra Servizi</span>
+<button aria-label="Chiudi" class="close" id="svcFilterCloseXBtn">✕</button>
+</header>
+<div class="content">
+<div class="row"><input id="svcfText" placeholder="Cerca in routine, servizio, operation, fallback, descrizione, ambito, applicativo, parametri ingresso, output"/></div>
+<div class="opf-grid">
+<div class="opf-card">
+<h4>Tipo</h4>
+<div class="opf-checks" id="svcfTipoGroup">
+<label><input type="checkbox" value="REST"/> REST</label>
+<label><input type="checkbox" value="SOAP"/> SOAP</label>
+</div>
+</div>
+<div class="opf-card">
+<h4>Ambiti / Routine / Servizi</h4>
+<div class="opf-row">
+<input id="svcfAmbiti" placeholder="Ambiti (virgole)"/>
+<input id="svcfRoutine" placeholder="Routine (virgole)"/>
+</div>
+<div class="row">
+<input id="svcfServizi" placeholder="Servizi (virgole)"/>
+</div>
+</div>
+</div>
+<div class="opf-actions" style="margin-top:12px">
+<button id="svcfResetBtn">Azzera</button>
+<button class="primary" id="svcfApplyBtn">Applica</button>
+</div>
+</div>
 </div></dialog>
 <script>
 // Polyfills & utils
@@ -1004,45 +1014,7 @@ var OPF_KEY='openpoints.filter.v1'; function defaultOpFilter(){ return { text:''
 function loadOpFilter(){ try{ var raw=localStorage.getItem(OPF_KEY); if(!raw) return defaultOpFilter(); var f=JSON.parse(raw); return Object.assign(defaultOpFilter(), f); }catch(e){ return defaultOpFilter(); } }
 function saveOpFilter(f){ try{ localStorage.setItem(OPF_KEY, JSON.stringify(f || defaultOpFilter())); }catch(e){} }
 var opFilter=loadOpFilter();
-
-
-window.openOpFilterDialog = function(){
-  var dlg = document.getElementById('opFilterDlg');
-  if(!dlg){ console.warn('Dialog OP non trovato'); return; }
-  try{
-    document.getElementById('opfText').value = (opFilter && opFilter.text)||'';
-    Array.prototype.forEach.call(document.querySelectorAll('#opfPrioGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter && opFilter.priorities||[]).indexOf(cb.value)>=0; });
-    Array.prototype.forEach.call(document.querySelectorAll('#opfStatusGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter && opFilter.statuses||[]).indexOf(cb.value)>=0; });
-    document.getElementById('opfMaxOnly').checked = !!(opFilter && opFilter.maxOnly);
-    var setVal=function(id,v){ var el=document.getElementById(id); if(el) el.value=v||''; };
-    setVal('opfCreatedFrom', opFilter && opFilter.createdFrom);
-    setVal('opfCreatedTo',   opFilter && opFilter.createdTo);
-    setVal('opfDueFrom',     opFilter && opFilter.dueFrom);
-    setVal('opfDueTo',       opFilter && opFilter.dueTo);
-    setVal('opfAssignees',   (opFilter && opFilter.assignees||[]).join(', '));
-    setVal('opfProjects',    (opFilter && opFilter.projects||[]).join(', '));
-  }catch(e){ console.warn('Prefill OP error:', e); }
-  var closeX = document.getElementById('opFilterCloseXBtn'); if(closeX) closeX.onclick=function(){ try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
-  var reset = document.getElementById('opfResetBtn'); if(reset) reset.onclick=function(){ opFilter = defaultOpFilter(); saveOpFilter(opFilter); renderOpenPoints(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
-  var apply = document.getElementById('opfApplyBtn'); if(apply) apply.onclick=function(){
-    function getChecked(containerId){ var box=document.getElementById(containerId); if(!box) return []; return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), function(o){return o.checked;}).map(function(o){return o.value;}); }
-    opFilter = {
-      text: String((document.getElementById('opfText')||{}).value||'').trim().toLowerCase(),
-      priorities: getChecked('opfPrioGroup'),
-      statuses: getChecked('opfStatusGroup'),
-      maxOnly: !!((document.getElementById('opfMaxOnly')||{}).checked),
-      createdFrom: String((document.getElementById('opfCreatedFrom')||{}).value||'').trim(),
-      createdTo:   String((document.getElementById('opfCreatedTo')||{}).value||'').trim(),
-      dueFrom:     String((document.getElementById('opfDueFrom')||{}).value||'').trim(),
-      dueTo:       String((document.getElementById('opfDueTo')||{}).value||'').trim(),
-      assignees:   String((document.getElementById('opfAssignees')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean),
-      projects:    String((document.getElementById('opfProjects')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean)
-    };
-    saveOpFilter(opFilter); renderOpenPoints(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); }
-  };
-  try{ dlg.showModal(); }catch(e){ dlg.setAttribute('open',''); }
-};
-
+window.openOpFilterDialog = function(){ try{ var dlg=document.getElementById('opFilterDlg'); if(!dlg) return alert('Dialog non disponibile'); document.getElementById('opfText').value=opFilter.text||''; Array.prototype.forEach.call(document.querySelectorAll('#opfPrioGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter.priorities||[]).indexOf(cb.value) >= 0; }); Array.prototype.forEach.call(document.querySelectorAll('#opfStatusGroup input[type=checkbox]'), function(cb){ cb.checked = (opFilter.statuses||[]).indexOf(cb.value) >= 0; }); document.getElementById('opfMaxOnly').checked=!!opFilter.maxOnly; document.getElementById('opfCreatedFrom').value=opFilter.createdFrom||''; document.getElementById('opfCreatedTo').value=opFilter.createdTo||''; document.getElementById('opfDueFrom').value=opFilter.dueFrom||''; document.getElementById('opfDueTo').value=opFilter.dueTo||''; document.getElementById('opfAssignees').value=(opFilter.assignees||[]).join(', '); document.getElementById('opfProjects').value=(opFilter.projects||[]).join(', '); document.getElementById('opFilterCloseXBtn').onclick=function(){ dlg.close(); }; document.getElementById('opfResetBtn').onclick=function(){ opFilter=defaultOpFilter(); saveOpFilter(opFilter); renderOpenPoints(); dlg.close(); }; document.getElementById('opfApplyBtn').onclick=function(){ function getChecked(containerId){ var box=document.getElementById(containerId); return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), function(o){return o.checked;}).map(function(o){return o.value;}); } opFilter={ text:String(document.getElementById('opfText').value||'').trim().toLowerCase(), priorities:getChecked('opfPrioGroup'), statuses:getChecked('opfStatusGroup'), maxOnly:!!document.getElementById('opfMaxOnly').checked, createdFrom:String(document.getElementById('opfCreatedFrom').value||'').trim(), createdTo:String(document.getElementById('opfCreatedTo').value||'').trim(), dueFrom:String(document.getElementById('opfDueFrom').value||'').trim(), dueTo:String(document.getElementById('opfDueTo').value||'').trim(), assignees:String(document.getElementById('opfAssignees').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), projects:String(document.getElementById('opfProjects').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean) }; saveOpFilter(opFilter); renderOpenPoints(); dlg.close(); }; dlg.showModal(); }catch(e){ alert('Apri il file nel browser per usare il filtro OP.'); } }
 function inDateRange(val, from, to){ if(!val) return true; try{ var v=new Date(val).toISOString().slice(0,10); if(from && v<from) return false; if(to && v>to) return false; return true; }catch(e){ return true; } }
 function applyOpFilters(rows){ var f=opFilter||defaultOpFilter(); return rows.filter(function(o){ var text=(f.text||''); if(text){ var bag=[o.title||'', o.project||'', o.desc||'', o.notes||'', Array.isArray(o.assignees)? o.assignees.join(' '): (o.assignees||'')].join(' ').toLowerCase(); if(bag.indexOf(text)===-1) return false; } var pr=(o.priority||'medium').toLowerCase(); if(Array.isArray(f.priorities)&&f.priorities.length&&f.priorities.indexOf(pr)===-1) return false; var st=(o.status||'Nuovo'); if(Array.isArray(f.statuses)&&f.statuses.length&&f.statuses.indexOf(st)===-1) return false; if(!!f.maxOnly && !o.maxPriority) return false; if(!inDateRange(o.createdAt||'', f.createdFrom||'', f.createdTo||'')) return false; if(!inDateRange(o.dueAt||'', f.dueFrom||'', f.dueTo||'')) return false; if(Array.isArray(f.assignees)&&f.assignees.length){ var a = Array.isArray(o.assignees)? o.assignees.map(function(x){return String(x).toLowerCase();}) : String(o.assignees||'').toLowerCase(); var ok=false; f.assignees.forEach(function(x){ var k=String(x).toLowerCase(); if(Array.isArray(a)){ if(a.indexOf(k)>=0) ok=true; } else { if(a.indexOf(k)>=0) ok=true; } }); if(!ok) return false; } if(Array.isArray(f.projects)&&f.projects.length){ var p=String(o.project||'').toLowerCase(); var okp=false; f.projects.forEach(function(x){ var k=String(x).toLowerCase(); if(k && p.indexOf(k)>=0) okp=true; }); if(!okp) return false; } return true; }); }
 var opSort={ key:'createdAt', dir:'desc' }; var PRIO_ORDER={low:1, medium:2, high:3, critical:4}; var STATUS_ORDER={'Nuovo':1, 'Da fare':2, 'In corso':3, 'Schedulato':4, 'Completato':5};
@@ -1085,49 +1057,7 @@ var SVCF_KEY = 'services.filter.v1'; function defaultSvcFilter(){ return { text:
 function loadSvcFilter(){ try{ var raw=localStorage.getItem(SVCF_KEY); if(!raw) return defaultSvcFilter(); var f=JSON.parse(raw); return Object.assign(defaultSvcFilter(), f); }catch(e){ return defaultSvcFilter(); } }
 function saveSvcFilter(f){ try{ localStorage.setItem(SVCF_KEY, JSON.stringify(f || defaultSvcFilter())); }catch(e){} }
 var svcFilter = loadSvcFilter();
-
-
-window.openSvcFilterDialog = function(){
-  var dlg=document.getElementById('svcFilterDlg');
-  if(!dlg){ console.warn('Dialog Servizi non disponibile'); return; }
-  try{ var clone=dlg.cloneNode(true); dlg.replaceWith(clone); dlg=document.getElementById('svcFilterDlg'); }catch(e){}
-  try{
-    document.getElementById('svcfText').value = (svcFilter && svcFilter.text)||'';
-    Array.prototype.forEach.call(document.querySelectorAll('#svcfTipoGroup input[type=checkbox]'), function(cb){ cb.checked = (svcFilter && Array.isArray(svcFilter.tipi)) ? svcFilter.tipi.indexOf(cb.value)>=0 : true; });
-    function setVal(id, arr){ var el=document.getElementById(id); if(!el) return; el.value = Array.isArray(arr)? arr.join(', ') : (arr||''); }
-    setVal('svcfAmbiti', svcFilter && svcFilter.ambiti);
-    setVal('svcfRoutine', svcFilter && svcFilter.routine);
-    setVal('svcfServizi', svcFilter && svcFilter.servizi);
-    setVal('svcfApplicativi', svcFilter && svcFilter.applicativi);
-    setVal('svcfFallback', svcFilter && svcFilter.fallback);
-    setVal('svcfOperation', svcFilter && svcFilter.operations);
-    setVal('svcfParamsIn', svcFilter && svcFilter.params);
-    setVal('svcfOutput', svcFilter && svcFilter.outputs);
-    setVal('svcfStati', svcFilter && svcFilter.stati);
-  }catch(e){ console.warn('Prefill Servizi error:', e); }
-  var closeX=document.getElementById('svcFilterCloseXBtn'); if(closeX) closeX.onclick=function(){ try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
-  var reset=document.getElementById('svcfResetBtn'); if(reset) reset.onclick=function(){ svcFilter=defaultSvcFilter(); saveSvcFilter(svcFilter); renderServices(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); } };
-  var apply=document.getElementById('svcfApplyBtn'); if(apply) apply.onclick=function(){
-    function getChecked(containerId){ var box=document.getElementById(containerId); if(!box) return []; return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), function(o){return o.checked;}).map(function(o){return o.value;}); }
-    function splitVals(id){ var el=document.getElementById(id); var v = el? String(el.value||'') : ''; return v.split(',').map(function(s){return s.trim();}).filter(Boolean); }
-    svcFilter = {
-      text: String((document.getElementById('svcfText')||{}).value||'').trim().toLowerCase(),
-      tipi: getChecked('svcfTipoGroup'),
-      ambiti: splitVals('svcfAmbiti'),
-      routine: splitVals('svcfRoutine'),
-      servizi: splitVals('svcfServizi'),
-      applicativi: splitVals('svcfApplicativi'),
-      fallback: splitVals('svcfFallback'),
-      operations: splitVals('svcfOperation'),
-      params: splitVals('svcfParamsIn'),
-      outputs: splitVals('svcfOutput'),
-      stati: splitVals('svcfStati')
-    };
-    saveSvcFilter(svcFilter); renderServices(); try{ dlg.close(); }catch(e){ dlg.removeAttribute('open'); }
-  };
-  try{ dlg.showModal(); }catch(e){ dlg.setAttribute('open',''); }
-};
-
+window.openSvcFilterDialog = function(){ try{ var dlg=document.getElementById('svcFilterDlg'); if(!dlg) return alert('Dialog non disponibile'); document.getElementById('svcfText').value = svcFilter.text || ''; Array.prototype.forEach.call(document.querySelectorAll('#svcfTipoGroup input[type=checkbox]'), function(cb){ cb.checked = (svcFilter.tipi||[]).indexOf(cb.value)>=0; }); document.getElementById('svcfAmbiti').value = (svcFilter.ambiti||[]).join(', '); document.getElementById('svcfRoutine').value = (svcFilter.routine||[]).join(', '); document.getElementById('svcfServizi').value = (svcFilter.servizi||[]).join(', '); var el; el=document.getElementById('svcfApplicativi'); if(el) el.value = (svcFilter.applicativi||[]).join(', '); el=document.getElementById('svcfFallback'); if(el) el.value = (svcFilter.fallback||[]).join(', '); el=document.getElementById('svcfOperation'); if(el) el.value = (svcFilter.operations||[]).join(', '); el=document.getElementById('svcfParamsIn'); if(el) el.value = (svcFilter.params||[]).join(', '); el=document.getElementById('svcfOutput'); if(el) el.value = (svcFilter.outputs||[]).join(', '); el=document.getElementById('svcfStati'); if(el) el.value = (svcFilter.stati||[]).join(', '); document.getElementById('svcFilterCloseXBtn').onclick=function(){ dlg.close(); }; document.getElementById('svcfResetBtn').onclick=function(){ svcFilter=defaultSvcFilter(); saveSvcFilter(svcFilter); renderServices(); dlg.close(); }; document.getElementById('svcfApplyBtn').onclick=function(){ function getChecked(containerId){ var box=document.getElementById(containerId); return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), function(o){return o.checked;}).map(function(o){return o.value;}); } svcFilter = { text: String(document.getElementById('svcfText').value||'').trim().toLowerCase(), tipi: getChecked('svcfTipoGroup'), ambiti: String(document.getElementById('svcfAmbiti').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), routine: String(document.getElementById('svcfRoutine').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), servizi: String(document.getElementById('svcfServizi').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), applicativi: String((document.getElementById('svcfApplicativi')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), fallback: String((document.getElementById('svcfFallback')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), operations: String((document.getElementById('svcfOperation')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), params: String((document.getElementById('svcfParamsIn')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), outputs: String((document.getElementById('svcfOutput')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean), stati: String((document.getElementById('svcfStati')||{}).value||'').split(',').map(function(s){return s.trim();}).filter(Boolean) }; saveSvcFilter(svcFilter); renderServices(); dlg.close(); }; dlg.showModal(); }catch(e){ alert('Apri il file nel browser per usare il filtro Servizi.'); } };
 function applySvcFilters(rows){ var f=svcFilter||defaultSvcFilter(); return (rows||[]).filter(function(s){ var text=(f.text||''); if(text){ var bag=[s.routine||'', s.tipo||'', s.servizio||'', s.operation||'', s.fallback||'', s.descrizione||'', s.ambito||'', s.applicativo||'', s.paramsIngresso||'', s.outputServizio||'', s.stato||''].join(' ').toLowerCase(); if(bag.indexOf(text)===-1) return false; } if(Array.isArray(f.tipi)&&f.tipi.length){ if(f.tipi.indexOf((s.tipo||'').toUpperCase())===-1) return false; } if(Array.isArray(f.ambiti)&&f.ambiti.length){ var amb=(s.ambito||'').toLowerCase(); var ok=false; f.ambiti.forEach(function(a){ var k=String(a).toLowerCase(); if(k && amb.indexOf(k)>=0) ok=true; }); if(!ok) return false; } if(Array.isArray(f.routine)&&f.routine.length){ var r=(s.routine||'').toLowerCase(); var okr=false; f.routine.forEach(function(a){ var k=String(a).toLowerCase(); if(k && r.indexOf(k)>=0) okr=true; }); if(!okr) return false; } if(Array.isArray(f.servizi)&&f.servizi.length){ var sv=(s.servizio||'').toLowerCase(); var oks=false; f.servizi.forEach(function(a){ var k=String(a).toLowerCase(); if(k && sv.indexOf(k)>=0) oks=true; }); if(!oks) return false; } if(Array.isArray(f.applicativi)&&f.applicativi.length){ var app=(s.applicativo||'').toLowerCase(); var okapp=false; f.applicativi.forEach(function(a){ var k=String(a).toLowerCase(); if(k && app.indexOf(k)>=0) okapp=true; }); if(!okapp) return false; } if(Array.isArray(f.fallback)&&f.fallback.length){ var fb=(s.fallback||'').toLowerCase(); var okfb=false; f.fallback.forEach(function(a){ var k=String(a).toLowerCase(); if(k && fb.indexOf(k)>=0) okfb=true; }); if(!okfb) return false; } if(Array.isArray(f.operations)&&f.operations.length){ var op=(s.operation||'').toLowerCase(); var okop=false; f.operations.forEach(function(a){ var k=String(a).toLowerCase(); if(k && op.indexOf(k)>=0) okop=true; }); if(!okop) return false; } if(Array.isArray(f.params)&&f.params.length){ var pin=(s.paramsIngresso||'').toLowerCase(); var okpi=false; f.params.forEach(function(a){ var k=String(a).toLowerCase(); if(k && pin.indexOf(k)>=0) okpi=true; }); if(!okpi) return false; } if(Array.isArray(f.outputs)&&f.outputs.length){ var out=(s.outputServizio||'').toLowerCase(); var okout=false; f.outputs.forEach(function(a){ var k=String(a).toLowerCase(); if(k && out.indexOf(k)>=0) okout=true; }); if(!okout) return false; } if(Array.isArray(f.stati)&&f.stati.length){ var st=(s.stato||'').toLowerCase(); var okst=false; f.stati.forEach(function(a){ var k=String(a).toLowerCase(); if(k && st.indexOf(k)>=0) okst=true; }); if(!okst) return false; } return true; }); }
 var svcSort = { key:'routine', dir:'asc' }; function svcCmp(a,b){ return a<b? -1 : a>b? 1 : 0; }
 function sortSvcRows(rows){ var k=svcSort.key, d=(svcSort.dir==='desc'?-1:1); return rows.slice().sort(function(x,y){ var r=0; if(k==='routine'||k==='servizio'||k==='operation'||k==='fallback'||k==='descrizione'||k==='ambito'||k==='applicativo'||k==='paramsIngresso'||k==='outputServizio'
@@ -1251,80 +1181,34 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
 </script>
 
 <script>
-// === v43.2: Auto-caricamento JSON dalla stessa cartella (una sola volta per browser) ===
-(function(){
-  const RUN_KEY = 'linkhub.autoload.v1';
-  if (localStorage.getItem(RUN_KEY) === 'done') return; // già fatto
-  if (!location || !/^https?:/i.test(location.protocol)) {
-    console.warn('Autoload JSON disattivato: protocollo non http/https');
-    return; // evitare fetch su file:// che spesso è bloccato
+// === v43.3: Commit su GitHub (via Function) — inline ===
+(async function(){
+  async function saveRepo(path, data, message){
+    const endpoints = [
+      '/.netlify/functions/save-to-github', // Netlify
+      '/api/save-to-github'                 // Vercel
+    ];
+    let lastErr;
+    for (const url of endpoints){
+      try{
+        const r = await fetch(url, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ path, data, message })});
+        if (r.ok) return await r.json();
+        lastErr = await r.text();
+      }catch(e){ lastErr = String(e); }
+    }
+    throw new Error('Nessun endpoint disponibile: '+lastErr);
   }
-  const CANDIDATES = [
-    'linkhub-links.json',       // formato {sections,links}
-    'open-points.json',         // formato {openPoints:[...]} oppure [...]
-    'services.json',            // formato {services:[...]} oppure [...]
-    'data.json'                 // formato libero combinato
-  ];
-  const baseUrl = (function(){
-    try { return new URL('.', location.href).href; } catch(e) { return ''; }
-  })();
-
-  function safeFetch(url){
-    return fetch(url, {cache:'no-cache'})
-      .then(r => r.ok ? r.text() : Promise.reject(new Error('HTTP '+r.status)))
-      .then(t => { try{ return JSON.parse(t); }catch(e){ throw new Error('JSON non valido in '+url+': '+e.message); } });
-  }
-
-  function mergeState(cur, inc){
-    // Preserva OP/Servizi esistenti se il file non li definisce
+  async function saveAllToRepo(){
     try{
-      if (Array.isArray(inc)) inc = { openPoints: inc };
-      if (inc.sections || inc.links) {
-        // Non sovrascrivo OP/SVC: solo sezioni+link
-        cur.sections = Array.isArray(inc.sections) ? inc.sections : cur.sections;
-        cur.links    = Array.isArray(inc.links)    ? inc.links    : cur.links;
-      }
-      if (inc.openPoints) {
-        const arr = Array.isArray(inc.openPoints) ? inc.openPoints : [];
-        cur.openPoints = arr;
-      }
-      if (inc.services) {
-        const arr = Array.isArray(inc.services) ? inc.services : [];
-        cur.services = arr;
-      }
-      return cur;
-    }catch(e){ console.warn('mergeState error:', e); return cur; }
+      await saveRepo('linkhub-links.json', { sections: state.sections, links: state.links }, 'Autosave links');
+      await saveRepo('open-points.json',   { openPoints: state.openPoints }, 'Autosave OP');
+      await saveRepo('services.json',      { services: state.services }, 'Autosave servizi');
+      if (typeof toast==='function') toast('Salvato su repo'); else alert('Salvato su repo');
+    }catch(e){ alert('Salvataggio su repo non riuscito: '+e.message); }
   }
-
-  (async function(){
-    try{
-      let merged = null; let any = false;
-      for(const name of CANDIDATES){
-        try{
-          const url = baseUrl + name;
-          const data = await safeFetch(url);
-          merged = mergeState(merged || {sections:[],links:[],openPoints:[],services:[]}, data);
-          any = true;
-        }catch(e){ /* file mancante o non valido: ignora e prosegui */ }
-      }
-      if (any && merged){
-        // Salva in localStorage con i normalizzatori già presenti nell'app
-        try{
-          localStorage.setItem('linkhub.v2', JSON.stringify(merged));
-        }catch(e){ console.warn('salvataggio autoload fallito:', e); }
-        // Forza refresh UI se l'app è già inizializzata
-        try{
-          if (typeof normalizeState === 'function') {
-            var norm = normalizeState(merged);
-            if (norm) { state = norm; save(state); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); }
-          }
-        }catch(e){ /* se non ancora inizializzato, initApp lo ricaricherà da localStorage */ }
-        // Segna come eseguito per non ripetere su ogni reload
-        localStorage.setItem(RUN_KEY, 'done');
-        console.info('Autoload JSON eseguito.');
-      }
-    }catch(e){ console.warn('Autoload JSON non riuscito:', e); }
-  })();
+  window.addEventListener('DOMContentLoaded', function(){
+    var b = document.getElementById('saveRepoBtn'); if(b) b.onclick = saveAllToRepo;
+  });
 })();
 </script>
 
