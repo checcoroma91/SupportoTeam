@@ -530,6 +530,11 @@ html, body { overflow-x:hidden; }
 <div class="wrap">
 <h1><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);"></span>BPER Banca – Team Sistemi Anagrafici</h1>
 <div class="toolbar">
+<label id="repoModeWrap" title="Se attivo, i dati vengono caricati sempre da /data (repo), ignorando il localStorage." style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #263041;background:#0b1328;border-radius:10px">
+  <input id="repoModeChk" type="checkbox"/>
+  <span>🔄 Dati da repo</span>
+</label>
+
 <input id="q" placeholder="Cerca per titolo, tag o descrizione… (⌘/Ctrl + K)" type="search"/>
 <button id="filterSectionsBtn" title="Apri menu sezioni">🏠 Menu</button>
 <button id="newBtn">➕ Nuovo link</button>
@@ -538,12 +543,7 @@ html, body { overflow-x:hidden; }
 <button id="importBtn">📥 Carica link</button>
 <button id="clearAllBtn" title="Pulisci tutte le sezioni, link e OP">🧹 Pulisci tutto</button>
 
-<button id=\"saveRepoBtn\">💾 Salva su repo (Actions)</button>
-
-<label id="repoModeWrap" title="Se attivo, i dati vengono caricati sempre da /data (repo), ignorando il localStorage." style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #263041;background:#0b1328;border-radius:10px">
-  <input id="repoModeChk" type="checkbox"/>
-  <span>🔄 Dati da repo</span>
-</label>
+<button id="saveRepoBtn">💾 Salva su repo (Actions)</button>
 </div>
 </div>
 </header>
@@ -907,6 +907,7 @@ function loadState() {
     return { sections:[], links:[], openPoints:[], services:[] };
   }
 }
+
 
 function normalizeState(x){
   var PL = (PALETTE && PALETTE.length) ? PALETTE.length : 7;
@@ -1299,9 +1300,8 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
 (function(){
   function safeJSON(t){ try{ return JSON.parse(t); }catch(e){ throw new Error('JSON non valido'); } }
   async function safeFetchJSON(url){ const r=await fetch(url,{cache:'no-cache'}); if(!r.ok) throw new Error('HTTP '+r.status+' '+url); const t=await r.text(); return safeJSON(t); }
-  async function autoload(){
+  async function autoload() {
   if (!isRepoModeOn()) return;
-
     if(!location || !/^https?:/i.test(location.protocol)) return;
     const base = new URL('./data/', location.href).href;
     const files = [
