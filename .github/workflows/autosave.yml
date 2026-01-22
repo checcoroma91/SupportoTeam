@@ -1,0 +1,79 @@
+name: Autosave JSON from UI
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  autosave:
+    if: contains(github.event.issue.labels.*.name, 'autosave')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract JSON block from issue body
+        id: extract
+        run: |
+          python - << 'PY'
+          import os, re, json, sys
+          body = os.environ.get('ISSUE_BODY','')
+          m = re.search(r"```json([\s\S]*?)```", body)
+          if not m:
+            print('::warning ::Nessun blocco JSON trovato. Niente da fare.')
+            open('autosave.skip','w').write('1')
+            sys.exit(0)
+          txt = m.group(1)
+          try:
+            data = json.loads(txt)
+          except Exception as e:
+            print('::error ::JSON non valido:', e)
+            sys.exit(1)
+          out = {
+            'sections': data.get('sections', []),
+            'links': data.get('links', []),
+            'openPoints': data.get('openPoints', []),
+            'services': data.get('services', []),
+          }
+          os.makedirs('data', exist_ok=True)
+          with open('data/linkhub-links.json','w',encoding='utf-8') as f:
+            json.dump({'sections': out['sections'], 'links': out['links']}, f, ensure_ascii=False, indent=2)
+          with open('data/open-points.json','w',encoding='utf-8') as f:
+            json.dump({'openPoints': out['openPoints']}, f, ensure_ascii=False, indent=2)
+          with open('data/services.json','w',encoding='utf-8') as f:
+            json.dump({'services': out['services']}, f, ensure_ascii=False, indent=2)
+          PY
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+
+      - name: Commit files
+        if: always()
+        run: |
+          if [ -f autosave.skip ]; then echo "Skip commit"; exit 0; fi
+          git config user.name "autosave-bot"
+          git config user.email "actions@github.com"
+          git add data/linkhub-links.json data/open-points.json data/services.json || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit"; exit 0;
+          fi
+          git commit -m "chore: autosave JSON from Issue #${{ github.event.issue.number }}"
+          git push
+
+      - name: Comment back with status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = context.payload.issue.number;
+            const repo = context.repo;
+            const run_url = `https://github.com/${repo.owner}/${repo.repo}/actions/runs/${context.runId}`;
+            const msg = `Autosave eseguito. [Dettagli run](${run_url}).`;
+            await github.rest.issues.createComment({
+              owner: repo.owner,
+              repo: repo.repo,
+              issue_number,
+              body: msg,
+            });
