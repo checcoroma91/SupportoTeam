@@ -539,6 +539,11 @@ html, body { overflow-x:hidden; }
 <button id="clearAllBtn" title="Pulisci tutte le sezioni, link e OP">🧹 Pulisci tutto</button>
 
 <button id=\"saveRepoBtn\">💾 Salva su repo (Actions)</button>
+
+<label id="repoModeWrap" title="Se attivo, i dati vengono caricati sempre da /data (repo), ignorando il localStorage." style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #263041;background:#0b1328;border-radius:10px">
+  <input id="repoModeChk" type="checkbox"/>
+  <span>🔄 Dati da repo</span>
+</label>
 </div>
 </div>
 </header>
@@ -878,11 +883,31 @@ var PALETTE = [ { id:'emerald', c1:'#064e3b', c2:'#065f46' }, { id:'blue', c1:'#
 var STORAGE_KEY_V2 = 'linkhub.v2';
 
 function save(st){ try{ localStorage.setItem(STORAGE_KEY_V2, JSON.stringify(st || state)); }catch(e){ console.error('save:', e); } }
-function loadState(){ try{ var raw = localStorage.getItem(STORAGE_KEY_V2); if(raw){ return normalizeState(JSON.parse(raw)); }
-  var demo={ sections:[ {id: crypto.randomUUID(), name:'Team', desc:'Contatti, orari, riunioni', icon:'👥', collapsed:false, color:{id:'emerald', c1:'#064e3b', c2:'#065f46'}}, {id: crypto.randomUUID(), name:'Progetti', desc:'Piani, task, roadmap', icon:'🧩', collapsed:false, color:{id:'blue', c1:'#0b3a68', c2:'#0f447a'}}, {id: crypto.randomUUID(), name:'File', desc:'Documenti e cartelle', icon:'📁', collapsed:false, color:{id:'indigo', c1:'#312e81', c2:'#3730a3'}} ], links:[], openPoints:[], services:[] };
-  localStorage.setItem(STORAGE_KEY_V2, JSON.stringify(demo));
-  return normalizeState(demo);
- }catch(e){ console.error('load:', e); return { sections:[], links:[], openPoints:[], services:[] }; } }
+function loadState() {
+  // Se Repo Mode è attivo: ignoro completamente il localStorage e NON innesco il demo-seed.
+  if (isRepoModeOn()) {
+    return { sections: [], links: [], openPoints: [], services: [] };
+  }
+
+  // Comportamento originale (localStorage come fonte)
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY_V2);
+    if (raw) { return normalizeState(JSON.parse(raw)); }
+
+    // Demo-seed solo quando repoMode è OFF
+    var demo={ sections:[
+      {id: crypto.randomUUID(), name:'Team', desc:'Contatti, orari, riunioni', icon:'👥', collapsed:false, color:{id:'emerald', c1:'#064e3b', c2:'#065f46'}},
+      {id: crypto.randomUUID(), name:'Progetti', desc:'Piani, task, roadmap', icon:'🧩', collapsed:false, color:{id:'blue', c1:'#0b3a68', c2:'#0f447a'}},
+      {id: crypto.randomUUID(), name:'File', desc:'Documenti e cartelle', icon:'📁', collapsed:false, color:{id:'indigo', c1:'#312e81', c2:'#3730a3'}}
+    ], links:[], openPoints:[], services:[] };
+    localStorage.setItem(STORAGE_KEY_V2, JSON.stringify(demo));
+    return normalizeState(demo);
+  } catch(e) {
+    console.error('load:', e);
+    return { sections:[], links:[], openPoints:[], services:[] };
+  }
+}
+
 function normalizeState(x){
   var PL = (PALETTE && PALETTE.length) ? PALETTE.length : 7;
   var sections = Array.isArray(x.sections)? x.sections.map(function(s,i){ return {
@@ -907,10 +932,29 @@ function loadUIState(){ try { return JSON.parse(localStorage.getItem(UI_STATE_KE
 function saveUIState(ui){ try { localStorage.setItem(UI_STATE_KEY, JSON.stringify(ui)); } catch(e){} }
 var state=null; var UI_STATE_KEY='ui.state.v1';
 
+
+// === Preferenza 'Dati da repo' (ignora localStorage) ===
+const SETTINGS_KEY = 'linkhub.settings.v1';
+function loadSettings() { try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch(_) { return {}; } }
+function saveSettings(s) { try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s || {})); } catch(_) {} }
+function isRepoModeOn() { const s = loadSettings(); return !!s.repoMode; }
+function setRepoMode(on) { const s = loadSettings(); s.repoMode = !!on; saveSettings(s); }
 // Init
 window.addEventListener('DOMContentLoaded', initApp);
 function initApp(){
   state = loadState();
+  // --- Repo Mode UI binding
+  try {
+    const chk = document.getElementById('repoModeChk');
+    if (chk) {
+      chk.checked = isRepoModeOn();
+      chk.addEventListener('change', function() {
+        setRepoMode(chk.checked);
+        location.reload();
+      });
+    }
+  } catch(_) {}
+
   (function restoreSectionUI(){ var ui = loadUIState(); if (!ui.sectionCollapsed) return; try { state.sections.forEach(function(s){ if (ui.sectionCollapsed.hasOwnProperty(s.id)) s.collapsed = ui.sectionCollapsed[s.id]; }); } catch(e){} })();
   render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn();
   var q=document.getElementById('q'); if(q) q.addEventListener('input', render);
@@ -1256,6 +1300,8 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
   function safeJSON(t){ try{ return JSON.parse(t); }catch(e){ throw new Error('JSON non valido'); } }
   async function safeFetchJSON(url){ const r=await fetch(url,{cache:'no-cache'}); if(!r.ok) throw new Error('HTTP '+r.status+' '+url); const t=await r.text(); return safeJSON(t); }
   async function autoload(){
+  if (!isRepoModeOn()) return;
+
     if(!location || !/^https?:/i.test(location.protocol)) return;
     const base = new URL('./data/', location.href).href;
     const files = [
