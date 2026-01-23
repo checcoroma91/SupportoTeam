@@ -1,4 +1,3 @@
-
 name: LinkHub Autosave (dispatch)
 
 on:
@@ -15,30 +14,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Write payload files
-                 
-        shell: bash
-        env:
-          PAYLOAD: ${{ toJson(github.event.client_payload) }}
+      - name: Debug event payload
         run: |
-          set -euo pipefail
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Event path: $GITHUB_EVENT_PATH"
+          echo '--- client_payload ---'
+          jq '.client_payload' "$GITHUB_EVENT_PATH" || true
 
+      - name: Write payload files
+        shell: bash
+        run: |
+          set -euxo pipefail
           mkdir -p data
-
-          echo "$PAYLOAD" > /tmp/payload.json
-
           # sections + links
-          jq '{sections: .sections // [], links: .links // []}' /tmp/payload.json             | jq -M . > data/linkhub-links.json
-                                               
-
+          jq -M '.client_payload | {sections: (.sections // []), links: (.links // [])}' "$GITHUB_EVENT_PATH" > data/linkhub-links.json
           # openPoints
-          jq '{openPoints: (.openPoints // [])}' /tmp/payload.json             | jq -M . > data/open-points.json
-                                             
-
+          jq -M '.client_payload | {openPoints: (.openPoints // [])}' "$GITHUB_EVENT_PATH" > data/open-points.json
           # services
-          jq '{services: (.services // [])}' /tmp/payload.json             | jq -M . > data/services.json
-                                          
-
+          jq -M '.client_payload | {services: (.services // [])}' "$GITHUB_EVENT_PATH" > data/services.json
           echo "=== Changed files ==="
           git status --porcelain
 
@@ -47,14 +40,11 @@ jobs:
           set -e
           git config user.name  "linkhub-bot"
           git config user.email "linkhub-bot@users.noreply.github.com"
-
           git add data/linkhub-links.json data/open-points.json data/services.json || true
-
           if git diff --cached --quiet; then
             echo "Nessuna modifica da committare."
             exit 0
           fi
-
           dt=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           git commit -m "Autosave: update data (${dt}) [skip ci]"
           git push
