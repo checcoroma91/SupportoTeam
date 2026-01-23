@@ -529,6 +529,35 @@ html, body { overflow-x:hidden; }
 <style>#helpCrqDlg{border:none;border-radius:14px;max-width:1000px;width:100%}#helpCrqDlg .modal{background:#0b1023;border:1px solid #1f2937;border-radius:14px;overflow:hidden}#helpCrqDlg .modal .content{padding:16px}#helpCrqDlg .modal-bar{display:grid;grid-template-columns:1fr auto;align-items:center;padding:12px var(--edge);background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-bottom:1px solid #1f2937}.modal-bar .title{font-weight:600}#helpCrqTableWrap{width:100%;overflow:auto}#helpCrqTable{width:100%;border-collapse:collapse;color:var(--text)}#helpCrqTable th,#helpCrqTable td{border:1px solid #1f2937;padding:8px 10px;font-size:13px;vertical-align:top}#helpCrqTable th{background:#0a1227;text-align:left;color:var(--text)}#helpCrqTable tbody tr:nth-child(odd){background:#0b1023}#helpCrqTable tbody tr:nth-child(even){background:#0c142f}#helpCrqTable tr[data-bmc]{cursor:pointer}#helpCrqTable tr[data-bmc]:hover{background:#0e1732}#helpCrqTable tr[data-bmc].copied{box-shadow:inset 0 0 0 2px rgba(34,197,94,.35)}#helpCrqTable tr[data-bmc]:focus{outline:2px dashed #22c55e;outline-offset:-2px}#helpCrqTable a{color:#e5e7eb;text-decoration-color:rgba(229,231,235,.6)}#helpCrqTable a:hover{color:#ffffff;text-decoration-color:#ffffff}</style>
 
 <!-- HELP CRQ ULTRA-FALLBACK CSS --><style>#helpCrqOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:9999}#helpCrqCard{position:fixed;left:50%;top:6vh;transform:translateX(-50%);width:min(1000px,94vw);max-height:88vh;overflow:auto;background:#0b1023;color:#e5e7eb;border:1px solid #1f2937;border-radius:14px;display:none;z-index:10000}#helpCrqCard header{display:grid;grid-template-columns:1fr auto;align-items:center;padding:12px 16px;border-bottom:1px solid #1f2937;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}#helpCrqCloseBtn{border:1px solid #263041;background:#0b1328;color:#e5e7eb;padding:6px 10px;border-radius:8px;cursor:pointer;margin-left:8px}#helpCrqCard .body{padding:16px}</style>
+
+<style>
+/* OP wide */
+html body #opFilterDlg { width: clamp(1400px, 98vw, 1920px); max-width: 1920px; }
+html body .opf-grid-op{ display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: clamp(12px, 1.2cqw, 18px); align-items:start; }
+@media (max-width: 1700px){ html body .opf-grid-op{ grid-template-columns: repeat(4, minmax(0,1fr)); } }
+@media (max-width: 1400px){ html body .opf-grid-op{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 1000px){ html body .opf-grid-op{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px){  html body .opf-grid-op{ grid-template-columns: 1fr; } }
+html body #opFilterDlg .opf-card{ background:#0b1023; border:1px solid #1f2937; border-radius: clamp(10px, 1.2cqw, 14px); padding: clamp(12px, 1.6cqw, 18px); }
+html body #opFilterDlg .opf-card h4{ margin: 0 0 10px 0; font-size: clamp(14px, 2.2cqw, 16px); font-weight: 600; }
+html body #opFilterDlg .opf-row{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1cqw, 14px); }
+html body #opFilterDlg .opf-actions{ position: sticky; bottom: 0; display:flex; justify-content:flex-end; gap: 10px; padding: 12px 0 0 0; margin-top: 14px; background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top: 1px solid #1f2937; }
+
+/* SVC wide */
+html body #svcFilterDlg { width: clamp(1400px, 98vw, 1920px); max-width: 1920px; }
+html body #svcFilterDlg .content{ padding: clamp(14px, 2cqw, 24px); }
+html body .svc-grid-op{ display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: clamp(12px, 1.2cqw, 18px); align-items:start; }
+@media (max-width: 1700px){ html body .svc-grid-op{ grid-template-columns: repeat(4, minmax(0,1fr)); } }
+@media (max-width: 1400px){ html body .svc-grid-op{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 1000px){ html body .svc-grid-op{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px){  html body .svc-grid-op{ grid-template-columns: 1fr; } }
+html body #svcFilterDlg .opf-card{ background:#0b1023; border:1px solid #1f2937; border-radius: clamp(10px, 1.2cqw, 14px); padding: clamp(12px, 1.6cqw, 18px); }
+html body #svcFilterDlg .opf-card h4{ margin: 0 0 10px 0; font-size: clamp(14px, 2.2cqw, 16px); font-weight: 600; }
+html body #svcFilterDlg .opf-row{ display:grid; grid-template-columns: 1fr 1fr; gap: clamp(10px, 1cqw, 14px); }
+html body #svcFilterDlg input[type="text"], html body #svcFilterDlg input[placeholder]{ min-height:38px; min-width:0; width:100%; }
+html body #svcFilterDlg .opf-checks label{ display:flex; align-items:center; gap:8px; margin: 4px 0; }
+html body #svcFilterDlg .opf-actions{ position: sticky; bottom: 0; display:flex; justify-content:flex-end; gap: 10px; padding: 12px 0 0 0; margin-top: 14px; background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top: 1px solid #1f2937; }
+</style>
 </head>
 <body>
 <header>
@@ -695,92 +724,86 @@ html, body { overflow-x:hidden; }
 </div>
 </div></dialog>
 <!-- Dialog: Filtro OP -->
-<dialog id="opFilterDlg"><div class="modal">
-<header class="modal-bar"><span class="title">Filtra Open Points</span><button aria-label="Chiudi" class="close" id="opFilterCloseXBtn">✕</button></header>
-<div class="content">
-<div class="row"><input id="opfText" placeholder="Cerca in titolo, progetto, assegnatari, descrizione, note"/></div>
-<div class="opf-grid">
-<div class="opf-card">
-<h4>Priorità</h4>
-<div class="opf-checks" id="opfPrioGroup">
-<label><input type="checkbox" value="low"/> Bassa</label>
-<label><input type="checkbox" value="medium"/> Media</label>
-<label><input type="checkbox" value="high"/> Alta</label>
-<label><input type="checkbox" value="critical"/> Critica</label>
-
-    <div class="opf-card">
-      <h4>Applicativo / Fallback</h4>
-      <div class="opf-row">
-        <input id="svcfApplicativi" placeholder="Applicativi (virgole)"/>
-        <input id="svcfFallback" placeholder="Fallback (virgole)"/>
-      </div>
-    </div>
-
-    <div class="opf-card">
-      <h4>Operation / Parametri</h4>
+<!-- Dialog: Filtro OP (ORIZZONTALE) -->
+<dialog id="opFilterDlg">
+  <div class="modal">
+    <header class="modal-bar">
+      <span class="title">Filtra Open Points</span>
+      <button aria-label="Chiudi" class="close" id="opFilterCloseXBtn">✕</button>
+    </header>
+    <div class="content">
       <div class="row">
-        <input id="svcfOperation" placeholder="Operation / Parametri (virgole)"/>
+        <input id="opfText" placeholder="Cerca in tutte le colonne (titolo, progetto, assegnatari, descrizione, note, stato, priorità)"/>
+      </div>
+      <div class="opf-grid opf-grid-op">
+        <div class="opf-card">
+          <h4>ID / Titolo</h4>
+          <div class="opf-row">
+            <input id="opfId" placeholder="ID contiene…"/>
+            <input id="opfTitle" placeholder="Titolo contiene…"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Progetti / Assegnatari</h4>
+          <div class="opf-row">
+            <input id="opfProjects" placeholder="Progetti (virgole)"/>
+            <input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Descrizione / Note</h4>
+          <div class="opf-row">
+            <input id="opfDesc" placeholder="Descrizione contiene…"/>
+            <input id="opfNotes" placeholder="Note contengono…"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Priorità</h4>
+          <div class="opf-checks" id="opfPrioGroup">
+            <label><input type="checkbox" value="low"/> Bassa</label>
+            <label><input type="checkbox" value="medium"/> Media</label>
+            <label><input type="checkbox" value="high"/> Alta</label>
+            <label><input type="checkbox" value="critical"/> Critica</label>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Stato</h4>
+          <div class="opf-checks" id="opfStatusGroup">
+            <label><input type="checkbox" value="Nuovo"/> Nuovo</label>
+            <label><input type="checkbox" value="Da fare"/> Da fare</label>
+            <label><input type="checkbox" value="In corso"/> In corso</label>
+            <label><input type="checkbox" value="Schedulato"/> Schedulato</label>
+            <label><input type="checkbox" value="Completato"/> Completato</label>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Inserito il</h4>
+          <div class="opf-row">
+            <input id="opfCreatedFrom" type="date" placeholder="Creato dal"/>
+            <input id="opfCreatedTo" type="date" placeholder="Creato al"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Scadenza</h4>
+          <div class="opf-row">
+            <input id="opfDueFrom" type="date" placeholder="Scadenza da"/>
+            <input id="opfDueTo" type="date" placeholder="Scadenza a"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Altre opzioni</h4>
+          <label style="display:flex;align-items:center;gap:8px">
+            <input id="opfMaxOnly" type="checkbox"/> Solo "Priorità massima"
+          </label>
+        </div>
+      </div>
+      <div class="opf-actions" style="margin-top:12px">
+        <button id="opfResetBtn">Azzera</button>
+        <button class="primary" id="opfApplyBtn">Applica</button>
       </div>
     </div>
-
-    <div class="opf-card">
-      <h4>Parametri & Output</h4>
-      <div class="opf-row">
-        <input id="svcfParamsIn" placeholder="Parametri ingresso (virgole)"/>
-        <input id="svcfOutput" placeholder="Output servizio (virgole)"/>
-      </div>
-    </div>
-
-    <div class="opf-card">
-      <h4>Stato</h4>
-      <div class="row">
-        <input id="svcfStati" placeholder="Stati (virgole)"/>
-      </div>
-    </div>
-</div>
-</div>
-<div class="opf-card">
-<h4>Stato</h4>
-<div class="opf-checks" id="opfStatusGroup">
-<label><input type="checkbox" value="Nuovo"/> Nuovo</label>
-<label><input type="checkbox" value="Da fare"/> Da fare</label>
-<label><input type="checkbox" value="In corso"/> In corso</label>
-<label><input type="checkbox" value="Schedulato"/> Schedulato</label>
-<label><input type="checkbox" value="Completato"/> Completato</label>
-</div>
-</div>
-<div class="opf-card">
-<h4>Date inserimento</h4>
-<div class="opf-row">
-<input id="opfCreatedFrom" placeholder="Creato dal" type="date"/>
-<input id="opfCreatedTo" placeholder="Creato al" type="date"/>
-</div>
-</div>
-<div class="opf-card">
-<h4 class="col-due">Scadenza</h4>
-<div class="opf-row">
-<input id="opfDueFrom" placeholder="Scadenza da" type="date"/>
-<input id="opfDueTo" placeholder="Scadenza a" type="date"/>
-</div>
-</div>
-<div class="opf-card">
-<h4>Altre opzioni</h4>
-<label style="display:flex;align-items:center;gap:8px"><input id="opfMaxOnly" type="checkbox"/> Solo Priorità massima</label>
-</div>
-<div class="opf-card">
-<h4>Assegnatari / Progetti</h4>
-<div class="opf-row">
-<input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
-<input id="opfProjects" placeholder="Progetti (virgole)"/>
-</div>
-</div>
-</div>
-<div class="opf-actions" style="margin-top:12px">
-<button id="opfResetBtn">Azzera</button>
-<button class="primary" id="opfApplyBtn">Applica</button>
-</div>
-</div>
-</div></dialog>
+  </div>
+</dialog>
 <!-- Dialog: Salva link -->
 <dialog id="saveLinksDlg"><div class="modal">
 <header class="modal-bar">
@@ -842,38 +865,72 @@ html, body { overflow-x:hidden; }
 </div>
 </div></dialog>
 <!-- Dialog: Filtro Servizi -->
-<dialog id="svcFilterDlg"><div class="modal">
-<header class="modal-bar">
-<span class="title">Filtra Servizi</span>
-<button aria-label="Chiudi" class="close" id="svcFilterCloseXBtn">✕</button>
-</header>
-<div class="content">
-<div class="row"><input id="svcfText" placeholder="Cerca in routine, servizio, operation, fallback, descrizione, ambito, applicativo, parametri ingresso, output"/></div>
-<div class="opf-grid">
-<div class="opf-card">
-<h4>Tipo</h4>
-<div class="opf-checks" id="svcfTipoGroup">
-<label><input type="checkbox" value="REST"/> REST</label>
-<label><input type="checkbox" value="SOAP"/> SOAP</label>
-</div>
-</div>
-<div class="opf-card">
-<h4>Ambiti / Routine / Servizi</h4>
-<div class="opf-row">
-<input id="svcfAmbiti" placeholder="Ambiti (virgole)"/>
-<input id="svcfRoutine" placeholder="Routine (virgole)"/>
-</div>
-<div class="row">
-<input id="svcfServizi" placeholder="Servizi (virgole)"/>
-</div>
-</div>
-</div>
-<div class="opf-actions" style="margin-top:12px">
-<button id="svcfResetBtn">Azzera</button>
-<button class="primary" id="svcfApplyBtn">Applica</button>
-</div>
-</div>
-</div></dialog>
+<!-- Dialog: Filtro Servizi (ORIZZONTALE, COMPLETO) -->
+<dialog id="svcFilterDlg">
+  <div class="modal">
+    <header class="modal-bar">
+      <span class="title">Filtra Servizi</span>
+      <button aria-label="Chiudi" class="close" id="svcFilterCloseXBtn">✕</button>
+    </header>
+    <div class="content">
+      <div class="row"><input id="svcfText" placeholder="Cerca in tutte le colonne (routine, tipo, servizio, operation/parametri, fallback, descrizione, ambito, applicativo, parametri IN, output, stato)"/></div>
+      <div class="svc-grid-op">
+        <div class="opf-card">
+          <h4>ID / Routine</h4>
+          <div class="opf-row">
+            <input id="svcfId" placeholder="ID contiene…"/>
+            <input id="svcfRoutine" placeholder="Routine (virgole)"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Servizio / Tipo</h4>
+          <div class="opf-row">
+            <input id="svcfServizi" placeholder="Servizi (virgole)"/>
+            <div class="opf-checks" id="svcfTipoGroup" style="padding:6px 8px;border:1px solid #263041;border-radius:10px;background:#0a1227;">
+              <label><input type="checkbox" value="REST"/> REST</label>
+              <label><input type="checkbox" value="SOAP"/> SOAP</label>
+            </div>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Descrizione / Ambito</h4>
+          <div class="opf-row">
+            <input id="svcfDescrizione" placeholder="Descrizione contiene…"/>
+            <input id="svcfAmbiti" placeholder="Ambiti (virgole)"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Applicativo / Fallback</h4>
+          <div class="opf-row">
+            <input id="svcfApplicativi" placeholder="Applicativi (virgole)"/>
+            <input id="svcfFallback" placeholder="Fallback (virgole)"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Operation / Parametri</h4>
+          <div class="row">
+            <input id="svcfOperation" placeholder="Operation / Parametri (virgole)"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Parametri &amp; Output</h4>
+          <div class="opf-row">
+            <input id="svcfParamsIn" placeholder="Parametri ingresso (virgole)"/>
+            <input id="svcfOutput" placeholder="Output servizio (virgole)"/>
+          </div>
+        </div>
+        <div class="opf-card">
+          <h4>Stato</h4>
+          <div class="opf-checks" id="svcfStatoGroup"></div>
+        </div>
+      </div>
+      <div class="opf-actions" style="margin-top:12px">
+        <button id="svcfResetBtn">Azzera</button>
+        <button class="primary" id="svcfApplyBtn">Applica</button>
+      </div>
+    </div>
+  </div>
+</dialog>
 
 <script>
   window.AUTOSAVE_ENDPOINT = "https://supportoteam.francesco-romano2.workers.dev";
@@ -1452,5 +1509,57 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
 
 
 <!-- HELP CRQ JS --><script>(function(){function getRoot(){var ov=document.getElementById('helpCrqOverlay');var card=document.getElementById('helpCrqCard');if(ov&&card&&ov.style.display==='block'&&card.style.display==='block'){return card}var dlg=document.getElementById('helpCrqDlg');return dlg||document}function copyText(t){try{if(navigator.clipboard){navigator.clipboard.writeText(t);return true}}catch(e){}try{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();return true}catch(_){return false}}function fmtRow(tr){var bmc=tr.getAttribute('data-bmc')||'',bhelp=tr.getAttribute('data-bhelp')||'',note=tr.getAttribute('data-note')||'';return ['BMC Helix (CRQ): '+bmc,'Bhelp Operatore (RFC): '+bhelp,'NOTE: '+(note||'')].join('\n')}function markCopied(el){el.classList.add('copied');setTimeout(function(){el.classList.remove('copied')},1000)}function onActivate(tr){var txt=fmtRow(tr);var ok=copyText(txt);if(!ok)alert('Copia negli appunti non riuscita');try{if(typeof window.toast==='function'){toast('Riga copiata')}}catch(_){ }markCopied(tr)}function bindInside(root){var table=(root||document).querySelector('#helpCrqTable');if(table&&!table._helpbound){table._helpbound=true;table.addEventListener('click',function(ev){var tr=ev.target.closest('tr[data-bmc]');if(tr)onActivate(tr)});table.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){var tr=ev.target.closest('tr[data-bmc]');if(tr){ev.preventDefault();onActivate(tr)}}})}}window.openHelpCrq=(function(orig){return function(){try{var d=document.getElementById('helpCrqDlg');if(d&&d.showModal){d.showModal();bindInside(d);return}}catch(e){}try{var mountOk=false;var dlg=document.getElementById('helpCrqDlg');var mount=document.getElementById('helpCrqBodyMount');if(dlg&&mount){var inner=dlg.querySelector('.content');if(inner){mount.innerHTML=inner.outerHTML;mountOk=true}}var ov=document.getElementById('helpCrqOverlay');var card=document.getElementById('helpCrqCard');if(mountOk&&ov&&card){ov.style.display='block';card.style.display='block';var b=document.getElementById('helpCrqCloseBtn');if(b){b.onclick=function(){ov.style.display='none';card.style.display='none'}}bindInside(card);return}}catch(e){}alert('Impossibile aprire HELP CRQ: prova via http:// (non file://)')}})(window.openHelpCrq||function(){});document.addEventListener('DOMContentLoaded',function(){var dlg=document.getElementById('helpCrqDlg');if(dlg)bindInside(dlg);var btn=document.getElementById('helpCrqBtn');if(btn&&!btn.onclick){btn.addEventListener('click',function(){window.openHelpCrq()})}})})();</script>
+
+<script>
+(function(){
+  function csvToArr(s){ return String(s||'').split(',').map(x=>x.trim()).filter(Boolean); }
+  function getCheckedValues(containerId){ var box=document.getElementById(containerId); if(!box) return []; return Array.prototype.filter.call(box.querySelectorAll('input[type=checkbox]'), el=>el.checked).map(el=>el.value); }
+  function setCheckedValues(containerId, values){ var set=new Set((values||[]).map(String)); var box=document.getElementById(containerId); if(!box) return; Array.prototype.forEach.call(box.querySelectorAll('input[type=checkbox]'), el=>{ el.checked=set.has(el.value); }); }
+
+  var prevOpen = window.openSvcFilterDialog;
+  window.openSvcFilterDialog = function(){
+    try{
+      var dlg=document.getElementById('svcFilterDlg'); if(!dlg){ if(prevOpen) return prevOpen(); return; }
+      if(typeof svcFilter==='undefined' && typeof loadSvcFilter==='function'){ window.svcFilter = loadSvcFilter(); }
+      var f = svcFilter || {};
+      var t=document.getElementById('svcfText'); if(t) t.value = f.text||'';
+      setCheckedValues('svcfTipoGroup', f.tipi||[]);
+      [['svcfId', f.id||''],['svcfRoutine', (f.routine||[]).join(', ')],['svcfServizi', (f.servizi||[]).join(', ')],['svcfDescrizione', f.descr||''],['svcfAmbiti', (f.ambiti||[]).join(', ')],['svcfApplicativi', (f.applicativi||[]).join(', ')],['svcfFallback', (f.fallback||[]).join(', ')],['svcfOperation', (f.operations||[]).join(', ')],['svcfParamsIn', (f.params||[]).join(', ')],['svcfOutput', (f.outputs||[]).join(', ')]]
+      .forEach(function([id,val]){ var el=document.getElementById(id); if(el) el.value=val; });
+      try{
+        var statiDistinct = (typeof distinctFromServicesField==='function') ? distinctFromServicesField('stato') : [];
+        var box = document.getElementById('svcfStatoGroup'); if(box){
+          var uniq = Array.from(new Set((statiDistinct||[]).filter(Boolean))).sort(function(a,b){return String(a).localeCompare(String(b));});
+          box.innerHTML = uniq.length ? uniq.map(function(v){return '<label><input type="checkbox" value="'+String(v)+'"/> '+String(v)+'</label>';}).join('') : '<small style="color:var(--muted)">Nessuno stato disponibile</small>';
+          setCheckedValues('svcfStatoGroup', f.stati||[]);
+        }
+      }catch(_){ }
+      document.getElementById('svcFilterCloseXBtn').onclick=function(){ dlg.close(); };
+      document.getElementById('svcfResetBtn').onclick=function(){ if(typeof defaultSvcFilter==='function'){ svcFilter=defaultSvcFilter(); } if(typeof saveSvcFilter==='function') saveSvcFilter(svcFilter); if(typeof renderServices==='function') renderServices(); dlg.close(); };
+      document.getElementById('svcfApplyBtn').onclick=function(){
+        svcFilter = {
+          text: String((document.getElementById('svcfText')||{}).value||'').trim().toLowerCase(),
+          id: String((document.getElementById('svcfId')||{}).value||'').trim().toLowerCase(),
+          descr: String((document.getElementById('svcfDescrizione')||{}).value||'').trim().toLowerCase(),
+          tipi: getCheckedValues('svcfTipoGroup'),
+          ambiti: csvToArr((document.getElementById('svcfAmbiti')||{}).value||''),
+          routine: csvToArr((document.getElementById('svcfRoutine')||{}).value||''),
+          servizi: csvToArr((document.getElementById('svcfServizi')||{}).value||''),
+          applicativi: csvToArr((document.getElementById('svcfApplicativi')||{}).value||''),
+          fallback: csvToArr((document.getElementById('svcfFallback')||{}).value||''),
+          operations: csvToArr((document.getElementById('svcfOperation')||{}).value||''),
+          params: csvToArr((document.getElementById('svcfParamsIn')||{}).value||''),
+          outputs: csvToArr((document.getElementById('svcfOutput')||{}).value||''),
+          stati: getCheckedValues('svcfStatoGroup')
+        };
+        if(typeof saveSvcFilter==='function') saveSvcFilter(svcFilter);
+        if(typeof renderServices==='function') renderServices();
+        dlg.close();
+      };
+      dlg.showModal();
+    }catch(e){ console.error('SVC filter open error', e); if(prevOpen) try{prevOpen();}catch(_){} }
+  };
+})();
+</script>
 </body>
 </html>
