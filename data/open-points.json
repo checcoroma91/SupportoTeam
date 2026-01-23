@@ -1,34 +1,47 @@
 {
   "openPoints": [
     {
-      "id": "c9a4060e-ffbb-4137-bed6-73ab3860e86a",
-      "title": "Servizi Portale Enti",
-      "project": "Portale Enti Convenzionati",
-      "assignees": [
-        "Fra"
-      ],
-      "priority": "high",
-      "status": "Nuovo",
-      "maxPriority": true,
-      "createdAt": "2026-01-19",
+      "assignees": [],
+      "createdAt": "2026-01-23",
+      "desc": "",
       "dueAt": "",
-      "desc": "Fare richiesta ufficiale di due servizi REST e un SOAP a Reactive.",
-      "notes": "ricordarsi che BStore e tutti gli altri, chiameranno SEMPRE, quindi il servizio di lettura tabella verde deve poggiare su una infrastruttura che regga e le performance molto rapide\nla stragrande maggioranza delle chiamate risponde che \"non ho trovato una cippa\" (perché i clienti convenzionati sono una minima parte rispetto al totale clienti banca). E' importante che questa risposta sia rapidissima, ma SOPRATTUTTO: che non venga registrato da Dynatrace come FAULT, se no ci aprono le segnalazioni per un normalissimo NOT FOUND"
+      "id": "21803c0c-e2e5-4ab3-9e3f-b4f3a9457691",
+      "maxPriority": false,
+      "notes": "",
+      "priority": "medium",
+      "project": "",
+      "status": "Nuovo",
+      "title": "test"
     },
     {
-      "id": "6a35c308-dd53-4285-adac-84946a550443",
-      "title": "Estrazione CRM",
-      "project": "Poteri di firma",
       "assignees": [
         "Fra"
       ],
-      "priority": "high",
-      "status": "Nuovo",
-      "maxPriority": false,
       "createdAt": "2026-01-19",
+      "desc": "Fare richiesta ufficiale di due servizi REST e un SOAP a Reactive.",
       "dueAt": "",
+      "id": "c9a4060e-ffbb-4137-bed6-73ab3860e86a",
+      "maxPriority": true,
+      "notes": "ricordarsi che BStore e tutti gli altri, chiameranno SEMPRE, quindi il servizio di lettura tabella verde deve poggiare su una infrastruttura che regga e le performance molto rapide\nla stragrande maggioranza delle chiamate risponde che \"non ho trovato una cippa\" (perché i clienti convenzionati sono una minima parte rispetto al totale clienti banca). E' importante che questa risposta sia rapidissima, ma SOPRATTUTTO: che non venga registrato da Dynatrace come FAULT, se no ci aprono le segnalazioni per un normalissimo NOT FOUND",
+      "priority": "high",
+      "project": "Portale Enti Convenzionati",
+      "status": "Nuovo",
+      "title": "Servizi Portale Enti"
+    },
+    {
+      "assignees": [
+        "Fra"
+      ],
+      "createdAt": "2026-01-19",
       "desc": "Approvare la richiesta di stima di reactive per la produzione di un flusso per l'invio di tutte le posizioni attive nella poteri al CRM.",
-      "notes": ""
+      "dueAt": "",
+      "id": "6a35c308-dd53-4285-adac-84946a550443",
+      "maxPriority": false,
+      "notes": "",
+      "priority": "high",
+      "project": "Poteri di firma",
+      "status": "Nuovo",
+      "title": "Estrazione CRM"
     }
   ]
 }

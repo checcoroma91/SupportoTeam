@@ -1,191 +1,190 @@
 {
   "sections": [
     {
-      "id": "2831ef7e-324f-4819-a28f-f43da0a00327",
-      "name": "BSPACE",
       "collapsed": false,
       "color": {
-        "id": "emerald",
         "c1": "#064e3b",
-        "c2": "#065f46"
+        "c2": "#065f46",
+        "id": "emerald"
       },
       "desc": "Accesso ai BSpace di tutti gli ambienti",
-      "icon": "✅"
+      "icon": "✅",
+      "id": "2831ef7e-324f-4819-a28f-f43da0a00327",
+      "name": "BSPACE"
     },
     {
-      "id": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
-      "name": "Applicativi",
       "collapsed": false,
       "color": {
-        "id": "emerald",
         "c1": "#064e3b",
-        "c2": "#065f46"
+        "c2": "#065f46",
+        "id": "emerald"
       },
       "desc": "Applicativi gestiti dal team",
-      "icon": "📅"
+      "icon": "📅",
+      "id": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
+      "name": "Applicativi"
     },
     {
-      "id": "d8e9fec7-90bc-4699-9c86-33a02d3bf029",
-      "name": "Sharepoint",
       "collapsed": false,
       "color": {
-        "id": "blue",
         "c1": "#0b3a68",
-        "c2": "#0f447a"
+        "c2": "#0f447a",
+        "id": "blue"
       },
       "desc": "Sharepoint di team e progettuali",
-      "icon": "👥"
+      "icon": "👥",
+      "id": "d8e9fec7-90bc-4699-9c86-33a02d3bf029",
+      "name": "Sharepoint"
     },
     {
-      "id": "225d513e-a3a9-4304-bd52-6ca9add12142",
-      "name": "Monitoraggio Produzione",
       "collapsed": false,
       "color": {
-        "id": "indigo",
         "c1": "#312e81",
-        "c2": "#3730a3"
+        "c2": "#3730a3",
+        "id": "indigo"
       },
       "desc": "Tool di monitoraggio",
-      "icon": "📊"
+      "icon": "📊",
+      "id": "225d513e-a3a9-4304-bd52-6ca9add12142",
+      "name": "Monitoraggio Produzione"
     },
     {
-      "id": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
-      "name": "Tool Dipartimentali",
       "collapsed": false,
       "color": {
-        "id": "cyan",
         "c1": "#0e3a43",
-        "c2": "#0b4a56"
+        "c2": "#0b4a56",
+        "id": "cyan"
       },
       "desc": "Tool di sviluppo dipartimentali",
-      "icon": "🛠"
+      "icon": "🛠",
+      "id": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
+      "name": "Tool Dipartimentali"
     },
     {
-      "id": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
-      "name": "Extra",
       "collapsed": false,
       "color": {
-        "id": "violet",
         "c1": "#4c1d95",
-        "c2": "#5b21b6"
+        "c2": "#5b21b6",
+        "id": "violet"
       },
       "desc": "Tool e extra",
-      "icon": "💡"
+      "icon": "💡",
+      "id": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
+      "name": "Extra"
     },
     {
-      "id": "fdc49495-babc-450c-aa79-7984c68a7e4e",
-      "name": "Swagger",
       "collapsed": false,
       "color": {
-        "id": "amber",
         "c1": "#78350f",
-        "c2": "#92400e"
+        "c2": "#92400e",
+        "id": "amber"
       },
       "desc": "Tool per test servizi esposti",
-      "icon": "⚙"
+      "icon": "⚙",
+      "id": "fdc49495-babc-450c-aa79-7984c68a7e4e",
+      "name": "Swagger"
     },
     {
-      "id": "bfe12b9d-e451-4043-9c33-c6592be8215b",
-      "name": "Segnalazioni",
       "collapsed": false,
       "color": {
-        "id": "rose",
         "c1": "#7f1d1d",
-        "c2": "#991b1b"
+        "c2": "#991b1b",
+        "id": "rose"
       },
       "desc": "Strumenti per segnalazioni progettuali",
-      "icon": "📌"
+      "icon": "📌",
+      "id": "bfe12b9d-e451-4043-9c33-c6592be8215b",
+      "name": "Segnalazioni"
     }
   ],
   "links": [
     {
-      "id": "5eac6fd1-e82c-4f61-b727-7415cb460ebe",
-      "title": "Team",
-      "url": "https://bpergroup.sharepoint.com/:f:/r/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Team%20Sist.%20Anagrafici?csf=1&web=1&e=oFoPW4",
       "desc": "Home dello sharepoint di team",
+      "id": "5eac6fd1-e82c-4f61-b727-7415cb460ebe",
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029",
       "tags": [
         "intranet",
         "team"
       ],
-      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+      "title": "Team",
+      "url": "https://bpergroup.sharepoint.com/:f:/r/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Team%20Sist.%20Anagrafici?csf=1&web=1&e=oFoPW4"
     },
     {
-      "id": "882690a6-5904-46db-bbba-a382071e8e57",
-      "title": "Test Factory",
-      "url": "https://bpergroup-my.sharepoint.com/personal/giuseppe_defeo_bper_it/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fgiuseppe_defeo_bper_it%2FDocuments%2FFoundation%20Test%20Factory_&ct=1764330771307&or=OWA-NT-Mail&cid=456c6cf9-e152-14d6-1ae9-c6e0f51f3c80&ga=1",
       "desc": "Home sharepoint test factory - documentazione ALM",
+      "id": "882690a6-5904-46db-bbba-a382071e8e57",
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029",
       "tags": [
         "sharepoint",
         "alm",
         "test",
         "factory"
       ],
-      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+      "title": "Test Factory",
+      "url": "https://bpergroup-my.sharepoint.com/personal/giuseppe_defeo_bper_it/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fgiuseppe_defeo_bper_it%2FDocuments%2FFoundation%20Test%20Factory_&ct=1764330771307&or=OWA-NT-Mail&cid=456c6cf9-e152-14d6-1ae9-c6e0f51f3c80&ga=1"
     },
     {
-      "id": "1b365cad-380c-481d-8d28-b3428021d910",
-      "title": "PMO IT",
-      "url": "https://bpergroup.sharepoint.com/sites/G365-FrameworkICT/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FG365-FrameworkICT%2FShared%20Documents%2FFramework%20ICT%2FProject%20Management%20IT&viewid=a4988fbc-6a28-4022-ae05-949ab86d0956&csf=1&web=1&e=mJi3CT&CID=3f907a3e-e49a-41c6-b789-13ebaff788eb&FolderCTID=0x012000D600C3FF08EE9640BCBD63D1D632255D",
       "desc": "Home sharepoint documentazione PMO IT",
+      "id": "1b365cad-380c-481d-8d28-b3428021d910",
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029",
       "tags": [
         "sharepoint",
         "pmo",
         "it"
       ],
-      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+      "title": "PMO IT",
+      "url": "https://bpergroup.sharepoint.com/sites/G365-FrameworkICT/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FG365-FrameworkICT%2FShared%20Documents%2FFramework%20ICT%2FProject%20Management%20IT&viewid=a4988fbc-6a28-4022-ae05-949ab86d0956&csf=1&web=1&e=mJi3CT&CID=3f907a3e-e49a-41c6-b789-13ebaff788eb&FolderCTID=0x012000D600C3FF08EE9640BCBD63D1D632255D"
     },
     {
-      "id": "b8a4f5c6-11d5-4d2e-bb88-fcd92c1af512",
-      "title": "A317 - Anagrafe Generale",
-      "url": "https://intrawseal.gbbper.priv/Anagrafe/Anagrafe/",
       "desc": "Accesso anagrafe generale web",
+      "id": "b8a4f5c6-11d5-4d2e-bb88-fcd92c1af512",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "Applicativo",
         "Anagrafe",
         "Generale"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "A317 - Anagrafe Generale",
+      "url": "https://intrawseal.gbbper.priv/Anagrafe/Anagrafe/"
     },
     {
-      "id": "0356f783-b526-4a92-a981-f1c2fef8ef19",
-      "title": "A981 - Proposte Anagrafiche",
-      "url": "https://intrawseal.gbbper.priv/proposteanagrafiche/fe-proposteanagrafichenew",
       "desc": "Accesso proposte anagrafiche",
+      "id": "0356f783-b526-4a92-a981-f1c2fef8ef19",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "Applicativo",
         "proposte",
         "anagrafiche"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "A981 - Proposte Anagrafiche",
+      "url": "https://intrawseal.gbbper.priv/proposteanagrafiche/fe-proposteanagrafichenew"
     },
     {
-      "id": "5d3a1a4a-c137-4f4a-8215-c788de8f22d2",
-      "title": "A1071 - Poteri Di Firma",
-      "url": "https://intrawseal.gbbper.priv/deleghepoteri/fe-deleghepoteri",
       "desc": "Accesso nuova poteri di firma",
+      "id": "5d3a1a4a-c137-4f4a-8215-c788de8f22d2",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "Applicativo",
         "Poteri",
         "Firma"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "A1071 - Poteri Di Firma",
+      "url": "https://intrawseal.gbbper.priv/deleghepoteri/fe-deleghepoteri"
     },
     {
-      "id": "36c5f074-2030-47e7-8311-05d9748e0b4f",
-      "title": "A798 - Concert",
-      "url": "https://intrawseal.gbbper.priv/concert/fe-concert",
       "desc": "Accesso Concert",
+      "id": "36c5f074-2030-47e7-8311-05d9748e0b4f",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "Applicativo",
         "Concert"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "A798 - Concert",
+      "url": "https://intrawseal.gbbper.priv/concert/fe-concert"
     },
     {
-      "id": "9e1056ae-8460-42e2-abfc-6b436cc66fa1",
-      "title": "A1318 - Portale Enti Convenzionati (NO LINK)",
-      "url": "https://localhost:8080",
       "desc": "Accesso portale enti convenzionati",
+      "id": "9e1056ae-8460-42e2-abfc-6b436cc66fa1",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "Applicativo",
         "portale",
@@ -193,25 +192,25 @@
         "convenzionati",
         "convenzioni"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "A1318 - Portale Enti Convenzionati (NO LINK)",
+      "url": "https://localhost:8080"
     },
     {
-      "id": "26e4a872-1985-46de-9d29-a1e9a88c9348",
-      "title": "STICRWEB - BPER",
-      "url": "https://sticr.pool7.rm.servizi.it/Sticr_Bper1/",
       "desc": "Accesso SticrWeb Bper",
+      "id": "26e4a872-1985-46de-9d29-a1e9a88c9348",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "Sticrweb",
         "sticr",
         "bper"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "STICRWEB - BPER",
+      "url": "https://sticr.pool7.rm.servizi.it/Sticr_Bper1/"
     },
     {
-      "id": "d9f80a5f-bdaf-4992-b82e-aa6b7c88ed5e",
-      "title": "STICRWEB - altri abi",
-      "url": "https://sticr.pool8.rm.servizi.it/Sticr_Bper2/",
       "desc": "Sticrweb BCP, BDS, BSS",
+      "id": "d9f80a5f-bdaf-4992-b82e-aa6b7c88ed5e",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "sticrweb",
         "sticr",
@@ -219,143 +218,143 @@
         "bds",
         "bss"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "STICRWEB - altri abi",
+      "url": "https://sticr.pool8.rm.servizi.it/Sticr_Bper2/"
     },
     {
-      "id": "c1d9e7a1-1b5d-4adb-a1d1-fb9998552097",
-      "title": "STICRWEB - pool 6",
-      "url": "https://sticr.pool6.rm.servizi.it/Sticr_Outs4/",
       "desc": "Sticrweb cartolarizzate pool6",
+      "id": "c1d9e7a1-1b5d-4adb-a1d1-fb9998552097",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "sticrweb",
         "sticr",
         "pool",
         "6"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "STICRWEB - pool 6",
+      "url": "https://sticr.pool6.rm.servizi.it/Sticr_Outs4/"
     },
     {
-      "id": "4d625946-82f3-4cf2-bcd7-52b00107024a",
-      "title": "STICRWEB - pool 7",
-      "url": "https://sticr.pool7.rm.servizi.it/Sticr_Outs4/",
       "desc": "Sticrweb cartolarizzate pool7",
+      "id": "4d625946-82f3-4cf2-bcd7-52b00107024a",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "sticrweb",
         "sticr",
         "pool",
         "7"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "STICRWEB - pool 7",
+      "url": "https://sticr.pool7.rm.servizi.it/Sticr_Outs4/"
     },
     {
-      "id": "e7c56993-797a-4a97-90fa-7c6459f702c2",
-      "title": "STICRWEB - pool 8",
-      "url": "https://sticr.pool8.rm.servizi.it/Sticr_Outs4/",
       "desc": "Sticrweb cartolarizzate pool8",
+      "id": "e7c56993-797a-4a97-90fa-7c6459f702c2",
+      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5",
       "tags": [
         "sticrweb",
         "sticr",
         "pool",
         "8"
       ],
-      "sectionId": "feff4d60-ebc6-44ea-928e-8f609a62a9c5"
+      "title": "STICRWEB - pool 8",
+      "url": "https://sticr.pool8.rm.servizi.it/Sticr_Outs4/"
     },
     {
-      "id": "01b02291-e8bc-4078-a364-e537d84d8300",
-      "title": "REDMINE - homepage",
-      "url": "http://172.16.63.240/login",
       "desc": "Homepage redmine",
+      "id": "01b02291-e8bc-4078-a364-e537d84d8300",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - homepage",
+      "url": "http://172.16.63.240/login"
     },
     {
-      "id": "34742e71-bedb-43e9-921a-20d4469af3d0",
-      "title": "REDMINE - Poteri di firma segnalazioni",
-      "url": "http://172.16.63.240/projects/poteri-di-firma-segnalazioni-esterne",
       "desc": "Pagina per segnalazioni esterne poteri di firma",
+      "id": "34742e71-bedb-43e9-921a-20d4469af3d0",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "poteri"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - Poteri di firma segnalazioni",
+      "url": "http://172.16.63.240/projects/poteri-di-firma-segnalazioni-esterne"
     },
     {
-      "id": "b8af0ad8-cbe1-41c1-8df1-3cbeba9543a1",
-      "title": "REDMINE - Poteri di firma",
-      "url": "http://172.16.63.240/projects/poteri-di-firma-segnalazioni",
       "desc": "Pagina per segnalazioni interne poteri di firma",
+      "id": "b8af0ad8-cbe1-41c1-8df1-3cbeba9543a1",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "poteri"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - Poteri di firma",
+      "url": "http://172.16.63.240/projects/poteri-di-firma-segnalazioni"
     },
     {
-      "id": "c808fd2f-c0ad-49a9-bf7d-3a132a2f1137",
-      "title": "REDMINE - Concert segnalazioni",
-      "url": "http://172.16.63.240/projects/certificazione-contatti-segnalazioni",
       "desc": "Pagina per segnalazioni esterne concert",
+      "id": "c808fd2f-c0ad-49a9-bf7d-3a132a2f1137",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "concert"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - Concert segnalazioni",
+      "url": "http://172.16.63.240/projects/certificazione-contatti-segnalazioni"
     },
     {
-      "id": "f4f3ac97-e147-4fcc-9dbf-6883b29978de",
-      "title": "REDMINE - Concert",
-      "url": "http://172.16.63.240/projects/certificazione-contatti",
       "desc": "Pagina per segnalazioni interne concert",
+      "id": "f4f3ac97-e147-4fcc-9dbf-6883b29978de",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "concert"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - Concert",
+      "url": "http://172.16.63.240/projects/certificazione-contatti"
     },
     {
-      "id": "8007567d-f95c-45d3-9b69-1fd5f39639bf",
-      "title": "REDMINE - deroghe applicative",
-      "url": "http://redmine.numera.priv/projects/deroghe-sdlc",
       "desc": "Richiesta deroghe applicative",
+      "id": "8007567d-f95c-45d3-9b69-1fd5f39639bf",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "deroghe"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - deroghe applicative",
+      "url": "http://redmine.numera.priv/projects/deroghe-sdlc"
     },
     {
-      "id": "8fc8dacd-baab-4d20-a9c5-033f04fc31fb",
-      "title": "REDMINE - AM toolchain",
-      "url": "http://172.16.63.240/projects/am-toolchain",
       "desc": "Pagina per richieste eliminazioni pipeline, creazione progetti redmine e censimento progetti openshift su redmine per segnalazioni",
+      "id": "8fc8dacd-baab-4d20-a9c5-033f04fc31fb",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "segnalazioni",
         "pipeline",
         "progetti"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - AM toolchain",
+      "url": "http://172.16.63.240/projects/am-toolchain"
     },
     {
-      "id": "5c5c9216-9574-4734-859e-503eede3e7b2",
-      "title": "REDMINE - Richieste ALM",
-      "url": "http://172.16.63.240/projects/richieste-alm",
       "desc": "Pagina per richieste creazioni pipeline build",
+      "id": "5c5c9216-9574-4734-859e-503eede3e7b2",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "segnalazioni",
         "alm",
         "pipeline"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - Richieste ALM",
+      "url": "http://172.16.63.240/projects/richieste-alm"
     },
     {
-      "id": "b634f91c-7528-40d9-afd8-6b8ff0f946e7",
-      "title": "REDMINE - AM Jenkins Deploy",
-      "url": "http://172.16.63.240/projects/am-jenkins-deploy",
       "desc": "Pagina per segnalazioni relative pipeline di deply",
+      "id": "b634f91c-7528-40d9-afd8-6b8ff0f946e7",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "segnalazioni",
@@ -363,13 +362,13 @@
         "pipeline",
         "deploy"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - AM Jenkins Deploy",
+      "url": "http://172.16.63.240/projects/am-jenkins-deploy"
     },
     {
-      "id": "82f1ba19-af2d-4e34-a9bf-f8555a3fb4d2",
-      "title": "REDMINE - AM ESB",
-      "url": "http://172.16.63.240/projects/am_esb",
       "desc": "Pagina per segnalazioni esb e richieste yaml e servizi esposti",
+      "id": "82f1ba19-af2d-4e34-a9bf-f8555a3fb4d2",
+      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "tags": [
         "redmine",
         "segnalazioni",
@@ -379,184 +378,184 @@
         "esposti",
         "sgw"
       ],
-      "sectionId": "bfe12b9d-e451-4043-9c33-c6592be8215b"
+      "title": "REDMINE - AM ESB",
+      "url": "http://172.16.63.240/projects/am_esb"
     },
     {
-      "id": "fbfaba2d-92cc-4583-ad9e-857b542d22c4",
-      "title": "POTERI DI FIRMA - servizi poteri",
-      "url": "http://deleghepoteri-coll-evo-be.lslb.ocp-tfa-01.gbbper.priv/be-deleghepoteri-ws/swagger-ui/index.html#/poteri-controller/getCollegamentiPoteri",
       "desc": "Swagger coll evo (modificando ambiente e indirizzo si può puntare a sviluppo piuttosto che certificazione) dei servizi esposti della poteri di firma",
+      "id": "fbfaba2d-92cc-4583-ad9e-857b542d22c4",
+      "sectionId": "fdc49495-babc-450c-aa79-7984c68a7e4e",
       "tags": [
         "swagger",
         "deleghepoteri",
         "firma",
         "poteri"
       ],
-      "sectionId": "fdc49495-babc-450c-aa79-7984c68a7e4e"
+      "title": "POTERI DI FIRMA - servizi poteri",
+      "url": "http://deleghepoteri-coll-evo-be.lslb.ocp-tfa-01.gbbper.priv/be-deleghepoteri-ws/swagger-ui/index.html#/poteri-controller/getCollegamentiPoteri"
     },
     {
-      "id": "9c4a33b0-4dff-4145-8d81-f572cbbbce9a",
-      "title": "POTERI DI FIRMA - interrogazione CRIF",
-      "url": "http://deleghepoteri-coll-run-be.gslb-cptf.gbbper.priv/be-deleghepoteri-sl/swagger-ui/index.html#/Api%20Recupero%20Poteri%20Firma/recuperaDeleghePoteriIstituzionaliDaProvider",
       "desc": "Swagger coll run (modificando ambiente e indirizzo si può puntare a sviluppo piuttosto che certificazione) del servizio di interrogazione CRIF",
+      "id": "9c4a33b0-4dff-4145-8d81-f572cbbbce9a",
+      "sectionId": "fdc49495-babc-450c-aa79-7984c68a7e4e",
       "tags": [
         "swagger",
         "deleghepoteri",
         "poteri",
         "firma"
       ],
-      "sectionId": "fdc49495-babc-450c-aa79-7984c68a7e4e"
+      "title": "POTERI DI FIRMA - interrogazione CRIF",
+      "url": "http://deleghepoteri-coll-run-be.gslb-cptf.gbbper.priv/be-deleghepoteri-sl/swagger-ui/index.html#/Api%20Recupero%20Poteri%20Firma/recuperaDeleghePoteriIstituzionaliDaProvider"
     },
     {
-      "id": "95f40dcf-b671-47a3-8a69-13dd07053327",
-      "title": "MICROSOFT - Intune",
-      "url": "https://portal.manage.microsoft.com/",
       "desc": "Microsoft intune",
+      "id": "95f40dcf-b671-47a3-8a69-13dd07053327",
+      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
       "tags": [
         "microsoft",
         "intune"
       ],
-      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894"
+      "title": "MICROSOFT - Intune",
+      "url": "https://portal.manage.microsoft.com/"
     },
     {
-      "id": "9ad6a484-f84e-42e7-bc0a-11302d833148",
-      "title": "TOOL - Enmonitor test",
-      "url": "https://intrawsealcol.gbbper.priv/sdweb/test/EnMonitorTest/",
       "desc": "Tool di test di enmonitor",
+      "id": "9ad6a484-f84e-42e7-bc0a-11302d833148",
+      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
       "tags": [
         "tool",
         "enmonitor",
         "test"
       ],
-      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894"
+      "title": "TOOL - Enmonitor test",
+      "url": "https://intrawsealcol.gbbper.priv/sdweb/test/EnMonitorTest/"
     },
     {
-      "id": "89f500bf-1f54-4713-befb-7a736ca4af4f",
-      "title": "TOOL - Casi d'uso",
-      "url": "https://app.diagrams.net/",
       "desc": "Tool per disegni di schemi e casi d'uso",
+      "id": "89f500bf-1f54-4713-befb-7a736ca4af4f",
+      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
       "tags": [
         "tool",
         "casi",
         "diagrammi",
         "disegni"
       ],
-      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894"
+      "title": "TOOL - Casi d'uso",
+      "url": "https://app.diagrams.net/"
     },
     {
+      "desc": "Elenco wsdl esposti su esb",
       "id": "9f388158-db7f-42c3-ba73-2b9964718fbe",
+      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
+      "tags": [
+        "wsdl",
+        "api",
+        "esb"
+      ],
       "title": "WSDL - cxf-ocp4",
-      "url": "http://esb-svil.gbbper.priv/cxf-ocp4.html",
-      "desc": "Elenco wsdl esposti su esb",
-      "tags": [
-        "wsdl",
-        "api",
-        "esb"
-      ],
-      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894"
+      "url": "http://esb-svil.gbbper.priv/cxf-ocp4.html"
     },
     {
+      "desc": "Elenco wsdl esposti su esb",
       "id": "8b606ee8-13dd-4c82-aaea-4efdf55f2f76",
-      "title": "WSDL - cxf-ocp4-2",
-      "url": "http://esb-svil.gbbper.priv/cxf-ocp4-2.html",
-      "desc": "Elenco wsdl esposti su esb",
+      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
       "tags": [
         "wsdl",
         "api",
         "esb"
       ],
-      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894"
+      "title": "WSDL - cxf-ocp4-2",
+      "url": "http://esb-svil.gbbper.priv/cxf-ocp4-2.html"
     },
     {
-      "id": "994182c7-7a9e-4b70-8cc7-8e1bff368e6a",
-      "title": "CALL - PUFFI",
-      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MDBlOWJmY2UtYWNlYi00ODViLWI1ZjItYzBmNDA1YWM0ZmQ1%40thread.v2%2F0%3Fcontext%3D%257B%2522Tid%2522%3A%252254e39d6c-28d7-4b14-a46e-de039fa1600e%2522%2C%2522Oid%2522%3A%25229e00e080-bdc7-48ee-b99e-66b1026d5ada%2522%257D%26anon%3Dtrue&type=meetup-join&deeplinkId=1d140906-b9ce-433e-a853-9bddf40f3bd3&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true",
       "desc": "Link alla \"stanza\" Teams PUFFI",
+      "id": "994182c7-7a9e-4b70-8cc7-8e1bff368e6a",
+      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894",
       "tags": [
         "Teams",
         "puffi"
       ],
-      "sectionId": "a8dd1624-6fa0-4e81-a0af-6bf72a89d894"
+      "title": "CALL - PUFFI",
+      "url": "https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MDBlOWJmY2UtYWNlYi00ODViLWI1ZjItYzBmNDA1YWM0ZmQ1%40thread.v2%2F0%3Fcontext%3D%257B%2522Tid%2522%3A%252254e39d6c-28d7-4b14-a46e-de039fa1600e%2522%2C%2522Oid%2522%3A%25229e00e080-bdc7-48ee-b99e-66b1026d5ada%2522%257D%26anon%3Dtrue&type=meetup-join&deeplinkId=1d140906-b9ce-433e-a853-9bddf40f3bd3&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true"
     },
     {
+      "desc": "- SVILUPPO e COLLAUDO: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, proposte-anagrafiche",
       "id": "e832c8b1-1463-4487-a3bb-3b7a449e96aa",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
+      "tags": [
+        "openshift",
+        "sviluppo",
+        "collaudo",
+        "fusione"
+      ],
       "title": "OPENSHIFT - A1 MINORI",
-      "url": "https://console-openshift-console.apps.ocp-tfa-01.gbbper.priv/k8s/cluster/projects",
-      "desc": "- SVILUPPO e COLLAUDO: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, proposte-anagrafiche",
-      "tags": [
-        "openshift",
-        "sviluppo",
-        "collaudo",
-        "fusione"
-      ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "url": "https://console-openshift-console.apps.ocp-tfa-01.gbbper.priv/k8s/cluster/projects"
     },
     {
+      "desc": "- SVILUPPO e COLLAUDO: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, proposte-anagrafiche",
       "id": "06eb2a70-fe69-42db-9efc-b2f6f0c511e7",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
+      "tags": [
+        "openshift",
+        "sviluppo",
+        "collaudo",
+        "fusione"
+      ],
       "title": "OPENSHIFT - B1 MINORI",
-      "url": "https://console-openshift-console.apps.ocp-tfb-01.gbbper.priv/k8s/cluster/projects",
-      "desc": "- SVILUPPO e COLLAUDO: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, proposte-anagrafiche",
-      "tags": [
-        "openshift",
-        "sviluppo",
-        "collaudo",
-        "fusione"
-      ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "url": "https://console-openshift-console.apps.ocp-tfb-01.gbbper.priv/k8s/cluster/projects"
     },
     {
+      "desc": "- FUSIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche\n\n- SVILUPPO e COLLAUDO: portaleenti, portaleentibatch",
       "id": "4a6f41a8-ded6-4626-816d-b7676a591d9f",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
+      "tags": [
+        "openshift",
+        "sviluppo",
+        "collaudo",
+        "fusione"
+      ],
       "title": "OPENSHIFT - A2 MINORI",
-      "url": "https://console-openshift-console.apps.ocp-tfa-02.gbbper.priv/add/all-namespaces",
-      "desc": "- FUSIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche\n\n- SVILUPPO e COLLAUDO: portaleenti, portaleentibatch",
-      "tags": [
-        "openshift",
-        "sviluppo",
-        "collaudo",
-        "fusione"
-      ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "url": "https://console-openshift-console.apps.ocp-tfa-02.gbbper.priv/add/all-namespaces"
     },
     {
+      "desc": "- FUSIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche\n\n- SVILUPPO e COLLAUDO: portaleenti, portaleentibatch",
       "id": "295ae35e-a110-4371-b496-7dcb4506e287",
-      "title": "OPENSHIFT - B2 MINORI",
-      "url": "https://console-openshift-console.apps.ocp-tfb-02.gbbper.priv/add/all-namespaces",
-      "desc": "- FUSIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche\n\n- SVILUPPO e COLLAUDO: portaleenti, portaleentibatch",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "openshift",
         "sviluppo",
         "collaudo",
         "fusione"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "OPENSHIFT - B2 MINORI",
+      "url": "https://console-openshift-console.apps.ocp-tfb-02.gbbper.priv/add/all-namespaces"
     },
     {
+      "desc": "CERTIFICAZIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche",
       "id": "3f30db8f-e418-42cc-9477-a3937ae97cd8",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
+      "tags": [
+        "openshift",
+        "certificazione"
+      ],
       "title": "OPENSHIFT - A - CERT",
-      "url": "https://console-openshift-console.apps.ocp-qfa-01.gbbper.priv/add/all-namespaces",
-      "desc": "CERTIFICAZIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche",
-      "tags": [
-        "openshift",
-        "certificazione"
-      ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "url": "https://console-openshift-console.apps.ocp-qfa-01.gbbper.priv/add/all-namespaces"
     },
     {
+      "desc": "CERTIFICAZIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche",
       "id": "bb766e48-9689-42a5-9379-32bd806ee8cc",
-      "title": "OPENSHIFT - B - CERT",
-      "url": "https://console-openshift-console.apps.ocp-qfb-01.gbbper.priv/add/all-namespaces",
-      "desc": "CERTIFICAZIONE: anagrafecdc, anagrafecdc-batch, anagrafe, concert, deleghepoteri, deleghepoteribatch, portaleenti, portaleentibatch, proposte-anagrafiche",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "openshift",
         "certificazione"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "OPENSHIFT - B - CERT",
+      "url": "https://console-openshift-console.apps.ocp-qfb-01.gbbper.priv/add/all-namespaces"
     },
     {
-      "id": "c1b9e72f-b5ff-4373-88a5-645715bf8a5d",
-      "title": "PIPELINE - Build",
-      "url": "http://jenkins.numera.priv/jenkins/login?from=%2Fjenkins%2F",
       "desc": "Pipeline di build",
+      "id": "c1b9e72f-b5ff-4373-88a5-645715bf8a5d",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "Pipeline",
         "build",
@@ -564,13 +563,13 @@
         "numera",
         "priv"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "PIPELINE - Build",
+      "url": "http://jenkins.numera.priv/jenkins/login?from=%2Fjenkins%2F"
     },
     {
-      "id": "964dc189-f70e-4142-bb48-ec060b370d6d",
-      "title": "PIPELINE - Deploy SVIL, COLL e FUS",
-      "url": "https://jenkins-c-fe-01.gbbper.priv/login?from=%2F",
       "desc": "Pipeline deploy in sviluppo e image promotion in coll e fusione",
+      "id": "964dc189-f70e-4142-bb48-ec060b370d6d",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "pipeline",
         "jenkins",
@@ -581,13 +580,13 @@
         "collaudo",
         "fusione"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "PIPELINE - Deploy SVIL, COLL e FUS",
+      "url": "https://jenkins-c-fe-01.gbbper.priv/login?from=%2F"
     },
     {
-      "id": "08b79449-011a-4a3e-ab10-98ebcaf6adfa",
-      "title": "PIPELINE - Deploy CERT",
-      "url": "https://jenkins-q-fe-01.gbbper.priv/",
       "desc": "Pipeline image promotion in cert",
+      "id": "08b79449-011a-4a3e-ab10-98ebcaf6adfa",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "pipeline",
         "jenkins",
@@ -596,187 +595,187 @@
         "deploy",
         "certificazione"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "PIPELINE - Deploy CERT",
+      "url": "https://jenkins-q-fe-01.gbbper.priv/"
     },
     {
-      "id": "52ba3106-f414-4de0-821d-6656026d3914",
-      "title": "BPER Automation Platform",
-      "url": "https://automation-platform.gbbper.priv/SAAS/auth/login",
       "desc": "Piattaforma per gestione pod openshift",
+      "id": "52ba3106-f414-4de0-821d-6656026d3914",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "Automation",
         "platform",
         "openshift"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "BPER Automation Platform",
+      "url": "https://automation-platform.gbbper.priv/SAAS/auth/login"
     },
     {
-      "id": "1f31184b-7cba-4995-b150-260a396186e2",
-      "title": "Gitlab Sviluppo",
-      "url": "http://172.16.63.237/users/sign_in",
       "desc": "Accesso Gitlab",
+      "id": "1f31184b-7cba-4995-b150-260a396186e2",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "Gitlab"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "Gitlab Sviluppo",
+      "url": "http://172.16.63.237/users/sign_in"
     },
     {
-      "id": "46a10810-aa81-49be-b965-a0928224ab06",
-      "title": "Artifactory (Nexus)",
-      "url": "http://nexus.numera.priv/ui/packages#/home",
       "desc": "Accesso nexus",
+      "id": "46a10810-aa81-49be-b965-a0928224ab06",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "Artifactory",
         "nexus"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "Artifactory (Nexus)",
+      "url": "http://nexus.numera.priv/ui/packages#/home"
     },
     {
-      "id": "6ed2c3c6-d169-430d-96da-2767b5936599",
-      "title": "BSPACE - Produzione",
-      "url": "https://intrawseal.gbbper.priv/EAI/",
       "desc": "Link BSpace di produzione",
+      "id": "6ed2c3c6-d169-430d-96da-2767b5936599",
+      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327",
       "tags": [
         "BSpace",
         "Produzione"
       ],
-      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327"
+      "title": "BSPACE - Produzione",
+      "url": "https://intrawseal.gbbper.priv/EAI/"
     },
     {
-      "id": "a8a329a3-3fc7-4fdf-9fd7-517d36e35fd8",
-      "title": "BSPACE - Certificazione",
-      "url": "https://intrawsealcert.gbbper.priv/EAI/",
       "desc": "Link BSpace di Certificazione",
+      "id": "a8a329a3-3fc7-4fdf-9fd7-517d36e35fd8",
+      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327",
       "tags": [
         "BSpace",
         "Certificazioni",
         "Minori"
       ],
-      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327"
+      "title": "BSPACE - Certificazione",
+      "url": "https://intrawsealcert.gbbper.priv/EAI/"
     },
     {
-      "id": "e8235220-6d47-4128-bef9-80a139962888",
-      "title": "BSPACE - Collaudo",
-      "url": "https://intrawsealcol.gbbper.priv/EAI/",
       "desc": "Link BSpace di Collaudo",
+      "id": "e8235220-6d47-4128-bef9-80a139962888",
+      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327",
       "tags": [
         "BSpace",
         "Collaudo",
         "Minori"
       ],
-      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327"
+      "title": "BSPACE - Collaudo",
+      "url": "https://intrawsealcol.gbbper.priv/EAI/"
     },
     {
-      "id": "39cd59ef-98ae-4d9c-8268-868695a8e235",
-      "title": "BSPACE - Sviluppo",
-      "url": "https://intrawsealsvil.gbbper.priv/EAI/",
       "desc": "Link BSpace di Sviluppo",
+      "id": "39cd59ef-98ae-4d9c-8268-868695a8e235",
+      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327",
       "tags": [
         "BSpace",
         "Sviluppo",
         "Minori"
       ],
-      "sectionId": "2831ef7e-324f-4819-a28f-f43da0a00327"
+      "title": "BSPACE - Sviluppo",
+      "url": "https://intrawsealsvil.gbbper.priv/EAI/"
     },
     {
-      "id": "8270efd6-61c9-45ca-b0ad-120d6ff576db",
-      "title": "ALM",
-      "url": "http://web-hpalm.gbbper.priv:8080/qcbin/",
       "desc": "Tool Test Factory",
+      "id": "8270efd6-61c9-45ca-b0ad-120d6ff576db",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "ALM",
         "Test"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "ALM",
+      "url": "http://web-hpalm.gbbper.priv:8080/qcbin/"
     },
     {
-      "id": "b1b63966-3e86-4cec-8042-3560a0adb68a",
-      "title": "Sonarqube",
-      "url": "http://sonarqube.numera.priv:9000/sessions/new?return_to=%2Fabout",
       "desc": "Accesso sonarqube (qualità codice deploy)",
+      "id": "b1b63966-3e86-4cec-8042-3560a0adb68a",
+      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212",
       "tags": [
         "Sonarqube"
       ],
-      "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
+      "title": "Sonarqube",
+      "url": "http://sonarqube.numera.priv:9000/sessions/new?return_to=%2Fabout"
     },
     {
-      "id": "6c1fdee3-bf14-41fa-baf6-7c1068347ea8",
-      "title": "Grafana - KAFKA",
-      "url": "http://192.168.81.8:3000/d/jwPKIsniz/kafka-exporter-overview?orgId=1&from=1747403089322&to=1747404889323&var-cluster=UNIF&var-job=kafka&var-topic=anbkpa01.moandb01.mo.antbtana&var-ClusterTopic=All&var-consumergroup=be-anagrafe-cdc-stream&var-cgtopic=All&var-LagThr=1000000&refresh=30s",
       "desc": "Grafana - Si accede con utenza cdc_anag e passwornd cdc_anag\nThread \"Kafka - Guida \"fai da me\" per il monitoraggio\" per manuale monitoraggio kafka Ricky",
+      "id": "6c1fdee3-bf14-41fa-baf6-7c1068347ea8",
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142",
       "tags": [
         "Grafana",
         "kafka",
         "monitoraggio"
       ],
-      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+      "title": "Grafana - KAFKA",
+      "url": "http://192.168.81.8:3000/d/jwPKIsniz/kafka-exporter-overview?orgId=1&from=1747403089322&to=1747404889323&var-cluster=UNIF&var-job=kafka&var-topic=anbkpa01.moandb01.mo.antbtana&var-ClusterTopic=All&var-consumergroup=be-anagrafe-cdc-stream&var-cgtopic=All&var-LagThr=1000000&refresh=30s"
     },
     {
-      "id": "ad16b460-c18a-4a21-b456-c84250c00be8",
-      "title": "Cloudera - KAFKA",
-      "url": "https://cl2-p.gbbper.priv/gateway/knoxsso/knoxauth/login.html?originalUrl=https://cl2-p.gbbper.priv/gateway/homepage/home/?profile=token",
       "desc": "Tool monitoraggio code kafka\nThread \"Kafka - Guida \"fai da me\" per il monitoraggio\" per manuale monitoraggio kafka Ricky",
+      "id": "ad16b460-c18a-4a21-b456-c84250c00be8",
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142",
       "tags": [
         "cloudera",
         "kafka",
         "monitoraggio"
       ],
-      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+      "title": "Cloudera - KAFKA",
+      "url": "https://cl2-p.gbbper.priv/gateway/knoxsso/knoxauth/login.html?originalUrl=https://cl2-p.gbbper.priv/gateway/homepage/home/?profile=token"
     },
     {
-      "id": "e9896003-dbce-413e-a7fe-81a07f48b244",
-      "title": "Dynatrace",
-      "url": "https://dynatrace-p-managed.gbbper.priv/e/5175f750-6e2e-4c75-afc0-2bb5f1505517/ui/services?gtf=-2h&gf=all&sorting=name;asc",
       "desc": "Dynatrace",
+      "id": "e9896003-dbce-413e-a7fe-81a07f48b244",
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142",
       "tags": [
         "Dynatrace",
         "monitoraggio"
       ],
-      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+      "title": "Dynatrace",
+      "url": "https://dynatrace-p-managed.gbbper.priv/e/5175f750-6e2e-4c75-afc0-2bb5f1505517/ui/services?gtf=-2h&gf=all&sorting=name;asc"
     },
     {
-      "id": "96e7f8d5-347a-4a14-9bc0-0b0bd5ca3268",
-      "title": "Kibana - CRIF",
-      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/view/41e6a360-f2b2-11f0-a478-cd10658ebd8c?_g=(filters:!(),refreshInterval:(pause:!f,value:300000),time:(from:now-60m,to:now))&_a=(breakdownField:response_status_code.keyword,columns:!(service,response_status_code,operation,CONSUMER),filters:!(),grid:(),hideChart:!f,index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',interval:auto,query:(language:kuery,query:'service:%20crif_v1%20or%20(service:%20verificaCliente_v3%20and%20not%20operation:%20controlloBancabilitaNDG)'),sort:!(!('@timestamp',desc)))",
       "desc": "Link di monitoraggio crif_v1 e verificaCliente_v3",
+      "id": "96e7f8d5-347a-4a14-9bc0-0b0bd5ca3268",
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142",
       "tags": [
         "CRIF",
         "monitoraggio",
         "kibana"
       ],
-      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+      "title": "Kibana - CRIF",
+      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/view/41e6a360-f2b2-11f0-a478-cd10658ebd8c?_g=(filters:!(),refreshInterval:(pause:!f,value:300000),time:(from:now-60m,to:now))&_a=(breakdownField:response_status_code.keyword,columns:!(service,response_status_code,operation,CONSUMER),filters:!(),grid:(),hideChart:!f,index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',interval:auto,query:(language:kuery,query:'service:%20crif_v1%20or%20(service:%20verificaCliente_v3%20and%20not%20operation:%20controlloBancabilitaNDG)'),sort:!(!('@timestamp',desc)))"
     },
     {
-      "id": "42ef9353-bf74-4142-b14d-ff99799a3505",
-      "title": "Kibana - log ESB",
-      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=(columns:!(CONSUMER,document_type,service,operation,request_body,response_body,response_status_code),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',key:document_type,negate:!f,params:(query:'esb-audit-log*'),type:phrase),query:(match_phrase:(document_type:'esb-audit-log*')))),index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))",
       "desc": "Link a esb_audit_log. Per visualizzare eventuali chiamate verso il mondo host togliere il filtro document_type",
+      "id": "42ef9353-bf74-4142-b14d-ff99799a3505",
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142",
       "tags": [
         "kibana",
         "monitoraggio",
         "esb",
         "log"
       ],
-      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+      "title": "Kibana - log ESB",
+      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=(columns:!(CONSUMER,document_type,service,operation,request_body,response_body,response_status_code),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',key:document_type,negate:!f,params:(query:'esb-audit-log*'),type:phrase),query:(match_phrase:(document_type:'esb-audit-log*')))),index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))"
     },
     {
-      "id": "4597ed13-2076-4ffe-b9e3-efc5471658c5",
-      "title": "Kibana - Anagrafe SL",
-      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(document_type,operationName,correlationId,messaggio,severity),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:document_type,negate:!f,params:!(anagrafe-be-anagrafe-sl-trace),type:phrases,value:!(anagrafe-be-anagrafe-sl-trace)),query:(bool:(minimum_should_match:1,should:!((match_phrase:(document_type:anagrafe-be-anagrafe-sl-trace)))))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Starting%20check:%20DATASOURCE_CONNECTION'),type:phrase),query:(match_phrase:(messaggio:'Starting%20check:%20DATASOURCE_CONNECTION'))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:health),type:phrase),query:(match_phrase:(messaggio:health))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:operationName,negate:!f,type:exists,value:exists),query:(exists:(field:operationName))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true'),type:phrase),query:(match_phrase:(messaggio:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true')))),hideChart:!t,index:'4159a260-2e65-11eb-b12f-199522cf04dc',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))",
       "desc": "Log del BE dei servizi esposti di anagrafe",
+      "id": "4597ed13-2076-4ffe-b9e3-efc5471658c5",
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142",
       "tags": [
         "kibana",
         "anagrafe",
         "log",
         "servizi"
       ],
-      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+      "title": "Kibana - Anagrafe SL",
+      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(document_type,operationName,correlationId,messaggio,severity),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:document_type,negate:!f,params:!(anagrafe-be-anagrafe-sl-trace),type:phrases,value:!(anagrafe-be-anagrafe-sl-trace)),query:(bool:(minimum_should_match:1,should:!((match_phrase:(document_type:anagrafe-be-anagrafe-sl-trace)))))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Starting%20check:%20DATASOURCE_CONNECTION'),type:phrase),query:(match_phrase:(messaggio:'Starting%20check:%20DATASOURCE_CONNECTION'))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:health),type:phrase),query:(match_phrase:(messaggio:health))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:operationName,negate:!f,type:exists,value:exists),query:(exists:(field:operationName))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true'),type:phrase),query:(match_phrase:(messaggio:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true')))),hideChart:!t,index:'4159a260-2e65-11eb-b12f-199522cf04dc',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))"
     },
     {
-      "id": "a6091ec6-2f50-42f7-8577-eb68d2e5acbc",
-      "title": "Kibana - Poteri di firma SL",
-      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(document_type,operationName,correlationId,messaggio,severity),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:document_type,negate:!f,params:!(deleghepoteri-be-deleghepoteri-ws-trace,deleghepoteri-be-deleghepoteri-sl-trace,deleghepoteri-be-deleghepoteri-sl-audit),type:phrases,value:!(deleghepoteri-be-deleghepoteri-ws-trace,deleghepoteri-be-deleghepoteri-sl-trace,deleghepoteri-be-deleghepoteri-sl-audit)),query:(bool:(minimum_should_match:1,should:!((match_phrase:(document_type:deleghepoteri-be-deleghepoteri-ws-trace)),(match_phrase:(document_type:deleghepoteri-be-deleghepoteri-sl-trace)),(match_phrase:(document_type:deleghepoteri-be-deleghepoteri-sl-audit)))))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Starting%20check:%20DATASOURCE_CONNECTION'),type:phrase),query:(match_phrase:(messaggio:'Starting%20check:%20DATASOURCE_CONNECTION'))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:health),type:phrase),query:(match_phrase:(messaggio:health))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:operationName,negate:!f,type:exists,value:exists),query:(exists:(field:operationName))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true'),type:phrase),query:(match_phrase:(messaggio:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true')))),hideChart:!t,index:'4159a260-2e65-11eb-b12f-199522cf04dc',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))",
       "desc": "Log del be dei servizi esposti della poteri di firma",
+      "id": "a6091ec6-2f50-42f7-8577-eb68d2e5acbc",
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142",
       "tags": [
         "log",
         "kibana",
@@ -785,33 +784,34 @@
         "be",
         "servizi"
       ],
-      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+      "title": "Kibana - Poteri di firma SL",
+      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(document_type,operationName,correlationId,messaggio,severity),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:document_type,negate:!f,params:!(deleghepoteri-be-deleghepoteri-ws-trace,deleghepoteri-be-deleghepoteri-sl-trace,deleghepoteri-be-deleghepoteri-sl-audit),type:phrases,value:!(deleghepoteri-be-deleghepoteri-ws-trace,deleghepoteri-be-deleghepoteri-sl-trace,deleghepoteri-be-deleghepoteri-sl-audit)),query:(bool:(minimum_should_match:1,should:!((match_phrase:(document_type:deleghepoteri-be-deleghepoteri-ws-trace)),(match_phrase:(document_type:deleghepoteri-be-deleghepoteri-sl-trace)),(match_phrase:(document_type:deleghepoteri-be-deleghepoteri-sl-audit)))))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Starting%20check:%20DATASOURCE_CONNECTION'),type:phrase),query:(match_phrase:(messaggio:'Starting%20check:%20DATASOURCE_CONNECTION'))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:health),type:phrase),query:(match_phrase:(messaggio:health))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:operationName,negate:!f,type:exists,value:exists),query:(exists:(field:operationName))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'4159a260-2e65-11eb-b12f-199522cf04dc',key:messaggio,negate:!t,params:(query:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true'),type:phrase),query:(match_phrase:(messaggio:'Ending%20check:%20DATASOURCE_CONNECTION%20-%3E%20true')))),hideChart:!t,index:'4159a260-2e65-11eb-b12f-199522cf04dc',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))"
     },
     {
-      "id": "546fe3ae-a3df-49df-a74b-8f062f86ab6d",
-      "title": "Poteri di firma w1",
-      "url": "https://bpergroup.sharepoint.com/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fm365%2Ddg%2D2943%2DTeamSist%2EAnagrafici%2FShared%20Documents%2FPoteri%20Di%20Firma%20w1%5F2024%2D5520&viewid=6cc27ab9%2D915b%2D46d9%2Dae42%2Dc052f37f6b33&csf=1&web=1&e=dss3oN&CID=e43202ee%2D7049%2D4910%2D8378%2Db14b2369e5d9&FolderCTID=0x012000687A7E50B2181E42AC97E16FB9FBD1C9",
       "desc": "Documentazione poteri di firma w1",
+      "id": "546fe3ae-a3df-49df-a74b-8f062f86ab6d",
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029",
       "tags": [
         "sharepoint",
         "poteri",
         "firma",
         "w1"
       ],
-      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+      "title": "Poteri di firma w1",
+      "url": "https://bpergroup.sharepoint.com/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fm365%2Ddg%2D2943%2DTeamSist%2EAnagrafici%2FShared%20Documents%2FPoteri%20Di%20Firma%20w1%5F2024%2D5520&viewid=6cc27ab9%2D915b%2D46d9%2Dae42%2Dc052f37f6b33&csf=1&web=1&e=dss3oN&CID=e43202ee%2D7049%2D4910%2D8378%2Db14b2369e5d9&FolderCTID=0x012000687A7E50B2181E42AC97E16FB9FBD1C9"
     },
     {
-      "id": "0a330a6d-d514-4ee7-91d5-3a9d0cd66a35",
-      "title": "AMLETO - Implementazioni IT",
-      "url": "https://bpergroup.sharepoint.com/sites/G365-Amleto-ImplementazioniIT/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FG365%2DAmleto%2DImplementazioniIT%2FShared%20Documents%2FAmleto%20%2D%20Implementazioni%20IT&p=true&ct=1766055344714&or=Teams%2DHL&ga=1&LOF=1",
       "desc": "Documentazione IT amleto - GAP",
+      "id": "0a330a6d-d514-4ee7-91d5-3a9d0cd66a35",
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029",
       "tags": [
         "sharepoint",
         "gap",
         "amleto",
         "it"
       ],
-      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+      "title": "AMLETO - Implementazioni IT",
+      "url": "https://bpergroup.sharepoint.com/sites/G365-Amleto-ImplementazioniIT/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FG365%2DAmleto%2DImplementazioniIT%2FShared%20Documents%2FAmleto%20%2D%20Implementazioni%20IT&p=true&ct=1766055344714&or=Teams%2DHL&ga=1&LOF=1"
     }
   ]
 }
