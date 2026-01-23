@@ -5,6 +5,21 @@
         "Fra"
       ],
       "createdAt": "2026-01-23",
+      "desc": "senti qualcuno di Sales solution e capitevi",
+      "dueAt": "2026-01-26",
+      "id": "b561a92a-9cf4-4c42-a87e-7ede3d70bfe8",
+      "maxPriority": false,
+      "notes": "",
+      "priority": "medium",
+      "project": "CRIF",
+      "status": "Da fare",
+      "title": "Ticket 12547258B"
+    },
+    {
+      "assignees": [
+        "Fra"
+      ],
+      "createdAt": "2026-01-23",
       "desc": "Richiesto tramite ticket 12558801B i profili LDAP portale enti",
       "dueAt": "",
       "id": "5c2132ee-5971-450e-b3d2-d90f3a5b5695",
