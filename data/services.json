@@ -2,6 +2,45 @@
   "services": [
     {
       "ambito": "Nuova Poteri di Firma w1",
+      "applicativo": "Poteri di Firma",
+      "descrizione": "servizio che dati abi, ndg pg e potere ti dice quali delle pf possono firmare. se si aggiunge l'ndg pf ti dice se tale ndg ha il potere sufficiente per firmare per quella pg",
+      "fallback": "NO",
+      "id": "46015c45-5069-4ada-bf69-17b70add4b16",
+      "operation": "poteri/collegamenti/ndg",
+      "outputServizio": "lista possibili firmatari",
+      "paramsIngresso": "{\n  \"ndgPg\": \"123456789\",\n  \"abi\": \"05387\",\n  \"potere\": \"OA\",\n  \"ndgPf\": \"8745123\"\n}",
+      "routine": "/be-deleghepoteri-ws/v1",
+      "servizio": "deleghePoteriFirma/api/v1",
+      "tipo": "REST"
+    },
+    {
+      "ambito": "Nuova Poteri Di Firma w1",
+      "applicativo": "Poteri di Firma",
+      "descrizione": "Servizio che dati ndg, abi, canale e una lista di prodotti, ti dice se qualcuno dei poteri che ha associtati è sufficiente per firmare tale carrello di prodotti",
+      "fallback": "NO",
+      "id": "02f62070-15cc-48e0-b2fe-a9395ea0a00a",
+      "operation": "poteri/collegamenti/prodotti",
+      "outputServizio": "lista possibili firmatari",
+      "paramsIngresso": "{\n  \"ndg\": \"123456789\",\n  \"abi\": \"05387\",\n  \"canale\": \"DISPOSITIVA\",\n  \"prodotti\": [\n    {\n      \"prodottoModulo\": \"P\",\n      \"codiceCategoria\": \"string\",\n      \"codiceMacroGruppo\": \"string\",\n      \"codiceEconomato\": \"string\"\n    }\n  ]\n}",
+      "routine": "/be-deleghepoteri-ws/v1",
+      "servizio": "deleghePoteriFirma/api/v1",
+      "tipo": "REST"
+    },
+    {
+      "ambito": "Nuova Poteri di Firma w1",
+      "applicativo": "Poteri di Firma",
+      "descrizione": "dato in ingresso abi e ndg restituisce i poteri di firma associati",
+      "fallback": "-",
+      "id": "9351d656-df14-4ca3-ad72-b0f9ddd51699",
+      "operation": "poteri/collegamenti",
+      "outputServizio": "lista possibili firmatari",
+      "paramsIngresso": "bankCode\nndg",
+      "routine": "/be-deleghepoteri-ws/v1",
+      "servizio": "deleghePoteriFirma/api/v1",
+      "tipo": "REST"
+    },
+    {
+      "ambito": "Nuova Poteri di Firma w1",
       "applicativo": "Poteri Di Firma",
       "descrizione": "Restituisce i poteri necessari per firmare un prodotto o un carrello di prodotti.\nprodottoModulo (opzionale, valori P o T, se valore P codiceMacrogruppo obbligatorio, se valore T codiceEconomato obbligatorio)\ncodiceCategoria (opzionale se valorizzato codiceMacrogruppo)\ncodiceMacroGruppo: (opzionale, se non valorizzato codiceEconomato obbligatorio)\ncodiceEconomato: (opzionale, se non valorizzato codiceMacroGruppo obbligatorio).\nInput passato \n[{\n  \"prodottoModulo\": \"P\",\n  \"codiceCategoria\": \"string\",\n  \"codiceMacroGruppo\": \"string\",\n  \"codiceEconomato\": \"string\"\n}]",
       "fallback": "-",
