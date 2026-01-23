@@ -1,17 +1,19 @@
 {
   "openPoints": [
     {
-      "assignees": [],
+      "assignees": [
+        "Fra"
+      ],
       "createdAt": "2026-01-23",
-      "desc": "",
-      "dueAt": "",
-      "id": "21803c0c-e2e5-4ab3-9e3f-b4f3a9457691",
-      "maxPriority": false,
+      "desc": "Consegnare il Service Inventory modificato",
+      "dueAt": "2026-01-23",
+      "id": "db1519c1-e9c9-4f83-8475-6a149963e2f6",
+      "maxPriority": true,
       "notes": "",
-      "priority": "medium",
-      "project": "",
-      "status": "Nuovo",
-      "title": "test"
+      "priority": "critical",
+      "project": "Portale Enti Convenzionati",
+      "status": "In corso",
+      "title": "Service Inventory"
     },
     {
       "assignees": [
