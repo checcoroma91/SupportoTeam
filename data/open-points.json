@@ -5,6 +5,21 @@
         "Fra"
       ],
       "createdAt": "2026-01-23",
+      "desc": "Allegare i tag per il rilascio",
+      "dueAt": "2026-01-25",
+      "id": "66670183-a1e9-4fef-b063-b16ed87ad806",
+      "maxPriority": false,
+      "notes": "",
+      "priority": "high",
+      "project": "Poteri di Firma",
+      "status": "Da fare",
+      "title": "CRQ000000003964"
+    },
+    {
+      "assignees": [
+        "Fra"
+      ],
+      "createdAt": "2026-01-23",
       "desc": "Consegnare il Service Inventory modificato",
       "dueAt": "2026-01-23",
       "id": "db1519c1-e9c9-4f83-8475-6a149963e2f6",
@@ -20,14 +35,14 @@
         "Fra"
       ],
       "createdAt": "2026-01-19",
-      "desc": "Fare richiesta ufficiale di due servizi REST e un SOAP a Reactive.",
+      "desc": "Servizi SOAP e REST confermati. Test in corso",
       "dueAt": "",
       "id": "c9a4060e-ffbb-4137-bed6-73ab3860e86a",
       "maxPriority": true,
-      "notes": "ricordarsi che BStore e tutti gli altri, chiameranno SEMPRE, quindi il servizio di lettura tabella verde deve poggiare su una infrastruttura che regga e le performance molto rapide\nla stragrande maggioranza delle chiamate risponde che \"non ho trovato una cippa\" (perché i clienti convenzionati sono una minima parte rispetto al totale clienti banca). E' importante che questa risposta sia rapidissima, ma SOPRATTUTTO: che non venga registrato da Dynatrace come FAULT, se no ci aprono le segnalazioni per un normalissimo NOT FOUND",
+      "notes": "",
       "priority": "high",
       "project": "Portale Enti Convenzionati",
-      "status": "Nuovo",
+      "status": "In corso",
       "title": "Servizi Portale Enti"
     },
     {
