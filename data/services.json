@@ -1,6 +1,19 @@
 {
   "services": [
     {
+      "ambito": "Nuova Poteri di Firma w1",
+      "applicativo": "Poteri Di Firma",
+      "descrizione": "Restituisce i poteri necessari per firmare un prodotto o un carrello di prodotti.\nprodottoModulo (opzionale, valori P o T, se valore P codiceMacrogruppo obbligatorio, se valore T codiceEconomato obbligatorio)\ncodiceCategoria (opzionale se valorizzato codiceMacrogruppo)\ncodiceMacroGruppo: (opzionale, se non valorizzato codiceEconomato obbligatorio)\ncodiceEconomato: (opzionale, se non valorizzato codiceMacroGruppo obbligatorio).\nInput passato \n[{\n  \"prodottoModulo\": \"P\",\n  \"codiceCategoria\": \"string\",\n  \"codiceMacroGruppo\": \"string\",\n  \"codiceEconomato\": \"string\"\n}]",
+      "fallback": "-",
+      "id": "21ebfe58-0bbe-4a16-9f37-2ea6bb479f0d",
+      "operation": "poteri",
+      "outputServizio": "{\n  \"poteri\": [\n    \"string\"\n  ]\n}",
+      "paramsIngresso": "prodottoModulo\ncodiceCategoria\ncodiceMacroGruppo\ncodiceEconomato",
+      "routine": "/be-deleghepoteri-ws/v1",
+      "servizio": "deleghePoteriFirma/api/v1",
+      "tipo": "REST"
+    },
+    {
       "ambito": "Particolarità",
       "applicativo": "Anagrafe",
       "descrizione": "Esposizione nuove operation",
