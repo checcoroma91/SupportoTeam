@@ -5,6 +5,21 @@
         "Fra"
       ],
       "createdAt": "2026-01-23",
+      "desc": "Richiesto tramite ticket 12558801B i profili LDAP portale enti",
+      "dueAt": "",
+      "id": "5c2132ee-5971-450e-b3d2-d90f3a5b5695",
+      "maxPriority": false,
+      "notes": "",
+      "priority": "high",
+      "project": "Portale Enti Convenzionati",
+      "status": "In corso",
+      "title": "Profili LDAP"
+    },
+    {
+      "assignees": [
+        "Fra"
+      ],
+      "createdAt": "2026-01-23",
       "desc": "Allegare i tag per il rilascio",
       "dueAt": "2026-01-25",
       "id": "66670183-a1e9-4fef-b063-b16ed87ad806",
