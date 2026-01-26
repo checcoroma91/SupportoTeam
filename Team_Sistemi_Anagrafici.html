@@ -432,7 +432,6 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
   border: 1px solid #1f2937; border-radius: 12px; padding: clamp(10px, 1.6cqw, 14px);
 }
 </style>
-
 <style>
 /* === v41.1: OP date columns single-line & min width === */
 #opTable th:nth-child(8), #opTable td.col-created { white-space: nowrap; min-width: 120px; } /* Inserito il */
@@ -457,13 +456,11 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
 #svcTable th:nth-child(12), #svcTable td:nth-child(12) { width: 140px; }     /* STATO (wrap) */
 #svcTable th:nth-child(13), #svcTable td:nth-child(13) { width: 96px; white-space: nowrap; } /* Azioni */
 </style>
-
 <style>
 /* === v41.4a: TIPO leggermente più largo, spazio preso da APPLICATIVO === */
 #svcTable th:nth-child(3), #svcTable td:nth-child(3) { width: 84px; }      /* TIPO */
 #svcTable th:nth-child(9), #svcTable td:nth-child(9) { width: 120px; }     /* APPLICATIVO */
 </style>
-
 <style>
 /* === v41.4b: Impaginazione dialog "Filtra Servizi" — compatta, a griglia, senza x-scroll === */
 /* Contenitore e tipografia coerenti con le altre dialog */
@@ -523,13 +520,9 @@ dialog::backdrop{ background: rgba(2,6,23,.6) }
 #svcFilterDlg, #svcFilterDlg *{ overflow-wrap: anywhere; }
 html, body { overflow-x:hidden; }
 </style>
-
-
 <!-- HELP CRQ CSS -->
 <style>#helpCrqDlg{border:none;border-radius:14px;max-width:1000px;width:100%}#helpCrqDlg .modal{background:#0b1023;border:1px solid #1f2937;border-radius:14px;overflow:hidden}#helpCrqDlg .modal .content{padding:16px}#helpCrqDlg .modal-bar{display:grid;grid-template-columns:1fr auto;align-items:center;padding:12px var(--edge);background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-bottom:1px solid #1f2937}.modal-bar .title{font-weight:600}#helpCrqTableWrap{width:100%;overflow:auto}#helpCrqTable{width:100%;border-collapse:collapse;color:var(--text)}#helpCrqTable th,#helpCrqTable td{border:1px solid #1f2937;padding:8px 10px;font-size:13px;vertical-align:top}#helpCrqTable th{background:#0a1227;text-align:left;color:var(--text)}#helpCrqTable tbody tr:nth-child(odd){background:#0b1023}#helpCrqTable tbody tr:nth-child(even){background:#0c142f}#helpCrqTable tr[data-bmc]{cursor:pointer}#helpCrqTable tr[data-bmc]:hover{background:#0e1732}#helpCrqTable tr[data-bmc].copied{box-shadow:inset 0 0 0 2px rgba(34,197,94,.35)}#helpCrqTable tr[data-bmc]:focus{outline:2px dashed #22c55e;outline-offset:-2px}#helpCrqTable a{color:#e5e7eb;text-decoration-color:rgba(229,231,235,.6)}#helpCrqTable a:hover{color:#ffffff;text-decoration-color:#ffffff}</style>
-
 <!-- HELP CRQ ULTRA-FALLBACK CSS --><style>#helpCrqOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:9999}#helpCrqCard{position:fixed;left:50%;top:6vh;transform:translateX(-50%);width:min(1000px,94vw);max-height:88vh;overflow:auto;background:#0b1023;color:#e5e7eb;border:1px solid #1f2937;border-radius:14px;display:none;z-index:10000}#helpCrqCard header{display:grid;grid-template-columns:1fr auto;align-items:center;padding:12px 16px;border-bottom:1px solid #1f2937;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}#helpCrqCloseBtn{border:1px solid #263041;background:#0b1328;color:#e5e7eb;padding:6px 10px;border-radius:8px;cursor:pointer;margin-left:8px}#helpCrqCard .body{padding:16px}</style>
-
 <style>
 /* OP wide */
 html body #opFilterDlg { width: clamp(1400px, 98vw, 1920px); max-width: 1920px; }
@@ -558,83 +551,138 @@ html body #svcFilterDlg input[type="text"], html body #svcFilterDlg input[placeh
 html body #svcFilterDlg .opf-checks label{ display:flex; align-items:center; gap:8px; margin: 4px 0; }
 html body #svcFilterDlg .opf-actions{ position: sticky; bottom: 0; display:flex; justify-content:flex-end; gap: 10px; padding: 12px 0 0 0; margin-top: 14px; background: linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top: 1px solid #1f2937; }
 </style>
+<style>
+html body #servicesDlg { width: clamp(1400px, 98vw, 1920px); max-width: 1920px; }
+#servicesDlg .modal { display:flex; flex-direction:column; }
+#servicesDlg .modal .content { flex:1; overflow:auto; padding: clamp(12px, 2cqw, 24px); }
+</style>
+<style>
+/* === OP Accordion Wide Dialog (v1) === */
+html body #openPointsDlg { width: clamp(1600px, 98vw, 2200px); max-width: 2200px; }
+#openPointsDlg .modal { display:flex; flex-direction:column; }
+#openPointsDlg .modal .content { flex:1; overflow:auto; padding: clamp(12px, 2cqw, 24px); }
+/* Ensure OP table container grows to fit columns without x-scroll */
+#openPointsDlg #opTableWrap { overflow-x: visible; }
+</style>
+<style>
+html body #linksDlg { width: clamp(1400px, 98vw, 1920px); max-width: 1920px; }
+#linksDlg .modal { display:flex; flex-direction:column; }
+#linksDlg .modal .content { flex:1; overflow:auto; padding: clamp(12px, 2cqw, 24px); }
+</style>
+<style>
+/* === HOME: Menu Principale (hero + mega bottoni) — Palette BPER === */
+.home-hero { margin: clamp(14px, 3vw, 28px) 0; text-align: center; }
+.home-hero h2 { margin: 0 0 clamp(10px, 2vw, 18px) 0; font-size: clamp(22px, 4.2vw, 34px); letter-spacing: 0.3px; }
+
+.home-menu { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4cqw, 16px); align-items: stretch; justify-items: center; }
+@media (max-width: 900px) { .home-menu { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .home-menu { grid-template-columns: 1fr; } }
+
+.home-tile { width: 100%; display: grid; grid-auto-rows: minmax(0, auto); align-content: center; text-align: left; padding: clamp(12px, 2cqw, 16px); border: 1px solid #1f2937; background: #0b1023; border-radius: clamp(10px, 1.2cqw, 14px); cursor: pointer; transition: transform .05s ease, background .15s ease, border-color .15s ease; }
+.home-tile:hover { background: #0a1227; transform: translateY(-1px); border-color: #263041; }
+.home-tile:active { transform: translateY(0); }
+
+.home-tile .tile-head { display: grid; grid-template-columns: 64px 1fr; column-gap: clamp(8px, 1.2cqw, 12px); align-items: center; }
+.home-tile .tile-ico { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 14px; border: 1px solid #1f2937; background: #0a1227; font-size: clamp(28px, 5.2cqw, 36px); line-height: 1; }
+.home-tile .tile-title { margin: 0; font-weight: 700; font-size: clamp(15px, 2.6cqw, 18px); }
+.home-tile .tile-desc { margin: 4px 0 0 0; color: var(--muted); font-size: clamp(12px, 2cqw, 13px); }
+
+/* Accenti colore in stile BPER: azzurro, giallo, viola tenue, verde, rosso scuro, blu */
+.tile-links .tile-ico { box-shadow: 0 0 0 1px rgba(56,189,248,.25) inset; color:#7dd3fc; }
+.tile-op    .tile-ico { box-shadow: 0 0 0 1px rgba(250,204,21,.25) inset;  color:#fde68a; }
+.tile-crq   .tile-ico { box-shadow: 0 0 0 1px rgba(167,139,250,.25) inset; color:#c4b5fd; }
+.tile-svc   .tile-ico { box-shadow: 0 0 0 1px rgba(34,197,94,.25) inset;  color:#86efac; }
+.tile-clear .tile-ico { box-shadow: 0 0 0 1px rgba(127,29,29,.35) inset;  color:#fecaca; }
+.tile-save  .tile-ico { box-shadow: 0 0 0 1px rgba(37,99,235,.35) inset;  color:#bfdbfe; }
+
+/* (Opzionale) nascondi i pulsanti piccoli in header: DISATTIVATO DI DEFAULT */
+/*
+header .toolbar #linksBtn,
+header .toolbar #openPointsBtn,
+header .toolbar #helpCrqBtn,
+header .toolbar #servicesBtn,
+header .toolbar #clearAllBtn,
+header .toolbar #saveRepoBtn {
+  display: none !important;
+}
+*/
+</style>
 </head>
 <body>
 <header>
 <div class="wrap">
 <h1><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);"></span>BPER Banca – Team Sistemi Anagrafici</h1>
-<div class="toolbar">
-<label id="repoModeWrap" title="Se attivo, i dati vengono caricati sempre da /data (repo), ignorando il localStorage." style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #263041;background:#0b1328;border-radius:10px">
-  <input id="repoModeChk" type="checkbox"/>
-  <span>🔄 Dati da repo</span>
+<div class="toolbar"><label id="repoModeWrap" style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #263041;background:#0b1328;border-radius:10px" title="Se attivo, i dati vengono caricati sempre da /data (repo), ignorando il localStorage.">
+<input id="repoModeChk" type="checkbox"/>
+<span>🔄 Dati da repo</span>
 </label>
-
 <input id="q" placeholder="Cerca per titolo, tag o descrizione… (⌘/Ctrl + K)" type="search"/>
-<button id="filterSectionsBtn" title="Apri menu sezioni">🏠 Menu</button>
-<button id="helpCrqBtn" onclick="openHelpCrq()">🆘 HELP CRQ</button>
-<button id="newBtn">➕ Nuovo link</button>
-<button id="manageSectionsBtn">📂 Gestisci sezioni</button>
-<button id="exportBtn">💾 Salva link</button>
-<button id="importBtn">📥 Carica link</button>
-<button id="clearAllBtn" title="Pulisci tutte le sezioni, link e OP">🧹 Pulisci tutto</button>
-
-<button id="saveRepoBtn">💾 Salva su repo (Actions)</button>
 </div>
 </div>
 </header>
 <main class="wrap">
+<!-- === HOME: MENU PRINCIPALE === -->
+<section aria-label="Menu principale" class="home-hero">
+<h2>Menu Principale</h2>
+<div class="home-menu">
+<button class="home-tile tile-links" onclick="openLinksDialog()" type="button">
+<div class="tile-head">
+<div class="tile-ico">🔗</div>
+<div>
+<p class="tile-title">LINK UTILI</p>
+<p class="tile-desc">Raccolta link per sezioni, import/export e gestione</p>
+</div>
+</div>
+</button>
+<button class="home-tile tile-op" onclick="openOpenPointsDialog &amp;&amp; openOpenPointsDialog()" type="button">
+<div class="tile-head">
+<div class="tile-ico">📝</div>
+<div>
+<p class="tile-title">OPEN POINTS</p>
+<p class="tile-desc">Apri/gestisci Open Points, filtri, export</p>
+</div>
+</div>
+</button>
+<button class="home-tile tile-crq" onclick="openHelpCrq()" type="button">
+<div class="tile-head">
+<div class="tile-ico">📋</div>
+<div>
+<p class="tile-title">CRQ</p>
+<p class="tile-desc">Mappatura stati e strumenti CRQ</p>
+</div>
+</div>
+</button>
+<button class="home-tile tile-svc" onclick="openServicesDialog()" type="button">
+<div class="tile-head">
+<div class="tile-ico">🛠</div>
+<div>
+<p class="tile-title">SERVIZI</p>
+<p class="tile-desc">Catalogo REST/SOAP, filtri ed export</p>
+</div>
+</div>
+</button>
+<button class="home-tile tile-clear" onclick="clearAll()" title="Pulisci tutte le sezioni, link, OP e servizi (irreversibile)" type="button">
+<div class="tile-head">
+<div class="tile-ico">🧹</div>
+<div>
+<p class="tile-title">PULISCI TUTTO</p>
+<p class="tile-desc">Azzera dati locali (localStorage)</p>
+</div>
+</div>
+</button>
+<button class="home-tile tile-save" onclick="document.getElementById('saveRepoBtn')?.click()" type="button">
+<div class="tile-head">
+<div class="tile-ico">💾</div>
+<div>
+<p class="tile-title">SALVA SU REPO</p>
+<p class="tile-desc">Esegue il salvataggio “1‑click” sul repo</p>
+</div>
+</div>
+</button>
+</div>
+</section>
 <!-- ===== SEZIONE: OPEN POINTS ===== -->
-<section class="section" id="opSection">
-<div class="section-header" style="background: linear-gradient(90deg, #0b3a68, #0f447a); border-bottom: 1px solid #0f447a80;">
-<div class="section-title">
-<button class="toggle" id="opToggle">▾</button>
-<span>📝</span> <span>Open Points</span>
-</div>
-<div class="section-actions">
-<button onclick="openOpDialog()">➕ Nuovo</button>
-<button onclick="(window.showSaveFilePicker? saveOPWithPicker() : openSaveOPDialog())">💾 Salva OP</button>
-<button onclick="importOpenPointsFromFile()">📥 Carica OP</button>
-<button onclick="openOpFilterDialog()">🔎 Filtra</button>
-<button onclick="exportOpenPointsToCSV()">📤 Export CSV</button>
-<button onclick="exportOpenPointsToExcel()">📤 Export Excel (.xls)</button>
-<button class="danger" onclick="clearOpenPoints()">🧹 Pulisci OP</button>
-</div>
-</div>
-<div id="opBody">
-<div class="grid" style="padding:0">
-<div id="opSummaryBar"><div class="count" id="opCount">0 risultati su 0</div></div>
-<div id="opTableWrap">
-<table class="table" id="opTable"></table>
-</div>
-</div>
-</div>
-</section>
-<!-- ===== SEZIONE: SERVIZI ===== -->
-<section class="section" id="servicesSection">
-<div class="section-header" style="background: linear-gradient(90deg, #0e3a43, #0b4a56); border-bottom: 1px solid #0b4a5680;">
-<div class="section-title">
-<button class="toggle" id="svcToggle">▾</button>
-<span>🛠</span> <span>Servizi (REST/SOAP)</span>
-</div>
-<div class="section-actions">
-<button onclick="openServiceDialog()">➕ Nuovo</button>
-<button onclick="exportServicesToFile()">💾 Salva</button>
-<button onclick="importServicesFromFile()">📥 Carica</button>
-<button onclick="openSvcFilterDialog()">🔎 Filtra</button>
-<button onclick="exportServicesToCSV()">📤 CSV</button>
-<button onclick="exportServicesToExcel()">📤 Excel (.xls)</button>
-<button class="danger" onclick="clearServices()">🧹 Pulisci</button>
-</div>
-</div>
-<div id="svcBody">
-<div class="grid" style="padding:0">
-<div id="svcTableWrap">
-<table class="table" id="svcTable"></table>
-</div>
-</div>
-</div>
-</section>
-<div id="container"></div>
+&gt;
 </main>
 <footer>Suggerimento: premi <span class="kbd">⌘/Ctrl</span> + <span class="kbd">K</span> per cercare velocemente. Le modifiche sono salvate nel browser (localStorage).</footer>
 <!-- Dialog: Link -->
@@ -653,8 +701,8 @@ html body #svcFilterDlg .opf-actions{ position: sticky; bottom: 0; display:flex;
 <dialog id="sectionsDlg"><div class="modal">
 <header class="modal-bar"><span class="title">Gestisci sezioni</span><button aria-label="Chiudi" class="close" id="closeSectionsBtn">✕</button></header>
 <div class="content">
-    <div class="fit-viewport" data-fit="true" data-max-scale="1">
-      <div class="fit-content">
+<div class="fit-viewport" data-fit="true" data-max-scale="1">
+<div class="fit-content">
 <div class="list" id="sectionsList"></div>
 <div class="row">
 <input id="newSectionName" placeholder="Nome nuova sezione"/>
@@ -668,19 +716,32 @@ html body #svcFilterDlg .opf-actions{ position: sticky; bottom: 0; display:flex;
 </div>
 </div>
 </div>
-    </div>
-    </div></dialog>
+</div>
+</div></dialog>
 <!-- Dialog: Menù sezioni -->
 <dialog id="filterSectionsDlg"><div class="modal">
 <header class="modal-bar"><span class="title">Filtra sezioni</span><button aria-label="Chiudi" class="close" id="fsCloseBtn">✕</button></header>
 <div class="content">
-    <div class="fit-viewport" data-fit="true" data-max-scale="1">
-      <div class="fit-content">
+<div class="fit-viewport" data-fit="true" data-max-scale="1">
+<div class="fit-content">
 <div class="list menu-grid" id="filterMenu"></div>
 </div>
 </div>
-    </div>
-    </div></dialog>
+</div>
+</div></dialog>
+<!-- Dialog: Link Utili (container con accordion link) -->
+<dialog id="linksDlg"><div class="modal">
+<header class="modal-bar"><span class="title">Link utili</span><button aria-label="Chiudi" class="close" id="linksCloseXBtn">✕</button></header>
+<div class="content">
+<div class="toolbar" id="linksToolbar" style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px 0;"><button id="filterSectionsBtn" title="Apri menu sezioni">🏠 Menu</button>
+<button id="newBtn">➕ Nuovo link</button>
+<button id="manageSectionsBtn">📂 Gestisci sezioni</button>
+<button id="exportBtn">💾 Salva link</button>
+<button id="importBtn">📥 Carica link</button>
+</div>
+<div id="container"></div>
+</div>
+</div></dialog>
 <!-- Dialog: Open Points -->
 <dialog id="opDialog"><div class="modal">
 <header class="modal-bar">
@@ -726,83 +787,83 @@ html body #svcFilterDlg .opf-actions{ position: sticky; bottom: 0; display:flex;
 <!-- Dialog: Filtro OP -->
 <!-- Dialog: Filtro OP (ORIZZONTALE) -->
 <dialog id="opFilterDlg">
-  <div class="modal">
-    <header class="modal-bar">
-      <span class="title">Filtra Open Points</span>
-      <button aria-label="Chiudi" class="close" id="opFilterCloseXBtn">✕</button>
-    </header>
-    <div class="content">
-      <div class="row">
-        <input id="opfText" placeholder="Cerca in tutte le colonne (titolo, progetto, assegnatari, descrizione, note, stato, priorità)"/>
-      </div>
-      <div class="opf-grid opf-grid-op">
-        <div class="opf-card">
-          <h4>ID / Titolo</h4>
-          <div class="opf-row">
-            <input id="opfId" placeholder="ID contiene…"/>
-            <input id="opfTitle" placeholder="Titolo contiene…"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Progetti / Assegnatari</h4>
-          <div class="opf-row">
-            <input id="opfProjects" placeholder="Progetti (virgole)"/>
-            <input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Descrizione / Note</h4>
-          <div class="opf-row">
-            <input id="opfDesc" placeholder="Descrizione contiene…"/>
-            <input id="opfNotes" placeholder="Note contengono…"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Priorità</h4>
-          <div class="opf-checks" id="opfPrioGroup">
-            <label><input type="checkbox" value="low"/> Bassa</label>
-            <label><input type="checkbox" value="medium"/> Media</label>
-            <label><input type="checkbox" value="high"/> Alta</label>
-            <label><input type="checkbox" value="critical"/> Critica</label>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Stato</h4>
-          <div class="opf-checks" id="opfStatusGroup">
-            <label><input type="checkbox" value="Nuovo"/> Nuovo</label>
-            <label><input type="checkbox" value="Da fare"/> Da fare</label>
-            <label><input type="checkbox" value="In corso"/> In corso</label>
-            <label><input type="checkbox" value="Schedulato"/> Schedulato</label>
-            <label><input type="checkbox" value="Completato"/> Completato</label>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Inserito il</h4>
-          <div class="opf-row">
-            <input id="opfCreatedFrom" type="date" placeholder="Creato dal"/>
-            <input id="opfCreatedTo" type="date" placeholder="Creato al"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Scadenza</h4>
-          <div class="opf-row">
-            <input id="opfDueFrom" type="date" placeholder="Scadenza da"/>
-            <input id="opfDueTo" type="date" placeholder="Scadenza a"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Altre opzioni</h4>
-          <label style="display:flex;align-items:center;gap:8px">
-            <input id="opfMaxOnly" type="checkbox"/> Solo "Priorità massima"
+<div class="modal">
+<header class="modal-bar">
+<span class="title">Filtra Open Points</span>
+<button aria-label="Chiudi" class="close" id="opFilterCloseXBtn">✕</button>
+</header>
+<div class="content">
+<div class="row">
+<input id="opfText" placeholder="Cerca in tutte le colonne (titolo, progetto, assegnatari, descrizione, note, stato, priorità)"/>
+</div>
+<div class="opf-grid opf-grid-op">
+<div class="opf-card">
+<h4>ID / Titolo</h4>
+<div class="opf-row">
+<input id="opfId" placeholder="ID contiene…"/>
+<input id="opfTitle" placeholder="Titolo contiene…"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Progetti / Assegnatari</h4>
+<div class="opf-row">
+<input id="opfProjects" placeholder="Progetti (virgole)"/>
+<input id="opfAssignees" placeholder="Assegnatari (virgole)"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Descrizione / Note</h4>
+<div class="opf-row">
+<input id="opfDesc" placeholder="Descrizione contiene…"/>
+<input id="opfNotes" placeholder="Note contengono…"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Priorità</h4>
+<div class="opf-checks" id="opfPrioGroup">
+<label><input type="checkbox" value="low"/> Bassa</label>
+<label><input type="checkbox" value="medium"/> Media</label>
+<label><input type="checkbox" value="high"/> Alta</label>
+<label><input type="checkbox" value="critical"/> Critica</label>
+</div>
+</div>
+<div class="opf-card">
+<h4>Stato</h4>
+<div class="opf-checks" id="opfStatusGroup">
+<label><input type="checkbox" value="Nuovo"/> Nuovo</label>
+<label><input type="checkbox" value="Da fare"/> Da fare</label>
+<label><input type="checkbox" value="In corso"/> In corso</label>
+<label><input type="checkbox" value="Schedulato"/> Schedulato</label>
+<label><input type="checkbox" value="Completato"/> Completato</label>
+</div>
+</div>
+<div class="opf-card">
+<h4>Inserito il</h4>
+<div class="opf-row">
+<input id="opfCreatedFrom" placeholder="Creato dal" type="date"/>
+<input id="opfCreatedTo" placeholder="Creato al" type="date"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Scadenza</h4>
+<div class="opf-row">
+<input id="opfDueFrom" placeholder="Scadenza da" type="date"/>
+<input id="opfDueTo" placeholder="Scadenza a" type="date"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Altre opzioni</h4>
+<label style="display:flex;align-items:center;gap:8px">
+<input id="opfMaxOnly" type="checkbox"/> Solo "Priorità massima"
           </label>
-        </div>
-      </div>
-      <div class="opf-actions" style="margin-top:12px">
-        <button id="opfResetBtn">Azzera</button>
-        <button class="primary" id="opfApplyBtn">Applica</button>
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+<div class="opf-actions" style="margin-top:12px">
+<button id="opfResetBtn">Azzera</button>
+<button class="primary" id="opfApplyBtn">Applica</button>
+</div>
+</div>
+</div>
 </dialog>
 <!-- Dialog: Salva link -->
 <dialog id="saveLinksDlg"><div class="modal">
@@ -867,71 +928,126 @@ html body #svcFilterDlg .opf-actions{ position: sticky; bottom: 0; display:flex;
 <!-- Dialog: Filtro Servizi -->
 <!-- Dialog: Filtro Servizi (ORIZZONTALE, COMPLETO) -->
 <dialog id="svcFilterDlg">
-  <div class="modal">
-    <header class="modal-bar">
-      <span class="title">Filtra Servizi</span>
-      <button aria-label="Chiudi" class="close" id="svcFilterCloseXBtn">✕</button>
-    </header>
-    <div class="content">
-      <div class="row"><input id="svcfText" placeholder="Cerca in tutte le colonne (routine, tipo, servizio, operation/parametri, fallback, descrizione, ambito, applicativo, parametri IN, output, stato)"/></div>
-      <div class="svc-grid-op">
-        <div class="opf-card">
-          <h4>ID / Routine</h4>
-          <div class="opf-row">
-            <input id="svcfId" placeholder="ID contiene…"/>
-            <input id="svcfRoutine" placeholder="Routine (virgole)"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Servizio / Tipo</h4>
-          <div class="opf-row">
-            <input id="svcfServizi" placeholder="Servizi (virgole)"/>
-            <div class="opf-checks" id="svcfTipoGroup" style="padding:6px 8px;border:1px solid #263041;border-radius:10px;background:#0a1227;">
-              <label><input type="checkbox" value="REST"/> REST</label>
-              <label><input type="checkbox" value="SOAP"/> SOAP</label>
-            </div>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Descrizione / Ambito</h4>
-          <div class="opf-row">
-            <input id="svcfDescrizione" placeholder="Descrizione contiene…"/>
-            <input id="svcfAmbiti" placeholder="Ambiti (virgole)"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Applicativo / Fallback</h4>
-          <div class="opf-row">
-            <input id="svcfApplicativi" placeholder="Applicativi (virgole)"/>
-            <input id="svcfFallback" placeholder="Fallback (virgole)"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Operation / Parametri</h4>
-          <div class="row">
-            <input id="svcfOperation" placeholder="Operation / Parametri (virgole)"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Parametri &amp; Output</h4>
-          <div class="opf-row">
-            <input id="svcfParamsIn" placeholder="Parametri ingresso (virgole)"/>
-            <input id="svcfOutput" placeholder="Output servizio (virgole)"/>
-          </div>
-        </div>
-        <div class="opf-card">
-          <h4>Stato</h4>
-          <div class="opf-checks" id="svcfStatoGroup"></div>
-        </div>
-      </div>
-      <div class="opf-actions" style="margin-top:12px">
-        <button id="svcfResetBtn">Azzera</button>
-        <button class="primary" id="svcfApplyBtn">Applica</button>
-      </div>
-    </div>
-  </div>
+<div class="modal">
+<header class="modal-bar">
+<span class="title">Filtra Servizi</span>
+<button aria-label="Chiudi" class="close" id="svcFilterCloseXBtn">✕</button>
+</header>
+<div class="content">
+<div class="row"><input id="svcfText" placeholder="Cerca in tutte le colonne (routine, tipo, servizio, operation/parametri, fallback, descrizione, ambito, applicativo, parametri IN, output, stato)"/></div>
+<div class="svc-grid-op">
+<div class="opf-card">
+<h4>ID / Routine</h4>
+<div class="opf-row">
+<input id="svcfId" placeholder="ID contiene…"/>
+<input id="svcfRoutine" placeholder="Routine (virgole)"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Servizio / Tipo</h4>
+<div class="opf-row">
+<input id="svcfServizi" placeholder="Servizi (virgole)"/>
+<div class="opf-checks" id="svcfTipoGroup" style="padding:6px 8px;border:1px solid #263041;border-radius:10px;background:#0a1227;">
+<label><input type="checkbox" value="REST"/> REST</label>
+<label><input type="checkbox" value="SOAP"/> SOAP</label>
+</div>
+</div>
+</div>
+<div class="opf-card">
+<h4>Descrizione / Ambito</h4>
+<div class="opf-row">
+<input id="svcfDescrizione" placeholder="Descrizione contiene…"/>
+<input id="svcfAmbiti" placeholder="Ambiti (virgole)"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Applicativo / Fallback</h4>
+<div class="opf-row">
+<input id="svcfApplicativi" placeholder="Applicativi (virgole)"/>
+<input id="svcfFallback" placeholder="Fallback (virgole)"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Operation / Parametri</h4>
+<div class="row">
+<input id="svcfOperation" placeholder="Operation / Parametri (virgole)"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Parametri &amp; Output</h4>
+<div class="opf-row">
+<input id="svcfParamsIn" placeholder="Parametri ingresso (virgole)"/>
+<input id="svcfOutput" placeholder="Output servizio (virgole)"/>
+</div>
+</div>
+<div class="opf-card">
+<h4>Stato</h4>
+<div class="opf-checks" id="svcfStatoGroup"></div>
+</div>
+</div>
+<div class="opf-actions" style="margin-top:12px">
+<button id="svcfResetBtn">Azzera</button>
+<button class="primary" id="svcfApplyBtn">Applica</button>
+</div>
+</div>
+</div>
 </dialog>
-
+<!-- DIALOG: SERVIZI (contenitore accordion servizi) -->
+<dialog id="servicesDlg">
+<div class="modal">
+<header class="modal-bar">
+<span class="title">Servizi</span>
+<button aria-label="Chiudi" class="close" id="servicesCloseXBtn">✕</button>
+</header>
+<div class="content">
+<!-- ===== SEZIONE: SERVIZI ===== -->
+<section class="section" id="servicesSection">
+<div class="section-header" style="background: linear-gradient(90deg, #0e3a43, #0b4a56); border-bottom: 1px solid #0b4a5680;">
+<div class="section-title">
+<button class="toggle" id="svcToggle">▾</button>
+<span>🛠</span> <span>Servizi (REST/SOAP)</span>
+</div>
+<div class="section-actions">
+<button onclick="openServiceDialog()">➕ Nuovo</button>
+<button onclick="exportServicesToFile()">💾 Salva</button>
+<button onclick="importServicesFromFile()">📥 Carica</button>
+<button onclick="openSvcFilterDialog()">🔎 Filtra</button>
+<button onclick="exportServicesToCSV()">📤 CSV</button>
+<button onclick="exportServicesToExcel()">📤 Excel (.xls)</button>
+<button class="danger" onclick="clearServices()">🧹 Pulisci</button>
+</div>
+</div>
+<div id="svcBody">
+<div class="grid" style="padding:0">
+<div id="svcTableWrap">
+<table class="table" id="svcTable"></table>
+</div>
+</div>
+</div>
+</section> </div>
+</div>
+</dialog>
+<script>
+// Apertura dialog LINK UTILI
+function openLinksDialog(){
+  try{ var dlg = document.getElementById('linksDlg'); if(dlg && dlg.showModal){ dlg.showModal(); } else { alert('Apri il file nel browser per usare questa finestra.'); } }
+  catch(e){ alert('Apri il file nel browser per usare questa finestra.'); }
+}
+window.addEventListener('DOMContentLoaded', function(){
+  try{ var btn=document.getElementById('linksBtn'); if(btn){ btn.addEventListener('click', openLinksDialog); } }catch(e){}
+  try{ var x=document.getElementById('linksCloseXBtn'); if(x){ x.addEventListener('click', function(){ var dlg=document.getElementById('linksDlg'); if(dlg) dlg.close(); }); } }catch(e){}
+});
+</script>
+<script>
+// Apertura dialog SERVIZI
+function openServicesDialog(){
+  try{ var dlg = document.getElementById('servicesDlg'); if(dlg && dlg.showModal){ dlg.showModal(); } else { alert('Apri il file nel browser per usare questa finestra.'); } }catch(e){ alert('Apri il file nel browser per usare questa finestra.'); }
+}
+window.addEventListener('DOMContentLoaded', function(){
+  try{ var btn=document.getElementById('servicesBtn'); if(btn){ btn.addEventListener('click', openServicesDialog); } }catch(e){}
+  try{ var x=document.getElementById('servicesCloseXBtn'); if(x){ x.addEventListener('click', function(){ var dlg=document.getElementById('servicesDlg'); if(dlg) dlg.close(); }); } }catch(e){}
+});
+</script>
 <script>
   window.AUTOSAVE_ENDPOINT = "https://supportoteam.francesco-romano2.workers.dev";
 </script>
@@ -953,7 +1069,7 @@ function save(st){ try{ localStorage.setItem(STORAGE_KEY_V2, JSON.stringify(st |
 function loadState() {
   // Se Repo Mode è attivo: ignoro completamente il localStorage e NON innesco il demo-seed.
   if (isRepoModeOn()) {
-    return { sections: [], links: [], openPoints: [], services: [] };
+    return { sections: [], links: [], openPoints: [], services: [], crq: [] };
   }
 
   // Comportamento originale (localStorage come fonte)
@@ -971,7 +1087,7 @@ function loadState() {
     return normalizeState(demo);
   } catch(e) {
     console.error('load:', e);
-    return { sections:[], links:[], openPoints:[], services:[] };
+    return { sections: [], links: [], openPoints: [], services: [], crq: [] };
   }
 }
 
@@ -992,7 +1108,9 @@ function normalizeState(x){
   var openPoints = Array.isArray(x.openPoints)? x.openPoints.map(nOP) : [];
   function nService(s){ return { id: s.id || crypto.randomUUID(), routine: String(s.routine || '').trim(), tipo: (s.tipo || '').toString().toUpperCase() === 'SOAP' ? 'SOAP' : 'REST', servizio: String(s.servizio || '').trim(), operation: String(s.operation || s['operation / parametro'] || '').trim(), fallback: String(s.fallback || s['fallback JDBC/SWP'] || '').trim(), descrizione: String(s.descrizione || '').trim(), ambito: String(s.ambito || '').trim(), applicativo: String(s.applicativo || s['applicativo'] || '').trim(), paramsIngresso: String(s.paramsIngresso || s['paramsIngresso'] || s['parametriIngresso'] || '').trim(), outputServizio: String(s.outputServizio || s['outputServizio'] || s['output'] || '').trim() }; }
   var services = Array.isArray(x.services) ? x.services.map(nService) : [];
-  return { sections:sections, links:links, openPoints:openPoints, services:services };
+
+ var crq = Array.isArray(x.crq) ? x.crq.map(function(o){ return typeof normalizeCRQItem==='function' ? normalizeCRQItem(o) : o; }) : [];
+  return { sections:sections, links:links, openPoints:openPoints, services:services, crq: crq };
 }
 
 // UI state
@@ -1027,12 +1145,12 @@ function initApp(){
   render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn();
   var q=document.getElementById('q'); if(q) q.addEventListener('input', render);
   window.addEventListener('keydown', function(e){ if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); if(q) q.focus(); } });
-  document.getElementById('exportBtn').onclick = function(){ if(window.showSaveFilePicker) saveLinksWithPicker(); else openSaveLinksDialog(); };
-  document.getElementById('importBtn').onclick = importFullJSON;
-  document.getElementById('clearAllBtn').onclick = clearAll;
-  document.getElementById('filterSectionsBtn').onclick = openFilterSectionsDialog;
-  document.getElementById('newBtn').onclick = function(){ openDialog(); };
-  document.getElementById('manageSectionsBtn').onclick = function(){ try{ renderSectionsList(); sectionsDlg.showModal(); setTimeout(function(){ var el=document.getElementById('newSectionName'); if(el) el.focus(); }, 50); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } };
+  (function(){var _el=document.getElementById('exportBtn'); if(_el) _el.onclick=function(){ if(window.showSaveFilePicker) saveLinksWithPicker(); else openSaveLinksDialog(); };})();
+  var _im=document.getElementById('importBtn'); if(_im) _im.onclick=importFullJSON;
+  var _el=document.getElementById('clearAllBtn'); if(_el) _el.onclick=clearAll;
+  var _fs=document.getElementById('filterSectionsBtn'); if(_fs) _fs.onclick=openFilterSectionsDialog;
+  var _nb=document.getElementById('newBtn'); if(_nb) _nb.onclick=function(){ openDialog(); };
+  (function(){var _ms=document.getElementById('manageSectionsBtn'); if(_ms) _ms.onclick=function(){ try{ renderSectionsList(); sectionsDlg.showModal(); setTimeout(function(){ var el=document.getElementById('newSectionName'); if(el) el.focus(); }, 50); }catch(e){ alert('Apri il file nel browser per usare questo dialog.'); } };})();
   var opToggle=document.getElementById('opToggle'), opBody=document.getElementById('opBody'); if(opToggle && opBody){ var uiState = loadUIState(); if (uiState.opCollapsed) { opBody.classList.add('hidden'); opToggle.textContent='▸'; } else { opBody.classList.remove('hidden'); opToggle.textContent='▾'; } opToggle.addEventListener('click', function(){ var collapsed = opBody.classList.toggle('hidden'); opToggle.textContent = collapsed ? '▸' : '▾'; uiState.opCollapsed = collapsed; saveUIState(uiState); }); }
   var svcToggle=document.getElementById('svcToggle'), svcBody=document.getElementById('svcBody'); if(svcToggle && svcBody){ var uiState2 = loadUIState(); if (uiState2.svcCollapsed){ svcBody.classList.add('hidden'); svcToggle.textContent='▸'; } else { svcBody.classList.remove('hidden'); svcToggle.textContent='▾'; } svcToggle.addEventListener('click', function(){ var collapsed = svcBody.classList.toggle('hidden'); svcToggle.textContent = collapsed ? '▸' : '▾'; uiState2.svcCollapsed = collapsed; saveUIState(uiState2); }); }
   // Link dialog
@@ -1117,7 +1235,7 @@ function setMainSectionsVisibility(opVisible, svcVisible) {
     svcToggle.textContent = svcVisible ? '▾' : '▸';
   }
 }
-function openFilterSectionsDialog(){ try{ var dlg=document.getElementById('filterSectionsDlg'); var menu=document.getElementById('filterMenu'); var items=[]; items.push('<button class="menu-btn" data-id="ALL"><div class="label"><span class="ico">🏠</span><div class="text"><div class="name">Tutte</div><div class="desc">Mostra tutte le sezioni</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_OP"><div class="label"><span class="ico">📝</span><div class="text"><div class="name">Solo Open Points</div><div class="desc">Nasconde tutte le sezioni link</div></div></div></button>'); items.push('<button class="menu-btn" data-id="SOLO_SVC"><div class="label"><span class="ico">🛠</span><div class="text"><div class="name">Solo Servizi</div><div class="desc">Nasconde le sezioni link</div></div></div></button>'); Array.prototype.push.apply(items, state.sections.map(function(s){ var icon=(s.icon&&String(s.icon).trim())? String(s.icon).trim() : '📁'; var desc=(s.desc&&String(s.desc).trim())? ('<div class="desc">'+escapeHtml(String(s.desc).trim())+'</div>') : ''; return '<button class="menu-btn" data-id="'+s.id+'"><div class="label"><span class="ico">'+escapeHtml(icon)+'</span><div class="text"><div class="name">'+escapeHtml(s.name)+'</div>'+desc+'</div></div></button>'; })); menu.innerHTML = items.join(''); Array.prototype.forEach.call(menu.querySelectorAll('button.menu-btn'), function(btn){ btn.onclick = function () {
+function openFilterSectionsDialog(){ try{ var dlg=document.getElementById('filterSectionsDlg'); var menu=document.getElementById('filterMenu'); var items=[]; items.push('<button class="menu-btn" data-id="ALL"><div class="label"><span class="ico">🏠</span><div class="text"><div class="name">Tutte</div><div class="desc">Mostra tutte le sezioni</div></div></div></button>'); items.push(''); items.push(''); Array.prototype.push.apply(items, state.sections.map(function(s){ var icon=(s.icon&&String(s.icon).trim())? String(s.icon).trim() : '📁'; var desc=(s.desc&&String(s.desc).trim())? ('<div class="desc">'+escapeHtml(String(s.desc).trim())+'</div>') : ''; return '<button class="menu-btn" data-id="'+s.id+'"><div class="label"><span class="ico">'+escapeHtml(icon)+'</span><div class="text"><div class="name">'+escapeHtml(s.name)+'</div>'+desc+'</div></div></button>'; })); menu.innerHTML = items.join(''); Array.prototype.forEach.call(menu.querySelectorAll('button.menu-btn'), function(btn){ btn.onclick = function () {
   var id = btn.getAttribute('data-id');
   if (id === 'ALL') {
     setVisibleSections(null);
@@ -1274,7 +1392,6 @@ async function saveBlobWithPicker(blob, suggestedName, types){ try{ if(window.sh
 async function saveLinksWithPicker(){ try{ const data = JSON.stringify({sections: state.sections||[], links: state.links||[]}, null, 2); const blob = new Blob([data], {type:'application/json'}); await saveBlobWithPicker(blob, 'linkhub-links.json'); }catch(e){ alert('Salvataggio link non riuscito: '+(e&&e.message?e.message:e)); } }
 async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: state.openPoints||[]}, null, 2); const blob=new Blob([data], {type:'application/json'}); await saveBlobWithPicker(blob, 'open-points.json'); }catch(e){ alert('Salvataggio OP non riuscito: '+(e&&e.message?e.message:e)); } }
 </script>
-
 <script>
 (function(){
   function setupFit(root){
@@ -1343,13 +1460,23 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
   function toast(msg){ try{ var t=document.createElement('div'); t.textContent=msg; t.style.position='fixed'; t.style.bottom='18px'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.background='#0b1227'; t.style.border='1px solid #334155'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=99; t.style.color='#e5e7eb'; document.body.appendChild(t); setTimeout(()=>t.remove(),1600);}catch(e){} }
 
   function buildPayload(){
-    const slim = {
-      sections: (window.state && Array.isArray(state.sections)) ? state.sections : [],
-      links:    (window.state && Array.isArray(state.links))    ? state.links    : [],
-      openPoints: (window.state && Array.isArray(state.openPoints)) ? state.openPoints : [],
-      services:   (window.state && Array.isArray(state.services))   ? state.services   : []
-    };
-    return JSON.stringify(slim);
+  const slim=(function(){
+    try{
+      return {
+        sections:(window.state&&Array.isArray(state.sections))?state.sections:[],
+        links:(window.state&&Array.isArray(state.links))?state.links:[],
+        openPoints:(window.state&&Array.isArray(state.openPoints))?state.openPoints:[],
+        services:(window.state&&Array.isArray(state.services))?state.services:[],
+        crq:(window.state&&Array.isArray(state.crq))?state.crq:[]
+      };
+    }catch(e){
+      return {sections:[],links:[],openPoints:[],services:[],crq:[]};
+    }
+  })();
+  return JSON.stringify(slim);
+}
+ })();
+ return JSON.stringifyslim);
   }
 
   async function saveDirect(){
@@ -1472,8 +1599,6 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
   });
 })();
 </script>
-
-
 <script>
 // === v44.1: Autoload dai file in /data (sempre all'avvio) ===
 (function(){
@@ -1485,31 +1610,25 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
     const base = new URL('./data/', location.href).href;
     const files = [
       {name:'linkhub-links.json', map:(data,acc)=>{ if(Array.isArray(data)){ acc.links=data; } else { if(data.sections) acc.sections = Array.isArray(data.sections)? data.sections : acc.sections; if(data.links) acc.links = Array.isArray(data.links)? data.links : acc.links; }}},
-      {name:'open-points.json',   map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.openPoints)? data.openPoints : []); acc.openPoints = arr; }},
+      {name:'open-points.json',   map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.openPoints)? data.openPoints : [,
+ {name:'crq.json', map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.crq)? data.crq : []); acc.crq = arr; }}]); acc.openPoints = arr; }},
       {name:'services.json',      map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.services)? data.services : []); acc.services = arr; }}
     ];
-    let acc={sections:[],links:[],openPoints:[],services:[]}; let any=false;
+    let acc={sections:[],links:[],openPoints:[],services:[],crq:[]}; let any=false;
     for(const f of files){ try{ const j = await safeFetchJSON(base+f.name); f.map(j, acc); any=true; }catch(e){} }
     if(!any) return;
     try{ if(typeof normalizeState==='function'){ const norm = normalizeState(acc); if(norm){ window.state = norm; save(state); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); } } }catch(e){}
   }
   document.addEventListener('DOMContentLoaded', autoload);
+  try{window.reloadFromRepo=autoload;}catch(e){}
 })();
 </script>
-
-
 <!-- HELP CRQ DIALOG -->
-<dialog id="helpCrqDlg"><div class="modal"><header class="modal-bar"><span class="title">HELP CRQ — Mappatura stati</span><button aria-label="Chiudi" class="close" id="helpCrqCloseXBtn" onclick="document.getElementById('helpCrqDlg').close()">✕</button></header><div class="content"><div id="helpCrqHint">Clicca una riga per copiare (Invio/Spazio).</div><div id="helpCrqTableWrap"><table class="table" id="helpCrqTable"><thead><tr><th>BMC Helix (CRQ)</th><th>Bhelp Operatore (RFC)</th><th>NOTE</th></tr></thead><tbody><tr tabindex="0" role="button" data-bmc="Bozza" data-bhelp="n.a." data-note="Dopo apertura richiedere slot"><td>Bozza</td><td>n.a.</td><td>Dopo apertura richiedere slot</td></tr><tr tabindex="0" role="button" data-bmc="Richiesta autorizzazione" data-bhelp="Verifica Referente Servizio IT" data-note="-"><td>Richiesta autorizzazione</td><td>Verifica Referente Servizio IT</td><td>-</td></tr><tr tabindex="0" role="button" data-bmc="Pianificazione in corso" data-bhelp="Deploy Test / Esecuzione Test" data-note="Martedì settimana prima del rilascio"><td>Pianificazione in corso</td><td>Deploy Test / Esecuzione Test</td><td>Martedì settimana prima del rilascio</td></tr><tr tabindex="0" role="button" data-bmc="Revisione pianificata" data-bhelp="Completamento Test" data-note="-"><td>Revisione pianificata</td><td>Completamento Test</td><td>-</td></tr><tr tabindex="0" role="button" data-bmc="Approvazione pianificata" data-bhelp="Verifica ICT" data-note="Giorno prima del rilascio"><td>Approvazione pianificata</td><td>Verifica ICT</td><td>Giorno prima del rilascio</td></tr><tr tabindex="0" role="button" data-bmc="Pianificato" data-bhelp="n.a." data-note=""><td>Pianificato</td><td>n.a.</td><td></td></tr><tr tabindex="0" role="button" data-bmc="Implementazione in corso" data-bhelp="Preparazione Installazione / Installazione" data-note=""><td>Implementazione in corso</td><td>Preparazione Installazione / Installazione</td><td></td></tr><tr tabindex="0" role="button" data-bmc="Completato" data-bhelp="n.a." data-note=""><td>Completato</td><td>n.a.</td><td></td></tr><tr tabindex="0" role="button" data-bmc="Chiuso" data-bhelp="Chiuso Deploy" data-note=""><td>Chiuso</td><td>Chiuso Deploy</td><td></td></tr></tbody></table></div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="primary" onclick="document.getElementById('helpCrqDlg').close()">OK</button></div></div></div></dialog>
-
-
+<dialog id="helpCrqDlg"><div class="modal"><header class="modal-bar"><span class="title">HELP CRQ — Mappatura stati</span><button aria-label="Chiudi" class="close" id="helpCrqCloseXBtn" onclick="document.getElementById('helpCrqDlg').close()">✕</button></header><div class="content"><div id="helpCrqHint">Clicca una riga per copiare (Invio/Spazio).</div><div id="helpCrqTableWrap"><table class="table" id="helpCrqTable"><thead><tr><th>BMC Helix (CRQ)</th><th>Bhelp Operatore (RFC)</th><th>NOTE</th></tr></thead><tbody><tr data-bhelp="n.a." data-bmc="Bozza" data-note="Dopo apertura richiedere slot" role="button" tabindex="0"><td>Bozza</td><td>n.a.</td><td>Dopo apertura richiedere slot</td></tr><tr data-bhelp="Verifica Referente Servizio IT" data-bmc="Richiesta autorizzazione" data-note="-" role="button" tabindex="0"><td>Richiesta autorizzazione</td><td>Verifica Referente Servizio IT</td><td>-</td></tr><tr data-bhelp="Deploy Test / Esecuzione Test" data-bmc="Pianificazione in corso" data-note="Martedì settimana prima del rilascio" role="button" tabindex="0"><td>Pianificazione in corso</td><td>Deploy Test / Esecuzione Test</td><td>Martedì settimana prima del rilascio</td></tr><tr data-bhelp="Completamento Test" data-bmc="Revisione pianificata" data-note="-" role="button" tabindex="0"><td>Revisione pianificata</td><td>Completamento Test</td><td>-</td></tr><tr data-bhelp="Verifica ICT" data-bmc="Approvazione pianificata" data-note="Giorno prima del rilascio" role="button" tabindex="0"><td>Approvazione pianificata</td><td>Verifica ICT</td><td>Giorno prima del rilascio</td></tr><tr data-bhelp="n.a." data-bmc="Pianificato" data-note="" role="button" tabindex="0"><td>Pianificato</td><td>n.a.</td><td></td></tr><tr data-bhelp="Preparazione Installazione / Installazione" data-bmc="Implementazione in corso" data-note="" role="button" tabindex="0"><td>Implementazione in corso</td><td>Preparazione Installazione / Installazione</td><td></td></tr><tr data-bhelp="n.a." data-bmc="Completato" data-note="" role="button" tabindex="0"><td>Completato</td><td>n.a.</td><td></td></tr><tr data-bhelp="Chiuso Deploy" data-bmc="Chiuso" data-note="" role="button" tabindex="0"><td>Chiuso</td><td>Chiuso Deploy</td><td></td></tr></tbody></table></div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button id="helpCrqListBtn" title="Apri Lista CRQ">📋 LISTA CRQ</button>   <button class="primary" onclick="document.getElementById('helpCrqDlg').close()">✖️ CHIUDI</button></div></div></div></dialog>
 <div id="helpCrqOverlay"></div>
-<div id="helpCrqCard"><header><span><strong>HELP CRQ — Mappatura stati</strong> (fallback)</span><div><button id="helpCrqCloseBtn">Chiudi</button></div></header><div class="body"><div id="helpCrqBodyMount"></div></div></div>
-
+<div id="helpCrqCard"><header><span><strong>HELP CRQ — Mappatura stati</strong> (fallback)</span><div><button id="helpCrqCloseBtn">✖️ Chiudi</button></div></header><div class="body"><div id="helpCrqBodyMount"></div></div></div>
 <script>(function(){function mountFromDialog(){var dlg=document.getElementById('helpCrqDlg');var mount=document.getElementById('helpCrqBodyMount');if(!dlg||!mount)return false;var inner=dlg.querySelector('.content');if(!inner)return false;mount.innerHTML=inner.outerHTML;return true}function showCard(){var ov=document.getElementById('helpCrqOverlay');var card=document.getElementById('helpCrqCard');if(!ov||!card)return;ov.style.display='block';card.style.display='block';var b=document.getElementById('helpCrqCloseBtn');if(b){b.onclick=function(){ov.style.display='none';card.style.display='none'}}}window.openHelpCrq=(function(orig){return function(){try{var d=document.getElementById('helpCrqDlg');if(d&&d.showModal){d.showModal();return}}catch(e){}try{if(mountFromDialog()){showCard();return}}catch(e){}alert('Impossibile aprire HELP CRQ: controlla che il browser permetta i dialog, oppure usa questo file via http:// (non file://).')}})(window.openHelpCrq||function(){});document.addEventListener('DOMContentLoaded',function(){var btn=document.getElementById('helpCrqBtn');if(btn&&!btn.onclick){btn.addEventListener('click',function(){window.openHelpCrq()})}});})();</script>
-
-
 <!-- HELP CRQ JS --><script>(function(){function getRoot(){var ov=document.getElementById('helpCrqOverlay');var card=document.getElementById('helpCrqCard');if(ov&&card&&ov.style.display==='block'&&card.style.display==='block'){return card}var dlg=document.getElementById('helpCrqDlg');return dlg||document}function copyText(t){try{if(navigator.clipboard){navigator.clipboard.writeText(t);return true}}catch(e){}try{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();return true}catch(_){return false}}function fmtRow(tr){var bmc=tr.getAttribute('data-bmc')||'',bhelp=tr.getAttribute('data-bhelp')||'',note=tr.getAttribute('data-note')||'';return ['BMC Helix (CRQ): '+bmc,'Bhelp Operatore (RFC): '+bhelp,'NOTE: '+(note||'')].join('\n')}function markCopied(el){el.classList.add('copied');setTimeout(function(){el.classList.remove('copied')},1000)}function onActivate(tr){var txt=fmtRow(tr);var ok=copyText(txt);if(!ok)alert('Copia negli appunti non riuscita');try{if(typeof window.toast==='function'){toast('Riga copiata')}}catch(_){ }markCopied(tr)}function bindInside(root){var table=(root||document).querySelector('#helpCrqTable');if(table&&!table._helpbound){table._helpbound=true;table.addEventListener('click',function(ev){var tr=ev.target.closest('tr[data-bmc]');if(tr)onActivate(tr)});table.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){var tr=ev.target.closest('tr[data-bmc]');if(tr){ev.preventDefault();onActivate(tr)}}})}}window.openHelpCrq=(function(orig){return function(){try{var d=document.getElementById('helpCrqDlg');if(d&&d.showModal){d.showModal();bindInside(d);return}}catch(e){}try{var mountOk=false;var dlg=document.getElementById('helpCrqDlg');var mount=document.getElementById('helpCrqBodyMount');if(dlg&&mount){var inner=dlg.querySelector('.content');if(inner){mount.innerHTML=inner.outerHTML;mountOk=true}}var ov=document.getElementById('helpCrqOverlay');var card=document.getElementById('helpCrqCard');if(mountOk&&ov&&card){ov.style.display='block';card.style.display='block';var b=document.getElementById('helpCrqCloseBtn');if(b){b.onclick=function(){ov.style.display='none';card.style.display='none'}}bindInside(card);return}}catch(e){}alert('Impossibile aprire HELP CRQ: prova via http:// (non file://)')}})(window.openHelpCrq||function(){});document.addEventListener('DOMContentLoaded',function(){var dlg=document.getElementById('helpCrqDlg');if(dlg)bindInside(dlg);var btn=document.getElementById('helpCrqBtn');if(btn&&!btn.onclick){btn.addEventListener('click',function(){window.openHelpCrq()})}})})();</script>
-
 <script>
 (function(){
   function csvToArr(s){ return String(s||'').split(',').map(x=>x.trim()).filter(Boolean); }
@@ -1560,6 +1679,210 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
     }catch(e){ console.error('SVC filter open error', e); if(prevOpen) try{prevOpen();}catch(_){} }
   };
 })();
+</script>
+<!-- CRQ LIST: v19 ascii (save/load/filter/clear + add/edit/delete + CSV) -->
+<script type="text/javascript">
+// ===== CRQ CONFIG =====
+var CRQ_COLS=['RFC Aperti','Data apertura','Anno','Emerg.','Utilizzato','Categoria','Data rilascio','Rif nostro','PRJ','Contenuto'];
+var CRQ_KEYS=['rfcAperti','dataApertura','anno','emerg','utilizzato','categoria','dataRilascio','rifNostro','prj','contenuto'];
+var CRQ_DATA=Array.isArray(window.CRQ_DATA)?window.CRQ_DATA:[{rfcAperti:'CRQ0012345',dataApertura:'2026-01-20',anno:'2026',emerg:'No',utilizzato:'Si',categoria:'Applicativa',dataRilascio:'2026-01-30',rifNostro:'REF-42',prj:'ANAG-CORE',contenuto:'Patch fix anagrafe cliente'}];
+var CRQ_FILTER={text:'',emerg:'',utilizzato:'',anno:''};
+function crq_id(id){return document.getElementById(id);} 
+
+// ===== BUILDERS =====
+function crq_buildDialog(){
+  var ex=crq_id('crqListDlg'); if(ex) return ex;
+  var d=document.createElement('dialog'); d.id='crqListDlg'; d.style.width='min(96vw,1400px)'; d.style.maxWidth='1400px';
+  var m=document.createElement('div'); m.className='modal'; d.appendChild(m);
+  var h=document.createElement('header'); h.className='modal-bar';
+  var t=document.createElement('span'); t.className='title'; t.textContent='Lista CRQ';
+  var x=document.createElement('button'); x.className='close'; x.setAttribute('aria-label','Chiudi'); x.textContent='✕';
+  x.addEventListener('click', function(){ try{ d.close(); }catch(e){ d.removeAttribute('open'); } });
+  h.appendChild(t); h.appendChild(x);
+  var c=document.createElement('div'); c.className='content';
+  // toolbar
+  var tb=document.createElement('div'); tb.style.display='flex'; tb.style.gap='8px'; tb.style.margin='0 0 10px 0';
+  var bAdd=document.createElement('button'); bAdd.id='crqAddBtn'; bAdd.textContent='➕ Nuovo';
+  var bSave=document.createElement('button'); bSave.id='crqSaveBtn'; bSave.textContent='💾 Salva';
+  var bLoad=document.createElement('button'); bLoad.id='crqLoadBtn'; bLoad.textContent='📥 Carica';
+  var bFilter=document.createElement('button'); bFilter.id='crqFilterBtn'; bFilter.textContent='🔎 Filtra';
+  var bClear=document.createElement('button'); bClear.id='crqClearBtn'; bClear.textContent='🧹 Pulisci';
+  var inLoad=document.createElement('input'); inLoad.type='file'; inLoad.accept='application/json'; inLoad.id='crqLoadInput'; inLoad.style.display='none';
+  tb.appendChild(bAdd); tb.appendChild(bSave); tb.appendChild(bLoad); tb.appendChild(bFilter); tb.appendChild(bClear); tb.appendChild(inLoad);
+  // filter bar
+  var fw=document.createElement('div'); fw.id='crqFilterWrap'; fw.style.display='none'; fw.style.margin='0 0 8px 0';
+  var fr=document.createElement('div'); fr.style.display='grid'; fr.style.gridTemplateColumns='1fr repeat(3,160px)'; fr.style.gap='8px';
+  var fText=document.createElement('input'); fText.type='text'; fText.id='crqFilterText'; fText.placeholder='Cerca in RFC/PRJ/Categoria/Contenuto/Rif';
+  var fEmerg=document.createElement('select'); fEmerg.id='crqFilterEmerg'; (function(sel){var v=['','Si','No']; var l=['Emerg. (tutte)','Si','No']; for(var i=0;i<v.length;i++){ var o=document.createElement('option'); o.value=v[i]; o.textContent=l[i]; sel.appendChild(o);} })(fEmerg);
+  var fUtil=document.createElement('select'); fUtil.id='crqFilterUtil'; (function(sel){var v=['','Si','No']; var l=['Utilizzato (tutti)','Si','No']; for(var i=0;i<v.length;i++){ var o=document.createElement('option'); o.value=v[i]; o.textContent=l[i]; sel.appendChild(o);} })(fUtil);
+  var fAnno=document.createElement('input'); fAnno.type='number'; fAnno.id='crqFilterAnno'; fAnno.placeholder='Anno'; fAnno.min='1900'; fAnno.max='2100';
+  fr.appendChild(fText); fr.appendChild(fEmerg); fr.appendChild(fUtil); fr.appendChild(fAnno); fw.appendChild(fr);
+  // table
+  var wrap=document.createElement('div'); wrap.id='crqListWrap'; wrap.style.width='100%'; wrap.style.maxHeight='70vh'; wrap.style.overflow='auto';
+  var table=document.createElement('table'); table.className='table'; table.id='crqListTable'; table.style.width='100%'; table.style.borderCollapse='collapse';
+  var thead=document.createElement('thead'); var trh=document.createElement('tr'); var cols=CRQ_COLS.slice(); cols.push('Azioni');
+  for(var i=0;i<cols.length;i++){ var th=document.createElement('th'); th.textContent=cols[i]; trh.appendChild(th);} thead.appendChild(trh);
+  var tbody=document.createElement('tbody'); table.appendChild(thead); table.appendChild(tbody); wrap.appendChild(table);
+  // footer
+  var f=document.createElement('div'); f.style.display='flex'; f.style.justifyContent='flex-end'; f.style.marginTop='12px'; f.style.gap='8px';
+  var bCsv=document.createElement('button'); bCsv.id='crqListExportCsvBtn'; bCsv.title='Esporta CSV'; bCsv.textContent='📤 CSV';
+  var bOk=document.createElement('button'); bOk.className='primary'; bOk.textContent='✖️ CHIUDI'; bOk.addEventListener('click', function(){ try{ d.close(); }catch(e){ d.removeAttribute('open'); } });
+  f.appendChild(bCsv); f.appendChild(bOk);
+  // mount
+  m.appendChild(h); m.appendChild(c); c.appendChild(tb); c.appendChild(fw); c.appendChild(wrap); c.appendChild(f);
+  document.body.appendChild(d);
+  return d;
+}
+
+// ===== EDIT DIALOG =====
+function crq_ensureEdit(){
+  var d=crq_id('crqEditDlg'); if(d) return d;
+  d=document.createElement('dialog'); d.id='crqEditDlg'; d.style.width='min(94vw,900px)'; d.style.maxWidth='900px';
+  var m=document.createElement('div'); m.className='modal'; d.appendChild(m);
+  var h=document.createElement('header'); h.className='modal-bar';
+  var t=document.createElement('span'); t.className='title'; t.id='crqEditTitle'; t.textContent='Nuovo CRQ';
+  var x=document.createElement('button'); x.className='close'; x.setAttribute('aria-label','Chiudi'); x.textContent='✕'; x.addEventListener('click', function(){ try{ d.close(); }catch(e){ d.removeAttribute('open'); } });
+  h.appendChild(t); h.appendChild(x);
+  var c=document.createElement('div'); c.className='content';
+  var form=document.createElement('div'); form.id='crqForm'; form.style.display='grid'; form.style.gridTemplateColumns='1fr 1fr'; form.style.gap='10px';
+  var inputs={}; for(var i=0;i<CRQ_KEYS.length;i++){ var w=document.createElement('div'); var lab=document.createElement('label'); lab.textContent=CRQ_COLS[i]; lab.style.display='block'; lab.style.margin='4px 0'; var inp=document.createElement('input'); inp.type='text'; inp.id='crq_'+CRQ_KEYS[i]; inp.placeholder=CRQ_COLS[i]; inp.style.width='100%'; if(CRQ_KEYS[i]==='dataApertura'||CRQ_KEYS[i]==='dataRilascio'){ inp.type='date'; } if(CRQ_KEYS[i]==='anno'){ inp.type='number'; inp.min='1900'; inp.max='2100'; } w.appendChild(lab); w.appendChild(inp); form.appendChild(w); inputs[CRQ_KEYS[i]]=inp; }
+  var f=document.createElement('div'); f.style.display='flex'; f.style.justifyContent='flex-end'; f.style.gap='8px'; f.style.marginTop='12px';
+  var bCancel=document.createElement('button'); bCancel.textContent='↩️ Annulla'; bCancel.addEventListener('click', function(){ try{ d.close(); }catch(e){ d.removeAttribute('open'); } });
+  var bSave=document.createElement('button'); bSave.className='primary'; bSave.textContent='💾 Salva';
+  f.appendChild(bCancel); f.appendChild(bSave);
+  m.appendChild(h); m.appendChild(c); c.appendChild(form); c.appendChild(f);
+  d._inputs=inputs; d._saveBtn=bSave; d._title=t; d._index=-1;
+  document.body.appendChild(d); return d;
+}
+
+function crq_openEditor(item,index){
+  var d=crq_ensureEdit(); d._index=(typeof index==='number'?index:-1); d._title.textContent=(d._index>=0?'Modifica CRQ':'Nuovo CRQ');
+  for(var i=0;i<CRQ_KEYS.length;i++){ var k=CRQ_KEYS[i]; d._inputs[k].value=item&&item[k]?String(item[k]):''; }
+  d._saveBtn.onclick=function(){ var o={}; for(var i=0;i<CRQ_KEYS.length;i++){ var k=CRQ_KEYS[i]; o[k]=d._inputs[k].value||''; } if(!o.rfcAperti){ alert('RFC Aperti obbligatorio'); return; } if(d._index>=0){ CRQ_DATA[d._index]=o; } else { CRQ_DATA.push(o); } try{ d.close(); }catch(e){ d.removeAttribute('open'); } crq_render(CRQ_DATA, document); };
+  try{ d.showModal(); }catch(e){ d.setAttribute('open','open'); }
+}
+
+// ===== FILTERING & RENDER =====
+function crq_getFiltered(rows){ var a=Array.isArray(rows)?rows.slice():[]; if(!a.length) return a; var t=(CRQ_FILTER.text||'').toLowerCase().trim(); if(t){ a=a.filter(function(r){ return ['rfcAperti','categoria','prj','contenuto','rifNostro'].some(function(k){ var v=r[k]; return v && String(v).toLowerCase().indexOf(t)>-1; }); }); } if(CRQ_FILTER.emerg){ a=a.filter(function(r){ return String(r.emerg||'')===CRQ_FILTER.emerg; }); } if(CRQ_FILTER.utilizzato){ a=a.filter(function(r){ return String(r.utilizzato||'')===CRQ_FILTER.utilizzato; }); } if(CRQ_FILTER.anno){ a=a.filter(function(r){ return String(r.anno||'')===String(CRQ_FILTER.anno); }); } return a; }
+function crq_clearFilters(){ CRQ_FILTER={text:'',emerg:'',utilizzato:'',anno:''}; var e; if((e=crq_id('crqFilterText'))) e.value=''; if((e=crq_id('crqFilterEmerg'))) e.value=''; if((e=crq_id('crqFilterUtil'))) e.value=''; if((e=crq_id('crqFilterAnno'))) e.value=''; }
+function crq_render(rows,root){ var ctx=root||document; var tb=ctx.querySelector('#crqListTable tbody'); if(!tb) return; var data=crq_getFiltered(rows); tb.innerHTML=''; if(!data||!data.length){ var tr=document.createElement('tr'); var td=document.createElement('td'); td.colSpan=CRQ_COLS.length+1; td.innerHTML='<div class="empty">Nessun CRQ</div>'; tr.appendChild(td); tb.appendChild(tr); return; } for(var i=0;i<data.length;i++){ var r=data[i]; var tr=document.createElement('tr'); for(var j=0;j<CRQ_KEYS.length;j++){ var td=document.createElement('td'); var k=CRQ_KEYS[j]; td.textContent=(r[k]==null?'':String(r[k])); tr.appendChild(td); } var tdA=document.createElement('td'); var eBtn=document.createElement('button'); eBtn.className='crqEditBtn'; eBtn.textContent='✏️ Edit'; eBtn.dataset.index=String(i); var dBtn=document.createElement('button'); dBtn.className='crqDelBtn'; dBtn.textContent='🗑️ Del'; dBtn.dataset.index=String(i); tdA.appendChild(eBtn); tdA.appendChild(dBtn); tr.appendChild(tdA); tb.appendChild(tr); } }
+
+// ===== EXPORTS =====
+function crq_exportCsv(rows){ rows=Array.isArray(rows)?rows:[]; var data=crq_getFiltered(rows); var head=CRQ_COLS.slice(); var csv=head.join(';')+'\n'; for(var i=0;i<data.length;i++){ var r=data[i]; var ord=[]; for(var j=0;j<CRQ_KEYS.length;j++){ ord.push(r[CRQ_KEYS[j]]);} var line=''; for(var k=0;k<ord.length;k++){ var val=(ord[k]==null?'':String(ord[k])); var needs=val.indexOf(';')>-1||val.indexOf('"')>-1||val.indexOf('\n')>-1||val.indexOf('\r')>-1; if(needs){ val='"'+val.split('"').join('""')+'"'; } line+=(k?';':'')+val; } csv+=line+'\n'; } var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='lista-crq.csv'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400); }
+function crq_exportJson(){ var data=CRQ_DATA.slice(); var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='crq-data.json'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400); }
+function crq_importJsonFile(file){ var r=new FileReader(); r.onload=function(){ try{ var arr=JSON.parse(r.result); if(!Array.isArray(arr)) throw new Error('Formato non valido: atteso array'); var mapped=arr.map(function(o){ var n={}; for(var i=0;i<CRQ_KEYS.length;i++){ var k=CRQ_KEYS[i]; n[k]=(o&&o[k]!=null)?String(o[k]):''; } return n; }); CRQ_DATA=mapped; crq_render(CRQ_DATA,document); console.log('[CRQ] Caricati',CRQ_DATA.length,'record'); }catch(e){ alert('Errore nel file JSON: '+e.message); } }; r.onerror=function(){ alert('Impossibile leggere il file'); }; r.readAsText(file); }
+
+// ===== OPEN LIST =====
+function openCrqList(){ var d=crq_buildDialog(); if(d&&d.showModal){ crq_render(CRQ_DATA,document); try{ d.showModal(); return; }catch(e){} } if(d){ crq_render(CRQ_DATA,document); d.setAttribute('open','open'); return; } alert('Lista CRQ non disponibile'); }
+
+// ===== EVENTS =====
+document.addEventListener('click', function(ev){ var b=ev.target.closest?ev.target.closest('#helpCrqListBtn'):null; if(b){ ev.preventDefault(); openCrqList(); } var add=ev.target.closest?ev.target.closest('#crqAddBtn'):null; if(add){ ev.preventDefault(); crq_openEditor(null,-1); } var sv=ev.target.closest?ev.target.closest('#crqSaveBtn'):null; if(sv){ ev.preventDefault(); crq_exportJson(); } var ld=ev.target.closest?ev.target.closest('#crqLoadBtn'):null; if(ld){ ev.preventDefault(); var i=crq_id('crqLoadInput'); if(i) i.click(); } var fb=ev.target.closest?ev.target.closest('#crqFilterBtn'):null; if(fb){ ev.preventDefault(); var fw=crq_id('crqFilterWrap'); if(fw){ fw.style.display=(fw.style.display==='none'?'block':'none'); } } var clr=ev.target.closest?ev.target.closest('#crqClearBtn'):null; if(clr){ ev.preventDefault(); crq_clearFilters(); crq_render(CRQ_DATA,document); } var csv=ev.target.closest?ev.target.closest('#crqListExportCsvBtn'):null; if(csv){ ev.preventDefault(); crq_exportCsv(CRQ_DATA); } var ed=ev.target.closest?ev.target.closest('.crqEditBtn'):null; if(ed){ ev.preventDefault(); var idx=parseInt(ed.dataset.index,10); var rows=crq_getFiltered(CRQ_DATA); crq_openEditor(rows[idx], idx); } var rm=ev.target.closest?ev.target.closest('.crqDelBtn'):null; if(rm){ ev.preventDefault(); var idx=parseInt(rm.dataset.index,10); var rows=crq_getFiltered(CRQ_DATA); if(!isNaN(idx)&&confirm('Eliminare questa riga?')){ var orig=CRQ_DATA.indexOf(rows[idx]); if(orig>-1){ CRQ_DATA.splice(orig,1); } crq_render(CRQ_DATA,document); } } });
+document.addEventListener('change', function(ev){ var inp=ev.target.closest?ev.target.closest('#crqLoadInput'):null; if(inp&&inp.files&&inp.files[0]){ crq_importJsonFile(inp.files[0]); inp.value=''; } });
+document.addEventListener('input', function(ev){ if(ev.target&&ev.target.id==='crqFilterText'){ CRQ_FILTER.text=ev.target.value||''; crq_render(CRQ_DATA,document); } });
+document.addEventListener('change', function(ev){ if(ev.target&&ev.target.id==='crqFilterEmerg'){ CRQ_FILTER.emerg=ev.target.value||''; crq_render(CRQ_DATA,document); } if(ev.target&&ev.target.id==='crqFilterUtil'){ CRQ_FILTER.utilizzato=ev.target.value||''; crq_render(CRQ_DATA,document); } if(ev.target&&ev.target.id==='crqFilterAnno'){ CRQ_FILTER.anno=ev.target.value||''; crq_render(CRQ_DATA,document); } });
+// expose
+window.openCrqList = openCrqList;
+</script>
+<!-- Dialog: Open Points (Accordion in dialog) -->
+<dialog id="openPointsDlg">
+<div class="modal">
+<header class="modal-bar">
+<span class="title">Open Points</span>
+<button aria-label="Chiudi" class="close" id="openPointsCloseXBtn">✕</button>
+</header>
+<div class="content">
+<section class="section" id="opSection">
+<div class="section-header" style="background: linear-gradient(90deg, #0b3a68, #0f447a); border-bottom: 1px solid #0f447a80;">
+<div class="section-title">
+<button class="toggle" id="opToggle">▾</button>
+<span>📝</span> <span>Open Points</span>
+</div>
+<div class="section-actions">
+<button onclick="openOpDialog()">➕ Nuovo</button>
+<button onclick="(window.showSaveFilePicker? saveOPWithPicker() : openSaveOPDialog())">💾 Salva OP</button>
+<button onclick="importOpenPointsFromFile()">📥 Carica OP</button>
+<button onclick="openOpFilterDialog()">🔎 Filtra</button>
+<button onclick="exportOpenPointsToCSV()">📤 Export CSV</button>
+<button onclick="exportOpenPointsToExcel()">📤 Export Excel (.xls)</button>
+<button class="danger" onclick="clearOpenPoints()">🧹 Pulisci OP</button>
+</div>
+</div>
+<div id="opBody">
+<div class="grid" style="padding:0">
+<div id="opSummaryBar"><div class="count" id="opCount">0 risultati su 0</div></div>
+<div id="opTableWrap">
+<table class="table" id="opTable"></table>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div></dialog>
+<script>
+function openOpenPointsDialog(){
+  try{ var dlg=document.getElementById("openPointsDlg"); if(dlg && dlg.showModal){ dlg.showModal(); } else { alert("Apri il file nel browser per usare questa finestra."); } }
+  catch(e){ alert("Apri il file nel browser per usare questa finestra."); }
+}
+window.addEventListener("DOMContentLoaded", function(){
+  try{ var btn=document.getElementById("openPointsBtn"); if(btn){ btn.addEventListener("click", openOpenPointsDialog); } }catch(e){}
+  try{ var x=document.getElementById("openPointsCloseXBtn"); if(x){ x.addEventListener("click", function(){ var dlg=document.getElementById("openPointsDlg"); if(dlg) dlg.close(); }); } }catch(e){}
+});
+</script>
+<script>
+// === CRQ: normalizzazione + export/import (v1) ===
+function str(v){return (v==null? '': String(v)).trim();}
+function boolish(v){
+  const s = String(v==null?'':v).trim().toLowerCase();
+  return s==='1' || s==='true' || s==='si' || s==='sì' || s==='x' || s==='yes';
+}
+function normalizeCRQItem(o){
+  return {
+    id: o && o.id ? String(o.id) : (crypto && crypto.randomUUID ? crypto.randomUUID() : ('id-'+Math.random().toString(16).slice(2)+'-'+Date.now())),
+    rfc: str(o.rfc || o.RFC || o['RFC'] || o['RFC Aperti']),
+    dataApertura: str(o.dataApertura || o['Data apertura'] || o.openedAt),
+    anno: str(o.anno || o['Anno']),
+    emergenza: boolish(o.emergenza || o['Emerg.'] || o.emerg),
+    utilizzato: boolish(o.utilizzato || o['Utilizzato']),
+    categoria: str(o.categoria || o['Categoria']),
+    dataRilascio: str(o.dataRilascio || o['Data rilascio'] || o.releaseAt),
+    rifNostro: str(o.rifNostro || o['Rif nostro'] || o.riferimento),
+    prj: str(o.prj || o['PRJ'] || o.progetto),
+    contenuto: str(o.contenuto || o['Contenuto'] || o.content)
+  };
+}
+async function exportCrqToFile(fileName){
+  try{
+    var data = JSON.stringify({ crq: (window.state && Array.isArray(state.crq)) ? state.crq : [] }, null, 2);
+    var blob = new Blob([data], {type:'application/json'});
+    await saveBlobWithPicker(blob, fileName || 'crq.json');
+  }catch(e){ alert('Salvataggio CRQ non riuscito: ' + (e && e.message ? e.message : e)); }
+}
+window.importCrqFromFile = async function(){
+  try{
+    var inp = document.createElement('input');
+    inp.type='file'; inp.accept='application/json';
+    inp.onchange = async function(){
+      var f = inp.files[0]; if(!f) return; var text = await f.text();
+      try{
+        var json = JSON.parse(text);
+        var arr = Array.isArray(json) ? json : (Array.isArray(json.crq) ? json.crq : null);
+        if(!arr){ alert('JSON non valido: atteso array o { crq: [...] }'); return; }
+        state.crq = arr.map(normalizeCRQItem);
+        if(typeof save==='function') save();
+        if(typeof render==='function') render();
+        if(typeof renderOpenPoints==='function') renderOpenPoints();
+        if(typeof renderServices==='function') renderServices();
+        if(typeof updateFilterSectionsBtn==='function') updateFilterSectionsBtn();
+        try{ toast('CRQ caricati da file'); }catch(_){}
+      }catch(err){ alert('Errore import CRQ: ' + err.message); }
+    };
+    inp.click();
+  }catch(e){ alert('Caricamento CRQ fallito: ' + e.message); }
+};
+document.addEventListener('DOMContentLoaded', function(){
+  var ex = document.getElementById('crqExportBtn'); if(ex){ ex.addEventListener('click', function(){ exportCrqToFile('crq.json'); }); }
+  var im = document.getElementById('crqImportBtn'); if(im){ im.addEventListener('click', function(){ importCrqFromFile(); }); }
+});
 </script>
 </body>
 </html>
