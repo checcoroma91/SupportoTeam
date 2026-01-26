@@ -1,1 +1,14 @@
-
+[
+  {
+    "rfcAperti": "CRQ0012345",
+    "dataApertura": "2026-01-20",
+    "anno": "2026",
+    "emerg": "No",
+    "utilizzato": "Si",
+    "categoria": "Applicativa",
+    "dataRilascio": "2026-01-30",
+    "rifNostro": "REF-42",
+    "prj": "ANAG-CORE",
+    "contenuto": "Patch fix anagrafe cliente"
+  }
+]
