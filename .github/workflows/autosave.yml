@@ -32,6 +32,8 @@ jobs:
           jq -M '.client_payload | {openPoints: (.openPoints // [])}' "$GITHUB_EVENT_PATH" > data/open-points.json
           # services
           jq -M '.client_payload | {services: (.services // [])}' "$GITHUB_EVENT_PATH" > data/services.json
+          # crq
+          jq -M '.client_payload | {crq: (.crq // [])}' "$GITHUB_EVENT_PATH" > data/crq.json
           echo "=== Changed files ==="
           git status --porcelain
 
