@@ -607,16 +607,15 @@ header .toolbar #saveRepoBtn {
 }
 */
 </style>
-</head>
+<style>.home-menu .tile-save .tile-ico{box-shadow:0 0 0 1px rgba(37,99,235,.35) inset;color:#bfdbfe;}
+#linksToolbar #linksRepoLoadBtn{border-color:#059669;box-shadow:0 0 0 1px rgba(5,150,105,.25) inset;}
+#linksToolbar #linksRepoLoadBtn:hover{background:#0b1023;color:#a7f3d0;}</style></head>
 <body>
 <header>
 <div class="wrap">
 <h1><span class="dot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);"></span>BPER Banca – Team Sistemi Anagrafici</h1>
-<div class="toolbar"><label id="repoModeWrap" style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid #263041;background:#0b1328;border-radius:10px" title="Se attivo, i dati vengono caricati sempre da /data (repo), ignorando il localStorage.">
-<input id="repoModeChk" type="checkbox"/>
-<span>🔄 Dati da repo</span>
-</label>
-<input id="q" placeholder="Cerca per titolo, tag o descrizione… (⌘/Ctrl + K)" type="search"/>
+<div class="toolbar">
+
 </div>
 </div>
 </header>
@@ -679,12 +678,12 @@ header .toolbar #saveRepoBtn {
 </div>
 </div>
 </button>
-</div>
+<button class="home-tile tile-save" onclick="window.reloadFromRepo ? window.reloadFromRepo(true) : alert('Funzione non disponibile');" type="button"><div class="tile-head"><div class="tile-ico">📥</div><div><p class="tile-title">CARICA DA REPO</p><p class="tile-desc">Legge i file in /data e aggiorna</p></div></div></button></div>
 </section>
 <!-- ===== SEZIONE: OPEN POINTS ===== -->
 &gt;
 </main>
-<footer>Suggerimento: premi <span class="kbd">⌘/Ctrl</span> + <span class="kbd">K</span> per cercare velocemente. Le modifiche sono salvate nel browser (localStorage).</footer>
+<footer>Supporto Team</footer>
 <!-- Dialog: Link -->
 <dialog id="dialog"><div class="modal">
 <header class="modal-bar"><span class="title" id="dlgTitle">Nuovo link</span><button aria-label="Chiudi" class="close" id="closeXBtn">✕</button></header>
@@ -733,12 +732,12 @@ header .toolbar #saveRepoBtn {
 <dialog id="linksDlg"><div class="modal">
 <header class="modal-bar"><span class="title">Link utili</span><button aria-label="Chiudi" class="close" id="linksCloseXBtn">✕</button></header>
 <div class="content">
-<div class="toolbar" id="linksToolbar" style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px 0;"><button id="filterSectionsBtn" title="Apri menu sezioni">🏠 Menu</button>
+<div class="toolbar" id="linksToolbar" style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px 0;"><input id="q" placeholder="Cerca per titolo, tag o descrizione… (⌘/Ctrl + K)" type="search"/><button id="filterSectionsBtn" title="Apri menu sezioni">🏠 Menu</button>
 <button id="newBtn">➕ Nuovo link</button>
 <button id="manageSectionsBtn">📂 Gestisci sezioni</button>
 <button id="exportBtn">💾 Salva link</button>
 <button id="importBtn">📥 Carica link</button>
-</div>
+<button id="linksRepoLoadBtn" onclick="window.reloadFromRepo ? window.reloadFromRepo(true) : alert('Funzione non disponibile')" title="Ricarica sezioni+link da /data sul sito">📥 Carica da repo</button></div>
 <div id="container"></div>
 </div>
 </div></dialog>
@@ -1015,7 +1014,7 @@ header .toolbar #saveRepoBtn {
 <button onclick="exportServicesToCSV()">📤 CSV</button>
 <button onclick="exportServicesToExcel()">📤 Excel (.xls)</button>
 <button class="danger" onclick="clearServices()">🧹 Pulisci</button>
-</div>
+<button onclick="window.reloadFromRepo ? window.reloadFromRepo(true) : alert('Funzione non disponibile')">📥 Carica da repo</button></div>
 </div>
 <div id="svcBody">
 <div class="grid" style="padding:0">
@@ -1123,8 +1122,8 @@ var state=null; var UI_STATE_KEY='ui.state.v1';
 const SETTINGS_KEY = 'linkhub.settings.v1';
 function loadSettings() { try { return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}; } catch(_) { return {}; } }
 function saveSettings(s) { try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s || {})); } catch(_) {} }
-function isRepoModeOn() { const s = loadSettings(); return !!s.repoMode; }
-function setRepoMode(on) { const s = loadSettings(); s.repoMode = !!on; saveSettings(s); }
+function isRepoModeOn() { return true; }
+function setRepoMode(on) { /* no-op: repo mode always on */ }
 // Init
 window.addEventListener('DOMContentLoaded', initApp);
 function initApp(){
@@ -1460,20 +1459,18 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
   function toast(msg){ try{ var t=document.createElement('div'); t.textContent=msg; t.style.position='fixed'; t.style.bottom='18px'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.background='#0b1227'; t.style.border='1px solid #334155'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=99; t.style.color='#e5e7eb'; document.body.appendChild(t); setTimeout(()=>t.remove(),1600);}catch(e){} }
 
   function buildPayload(){
-  const slim=(function(){
-    try{
-      return {
-        sections:(window.state&&Array.isArray(state.sections))?state.sections:[],
-        links:(window.state&&Array.isArray(state.links))?state.links:[],
-        openPoints:(window.state&&Array.isArray(state.openPoints))?state.openPoints:[],
-        services:(window.state&&Array.isArray(state.services))?state.services:[],
-        crq:(window.state&&Array.isArray(state.crq))?state.crq:[]
-      };
-    }catch(e){
-      return {sections:[],links:[],openPoints:[],services:[],crq:[]};
-    }
-  })();
-  return JSON.stringify(slim);
+  try{
+    const slim = {
+      sections: (window.state && Array.isArray(state.sections)) ? state.sections : [],
+      links: (window.state && Array.isArray(state.links)) ? state.links : [],
+      openPoints: (window.state && Array.isArray(state.openPoints)) ? state.openPoints : [],
+      services: (window.state && Array.isArray(state.services)) ? state.services : [],
+      crq: (window.state && Array.isArray(state.crq)) ? state.crq : []
+    };
+    return JSON.stringify(slim);
+  }catch(e){
+    return JSON.stringify({sections:[],links:[],openPoints:[],services:[],crq:[]});
+  }
 }
  })();
  return JSON.stringifyslim);
@@ -1620,11 +1617,14 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
     try{ if(typeof normalizeState==='function'){ const norm = normalizeState(acc); if(norm){ window.state = norm; save(state); render(); renderOpenPoints(); renderServices(); updateFilterSectionsBtn(); } } }catch(e){}
   }
   document.addEventListener('DOMContentLoaded', autoload);
-  try{window.reloadFromRepo=autoload;}catch(e){}
+  try{window.reloadFromRepo = async function(force){
+    try{ if(force && typeof setRepoMode==='function') setRepoMode(true); }catch(e){}
+    try{ await autoload(); if(typeof toast==='function') toast('Dati ricaricati dal repo'); }catch(e){ alert('Caricamento dal repo non riuscito: '+(e&&e.message?e.message:e)); }
+  };}catch(e){}
 })();
 </script>
 <!-- HELP CRQ DIALOG -->
-<dialog id="helpCrqDlg"><div class="modal"><header class="modal-bar"><span class="title">HELP CRQ — Mappatura stati</span><button aria-label="Chiudi" class="close" id="helpCrqCloseXBtn" onclick="document.getElementById('helpCrqDlg').close()">✕</button></header><div class="content"><div id="helpCrqHint">Clicca una riga per copiare (Invio/Spazio).</div><div id="helpCrqTableWrap"><table class="table" id="helpCrqTable"><thead><tr><th>BMC Helix (CRQ)</th><th>Bhelp Operatore (RFC)</th><th>NOTE</th></tr></thead><tbody><tr data-bhelp="n.a." data-bmc="Bozza" data-note="Dopo apertura richiedere slot" role="button" tabindex="0"><td>Bozza</td><td>n.a.</td><td>Dopo apertura richiedere slot</td></tr><tr data-bhelp="Verifica Referente Servizio IT" data-bmc="Richiesta autorizzazione" data-note="-" role="button" tabindex="0"><td>Richiesta autorizzazione</td><td>Verifica Referente Servizio IT</td><td>-</td></tr><tr data-bhelp="Deploy Test / Esecuzione Test" data-bmc="Pianificazione in corso" data-note="Martedì settimana prima del rilascio" role="button" tabindex="0"><td>Pianificazione in corso</td><td>Deploy Test / Esecuzione Test</td><td>Martedì settimana prima del rilascio</td></tr><tr data-bhelp="Completamento Test" data-bmc="Revisione pianificata" data-note="-" role="button" tabindex="0"><td>Revisione pianificata</td><td>Completamento Test</td><td>-</td></tr><tr data-bhelp="Verifica ICT" data-bmc="Approvazione pianificata" data-note="Giorno prima del rilascio" role="button" tabindex="0"><td>Approvazione pianificata</td><td>Verifica ICT</td><td>Giorno prima del rilascio</td></tr><tr data-bhelp="n.a." data-bmc="Pianificato" data-note="" role="button" tabindex="0"><td>Pianificato</td><td>n.a.</td><td></td></tr><tr data-bhelp="Preparazione Installazione / Installazione" data-bmc="Implementazione in corso" data-note="" role="button" tabindex="0"><td>Implementazione in corso</td><td>Preparazione Installazione / Installazione</td><td></td></tr><tr data-bhelp="n.a." data-bmc="Completato" data-note="" role="button" tabindex="0"><td>Completato</td><td>n.a.</td><td></td></tr><tr data-bhelp="Chiuso Deploy" data-bmc="Chiuso" data-note="" role="button" tabindex="0"><td>Chiuso</td><td>Chiuso Deploy</td><td></td></tr></tbody></table></div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button id="helpCrqListBtn" title="Apri Lista CRQ">📋 LISTA CRQ</button>   <button class="primary" onclick="document.getElementById('helpCrqDlg').close()">✖️ CHIUDI</button></div></div></div></dialog>
+<dialog id="helpCrqDlg"><div class="modal"><header class="modal-bar"><span class="title">HELP CRQ — Mappatura stati</span><button aria-label="Chiudi" class="close" id="helpCrqCloseXBtn" onclick="document.getElementById('helpCrqDlg').close()">✕</button></header><div class="content"><div id="helpCrqHint">Clicca una riga per copiare (Invio/Spazio).</div><div id="helpCrqTableWrap"><table class="table" id="helpCrqTable"><thead><tr><th>BMC Helix (CRQ)</th><th>Bhelp Operatore (RFC)</th><th>NOTE</th></tr></thead><tbody><tr data-bhelp="n.a." data-bmc="Bozza" data-note="Dopo apertura richiedere slot" role="button" tabindex="0"><td>Bozza</td><td>n.a.</td><td>Dopo apertura richiedere slot</td></tr><tr data-bhelp="Verifica Referente Servizio IT" data-bmc="Richiesta autorizzazione" data-note="-" role="button" tabindex="0"><td>Richiesta autorizzazione</td><td>Verifica Referente Servizio IT</td><td>-</td></tr><tr data-bhelp="Deploy Test / Esecuzione Test" data-bmc="Pianificazione in corso" data-note="Martedì settimana prima del rilascio" role="button" tabindex="0"><td>Pianificazione in corso</td><td>Deploy Test / Esecuzione Test</td><td>Martedì settimana prima del rilascio</td></tr><tr data-bhelp="Completamento Test" data-bmc="Revisione pianificata" data-note="-" role="button" tabindex="0"><td>Revisione pianificata</td><td>Completamento Test</td><td>-</td></tr><tr data-bhelp="Verifica ICT" data-bmc="Approvazione pianificata" data-note="Giorno prima del rilascio" role="button" tabindex="0"><td>Approvazione pianificata</td><td>Verifica ICT</td><td>Giorno prima del rilascio</td></tr><tr data-bhelp="n.a." data-bmc="Pianificato" data-note="" role="button" tabindex="0"><td>Pianificato</td><td>n.a.</td><td></td></tr><tr data-bhelp="Preparazione Installazione / Installazione" data-bmc="Implementazione in corso" data-note="" role="button" tabindex="0"><td>Implementazione in corso</td><td>Preparazione Installazione / Installazione</td><td></td></tr><tr data-bhelp="n.a." data-bmc="Completato" data-note="" role="button" tabindex="0"><td>Completato</td><td>n.a.</td><td></td></tr><tr data-bhelp="Chiuso Deploy" data-bmc="Chiuso" data-note="" role="button" tabindex="0"><td>Chiuso</td><td>Chiuso Deploy</td><td></td></tr></tbody></table></div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button id="helpCrqListBtn" title="Apri Lista CRQ">📋 LISTA CRQ</button> <button class="primary" onclick="document.getElementById('helpCrqDlg').close()">✖️ CHIUDI</button></div></div></div></dialog>
 <div id="helpCrqOverlay"></div>
 <div id="helpCrqCard"><header><span><strong>HELP CRQ — Mappatura stati</strong> (fallback)</span><div><button id="helpCrqCloseBtn">✖️ Chiudi</button></div></header><div class="body"><div id="helpCrqBodyMount"></div></div></div>
 <script>(function(){function mountFromDialog(){var dlg=document.getElementById('helpCrqDlg');var mount=document.getElementById('helpCrqBodyMount');if(!dlg||!mount)return false;var inner=dlg.querySelector('.content');if(!inner)return false;mount.innerHTML=inner.outerHTML;return true}function showCard(){var ov=document.getElementById('helpCrqOverlay');var card=document.getElementById('helpCrqCard');if(!ov||!card)return;ov.style.display='block';card.style.display='block';var b=document.getElementById('helpCrqCloseBtn');if(b){b.onclick=function(){ov.style.display='none';card.style.display='none'}}}window.openHelpCrq=(function(orig){return function(){try{var d=document.getElementById('helpCrqDlg');if(d&&d.showModal){d.showModal();return}}catch(e){}try{if(mountFromDialog()){showCard();return}}catch(e){}alert('Impossibile aprire HELP CRQ: controlla che il browser permetta i dialog, oppure usa questo file via http:// (non file://).')}})(window.openHelpCrq||function(){});document.addEventListener('DOMContentLoaded',function(){var btn=document.getElementById('helpCrqBtn');if(btn&&!btn.onclick){btn.addEventListener('click',function(){window.openHelpCrq()})}});})();</script>
@@ -1809,7 +1809,7 @@ window.openCrqList = openCrqList;
 </div>
 <div id="opBody">
 <div class="grid" style="padding:0">
-<div id="opSummaryBar"><div class="count" id="opCount">0 risultati su 0</div></div>
+<div id="opSummaryBar"><div class="count" id="opCount">0 risultati su 0</div><button onclick="window.reloadFromRepo ? window.reloadFromRepo(true) : alert('Funzione non disponibile')">📥 Carica da repo</button></div>
 <div id="opTableWrap">
 <table class="table" id="opTable"></table>
 </div>
