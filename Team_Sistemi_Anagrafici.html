@@ -669,7 +669,7 @@ header .toolbar #saveRepoBtn {
 </div>
 </div>
 </button>
-<button class="home-tile tile-save" onclick="document.getElementById('saveRepoBtn')?.click()" type="button">
+<button class="home-tile tile-save" onclick="(window.handleSave ? window.handleSave() : alert('Funzione non disponibile'))" type="button">
 <div class="tile-head">
 <div class="tile-ico">💾</div>
 <div>
@@ -1448,152 +1448,93 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
 })();
 </script>
 <script>
-
-// === v44.0b: Autosave diretto (serverless) o fallback Issue ===
+// === v44.0b ES5 SAFE: Autosave diretto (serverless) o fallback Issue ===
 (function(){
-  const LS_CFG  = 'autosave.repo';   // {owner, repo} - usato SOLO per fallback
-  const LS_LAST = 'autosave.last';   // {ts, hash}
-  const LABEL   = 'autosave';
-
-  function djb2(str){ let h=5381; for(let i=0;i<str.length;i++){ h=((h<<5)+h) + str.charCodeAt(i); h=h|0; } return (h>>>0).toString(16); }
-  function toast(msg){ try{ var t=document.createElement('div'); t.textContent=msg; t.style.position='fixed'; t.style.bottom='18px'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.background='#0b1227'; t.style.border='1px solid #334155'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=99; t.style.color='#e5e7eb'; document.body.appendChild(t); setTimeout(()=>t.remove(),1600);}catch(e){} }
-
+  var LS_CFG = 'autosave.repo';
+  var LS_LAST = 'autosave.last';
+  var LABEL = 'autosave';
+  function djb2(str){ var h=5381; for(var i=0;i<str.length;i++){ h=((h<<5)+h) + str.charCodeAt(i); h=h|0; } return (h>>>0).toString(16); }
+  function toast(msg){ try{ var t=document.createElement('div'); t.textContent=msg; t.style.position='fixed'; t.style.bottom='18px'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.background='#0b1227'; t.style.border='1px solid #334155'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=99; t.style.color='#e5e7eb'; document.body.appendChild(t); setTimeout(function(){t.remove();},1600);}catch(e){} }
   function buildPayload(){
-  try{
-    const slim = {
-      sections: (window.state && Array.isArray(state.sections)) ? state.sections : [],
-      links: (window.state && Array.isArray(state.links)) ? state.links : [],
-      openPoints: (window.state && Array.isArray(state.openPoints)) ? state.openPoints : [],
-      services: (window.state && Array.isArray(state.services)) ? state.services : [],
-      crq: (window.state && Array.isArray(state.crq)) ? state.crq : []
-    };
-    return JSON.stringify(slim);
-  }catch(e){
-    return JSON.stringify({sections:[],links:[],openPoints:[],services:[],crq:[]});
-  }
-}
- })();
- return JSON.stringifyslim);
-  }
-
-  async function saveDirect(){
-    const ep = (window.AUTOSAVE_ENDPOINT||'').trim();
-    if (!/^https?:\/\//i.test(ep)) return false; // non configurato -> usa fallback
-
-    const json = buildPayload();
-    const ts = new Date().toISOString();
-
-    // Anti-spam locale (20s per lo stesso contenuto)
     try{
-      const lastRaw = localStorage.getItem(LS_LAST);
+      var slim = {
+        sections: (window.state && Object.prototype.toString.call(state.sections)==='[object Array]') ? state.sections : [],
+        links:    (window.state && Object.prototype.toString.call(state.links)==='[object Array]')    ? state.links    : [],
+        openPoints:(window.state && Object.prototype.toString.call(state.openPoints)==='[object Array]')? state.openPoints: [],
+        services: (window.state && Object.prototype.toString.call(state.services)==='[object Array]') ? state.services : [],
+        crq:      (window.state && Object.prototype.toString.call(state.crq)==='[object Array]')      ? state.crq      : []
+      };
+      return JSON.stringify(slim);
+    }catch(e){ return JSON.stringify({sections:[],links:[],openPoints:[],services:[],crq:[]}); }
+  }
+  function saveDirect(){
+    var ep = (window.AUTOSAVE_ENDPOINT||'').trim();
+    if (!/^https?:\/\//i.test(ep)) return false; // non configurato -> usa fallback
+    var json = buildPayload();
+    try{
+      var lastRaw = localStorage.getItem(LS_LAST);
       if (lastRaw){
-        const last = JSON.parse(lastRaw);
-        if (last && last.hash===djb2(json) && (Date.now()-last.ts)<20000){
-          toast('Attendi qualche secondo prima di ripetere il salvataggio');
-          return true;
-        }
+        var last = JSON.parse(lastRaw);
+        if (last && last.hash===djb2(json) && (Date.now()-last.ts)<20000){ toast('Attendi qualche secondo prima di ripetere il salvataggio'); return true; }
       }
     }catch(e){}
-
-    // POST al Worker
-    const res = await fetch(ep, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: json
-    });
-
-    if (!res.ok){
-      const t = await res.text().catch(()=>res.statusText);
-      alert('Autosave fallito: ' + t);
-      return true; // consideriamo gestito, non ricadere nel fallback
-    }
-
-    try{ localStorage.setItem(LS_LAST, JSON.stringify({ ts: Date.now(), hash: djb2(json) })); }catch(e){}
-    toast('Salvato su repo ✔');
-    return true;
+    return fetch(ep, { method:'POST', headers:{'Content-Type':'application/json'}, body: json })
+      .then(function(res){ if(!res.ok) return res.text().then(function(t){ throw new Error(t||res.statusText);}); return res; })
+      .then(function(){ try{ localStorage.setItem(LS_LAST, JSON.stringify({ ts: Date.now(), hash: djb2(json) })); }catch(e){} toast('Salvato su repo ✔'); return true; })
+      .catch(function(err){ alert('Autosave fallito: '+ (err && err.message ? err.message : err)); return true; });
   }
-
-  // ===== Fallback Issue (solo se nessun endpoint) =====
   function getRepoCfg(){
-    try{
-      const raw = localStorage.getItem(LS_CFG);
-      if (raw){ const cfg=JSON.parse(raw); if (cfg && cfg.owner && cfg.repo) return cfg; }
-    }catch(e){}
-    const owner = prompt('GitHub OWNER/ORG (es. my-org o mio-utente):','');
-    if(!owner) throw new Error('Owner mancante');
-    const repo  = prompt('GitHub REPO (es. linkhub):','');
-    if(!repo) throw new Error('Repo mancante');
-    const cfg = {owner:String(owner).trim(), repo:String(repo).trim()};
-    localStorage.setItem(LS_CFG, JSON.stringify(cfg));
-    return cfg;
+    try{ var raw = localStorage.getItem(LS_CFG); if (raw){ var cfg=JSON.parse(raw); if (cfg && cfg.owner && cfg.repo) return cfg; } }catch(e){}
+    var owner = prompt('GitHub OWNER/ORG (es. my-org o mio-utente):',''); if(!owner) throw new Error('Owner mancante');
+    var repo  = prompt('GitHub REPO (es. linkhub):',''); if(!repo)  throw new Error('Repo mancante');
+    var cfg = {owner:String(owner).trim(), repo:String(repo).trim()}; localStorage.setItem(LS_CFG, JSON.stringify(cfg)); return cfg;
   }
-
   function openIssueURL(owner, repo, title, labels, body){
-    const base = 'https://github.com/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/issues/new';
-    const params = new URLSearchParams();
-    params.set('title', title);
-    if(labels && labels.length) params.set('labels', labels.join(','));
-    params.set('body', body);
-    const url = base + '?' + params.toString();
-    window.open(url, '_blank', 'noopener');
+    var base = 'https://github.com/'+encodeURIComponent(owner)+'/'+encodeURIComponent(repo)+'/issues/new';
+    var params = new URLSearchParams(); params.set('title', title); if(labels&&labels.length) params.set('labels', labels.join(',')); params.set('body', body);
+    var url = base+'?'+params.toString(); window.open(url, '_blank', 'noopener');
   }
-
   function copyToClipboard(text){
     try{ navigator.clipboard.writeText(text); return true; }
-    catch(e){ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); const ok=document.execCommand('copy'); ta.remove(); return ok; }
+    catch(e){ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); var ok=document.execCommand('copy'); ta.remove(); return ok; }
   }
-
-  async function handleSave(){
-    const btn=document.getElementById('saveRepoBtn');
-    if(btn){ btn.disabled=true; btn.style.opacity='.7'; }
+  function handleSave(){
     try{
-      // 1) Prova salvataggio diretto (se endpoint configurato)
-      const done = await saveDirect();
-      if (done) return;
-
-      // 2) Fallback: Issue (vecchio flusso, nessuna regressione)
-      const cfg = getRepoCfg();
-      const json = buildPayload();
-      const ts = new Date().toISOString();
-
-      const compactHash = djb2(json);
-      const pretty = JSON.stringify(JSON.parse(json), null, 2);
-      const header = 'Autosave payload\n\nTimestamp: '+ts+'\nContent-Hash: '+compactHash;
-      const bodyBlock = '```json\n'+pretty+'\n```';
-      let issueBody = header+'\n\n'+bodyBlock+'\n\n<!-- linkhub-autosave -->';
-
-      const MAX_URL_BODY = 6500;
-      const safeBodyForURL = issueBody.length <= MAX_URL_BODY ? issueBody : null;
-
-      if (safeBodyForURL){
-        openIssueURL(cfg.owner, cfg.repo, 'autosave '+ts, [LABEL], safeBodyForURL);
-        toast("Si apre GitHub: conferma la creazione dell'Issue");
-      } else {
-        const ok = copyToClipboard(issueBody);
-        if (ok){
-          const smallBody = '**Incolla il payload negli appunti tra i marker qui sotto e premi Submit.**\n\n```json\nPASTE_HERE\n```\n\nTimestamp: '+ts+'  \\nContent-Hash: '+compactHash+'\n\n<!-- linkhub-autosave -->';
-          openIssueURL(cfg.owner, cfg.repo, 'autosave '+ts, [LABEL], smallBody);
-          toast("Payload copiato: incollalo nel corpo dell'Issue");
-        } else {
-          alert('Copia negli appunti non riuscita: prova a ripetere o ridurre i dati');
-        }
+      var direct = saveDirect();
+      if (direct && typeof direct.then==='function'){
+        direct.then(function(done){ if(done) return; fallbackIssue(); });
+      } else if (!direct){
+        fallbackIssue();
       }
+    }catch(e){ alert('Salvataggio non riuscito: ' + (e && e.message ? e.message : e)); }
+  }
+  function fallbackIssue(){
+    var cfg = getRepoCfg();
+    var json = buildPayload();
+    var ts = new Date().toISOString();
+    var compactHash = djb2(json);
+    var pretty = JSON.stringify(JSON.parse(json), null, 2);
+    var header = 'Autosave payload\n' + 'Timestamp: ' + ts + 'Content-Hash: ' + compactHash;
+    var bodyBlock = '```json' + pretty + '```';
+    var issueBody = header + '\n' + bodyBlock + ''
 
-      try{ localStorage.setItem(LS_LAST, JSON.stringify({ ts: Date.now(), hash: compactHash })); }catch(e){}
-    } catch(e){
-      alert('Salvataggio non riuscito: '+ (e && e.message ? e.message : e));
-    } finally {
-      if(btn){ btn.disabled=false; btn.style.opacity=''; }
+<!-- linkhub-autosave -->';
+    var MAX_URL_BODY = 6500;
+    var safeBodyForURL = issueBody.length <= MAX_URL_BODY ? issueBody : null;
+    if (safeBodyForURL){ openIssueURL(cfg.owner, cfg.repo, 'autosave '+ts, [LABEL], safeBodyForURL); toast("Si apre GitHub: conferma la creazione dell'Issue"); }
+    else{
+      var ok = copyToClipboard(issueBody);
+      if (ok){
+        var smallBody = '**Incolla il payload negli appunti tra i marker qui sotto e premi Submit.**\n```json\nPASTE_HERE\n```Timestamp: '+ts+'	Content-Hash: '+compactHash+''
+
+<!-- linkhub-autosave -->';
+        openIssueURL(cfg.owner, cfg.repo, 'autosave '+ts, [LABEL], smallBody);
+        toast("Payload copiato: incollalo nel corpo dell'Issue");
+      } else { alert('Copia negli appunti non riuscita: prova a ripetere o ridurre i dati'); }
     }
   }
-
-  window.addEventListener('DOMContentLoaded', function(){
-    const btn=document.getElementById('saveRepoBtn');
-    if(btn){
-      btn.title = "Salva i dati sul repo (1-click)";
-      let t=null; btn.addEventListener('click', function(){ clearTimeout(t); t=setTimeout(handleSave, 200); });
-    }
-  });
+  // esponi per tile e pulsanti
+  if(!window.handleSave) window.handleSave = handleSave;
 })();
 </script>
 <script>
@@ -1606,11 +1547,10 @@ async function saveOPWithPicker(){ try{ const data=JSON.stringify({openPoints: s
     if(!location || !/^https?:/i.test(location.protocol)) return;
     const base = new URL('./data/', location.href).href;
     const files = [
-      {name:'linkhub-links.json', map:(data,acc)=>{ if(Array.isArray(data)){ acc.links=data; } else { if(data.sections) acc.sections = Array.isArray(data.sections)? data.sections : acc.sections; if(data.links) acc.links = Array.isArray(data.links)? data.links : acc.links; }}},
-      {name:'open-points.json',   map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.openPoints)? data.openPoints : [,
- {name:'crq.json', map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.crq)? data.crq : []); acc.crq = arr; }}]); acc.openPoints = arr; }},
-      {name:'services.json',      map:(data,acc)=>{ const arr = Array.isArray(data)? data : (Array.isArray(data.services)? data.services : []); acc.services = arr; }}
-    ];
+  {name:'linkhub-links.json', map:function(data,acc){ if(Object.prototype.toString.call(data)==='[object Array]'){ acc.links=data; } else { if(data.sections) acc.sections = (Object.prototype.toString.call(data.sections)==='[object Array]')? data.sections : acc.sections; if(data.links) acc.links = (Object.prototype.toString.call(data.links)==='[object Array]')? data.links : acc.links; } }},
+  {name:'open-points.json', map:function(data,acc){ var arr = (Object.prototype.toString.call(data)==='[object Array]')? data : ((data && Object.prototype.toString.call(data.openPoints)==='[object Array]')? data.openPoints : []); acc.openPoints = arr; }},
+  {name:'crq.json', map:function(data,acc){ var arr = (Object.prototype.toString.call(data)==='[object Array]')? data : ((data && Object.prototype.toString.call(data.crq)==='[object Array]')? data.crq : []); acc.crq = arr; }},
+  {name:'services.json', map:function(data,acc){ var arr = (Object.prototype.toString.call(data)==='[object Array]')? data : ((data && Object.prototype.toString.call(data.services)==='[object Array]')? data.services : []); acc.services = arr; }}];
     let acc={sections:[],links:[],openPoints:[],services:[],crq:[]}; let any=false;
     for(const f of files){ try{ const j = await safeFetchJSON(base+f.name); f.map(j, acc); any=true; }catch(e){} }
     if(!any) return;
