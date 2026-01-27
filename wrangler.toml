@@ -4,3 +4,4 @@ compatibility_date = "2025-01-01"
 
 [vars]
 ALLOWED_ORIGINS = "https://checcoroma91.github.io"
+GH_BRANCH = "main"
