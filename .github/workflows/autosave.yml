@@ -1,5 +1,6 @@
-name: LinkHub Autosave (dispatch)
+                                 
 
+name: LinkHub Autosave (dispatch)
 on:
   repository_dispatch:
     types: [linkhub_autosave]
@@ -32,17 +33,18 @@ jobs:
           jq -M '.client_payload | {openPoints: (.openPoints // [])}' "$GITHUB_EVENT_PATH" > data/open-points.json
           # services
           jq -M '.client_payload | {services: (.services // [])}' "$GITHUB_EVENT_PATH" > data/services.json
-          # crq
+          # crq   <-- NEW
           jq -M '.client_payload | {crq: (.crq // [])}' "$GITHUB_EVENT_PATH" > data/crq.json
+
           echo "=== Changed files ==="
           git status --porcelain
 
       - name: Commit & push
         run: |
           set -e
-          git config user.name  "linkhub-bot"
+          git config user.name "linkhub-bot"
           git config user.email "linkhub-bot@users.noreply.github.com"
-          git add data/linkhub-links.json data/open-points.json data/services.json || true
+          git add data/linkhub-links.json data/open-points.json data/services.json data/crq.json || true
           if git diff --cached --quiet; then
             echo "Nessuna modifica da committare."
             exit 0
