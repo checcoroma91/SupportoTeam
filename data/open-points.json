@@ -1,94 +1,94 @@
 {
   "openPoints": [
     {
-      "assignees": [
-        "Fra"
-      ],
-      "createdAt": "2026-01-23",
-      "desc": "senti qualcuno di Sales solution e capitevi",
-      "dueAt": "2026-01-26",
       "id": "b561a92a-9cf4-4c42-a87e-7ede3d70bfe8",
-      "maxPriority": false,
-      "notes": "bhelp Operatore, teams, ricerca per unità organizzativa",
-      "priority": "medium",
+      "title": "Ticket 12547258B",
       "project": "CRIF",
-      "status": "Da fare",
-      "title": "Ticket 12547258B"
-    },
-    {
       "assignees": [
         "Fra"
       ],
+      "priority": "medium",
+      "status": "Da fare",
+      "maxPriority": false,
       "createdAt": "2026-01-23",
-      "desc": "Richiesto tramite ticket 12558801B i profili LDAP portale enti",
-      "dueAt": "",
+      "dueAt": "2026-01-26",
+      "desc": "senti qualcuno di Sales solution e capitevi",
+      "notes": "bhelp Operatore, teams, ricerca per unità organizzativa"
+    },
+    {
       "id": "5c2132ee-5971-450e-b3d2-d90f3a5b5695",
-      "maxPriority": false,
-      "notes": "",
-      "priority": "high",
+      "title": "Profili LDAP",
       "project": "Portale Enti Convenzionati",
-      "status": "In corso",
-      "title": "Profili LDAP"
-    },
-    {
       "assignees": [
         "Fra"
       ],
+      "priority": "high",
+      "status": "In corso",
+      "maxPriority": false,
       "createdAt": "2026-01-23",
-      "desc": "Allegare i tag per il rilascio",
-      "dueAt": "2026-01-25",
+      "dueAt": "",
+      "desc": "Richiesto tramite ticket 12558801B i profili LDAP portale enti",
+      "notes": ""
+    },
+    {
       "id": "66670183-a1e9-4fef-b063-b16ed87ad806",
-      "maxPriority": false,
-      "notes": "",
-      "priority": "high",
+      "title": "CRQ000000003964",
       "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
       "status": "Da fare",
-      "title": "CRQ000000003964"
-    },
-    {
-      "assignees": [
-        "Fra"
-      ],
-      "createdAt": "2026-01-23",
-      "desc": "Consegnare il Service Inventory modificato",
-      "dueAt": "2026-01-23",
-      "id": "db1519c1-e9c9-4f83-8475-6a149963e2f6",
-      "maxPriority": true,
-      "notes": "",
-      "priority": "critical",
-      "project": "Portale Enti Convenzionati",
-      "status": "In corso",
-      "title": "Service Inventory"
-    },
-    {
-      "assignees": [
-        "Fra"
-      ],
-      "createdAt": "2026-01-19",
-      "desc": "Servizi SOAP e REST confermati. Test in corso",
-      "dueAt": "",
-      "id": "c9a4060e-ffbb-4137-bed6-73ab3860e86a",
-      "maxPriority": true,
-      "notes": "",
-      "priority": "high",
-      "project": "Portale Enti Convenzionati",
-      "status": "In corso",
-      "title": "Servizi Portale Enti"
-    },
-    {
-      "assignees": [
-        "Fra"
-      ],
-      "createdAt": "2026-01-19",
-      "desc": "Approvare la richiesta di stima di reactive per la produzione di un flusso per l'invio di tutte le posizioni attive nella poteri al CRM.",
-      "dueAt": "",
-      "id": "6a35c308-dd53-4285-adac-84946a550443",
       "maxPriority": false,
-      "notes": "",
+      "createdAt": "2026-01-23",
+      "dueAt": "2026-01-25",
+      "desc": "Allegare i tag per il rilascio",
+      "notes": ""
+    },
+    {
+      "id": "db1519c1-e9c9-4f83-8475-6a149963e2f6",
+      "title": "Service Inventory",
+      "project": "Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "critical",
+      "status": "In corso",
+      "maxPriority": true,
+      "createdAt": "2026-01-23",
+      "dueAt": "2026-01-23",
+      "desc": "Consegnare il Service Inventory modificato",
+      "notes": ""
+    },
+    {
+      "id": "c9a4060e-ffbb-4137-bed6-73ab3860e86a",
+      "title": "Servizi Portale Enti",
+      "project": "Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
       "priority": "high",
+      "status": "In corso",
+      "maxPriority": true,
+      "createdAt": "2026-01-19",
+      "dueAt": "",
+      "desc": "Servizi SOAP e REST confermati. Test in corso",
+      "notes": ""
+    },
+    {
+      "id": "6a35c308-dd53-4285-adac-84946a550443",
+      "title": "Estrazione CRM",
       "project": "Poteri di firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
       "status": "Nuovo",
-      "title": "Estrazione CRM"
+      "maxPriority": false,
+      "createdAt": "2026-01-19",
+      "dueAt": "",
+      "desc": "Approvare la richiesta di stima di reactive per la produzione di un flusso per l'invio di tutte le posizioni attive nella poteri al CRM.",
+      "notes": ""
     }
   ]
 }
