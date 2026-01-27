@@ -1,0 +1,6 @@
+name = "supportoteam"
+main = "worker.js"              # ← qui il nome deve essere ESATTAMENTE il tuo file
+compatibility_date = "2025-01-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://checcoroma91.github.io"
