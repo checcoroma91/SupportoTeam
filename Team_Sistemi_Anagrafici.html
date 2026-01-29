@@ -2,13 +2,13 @@
 
 <html lang="it">
 <head>
-<!-- SupportoTeam v2.1.4 STABLE -->
+<!-- SupportoTeam v2.1.8 STABLE -->
 
 <!-- PATCH v1.3c: clearLinks fallback + CRQ bootstrap/render keys (no new <script> tags) -->
 
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Supporto Team – Sistemi Anagrafici (v2.1.4)</title>
+<title>Supporto Team – Sistemi Anagrafici (v2.1.8)</title>
 <style>:root{ --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#22c55e; --danger:#ef4444; --chip:#1f2937; --space:18px; --edge:clamp(8px, 2vw, 16px); --op-max:60vh; }
 *{box-sizing:border-box} html, body { max-width:100%; overflow-x:hidden; }
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,#0b1023,#0f172a);color:var(--text)}
@@ -662,6 +662,125 @@ html body #crqListDlg { width: clamp(1600px, 98vw, 2200px); max-width: 2200px; }
 #crqTableWrap{order:1;flex:1 1 auto;width:100%;overflow:auto}
 #crqTable{width:100%}
 </style>
+
+<style>
+/* === v2.1.8: Filtri CRQ & Open Points allineati allo stile 'Filtra Servizi' (solo CSS) === */
+html body #opFilterDlg .opf-card,
+html body #crqFilterDlg .opf-card { background:#0b1023; border:1px solid #1f2937; border-radius:clamp(10px,1.2cqw,14px); padding:clamp(12px,1.6cqw,18px); }
+html body #opFilterDlg .opf-card h4,
+html body #crqFilterDlg .opf-card h4 { margin:0 0 10px 0; font-size:clamp(14px,2.2cqw,16px); font-weight:600; }
+html body #opFilterDlg .opf-row,
+html body #crqFilterDlg .opf-row { display:grid; grid-template-columns:1fr 1fr; gap:clamp(10px,1cqw,14px); }
+html body #opFilterDlg .opf-card input[type="text"],
+html body #opFilterDlg .opf-card input[type="date"],
+html body #crqFilterDlg .opf-card input[type="text"],
+html body #crqFilterDlg .opf-card input[type="date"] { min-height:38px; min-width:0; width:100%; padding:10px 12px; border:1px solid #263041; background:#0a1227; color:var(--text); border-radius:10px; outline:none; }
+html body #opFilterDlg .opf-card input[type="text"]::placeholder,
+html body #crqFilterDlg .opf-card input[type="text"]::placeholder { color:var(--muted); }
+html body #opFilterDlg .row > input,
+html body #crqFilterDlg .row > input { min-height:38px; padding:10px 12px; border:1px solid #263041; background:#0a1227; color:var(--text); border-radius:10px; }
+html body #opFilterDlg .opf-checks,
+html body #crqFilterDlg .opf-checks { padding:6px 8px; border:1px solid #263041; border-radius:10px; background:#0a1227; }
+html body #opFilterDlg .opf-checks label,
+html body #crqFilterDlg .opf-checks label { display:flex; align-items:center; gap:8px; margin:4px 0; color:var(--text); }
+html body #opFilterDlg .opf-actions,
+html body #crqFilterDlg .opf-actions { position:sticky; bottom:0; display:flex; justify-content:flex-end; gap:10px; padding:12px 0 0 0; margin-top:14px; background:linear-gradient(180deg, rgba(11,16,35,0), #0b1023 40%); border-top:1px solid #1f2937; }
+</style>
+
+
+<style>
+/* === v2.1.8: Forza TUTTE le input box dei FILTRI in stile scuro/blu (niente box bianchi) === */
+:root{
+  --filter-input-bg: #0b2a52;
+  --filter-input-bg2: #0a2447;
+  --filter-input-border: #2b4d78;
+  --filter-input-radius: 18px;
+  --filter-input-minh: 46px;
+  --filter-input-pad-y: 12px;
+  --filter-input-pad-x: 14px;
+}
+
+/* Scope: solo finestre FILTRI */
+html body #svcFilterDlg,
+html body #opFilterDlg,
+html body #crqFilterDlg{ color-scheme: dark; }
+
+/* Input + select dentro i filtri */
+html body #svcFilterDlg input,
+html body #svcFilterDlg select,
+html body #opFilterDlg input,
+html body #opFilterDlg select,
+html body #crqFilterDlg input,
+html body #crqFilterDlg select{
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--filter-input-bg) !important;
+  border: 1px solid var(--filter-input-border) !important;
+  color: var(--text) !important;
+  border-radius: var(--filter-input-radius) !important;
+  min-height: var(--filter-input-minh) !important;
+  padding: var(--filter-input-pad-y) var(--filter-input-pad-x) !important;
+  box-shadow: 0 0 0 1px rgba(11,42,82,.35) inset;
+}
+
+/* Eccezione: checkbox/radio NON diventano pillole */
+html body #svcFilterDlg input[type="checkbox"],
+html body #svcFilterDlg input[type="radio"],
+html body #opFilterDlg input[type="checkbox"],
+html body #opFilterDlg input[type="radio"],
+html body #crqFilterDlg input[type="checkbox"],
+html body #crqFilterDlg input[type="radio"]{
+  appearance: auto;
+  -webkit-appearance: auto;
+  min-height: auto !important;
+  padding: 0 !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Placeholder */
+html body #svcFilterDlg input::placeholder,
+html body #opFilterDlg input::placeholder,
+html body #crqFilterDlg input::placeholder{ color: rgba(148,163,184,.95) !important; }
+
+/* Focus */
+html body #svcFilterDlg input:focus,
+html body #svcFilterDlg select:focus,
+html body #opFilterDlg input:focus,
+html body #opFilterDlg select:focus,
+html body #crqFilterDlg input:focus,
+html body #crqFilterDlg select:focus{
+  outline: none;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 2px rgba(59,130,246,.28), 0 0 0 1px rgba(11,42,82,.35) inset;
+}
+
+/* Date picker icon (Chrome/Edge) */
+html body #svcFilterDlg input[type="date"]::-webkit-calendar-picker-indicator,
+html body #opFilterDlg input[type="date"]::-webkit-calendar-picker-indicator,
+html body #crqFilterDlg input[type="date"]::-webkit-calendar-picker-indicator{ filter: invert(1) opacity(.85); }
+
+/* Autofill (Chrome): evita giallo/bianco */
+html body #svcFilterDlg input:-webkit-autofill,
+html body #opFilterDlg input:-webkit-autofill,
+html body #crqFilterDlg input:-webkit-autofill{
+  -webkit-text-fill-color: var(--text) !important;
+  box-shadow: 0 0 0 1000px var(--filter-input-bg) inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Checkbox group container coerente */
+html body #svcFilterDlg .opf-checks,
+html body #opFilterDlg .opf-checks,
+html body #crqFilterDlg .opf-checks{
+  background: var(--filter-input-bg2) !important;
+  border: 1px solid var(--filter-input-border) !important;
+  border-radius: 16px !important;
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -826,7 +945,7 @@ html body #crqListDlg { width: clamp(1600px, 98vw, 2200px); max-width: 2200px; }
     </header>
     <div class="content">
       <div class="row"><input id="crqfText" placeholder="Cerca in tutte le colonne (RFC/PRJ/Categoria/Contenuto/Rif/Anno)"/></div>
-      <div class="opf-grid">
+      <div class="opf-grid opf-grid-op">
         <div class="opf-card"><h4>RFC Aperti</h4><input id="crqfRfc" placeholder="RFC contiene..."/></div>
         <div class="opf-card"><h4>Data apertura</h4><div class="opf-row"><input id="crqfAperturaFrom" type="date"/><input id="crqfAperturaTo" type="date"/></div></div>
         <div class="opf-card"><h4>Anno</h4><input id="crqfAnno" placeholder="Anno"/></div>
@@ -2167,6 +2286,116 @@ window.addEventListener('DOMContentLoaded', function(){
     if (x) x.addEventListener('click', function(){ var d=document.getElementById('crqListDlg'); if(d) d.close(); });
   }catch(e){}
 });
+</script>
+
+
+<!-- === v2.1.8 PATCH: Carica da cartella compatibile con file:// === -->
+<script>
+(function(){
+  function safeParseJSON(name, txt){ try{ return JSON.parse(txt);} catch(e){ throw new Error('JSON non valido in '+name+': '+(e&&e.message?e.message:e)); } }
+
+  function mapFileToAcc(fileName, data, acc){
+    var fn = String(fileName||'').toLowerCase();
+    if(fn.indexOf('linkhub-links.json')!==-1 || fn.indexOf('links')!==-1){
+      if(Object.prototype.toString.call(data)==='[object Array]') acc.links=data;
+      else if(data && typeof data==='object'){
+        if(Object.prototype.toString.call(data.sections)==='[object Array]') acc.sections=data.sections;
+        if(Object.prototype.toString.call(data.links)==='[object Array]') acc.links=data.links;
+      }
+      return;
+    }
+    if(fn.indexOf('open-points.json')!==-1 || fn.indexOf('openpoints')!==-1 || fn.indexOf('open_points')!==-1){
+      if(Object.prototype.toString.call(data)==='[object Array]') acc.openPoints=data;
+      else if(data && Object.prototype.toString.call(data.openPoints)==='[object Array]') acc.openPoints=data.openPoints;
+      return;
+    }
+    if(fn.indexOf('services.json')!==-1 || fn.indexOf('servizi')!==-1 || fn.indexOf('service')!==-1){
+      if(Object.prototype.toString.call(data)==='[object Array]') acc.services=data;
+      else if(data && Object.prototype.toString.call(data.services)==='[object Array]') acc.services=data.services;
+      return;
+    }
+    if(fn.indexOf('crq.json')!==-1 || fn.indexOf('crq')!==-1){
+      if(Object.prototype.toString.call(data)==='[object Array]') acc.crq=data;
+      else if(data && Object.prototype.toString.call(data.crq)==='[object Array]') acc.crq=data.crq;
+      return;
+    }
+    if(data && typeof data==='object'){
+      if(Object.prototype.toString.call(data.sections)==='[object Array]') acc.sections=data.sections;
+      if(Object.prototype.toString.call(data.links)==='[object Array]') acc.links=data.links;
+      if(Object.prototype.toString.call(data.openPoints)==='[object Array]') acc.openPoints=data.openPoints;
+      if(Object.prototype.toString.call(data.services)==='[object Array]') acc.services=data.services;
+      if(Object.prototype.toString.call(data.crq)==='[object Array]') acc.crq=data.crq;
+    }
+  }
+
+  async function applyAcc(acc){
+    if(typeof normalizeState==='function'){
+      var norm = normalizeState(acc);
+      if(norm){
+        window.state = norm;
+        try{ if(typeof save==='function') save(state); }catch(e){}
+        try{ if(typeof render==='function') render(); }catch(e){}
+        try{ if(typeof renderOpenPoints==='function') renderOpenPoints(); }catch(e){}
+        try{ if(typeof renderServices==='function') renderServices(); }catch(e){}
+        try{ if(window.renderCrq) window.renderCrq(); else if(typeof renderCrq==='function') renderCrq(); }catch(e){}
+        try{ if(typeof updateFilterSectionsBtn==='function') updateFilterSectionsBtn(); }catch(e){}
+        try{ if(typeof toast==='function') toast('Import da cartella completato ✔'); }catch(e){}
+        return;
+      }
+    }
+    window.state = acc;
+  }
+
+  async function loadFromFileList(fileList){
+    var files = Array.prototype.slice.call(fileList||[]);
+    files = files.filter(function(f){ return /\.json$/i.test(f.name||''); });
+    if(!files.length){ alert('Nessun file .json trovato nella selezione.'); return; }
+    var acc = {sections:[], links:[], openPoints:[], services:[], crq:[]};
+    var any=false;
+    for(var i=0;i<files.length;i++){
+      var f=files[i];
+      try{
+        var txt = await f.text();
+        var data = safeParseJSON(f.name, txt);
+        mapFileToAcc(f.name, data, acc);
+        any=true;
+      }catch(e){ console.warn('Skip file', f.name, e); }
+    }
+    if(!any){ alert('Nessun JSON valido importabile trovato.'); return; }
+    await applyAcc(acc);
+  }
+
+  function pickFolderWithInput(){
+    return new Promise(function(resolve){
+      var input=document.createElement('input');
+      input.type='file';
+      input.multiple=true;
+      input.accept='application/json,.json';
+      input.setAttribute('webkitdirectory','');
+      input.setAttribute('directory','');
+      input.style.position='fixed';
+      input.style.left='-9999px';
+      document.body.appendChild(input);
+      input.addEventListener('change', function(){
+        var files = input.files ? Array.prototype.slice.call(input.files) : [];
+        input.remove();
+        resolve(files);
+      }, {once:true});
+      input.click();
+    });
+  }
+
+  async function loadFromFolder(){
+    try{
+      var files = await pickFolderWithInput();
+      await loadFromFileList(files);
+    }catch(e){
+      alert('Carica da cartella non riuscito: '+(e&&e.message?e.message:e));
+    }
+  }
+
+  window.loadFromFolder = loadFromFolder;
+})();
 </script>
 
 </body>
