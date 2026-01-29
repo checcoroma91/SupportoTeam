@@ -2,13 +2,13 @@
 
 <html lang="it">
 <head>
-<!-- SupportoTeam v2.1.8 STABLE -->
+<!-- SupportoTeam v2.1.8c STABLE -->
 
 <!-- PATCH v1.3c: clearLinks fallback + CRQ bootstrap/render keys (no new <script> tags) -->
 
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Supporto Team – Sistemi Anagrafici (v2.1.8)</title>
+<title>Supporto Team – Sistemi Anagrafici (v2.1.8c)</title>
 <style>:root{ --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#22c55e; --danger:#ef4444; --chip:#1f2937; --space:18px; --edge:clamp(8px, 2vw, 16px); --op-max:60vh; }
 *{box-sizing:border-box} html, body { max-width:100%; overflow-x:hidden; }
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,#0b1023,#0f172a);color:var(--text)}
@@ -664,7 +664,7 @@ html body #crqListDlg { width: clamp(1600px, 98vw, 2200px); max-width: 2200px; }
 </style>
 
 <style>
-/* === v2.1.8: Filtri CRQ & Open Points allineati allo stile 'Filtra Servizi' (solo CSS) === */
+/* === v2.1.8c: Filtri CRQ & Open Points allineati allo stile 'Filtra Servizi' (solo CSS) === */
 html body #opFilterDlg .opf-card,
 html body #crqFilterDlg .opf-card { background:#0b1023; border:1px solid #1f2937; border-radius:clamp(10px,1.2cqw,14px); padding:clamp(12px,1.6cqw,18px); }
 html body #opFilterDlg .opf-card h4,
@@ -689,11 +689,11 @@ html body #crqFilterDlg .opf-actions { position:sticky; bottom:0; display:flex; 
 
 
 <style>
-/* === v2.1.8: Forza TUTTE le input box dei FILTRI in stile scuro/blu (niente box bianchi) === */
+/* === v2.1.8c: Forza TUTTE le input box dei FILTRI in stile scuro/blu (niente box bianchi) === */
 :root{
-  --filter-input-bg: #0b2a52;
-  --filter-input-bg2: #0a2447;
-  --filter-input-border: #2b4d78;
+  --filter-input-bg: #071b35;   /* blu più scuro */
+  --filter-input-bg2: #06172e;  /* variante ancora più scura per gruppi */
+  --filter-input-border: #244569;
   --filter-input-radius: 18px;
   --filter-input-minh: 46px;
   --filter-input-pad-y: 12px;
@@ -720,7 +720,7 @@ html body #crqFilterDlg select{
   border-radius: var(--filter-input-radius) !important;
   min-height: var(--filter-input-minh) !important;
   padding: var(--filter-input-pad-y) var(--filter-input-pad-x) !important;
-  box-shadow: 0 0 0 1px rgba(11,42,82,.35) inset;
+  box-shadow: 0 0 0 1px rgba(7,27,53,.35) inset;
 }
 
 /* Eccezione: checkbox/radio NON diventano pillole */
@@ -754,7 +754,7 @@ html body #crqFilterDlg input:focus,
 html body #crqFilterDlg select:focus{
   outline: none;
   border-color: #3b82f6 !important;
-  box-shadow: 0 0 0 2px rgba(59,130,246,.28), 0 0 0 1px rgba(11,42,82,.35) inset;
+  box-shadow: 0 0 0 2px rgba(59,130,246,.28), 0 0 0 1px rgba(7,27,53,.35) inset;
 }
 
 /* Date picker icon (Chrome/Edge) */
@@ -778,6 +778,46 @@ html body #crqFilterDlg .opf-checks{
   background: var(--filter-input-bg2) !important;
   border: 1px solid var(--filter-input-border) !important;
   border-radius: 16px !important;
+}
+</style>
+
+
+<style>
+/* === v2.1.8c: Fix overflow input nei box filtri (rientrano nelle card) === */
+
+/* Le colonne dei gruppi input devono poter stringere (evita overflow orizzontale) */
+html body #svcFilterDlg .opf-row,
+html body #opFilterDlg .opf-row,
+html body #crqFilterDlg .opf-row{
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Gli input dentro le righe a griglia non devono imporre min-width */
+html body #svcFilterDlg .opf-row > input,
+html body #opFilterDlg .opf-row > input,
+html body #crqFilterDlg .opf-row > input,
+html body #svcFilterDlg .opf-row > select,
+html body #opFilterDlg .opf-row > select,
+html body #crqFilterDlg .opf-row > select{
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Anche gli elementi diretti dentro le card non devono forzare larghezza */
+html body #svcFilterDlg .opf-card > input,
+html body #opFilterDlg .opf-card > input,
+html body #crqFilterDlg .opf-card > input{
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Sicurezza: impedisci che il contenuto sbordi visivamente dalla card */
+html body #svcFilterDlg .opf-card,
+html body #opFilterDlg .opf-card,
+html body #crqFilterDlg .opf-card{
+  overflow: hidden;
 }
 </style>
 
@@ -2289,7 +2329,7 @@ window.addEventListener('DOMContentLoaded', function(){
 </script>
 
 
-<!-- === v2.1.8 PATCH: Carica da cartella compatibile con file:// === -->
+<!-- === v2.1.8c PATCH: Carica da cartella compatibile con file:// === -->
 <script>
 (function(){
   function safeParseJSON(name, txt){ try{ return JSON.parse(txt);} catch(e){ throw new Error('JSON non valido in '+name+': '+(e&&e.message?e.message:e)); } }
