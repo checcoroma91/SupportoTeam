@@ -2,13 +2,13 @@
 
 <html lang="it">
 <head>
-<!-- SupportoTeam v2.1.8c STABLE -->
+<!-- Team_Sistemi_Anagrafici v3.0.0 STABLE -->
 
 <!-- PATCH v1.3c: clearLinks fallback + CRQ bootstrap/render keys (no new <script> tags) -->
 
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Supporto Team – Sistemi Anagrafici (v2.1.8c)</title>
+<title>Team Sistemi Anagrafici (v3.0.0)</title>
 <style>:root{ --bg:#0f172a; --panel:#111827; --muted:#94a3b8; --text:#e5e7eb; --accent:#22c55e; --danger:#ef4444; --chip:#1f2937; --space:18px; --edge:clamp(8px, 2vw, 16px); --op-max:60vh; }
 *{box-sizing:border-box} html, body { max-width:100%; overflow-x:hidden; }
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;background:linear-gradient(180deg,#0b1023,#0f172a);color:var(--text)}
@@ -664,7 +664,7 @@ html body #crqListDlg { width: clamp(1600px, 98vw, 2200px); max-width: 2200px; }
 </style>
 
 <style>
-/* === v2.1.8c: Filtri CRQ & Open Points allineati allo stile 'Filtra Servizi' (solo CSS) === */
+/* === v2.1.6: Filtri CRQ & Open Points allineati allo stile 'Filtra Servizi' (solo CSS) === */
 html body #opFilterDlg .opf-card,
 html body #crqFilterDlg .opf-card { background:#0b1023; border:1px solid #1f2937; border-radius:clamp(10px,1.2cqw,14px); padding:clamp(12px,1.6cqw,18px); }
 html body #opFilterDlg .opf-card h4,
@@ -689,10 +689,10 @@ html body #crqFilterDlg .opf-actions { position:sticky; bottom:0; display:flex; 
 
 
 <style>
-/* === v2.1.8c: Forza TUTTE le input box dei FILTRI in stile scuro/blu (niente box bianchi) === */
+/* === RESTORE v2.1.8c: stile filtri coerente (niente input bianche) === */
 :root{
   --filter-input-bg: #071b35;   /* blu più scuro */
-  --filter-input-bg2: #06172e;  /* variante ancora più scura per gruppi */
+  --filter-input-bg2: #06172e;  /* gruppo checkbox */
   --filter-input-border: #244569;
   --filter-input-radius: 18px;
   --filter-input-minh: 46px;
@@ -700,20 +700,19 @@ html body #crqFilterDlg .opf-actions { position:sticky; bottom:0; display:flex; 
   --filter-input-pad-x: 14px;
 }
 
-/* Scope: solo finestre FILTRI */
+/* Scope: SOLO finestre dei filtri */
 html body #svcFilterDlg,
 html body #opFilterDlg,
 html body #crqFilterDlg{ color-scheme: dark; }
 
-/* Input + select dentro i filtri */
+/* Input + select: tondi, grandi, blu (forza override) */
 html body #svcFilterDlg input,
 html body #svcFilterDlg select,
 html body #opFilterDlg input,
 html body #opFilterDlg select,
 html body #crqFilterDlg input,
 html body #crqFilterDlg select{
-  appearance: none;
-  -webkit-appearance: none;
+  appearance: none; -webkit-appearance: none;
   background: var(--filter-input-bg) !important;
   border: 1px solid var(--filter-input-border) !important;
   color: var(--text) !important;
@@ -721,31 +720,30 @@ html body #crqFilterDlg select{
   min-height: var(--filter-input-minh) !important;
   padding: var(--filter-input-pad-y) var(--filter-input-pad-x) !important;
   box-shadow: 0 0 0 1px rgba(7,27,53,.35) inset;
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
-
-/* Eccezione: checkbox/radio NON diventano pillole */
+/* Escludi checkbox/radio dal trattamento “pill” */
 html body #svcFilterDlg input[type="checkbox"],
 html body #svcFilterDlg input[type="radio"],
 html body #opFilterDlg input[type="checkbox"],
 html body #opFilterDlg input[type="radio"],
 html body #crqFilterDlg input[type="checkbox"],
 html body #crqFilterDlg input[type="radio"]{
-  appearance: auto;
-  -webkit-appearance: auto;
-  min-height: auto !important;
-  padding: 0 !important;
-  border-radius: 4px !important;
+  appearance: auto; -webkit-appearance: auto;
   background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  border: none !important; box-shadow: none !important;
+  min-height: auto !important; padding: 0 !important;
+  border-radius: 4px !important;
 }
-
-/* Placeholder */
+/* Placeholder leggibile */
 html body #svcFilterDlg input::placeholder,
 html body #opFilterDlg input::placeholder,
-html body #crqFilterDlg input::placeholder{ color: rgba(148,163,184,.95) !important; }
-
-/* Focus */
+html body #crqFilterDlg input::placeholder{
+  color: rgba(148,163,184,.95) !important;
+}
+/* Focus ring blu coerente */
 html body #svcFilterDlg input:focus,
 html body #svcFilterDlg select:focus,
 html body #opFilterDlg input:focus,
@@ -756,13 +754,13 @@ html body #crqFilterDlg select:focus{
   border-color: #3b82f6 !important;
   box-shadow: 0 0 0 2px rgba(59,130,246,.28), 0 0 0 1px rgba(7,27,53,.35) inset;
 }
-
-/* Date picker icon (Chrome/Edge) */
+/* Icona datepicker leggibile su scuro */
 html body #svcFilterDlg input[type="date"]::-webkit-calendar-picker-indicator,
 html body #opFilterDlg input[type="date"]::-webkit-calendar-picker-indicator,
-html body #crqFilterDlg input[type="date"]::-webkit-calendar-picker-indicator{ filter: invert(1) opacity(.85); }
-
-/* Autofill (Chrome): evita giallo/bianco */
+html body #crqFilterDlg input[type="date"]::-webkit-calendar-picker-indicator{
+  filter: invert(1) opacity(.85);
+}
+/* Autofill Chrome: niente giallo/bianco */
 html body #svcFilterDlg input:-webkit-autofill,
 html body #opFilterDlg input:-webkit-autofill,
 html body #crqFilterDlg input:-webkit-autofill{
@@ -770,8 +768,7 @@ html body #crqFilterDlg input:-webkit-autofill{
   box-shadow: 0 0 0 1000px var(--filter-input-bg) inset !important;
   transition: background-color 9999s ease-in-out 0s;
 }
-
-/* Checkbox group container coerente */
+/* Gruppi checkbox coerenti e più tondi */
 html body #svcFilterDlg .opf-checks,
 html body #opFilterDlg .opf-checks,
 html body #crqFilterDlg .opf-checks{
@@ -779,48 +776,23 @@ html body #crqFilterDlg .opf-checks{
   border: 1px solid var(--filter-input-border) !important;
   border-radius: 16px !important;
 }
+/* Griglie interne a due colonne e no overflow */
+html body #svcFilterDlg .opf-row,
+html body #opFilterDlg .opf-row,
+html body #crqFilterDlg .opf-row{
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+  gap: clamp(10px, 1cqw, 14px);
+}
+html body #svcFilterDlg .opf-card,
+html body #opFilterDlg .opf-card,
+html body #crqFilterDlg .opf-card{ overflow: hidden; }
 </style>
 
 
 <style>
-/* === v2.1.8c: Fix overflow input nei box filtri (rientrano nelle card) === */
-
-/* Le colonne dei gruppi input devono poter stringere (evita overflow orizzontale) */
-html body #svcFilterDlg .opf-row,
-html body #opFilterDlg .opf-row,
-html body #crqFilterDlg .opf-row{
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-}
-
-/* Gli input dentro le righe a griglia non devono imporre min-width */
-html body #svcFilterDlg .opf-row > input,
-html body #opFilterDlg .opf-row > input,
-html body #crqFilterDlg .opf-row > input,
-html body #svcFilterDlg .opf-row > select,
-html body #opFilterDlg .opf-row > select,
-html body #crqFilterDlg .opf-row > select{
-  min-width: 0 !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-/* Anche gli elementi diretti dentro le card non devono forzare larghezza */
-html body #svcFilterDlg .opf-card > input,
-html body #opFilterDlg .opf-card > input,
-html body #crqFilterDlg .opf-card > input{
-  width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-}
-
-/* Sicurezza: impedisci che il contenuto sbordi visivamente dalla card */
-html body #svcFilterDlg .opf-card,
-html body #opFilterDlg .opf-card,
-html body #crqFilterDlg .opf-card{
-  overflow: hidden;
-}
+.filter-skin-darkblue .opf-checks{display:flex!important;flex-direction:column!important;align-items:flex-start!important;}
+.filter-skin-darkblue .opf-checks label{display:flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;}
 </style>
-
 </head>
 <body>
 <header>
@@ -946,6 +918,12 @@ html body #crqFilterDlg .opf-card{
     <div class="content">
       <div class="row"><input id="crqRfcAperti" placeholder="RFC Aperti *"/></div>
       <div class="row">
+        <select id="crqStato">
+          <option value="">STATO: n/d</option>
+        </select>
+        <input id="crqStatoBhelp" placeholder="Bhelp Operatore (RFC)" readonly/>
+      </div>
+      <div class="row">
         <input id="crqDataApertura" placeholder="Data apertura" type="date"/>
         <input id="crqAnno" placeholder="Anno"/>
       </div>
@@ -989,8 +967,19 @@ html body #crqFilterDlg .opf-card{
         <div class="opf-card"><h4>RFC Aperti</h4><input id="crqfRfc" placeholder="RFC contiene..."/></div>
         <div class="opf-card"><h4>Data apertura</h4><div class="opf-row"><input id="crqfAperturaFrom" type="date"/><input id="crqfAperturaTo" type="date"/></div></div>
         <div class="opf-card"><h4>Anno</h4><input id="crqfAnno" placeholder="Anno"/></div>
-        <div class="opf-card"><h4>Emergenza</h4><div class="opf-checks" id="crqfEmergGroup"><label><input type="checkbox" value="No"/> No</label><label><input type="checkbox" value="Sì"/> Sì</label></div></div>
-        <div class="opf-card"><h4>Utilizzato</h4><div class="opf-checks" id="crqfUtilGroup"><label><input type="checkbox" value="Si"/> Si</label><label><input type="checkbox" value="No"/> No</label></div></div>
+        <div class="opf-card"><h4>Emergenza</h4><div class="opf-checks" id="crqfEmergGroup"><label><label><input type="checkbox" value="No"/> No</label></label><label><label><input type="checkbox" value="Sì"/> Sì</label></label></div></div>
+        <div class="opf-card"><h4>Utilizzato</h4><div class="opf-checks" id="crqfUtilGroup"><label><label><input type="checkbox" value="Si"/> Si</label></label><label><label><input type="checkbox" value="No"/> No</label></label></div></div>
+        <div class="opf-card"><h4>Stato</h4><div class="opf-checks" id="crqfStatiGroup">
+<label><label><input type="checkbox" value="Bozza"/> Bozza</label></label>
+<label><label><input type="checkbox" value="Richiesta autorizzazione"/> Richiesta autorizzazione</label></label>
+<label><label><input type="checkbox" value="Pianificazione in corso"/> Pianificazione in corso</label></label>
+<label><label><input type="checkbox" value="Revisione pianificata"/> Revisione pianificata</label></label>
+<label><label><input type="checkbox" value="Approvazione pianificata"/> Approvazione pianificata</label></label>
+<label><label><input type="checkbox" value="Pianificato"/> Pianificato</label></label>
+<label><label><input type="checkbox" value="Implementazione in corso"/> Implementazione in corso</label></label>
+<label><label><input type="checkbox" value="Completato"/> Completato</label></label>
+<label><label><input type="checkbox" value="Chiuso"/> Chiuso</label></label>
+</div></div>
         <div class="opf-card"><h4>Categoria</h4><input id="crqfCategoria" placeholder="Categoria contiene..."/></div>
         <div class="opf-card"><h4>Data rilascio</h4><div class="opf-row"><input id="crqfRilFrom" type="date"/><input id="crqfRilTo" type="date"/></div></div>
         <div class="opf-card"><h4>Rif nostro</h4><input id="crqfRif" placeholder="Rif contiene..."/></div>
@@ -1089,7 +1078,7 @@ html body #crqFilterDlg .opf-card{
 <option value="Completato">Stato: Completato</option>
 </select>
 <label style="display:inline-flex;align-items:center;gap:8px;margin-left:10px">
-<input id="opMaxPrio" type="checkbox"/> Priorità massima
+<label><input id="opMaxPrio" type="checkbox"/> Priorità</label> massima
  </label>
 </div>
 <div class="row">
@@ -1141,20 +1130,20 @@ html body #crqFilterDlg .opf-card{
 <div class="opf-card">
 <h4>Priorità</h4>
 <div class="opf-checks" id="opfPrioGroup">
-<label><input type="checkbox" value="low"/> Bassa</label>
-<label><input type="checkbox" value="medium"/> Media</label>
-<label><input type="checkbox" value="high"/> Alta</label>
-<label><input type="checkbox" value="critical"/> Critica</label>
+<label><label><input type="checkbox" value="low"/> Bassa</label></label>
+<label><label><input type="checkbox" value="medium"/> Media</label></label>
+<label><label><input type="checkbox" value="high"/> Alta</label></label>
+<label><label><input type="checkbox" value="critical"/> Critica</label></label>
 </div>
 </div>
 <div class="opf-card">
 <h4>Stato</h4>
 <div class="opf-checks" id="opfStatusGroup">
-<label><input type="checkbox" value="Nuovo"/> Nuovo</label>
-<label><input type="checkbox" value="Da fare"/> Da fare</label>
-<label><input type="checkbox" value="In corso"/> In corso</label>
-<label><input type="checkbox" value="Schedulato"/> Schedulato</label>
-<label><input type="checkbox" value="Completato"/> Completato</label>
+<label><label><input type="checkbox" value="Nuovo"/> Nuovo</label></label>
+<label><label><input type="checkbox" value="Da fare"/> Da</label> fare</label>
+<label><label><input type="checkbox" value="In corso"/> In</label> corso</label>
+<label><label><input type="checkbox" value="Schedulato"/> Schedulato</label></label>
+<label><label><input type="checkbox" value="Completato"/> Completato</label></label>
 </div>
 </div>
 <div class="opf-card">
@@ -1174,7 +1163,7 @@ html body #crqFilterDlg .opf-card{
 <div class="opf-card">
 <h4>Altre opzioni</h4>
 <label style="display:flex;align-items:center;gap:8px">
-<input id="opfMaxOnly" type="checkbox"/> Solo "Priorità massima"
+<label><input id="opfMaxOnly" type="checkbox"/> Solo</label> "Priorità massima"
           </label>
 </div>
 </div>
@@ -1268,8 +1257,8 @@ html body #crqFilterDlg .opf-card{
 <div class="opf-row">
 <input id="svcfServizi" placeholder="Servizi (virgole)"/>
 <div class="opf-checks" id="svcfTipoGroup" style="padding:6px 8px;border:1px solid #263041;border-radius:10px;background:#0a1227;">
-<label><input type="checkbox" value="REST"/> REST</label>
-<label><input type="checkbox" value="SOAP"/> SOAP</label>
+<label><label><input type="checkbox" value="REST"/> REST</label></label>
+<label><label><input type="checkbox" value="SOAP"/> SOAP</label></label>
 </div>
 </div>
 </div>
@@ -2013,6 +2002,7 @@ function normalizeCRQItem(o){
   return {
     id: o && o.id ? String(o.id) : (crypto && crypto.randomUUID ? crypto.randomUUID() : ('id-'+Math.random().toString(16).slice(2)+'-'+Date.now())),
     rfcAperti: str(o.rfcAperti || o.rfc || o.RFC || o['RFC'] || o['RFC Aperti']),
+    stato: str(o.stato || o.STATO || o['Stato'] || o['STATO'] || o['BMC Helix (CRQ)'] || o.bmc || o.status),
     dataApertura: str(o.dataApertura || o['Data apertura'] || o.openedAt),
     anno: str(o.anno || o['Anno']),
     emerg: boolish(o.emerg || o.emergenza || o['Emerg.'] || o.emerg),
@@ -2074,7 +2064,7 @@ function getCrqArray() {
 (function(){
   // ---- Data & helpers ----
   function normalizeCRQItem(o){
-    var k = ['rfcAperti','dataApertura','anno','emerg','utilizzato','categoria','dataRilascio','rifNostro','prj','contenuto'];
+    var k = ['rfcAperti','stato','dataApertura','anno','emerg','utilizzato','categoria','dataRilascio','rifNostro','prj','contenuto'];
     var n = {};
     for (var i=0;i<k.length;i++){ var key=k[i]; n[key] = (o && o[key]!=null) ? String(o[key]) : ''; }
     if (/^\s*true\s*$/i.test(n.utilizzato)) n.utilizzato='Si';
@@ -2089,7 +2079,7 @@ function getCrqArray() {
 
   // ---- Filter model ----
   var CRQF_KEY='crq.filter.v1';
-  function defaultCrqFilter(){ return { text:'', rfc:'', anno:'', emerg:[], utilizzato:[], categoria:'', rif:'', prj:'', contenuto:'', apFrom:'', apTo:'', rilFrom:'', rilTo:'' }; }
+  function defaultCrqFilter(){ return { text:'', rfc:'', anno:'', emerg:[], utilizzato:[], categoria:'', rif:'', prj:'', contenuto:'', apFrom:'', apTo:'', rilFrom:'', rilTo:'' , stati:[]}; }
   function loadCrqFilter(){ try{ var raw=localStorage.getItem(CRQF_KEY); if(!raw) return defaultCrqFilter(); var f=JSON.parse(raw); return Object.assign(defaultCrqFilter(), f); }catch(e){ return defaultCrqFilter(); } }
   function saveCrqFilter(f){ try{ localStorage.setItem(CRQF_KEY, JSON.stringify(f||defaultCrqFilter())); }catch(e){} }
   var crqFilter = loadCrqFilter();
@@ -2107,7 +2097,7 @@ function getCrqArray() {
   function arrHas(arr, v){ return Array.isArray(arr)&&arr.length? arr.indexOf(v)>=0 : true; }
   function applyCrqFilters(rows){ var f=crqFilter||defaultCrqFilter();
     return (rows||[]).filter(function(o){
-      var bag=[o.rfcAperti,o.anno,o.emerg,o.utilizzato,o.categoria,o.rifNostro,o.prj,o.contenuto].join(' ').toLowerCase();
+      var bag=[o.rfcAperti,o.anno,o.emerg,o.utilizzato,o.categoria,o.rifNostro,o.prj,o.contenuto,o.stato].join(' ').toLowerCase();
       var text=(f.text||'').toLowerCase(); if(text && bag.indexOf(text)===-1) return false;
       if (f.rfc && String(o.rfcAperti||'').toLowerCase().indexOf(String(f.rfc).toLowerCase())===-1) return false;
       if (f.anno && String(o.anno||'').toLowerCase().indexOf(String(f.anno).toLowerCase())===-1) return false;
@@ -2119,6 +2109,7 @@ function getCrqArray() {
       if (f.rif && String(o.rifNostro||'').toLowerCase().indexOf(String(f.rif).toLowerCase())===-1) return false;
       if (f.prj && String(o.prj||'').toLowerCase().indexOf(String(f.prj).toLowerCase())===-1) return false;
       if (f.contenuto && String(o.contenuto||'').toLowerCase().indexOf(String(f.contenuto).toLowerCase())===-1) return false;
+      if (Array.isArray(f.stati) && f.stati.length && f.stati.indexOf(o.stato)<0) return false;
       return true;
     });
   }
@@ -2136,6 +2127,7 @@ function getCrqArray() {
     var countEl=document.getElementById('crqCount'); if(countEl) countEl.textContent = rows.length+" risultati su "+all.length;
         var head = `<thead><tr>
       <th class="sortable" onclick="setCrqSort('rfcAperti')">RFC Aperti${sortArrowFor('rfcAperti')}</th>
+      <th class=\"sortable\" onclick=\"setCrqSort('stato')\">STATO${sortArrowFor('stato')}</th>
       <th class="sortable" onclick="setCrqSort('dataApertura')">Data apertura${sortArrowFor('dataApertura')}</th>
       <th class="sortable" onclick="setCrqSort('anno')">Anno${sortArrowFor('anno')}</th>
       <th class="sortable" onclick="setCrqSort('emerg')">Emerg.${sortArrowFor('emerg')}</th>
@@ -2153,6 +2145,7 @@ function getCrqArray() {
       var idx = getCRQ().indexOf(o); if(idx<0) idx = 0;
       return '<tr>'
       + '<td>'+escapeHtml(o.rfcAperti||'')+'</td>'
+      + '<td>'+escapeHtml(o.stato||'')+'</td>'
       + '<td>'+escapeHtml(o.dataApertura||'')+'</td>'
       + '<td>'+escapeHtml(o.anno||'')+'</td>'
       + '<td>'+escapeHtml(o.emerg||'')+'</td>'
@@ -2177,6 +2170,7 @@ function getCrqArray() {
   function fillEditor(item){
     document.getElementById('crqDlgTitle').textContent = item? 'Modifica CRQ' : 'Nuova CRQ';
     document.getElementById('crqRfcAperti').value = item&&item.rfcAperti||'';
+      try{ var _st=document.getElementById('crqStato'); if(_st){ _st.value = (item && item.stato)? item.stato : ''; } }catch(e){}
     document.getElementById('crqDataApertura').value = item&&item.dataApertura||'';
     document.getElementById('crqAnno').value = item&&item.anno||'';
     document.getElementById('crqEmerg').value = item&&item.emerg||'';
@@ -2195,6 +2189,7 @@ function getCrqArray() {
     var saveBtn=document.getElementById('crqSaveBtn'); if(saveBtn) saveBtn.onclick=function(){
       var o = normalizeCRQItem({
         rfcAperti: document.getElementById('crqRfcAperti').value,
+        stato: document.getElementById('crqStato') ? document.getElementById('crqStato').value : '',
         dataApertura: document.getElementById('crqDataApertura').value,
         anno: document.getElementById('crqAnno').value,
         emerg: document.getElementById('crqEmerg').value,
@@ -2227,6 +2222,7 @@ function getCrqArray() {
     document.getElementById('crqfAnno').value=f.anno||'';
     setCheckedValues('crqfEmergGroup', f.emerg||[]);
     setCheckedValues('crqfUtilGroup', f.utilizzato||[]);
+    setCheckedValues('crqfStatiGroup', f.stati||[]);
     document.getElementById('crqfCategoria').value=f.categoria||'';
     document.getElementById('crqfAperturaFrom').value=f.apFrom||'';
     document.getElementById('crqfAperturaTo').value=f.apTo||'';
@@ -2250,7 +2246,8 @@ function getCrqArray() {
         rilTo:String(document.getElementById('crqfRilTo').value||'').trim(),
         rif:String(document.getElementById('crqfRif').value||'').trim(),
         prj:String(document.getElementById('crqfPrj').value||'').trim(),
-        contenuto:String(document.getElementById('crqfContenuto').value||'').trim()
+        contenuto:String(document.getElementById('crqfContenuto').value||'').trim(),
+        stati:getCheckedValues('crqfStatiGroup')
       };
       saveCrqFilter(crqFilter); renderCrq(); dlg.close();
     };
@@ -2275,7 +2272,7 @@ function getCrqArray() {
   }catch(e){ alert('Caricamento CRQ fallito: '+e.message); } };
 
   window.exportCrqToCSV = function(){ var rows = sortCrqRows(applyCrqFilters(getCRQ()));
-    var head=['RFC Aperti','Data apertura','Anno','Emerg.','Utilizzato','Categoria','Data rilascio','Rif nostro','PRJ','Contenuto'];
+    var head=['RFC Aperti','STATO','Data apertura','Anno','Emerg.','Utilizzato','Categoria','Data rilascio','Rif nostro','PRJ','Contenuto'];
     function q(v){ v=(v==null?'':String(v)); return /[";]/.test(v)? '"'+v.replace(/"/g,'""')+'"' : v; }
     var csv = head.join(';')+''+rows.map(function(o){ return [o.rfcAperti,o.dataApertura,o.anno,o.emerg,o.utilizzato,o.categoria,o.dataRilascio,o.rifNostro,o.prj,o.contenuto].map(q).join(';'); }).join('');
     var blob=new Blob([csv], {type:'text/csv;charset=utf-8;'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='crq.csv'; document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href); a.remove();},400);
@@ -2283,10 +2280,10 @@ function getCrqArray() {
   window.exportCrqToExcel = function(){ var rows = sortCrqRows(applyCrqFilters(getCRQ()));
     function xe(s){ return String(s==null?'':s).replace(/&/g,'&').replace(/\</g,'<').replace(/\>/g,'>'); }
     function cell(v,t){ t=t||'String'; return '<Cell><Data ss:Type="'+t+'">'+xe(v)+'</Data></Cell>'; }
-    var head=['RFC Aperti','Data apertura','Anno','Emerg.','Utilizzato','Categoria','Data rilascio','Rif nostro','PRJ','Contenuto'];
+    var head=['RFC Aperti','STATO','Data apertura','Anno','Emerg.','Utilizzato','Categoria','Data rilascio','Rif nostro','PRJ','Contenuto'];
     var xml='<?xml version="1.0"?>'+'<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'+'<Worksheet ss:Name="CRQ"><Table>';
     xml += '<Row>'+head.map(function(h){return cell(h);}).join('')+'</Row>';
-    rows.forEach(function(o){ xml += '<Row>' + cell(o.rfcAperti) + cell(o.dataApertura) + cell(o.anno) + cell(o.emerg) + cell(o.utilizzato) + cell(o.categoria) + cell(o.dataRilascio) + cell(o.rifNostro) + cell(o.prj) + cell(o.contenuto) + '</Row>'; });
+    rows.forEach(function(o){ xml += '<Row>' + cell(o.rfcAperti) + cell(o.stato||'') + cell(o.dataApertura) + cell(o.anno) + cell(o.emerg) + cell(o.utilizzato) + cell(o.categoria) + cell(o.dataRilascio) + cell(o.rifNostro) + cell(o.prj) + cell(o.contenuto) + '</Row>'; });
     xml += '</Table></Worksheet></Workbook>';
     var blob=new Blob([xml], {type:'application/vnd.ms-excel'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='crq.xls'; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400);
   };
@@ -2329,7 +2326,7 @@ window.addEventListener('DOMContentLoaded', function(){
 </script>
 
 
-<!-- === v2.1.8c PATCH: Carica da cartella compatibile con file:// === -->
+<!-- === v2.1.6 PATCH: Carica da cartella compatibile con file:// === -->
 <script>
 (function(){
   function safeParseJSON(name, txt){ try{ return JSON.parse(txt);} catch(e){ throw new Error('JSON non valido in '+name+': '+(e&&e.message?e.message:e)); } }
@@ -2435,6 +2432,78 @@ window.addEventListener('DOMContentLoaded', function(){
   }
 
   window.loadFromFolder = loadFromFolder;
+})();
+</script>
+
+
+<script>
+// === CRQ STATO mapping (v3.0.0): popola menu STATO da HELP CRQ e mostra Bhelp Operatore ===
+(function(){
+  function buildMap(){
+    var tbl = document.getElementById('helpCrqTable');
+    var out = {order:[], map:{}};
+    if(!tbl) return out;
+    var rows = tbl.querySelectorAll('tbody tr[data-bmc][data-bhelp]');
+    rows.forEach(function(tr){
+      var bmc = (tr.getAttribute('data-bmc')||'').trim();
+      var bhelp = (tr.getAttribute('data-bhelp')||'').trim();
+      if(!bmc) return;
+      if(!out.map.hasOwnProperty(bmc)) out.order.push(bmc);
+      out.map[bmc]=bhelp;
+    });
+    return out;
+  }
+
+  function ensureSelectFilled(){
+    var sel = document.getElementById('crqStato');
+    if(!sel) return;
+    if(sel.dataset.filled==='1') return;
+    var m = buildMap();
+    // keep first option
+    m.order.forEach(function(bmc){
+      var opt = document.createElement('option');
+      opt.value = bmc;
+      opt.textContent = bmc;
+      sel.appendChild(opt);
+    });
+    sel.dataset.filled='1';
+  }
+
+  function syncBhelp(){
+    var sel = document.getElementById('crqStato');
+    var hint = document.getElementById('crqStatoBhelp');
+    if(!sel || !hint) return;
+    ensureSelectFilled();
+    var m = buildMap();
+    var v = (sel.value||'').trim();
+    hint.value = v ? (m.map[v] || '') : '';
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var sel = document.getElementById('crqStato');
+    if(sel){
+      ensureSelectFilled();
+      sel.addEventListener('change', syncBhelp);
+    }
+    var dlg = document.getElementById('crqEditorDlg');
+    if(dlg){
+      dlg.addEventListener('close', function(){ /* noop */ });
+      dlg.addEventListener('cancel', function(){ /* noop */ });
+    }
+    // initial
+    syncBhelp();
+  });
+
+  // keep hint updated when dialog opens
+  try{
+    var dlg2 = document.getElementById('crqEditorDlg');
+    if(dlg2){
+      var mo = new MutationObserver(function(){
+        if(dlg2.hasAttribute('open')){ setTimeout(syncBhelp, 0); }
+      });
+      mo.observe(dlg2, {attributes:true, attributeFilter:['open']});
+    }
+  }catch(e){}
 })();
 </script>
 
