@@ -47,7 +47,7 @@ function debounce(fn, ms) {
         id = setTimeout(() => fn(...args), ms);
     };
 }
-
+/*
 // Autosave remoto (configurabile)
 function getRemoteAutosaveOn() {
   const s = loadSettings() || {};
@@ -57,7 +57,7 @@ function getRemoteAutosaveOn() {
 const debouncedRemoteSave = debounce(() => {
   if (getRemoteAutosaveOn()) saveToRepo();
 }, 8000);
-
+*/
 // --------------------------
 // DEFAULT STATE
 // --------------------------
@@ -3300,7 +3300,7 @@ function renderAll() {
     window.saveState = function(st) {
         try { _save(st); } catch (_) {}
         try { renderAll(); } catch (_) {}
-		try { debouncedRemoteSave(); } catch (_) {}
+		//try { debouncedRemoteSave(); } catch (_) {}
     };
 })();
 
