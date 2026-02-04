@@ -3708,38 +3708,41 @@ function openCrqHelpDialog() {
 document.querySelector("[data-do='crqHelp']")
     ?.addEventListener("click", openCrqHelpDialog);
 
-document.addEventListener("DOMContentLoaded", () => {
-   try {
-     // Re-render everything on startup
-     renderAll();
-     initExportButtons();
+/* ------------------------------------------------------------
+   FINAL GLOBAL INIT
+   ------------------------------------------------------------ */
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // 1) Render UI iniziale
+    renderAll();
+    initExportButtons();
 
-     // Bridge per i tile della HOME dell'HTML v3
-     window.handleSave = () => saveToRepo();
-     window.reloadFromRepo = (force) => loadFromRepo();
+    // 2) Bridge tile HTML v3
+    window.handleSave = () => saveToRepo(); 
+    window.reloadFromRepo = (force) => loadFromRepo();
+    window.loadFromFolder =
+      window.loadFromFolder || (async () => alert("Funzione non disponibile in questo browser"));
 
-     // (opzionale) per compat con tile "Carica da cartella"
-     window.loadFromFolder = window.loadFromFolder || (async () => alert("Funzione non disponibile in questo browser"));
-
-
-    // Auto-load SEMPRE all'avvio/refresh
-    (async () => {
+    // 3) AUTOLOAD DAL REPO — ritardato di 50 ms
+    setTimeout(async () => {
       try {
-        await loadFromRepo();   // GET …?op=load dal Worker (con fallback /data/*)
+        await loadFromRepo();   // Worker V2 risponde con i veri dati
+        toast("Dati caricati dal repository ✔");
       } catch (e) {
         console.warn("Auto-load fallito:", e);
-        try { toast("Impossibile caricare dal repository. Uso dati locali."); } catch(_) {}
+        toast("Impossibile caricare dal repository. Uso dati locali.");
       }
-    })();
+    }, 50);
 
-     // Ensure default pane
-     showPane("home");
+    // 4) Mostra Home
+    showPane("home");
 
-     toast("V5 Neo‑Glass pronta ✨");
-   } catch (e) {
-     console.error("Fatal init error:", e);
-   }
- });
+    toast("V5 Neo‑Glass pronta ✨");
+
+  } catch (e) {
+    console.error("Fatal init error:", e);
+  }
+});
 
 // ===== Ripple sui CHIP =====
 document.addEventListener("click", (ev) => {
