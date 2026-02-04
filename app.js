@@ -9,7 +9,7 @@
 const STORAGE_KEY = "tsa.v5.state";
 const SETTINGS_KEY = "tsa.v5.settings";
 const LAST_SAVE_KEY = "tsa.v5.lastSave";
-const AUTOSAVE_ENDPOINT = "https://supportoteam.francesco-romano2.workers.dev";
+const AUTOSAVE_ENDPOINT = (window.AUTOSAVE_ENDPOINT || "https://supportoteam.francesco-romano2.workers.dev").trim();
 
 // --------------------------
 // SIMPLE TOAST (non intrusive)
@@ -47,6 +47,16 @@ function debounce(fn, ms) {
         id = setTimeout(() => fn(...args), ms);
     };
 }
+
+// Autosave remoto (configurabile)
+function getRemoteAutosaveOn() {
+  const s = loadSettings() || {};
+  // default: TRUE (puoi metterlo a false se preferisci)
+  return s.remoteAutosave !== false;
+}
+const debouncedRemoteSave = debounce(() => {
+  if (getRemoteAutosaveOn()) saveToRepo();
+}, 8000);
 
 // --------------------------
 // DEFAULT STATE
@@ -620,7 +630,7 @@ document.addEventListener("DOMContentLoaded", () => {
    ============================================================ */
 
 // Shortcuts
-const linksContainer = document.getElementById("linksContainer");
+const linksContainer = document.getElementById("linksContainer") || document.getElementById("container");
 
 /* ------------------------------------------------------------
    NORMALIZZATORI
@@ -864,8 +874,9 @@ document.querySelector("[data-open='linksFilter']")
 /* ------------------------------------------------------------
    LINK: OPEN EDITOR DIALOG
    ------------------------------------------------------------ */
+const LINK_DLG_ID = document.getElementById("linkEditorDlg") ? "linkEditorDlg" : "dialog";
 function openLinkEditor(item, defaultSectionId) {
-    const dlg = document.getElementById("linkEditorDlg");
+    const dlg = document.getElementById(LINK_DLG_ID);
     if (!dlg) return;
 
     const fTitle = document.getElementById("fTitle");
@@ -3289,6 +3300,7 @@ function renderAll() {
     window.saveState = function(st) {
         try { _save(st); } catch (_) {}
         try { renderAll(); } catch (_) {}
+		try { debouncedRemoteSave(); } catch (_) {}
     };
 })();
 
@@ -3652,6 +3664,22 @@ document.addEventListener("DOMContentLoaded", () => {
         // Re-render everything on startup
         renderAll();
 		initExportButtons();
+
+		// Bridge per i tile della HOME dell'HTML v3
+		window.handleSave = () => saveToRepo();
+		window.reloadFromRepo = (force) => loadFromRepo();
+
+		// (opzionale) per compat con tile "Carica da cartella"
+		window.loadFromFolder = window.loadFromFolder || (async () => alert("Funzione non disponibile in questo browser"));
+
+		try {
+		  const hasLocal = !!localStorage.getItem(STORAGE_KEY);
+		  const qp = new URLSearchParams(location.search);
+		  const wantsAuto = qp.get("autoload") === "1";
+		  if (!hasLocal || wantsAuto) {
+			loadFromRepo();   // GET …?op=load dal Worker
+		  }
+		} catch (_) {}
 
         // Ensure default pane
         showPane("home");
