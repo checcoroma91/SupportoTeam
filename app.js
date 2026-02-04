@@ -178,49 +178,101 @@ async function saveToRepo() {
 // LOAD FROM REMOTE REPO
 // --------------------------
 async function loadFromRepo() {
+  const endpoint = (typeof AUTOSAVE_ENDPOINT === "string" && AUTOSAVE_ENDPOINT.trim())
+    ? AUTOSAVE_ENDPOINT.trim()
+    : "";
+
+  if (!/^https?:\/\//i.test(endpoint)) {
+    alert("Endpoint repository non configurato");
+    return;
+  }
+
+  // Helper sicuri
+  const fetchJSON = async (url) => {
+    const res = await fetch(url, { method: "GET" });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText} @ ${url}`);
+    return res.json();
+  };
+
+  try {
+    // 1) Tentativo "combinato": ?op=load
+    let combined = null;
+    let diag = null;
     try {
-        const endpoint = AUTOSAVE_ENDPOINT.trim();
-        if (!/^https?:\/\//i.test(endpoint)) {
-            alert("Endpoint repository non configurato");
-            return;
-        }
-
-        let data = null;
-        let errText = "";
-
-        try {
-            const url = endpoint + (endpoint.includes("?") ? "&" : "?") + "op=load";
-            const res = await fetch(url, { method: "GET" });
-
-            if (!res.ok) {
-                errText = await res.text().catch(() => res.statusText);
-            } else {
-                data = await res.json();
-            }
-        } catch (e) {
-            errText = e && e.message ? e.message : String(e);
-        }
-
-        if (!data || typeof data !== "object") {
-            alert("Caricamento repository non disponibile.\n" +
-                  (errText ? ("Dettagli: " + errText) : ""));
-            return;
-        }
-
-        state = {
-            sections: Array.isArray(data.sections) ? data.sections : [],
-            links: Array.isArray(data.links) ? data.links : [],
-            openPoints: Array.isArray(data.openPoints) ? data.openPoints : [],
-            services: Array.isArray(data.services) ? data.services : [],
-            crq: Array.isArray(data.crq) ? data.crq : []
-        };
-
-        saveState(state);
-        toast("Dati caricati dal repository ✔");
-    } catch (err) {
-        alert("Caricamento dal repository fallito: " +
-              (err && err.message ? err.message : err));
+      const url = endpoint + (endpoint.includes("?") ? "&" : "?") + "op=load";
+      const res = await fetch(url, { method: "GET" });
+      if (res.ok) {
+        combined = await res.json();
+      } else {
+        diag = await res.text().catch(() => res.statusText);
+      }
+    } catch (e) {
+      diag = e?.message || String(e);
     }
+
+    // Se il payload ha davvero i dati attesi → usa quelli
+    if (combined && typeof combined === "object" && (
+        Array.isArray(combined.sections) || Array.isArray(combined.links) ||
+        Array.isArray(combined.openPoints) || Array.isArray(combined.services) ||
+        Array.isArray(combined.crq)
+    )) {
+      state = {
+        sections: Array.isArray(combined.sections) ? combined.sections : [],
+        links: Array.isArray(combined.links) ? combined.links : [],
+        openPoints: Array.isArray(combined.openPoints) ? combined.openPoints : [],
+        services: Array.isArray(combined.services) ? combined.services : [],
+        crq: Array.isArray(combined.crq) ? combined.crq : []
+      };
+      saveState(state);
+      toast("Dati caricati dal repository ✔");
+      return;
+    }
+
+    // 2) Fallback: prova a leggere i 4 file "data/*" direttamente
+    const base = endpoint.replace(/\/*$/, ""); // togli eventuale slash finale
+    const paths = {
+      links:      `${base}/data/linkhub-links.json`,
+      openPoints: `${base}/data/open-points.json`,
+      services:   `${base}/data/services.json`,
+      crq:        `${base}/data/crq.json`
+    };
+
+    const [linksPack, opPack, svcPack, crqPack] = await Promise.all([
+      fetchJSON(paths.links).catch(() => ({})),
+      fetchJSON(paths.openPoints).catch(() => ({})),
+      fetchJSON(paths.services).catch(() => ({})),
+      fetchJSON(paths.crq).catch(() => ({}))
+    ]);
+
+    // Mappa nei 5 array attesi dallo state unico
+    state = {
+      sections: Array.isArray(linksPack.sections) ? linksPack.sections : [],
+      links: Array.isArray(linksPack.links) ? linksPack.links : [],
+      openPoints: Array.isArray(opPack.openPoints) ? opPack.openPoints : [],
+      services: Array.isArray(svcPack.services) ? svcPack.services : [],
+      crq: Array.isArray(crqPack.crq) ? crqPack.crq : []
+    };
+
+    // Se anche il fallback ha portato TUTTO vuoto, avvisa con diagnostica
+    const nothing =
+      !state.sections.length && !state.links.length &&
+      !state.openPoints.length && !state.services.length &&
+      !state.crq.length;
+
+    saveState(state);
+    toast(nothing ? "Repo vuoto o non accessibile" : "Dati caricati dal repository ✔");
+
+    if (nothing && combined && combined.ok) {
+      // Mostra un minimo di info per capire perché il “combinato” non torna i dati
+      console.warn("Diagnostica Worker:", combined);
+    }
+    if (nothing && diag) {
+      console.warn("Diagnosi ?op=load:", diag);
+    }
+
+  } catch (err) {
+    alert("Caricamento dal repository fallito: " + (err?.message || err));
+  }
 }
 
 // --------------------------
