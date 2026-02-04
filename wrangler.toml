@@ -3,7 +3,7 @@ main = "worker.js"              # ← qui il nome deve essere ESATTAMENTE il tuo
 compatibility_date = "2025-01-01"
 
 [vars]
-ALLOWED_ORIGINS = "*"
+ALLOWED_ORIGINS = ["https://checcomarco91.github.io",  "https://checcomarco91.github.io/SupportoTeam",  "https://checcomarco91.github.io/SupportoTeam/"]
 GH_BRANCH = "main"
 GH_OWNER = "checcoroma91"
 GH_REPO  = "SupportoTeam"
