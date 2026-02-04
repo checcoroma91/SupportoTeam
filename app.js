@@ -9,7 +9,7 @@
 const STORAGE_KEY = "tsa.v5.state";
 const SETTINGS_KEY = "tsa.v5.settings";
 const LAST_SAVE_KEY = "tsa.v5.lastSave";
-const AUTOSAVE_ENDPOINT = (window.AUTOSAVE_ENDPOINT || "https://supportoteam.francesco-romano2.workers.dev").trim();
+const AUTOSAVE_ENDPOINT = "https://supportoteam.francesco-romano2.workers.dev";
 
 // --------------------------
 // SIMPLE TOAST (non intrusive)
