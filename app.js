@@ -3708,39 +3708,38 @@ function openCrqHelpDialog() {
 document.querySelector("[data-do='crqHelp']")
     ?.addEventListener("click", openCrqHelpDialog);
 
-/* ------------------------------------------------------------
-   FINAL GLOBAL INIT
-   ------------------------------------------------------------ */
 document.addEventListener("DOMContentLoaded", () => {
-    try {
-        // Re-render everything on startup
-        renderAll();
-		initExportButtons();
+   try {
+     // Re-render everything on startup
+     renderAll();
+     initExportButtons();
 
-		// Bridge per i tile della HOME dell'HTML v3
-		window.handleSave = () => saveToRepo();
-		window.reloadFromRepo = (force) => loadFromRepo();
+     // Bridge per i tile della HOME dell'HTML v3
+     window.handleSave = () => saveToRepo();
+     window.reloadFromRepo = (force) => loadFromRepo();
 
-		// (opzionale) per compat con tile "Carica da cartella"
-		window.loadFromFolder = window.loadFromFolder || (async () => alert("Funzione non disponibile in questo browser"));
+     // (opzionale) per compat con tile "Carica da cartella"
+     window.loadFromFolder = window.loadFromFolder || (async () => alert("Funzione non disponibile in questo browser"));
 
-		try {
-		  const hasLocal = !!localStorage.getItem(STORAGE_KEY);
-		  const qp = new URLSearchParams(location.search);
-		  const wantsAuto = qp.get("autoload") === "1";
-		  if (!hasLocal || wantsAuto) {
-			loadFromRepo();   // GET …?op=load dal Worker
-		  }
-		} catch (_) {}
 
-        // Ensure default pane
-        showPane("home");
+    // Auto-load SEMPRE all'avvio/refresh
+    (async () => {
+      try {
+        await loadFromRepo();   // GET …?op=load dal Worker (con fallback /data/*)
+      } catch (e) {
+        console.warn("Auto-load fallito:", e);
+        try { toast("Impossibile caricare dal repository. Uso dati locali."); } catch(_) {}
+      }
+    })();
 
-        toast("V5 Neo‑Glass pronta ✨");
-    } catch (e) {
-        console.error("Fatal init error:", e);
-    }
-});
+     // Ensure default pane
+     showPane("home");
+
+     toast("V5 Neo‑Glass pronta ✨");
+   } catch (e) {
+     console.error("Fatal init error:", e);
+   }
+ });
 
 // ===== Ripple sui CHIP =====
 document.addEventListener("click", (ev) => {
