@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "aea9b240-7c24-4f7e-8a42-6a255ce88e67",
+      "title": "Meet per servizio particolarità",
+      "project": "Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-05",
+      "dueAt": "2026-02-06",
+      "desc": "Creare meet per mettere di fronte Reactive Anagrafe e Reactive Poteri per parlare del servizio",
+      "notes": ""
+    },
+    {
       "id": "8dc464ff-56bc-4afa-b43b-ef91bd9b6f1d",
       "title": "CRQ da creare",
       "project": "Poteri di Firma",
