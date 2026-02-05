@@ -674,6 +674,17 @@ function initUIRouter() {
 // When DOM ready
 document.addEventListener("DOMContentLoaded", () => {
     initUIRouter();
+	document.getElementById("notifBtn")?.addEventListener("click", () => {
+	  renderNotifDialog();     // <-- genera le notifiche
+	  updateNotifTabCounters();
+	  openDialogById("notifDlg");
+	  
+	  initNotifToggles();      // <— attiva i toggle
+	  initNotifClickHandlers(); // <— per la parte 2
+	  
+	  initNotifTabs();
+
+	});
     showPane("home"); // default view
 });
 
@@ -751,8 +762,320 @@ function renderSectionsList() {
         </div>`;
     }).join("");
 }
-``
 
+/*
+	NOTIFICHE
+*/
+
+function computeOPNotifications() {
+  const now = new Date();
+  
+  const groups = {
+    verde: [],   // 🟢
+    giallo: [],  // 🟡
+    rosso: []    // 🔴
+  };
+
+  function workingDaysDiff(d1, d2) {
+    let count = 0;
+    const cur = new Date(d1);
+    while (cur <= d2) {
+      const day = cur.getDay();
+      if (day !== 0 && day !== 6) count++; // lun–ven
+      cur.setDate(cur.getDate() + 1);
+    }
+    return count - 1;
+  }
+
+  state.openPoints.forEach(op => {
+    if (op.status === "Completato") return;
+
+    const due = op.dueAt ? new Date(op.dueAt) : null;
+
+    // 🟢 Nessuna scadenza
+    if (!due) {
+      groups.verde.push({ icon:"🟢", stato:"DA FARE APPENA POSSIBILE", ...op });
+      return;
+    }
+
+    // Calcolo giorni feriali tra oggi e scadenza
+    const wd = workingDaysDiff(now, due);
+
+    // 🟡 Entro 3 giorni feriali e scadenza >= oggi
+    if (wd >= 0 && wd <= 3) {
+      groups.giallo.push({ icon:"🟡", stato:"IN SCADENZA", ...op });
+      return;
+    }
+
+    // 🔴 Scaduto (due < oggi)
+    if (due < now) {
+      groups.rosso.push({ icon:"🔴", stato:"SCADUTO", ...op });
+      return;
+    }
+  });
+
+  return groups;
+}
+
+function getOPNotifCount() {
+  const groups = computeOPNotifications();
+  return (groups.verde?.length || 0) + (groups.giallo?.length || 0) + (groups.rosso?.length || 0);
+}
+
+function getCRQNotifCount() {
+  const g = computeCRQNotifications();
+  return (g.verde?.length || 0) + (g.giallo?.length || 0) + (g.rosso?.length || 0);
+}
+
+function refreshNotificationsUI() {
+  const totalOP  = getOPNotifCount();
+  const totalCRQ = getCRQNotifCount();
+  const total    = totalOP + totalCRQ;
+
+  const badge = document.getElementById("notifBadge");
+  const banner = document.getElementById("notifBanner");
+  const bannerText = document.getElementById("notifBannerText");
+  const notifBtn = document.getElementById("notifBtn");
+
+  // Badge numero
+  if (badge) {
+    if (total > 0) {
+      badge.textContent = total;
+      badge.style.display = "inline-flex";
+    } else {
+      badge.textContent = "";
+      badge.style.display = "none";
+    }
+  }
+
+  // 🚨 Evidenziazione bottone Notifiche
+  if (notifBtn) {
+    if (total > 0) notifBtn.classList.add("alert");
+    else notifBtn.classList.remove("alert");
+  }
+
+  // Banner (se lo usi)
+  if (banner && bannerText) {
+    if (total > 0) {
+      banner.style.display = "inline-flex";
+      bannerText.textContent =
+        total === 1
+          ? "Hai 1 notifica da controllare"
+          : `Hai ${total} notifiche da controllare`;
+    } else {
+      banner.style.display = "none";
+    }
+  }
+}
+
+function renderNotifDialog() {
+  const op = computeOPNotifications();
+  const cq = computeCRQNotifications();
+
+  const elOP  = document.getElementById("notifOP");
+  const elCRQ = document.getElementById("notifCRQ");
+
+  // --- OP (rimane come lo hai già corretto) ---
+  function renderGroupOP(arr, cssClass, addSeparator = false) {
+    if (!arr.length) return "";
+    return `
+      ${addSeparator ? '<div class="notif-sep"></div>' : ""}
+      ${arr.map(item => `
+        <div class="notif-item ${cssClass}" data-op-id="${item.id}">
+          <div class="notif-head">
+            <span class="notif-icon">${item.icon}</span>
+            <span class="notif-status">${item.stato}</span>
+          </div>
+          <div class="notif-field"><strong>Titolo:</strong> ${item.title}</div>
+          <div class="notif-field"><strong>Progetto:</strong> ${item.project || "-"}</div>
+          <div class="notif-field"><strong>Assegnatari:</strong> ${Array.isArray(item.assignees) ? item.assignees.join(", ") : (item.assignees || "-")}</div>
+          <div class="notif-field"><strong>Stato:</strong> ${item.status}</div>
+          <div class="notif-field"><strong>Scadenza:</strong> ${item.dueAt || "—"}</div>
+          ${item.desc ? `
+            <div class="notif-desc-collapsible">
+              <button class="btn link-btn notif-toggle" data-target="desc-${item.id}">Mostra dettagli</button>
+              <div class="notif-desc-content" id="desc-${item.id}" style="display:none;">${item.desc}</div>
+            </div>
+          ` : ""}
+        </div>
+      `).join("")}
+    `;
+  }
+
+  // --- CRQ ---
+  function renderGroupCRQ(arr, cssClass, addSeparator = false) {
+    if (!arr.length) return "";
+    return `
+      ${addSeparator ? '<div class="notif-sep"></div>' : ""}
+      ${arr.map(c => `
+        <div class="notif-item ${cssClass}" data-crq-id="${c.id}">
+          <div class="notif-head">
+            <span class="notif-icon">${c.icon}</span>
+            <span class="notif-status">${c.statoNotifica}</span>
+          </div>
+
+          <div class="notif-field"><strong>RFC Aperti:</strong> ${c.rfc || "-"}</div>
+          <div class="notif-field"><strong>Stato:</strong> ${c.stato || "-"}</div>
+          <div class="notif-field"><strong>Categoria:</strong> ${c.categoria || "-"}</div>
+          <div class="notif-field"><strong>Rilascio:</strong> ${c.rilascio || "—"}</div>
+          <div class="notif-field"><strong>Rif Nostro:</strong> ${c.rif || "-"}</div>
+          <div class="notif-field"><strong>PRJ:</strong> ${c.prj || "-"}</div>
+
+          ${c.contenuto ? `
+            <div class="notif-desc-collapsible">
+              <button class="btn link-btn notif-toggle" data-target="descC-${c.id}">Mostra dettagli</button>
+              <div class="notif-desc-content" id="descC-${c.id}" style="display:none;">${c.contenuto}</div>
+            </div>
+          ` : ""}
+        </div>
+      `).join("")}
+    `;
+  }
+
+  // OP
+  const htmlOP =
+    renderGroupOP(op.verde,  "ok") +
+    renderGroupOP(op.giallo, "avviso",  !!op.verde.length) +
+    renderGroupOP(op.rosso,  "critica", !!op.verde.length || !!op.giallo.length);
+
+  elOP.innerHTML = htmlOP || `<div class="muted">Nessuna notifica per gli Open Point.</div>`;
+
+  // CRQ
+  const htmlCRQ =
+    renderGroupCRQ(cq.verde,  "ok") +
+    renderGroupCRQ(cq.giallo, "avviso",  !!cq.verde.length) +
+    renderGroupCRQ(cq.rosso,  "critica", !!cq.verde.length || !!cq.giallo.length);
+
+  elCRQ.innerHTML = htmlCRQ || `<div class="muted">Nessuna notifica per le CRQ.</div>`;
+}
+
+function initNotifToggles() {
+  document.querySelectorAll(".notif-toggle").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // non attivare il click della card
+      const targetId = btn.dataset.target;
+      const panel = targetId ? document.getElementById(targetId) : null;
+      if (!panel) return;
+      const vis = panel.style.display !== "none";
+      panel.style.display = vis ? "none" : "block";
+      btn.textContent = vis ? "Mostra dettagli" : "Nascondi dettagli";
+    });
+  });
+}
+	
+function initNotifClickHandlers() {
+  document.querySelectorAll(".notif-item").forEach(el => {
+    el.addEventListener("click", (e) => {
+      // Se clicco sul bottone "Mostra dettagli", ignoro la navigazione
+      if (e.target.closest(".notif-toggle")) return;
+
+      const opId  = el.dataset.opId;
+      const crqId = el.dataset.crqId;
+
+      // Chiudi dialog notifiche
+      const dlg = document.getElementById("notifDlg");
+      if (dlg) dlg.close();
+
+      if (opId) {
+        showPane("op");
+        filterToSingleOP(opId);
+        return;
+      }
+      if (crqId) {
+        showPane("crq");
+        filterToSingleCRQ(crqId);
+        return;
+      }
+    });
+  });
+}
+
+function initNotifTabs() {
+  const tabs = document.querySelectorAll(".notif-tab");
+  const sections = {
+    op: document.getElementById("notifTabOP"),
+    crq: document.getElementById("notifTabCRQ")
+  };
+
+  tabs.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.tab;
+
+      // Aggiorna tab attivi
+      tabs.forEach(t => t.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Mostra contenuto giusto
+      Object.entries(sections).forEach(([key, el]) => {
+        el.classList.toggle("active", key === target);
+      });
+    });
+  });
+}
+
+function updateNotifTabCounters() {
+  const op = computeOPNotifications();
+  const cq = computeCRQNotifications();
+
+  // OP counters
+  const opGreen  = op.verde.length;
+  const opYellow = op.giallo.length;
+  const opRed    = op.rosso.length;
+
+  const elOP = document.getElementById("notifTabCountOP");
+  if (elOP) {
+    elOP.innerHTML = `
+      ${opGreen  ? `<span class="notif-count-green">🟢${opGreen}</span>` : ""}
+      ${opYellow ? `<span class="notif-count-yellow">🟡${opYellow}</span>` : ""}
+      ${opRed    ? `<span class="notif-count-red">🔴${opRed}</span>`     : ""}
+    `;
+  }
+
+  // CRQ counters
+  const cqGreen  = cq.verde.length;
+  const cqYellow = cq.giallo.length;
+  const cqRed    = cq.rosso.length;
+
+  const elCRQ = document.getElementById("notifTabCountCRQ");
+  if (elCRQ) {
+    elCRQ.innerHTML = `
+      ${cqGreen  ? `<span class="notif-count-green">🟢${cqGreen}</span>` : ""}
+      ${cqYellow ? `<span class="notif-count-yellow">🟡${cqYellow}</span>` : ""}
+      ${cqRed    ? `<span class="notif-count-red">🔴${cqRed}</span>`     : ""}
+    `;
+  }
+}
+
+function filterToSingleCRQ(id) {
+  // Se esiste già un crqFilter nello stato app → usiamolo, altrimenti creiamone uno minimale
+  window.crqFilter = (typeof crqFilter === "object" && crqFilter) ? crqFilter : {};
+  crqFilter = { ...crqFilter, id }; // attivo filtro per ID
+  if (typeof saveCrqFilter === "function") saveCrqFilter(crqFilter); // se hai persistenza
+  if (typeof renderCrq === "function") renderCrq();
+}
+
+function filterToSingleOP(id) {
+  // Salva un filtro speciale
+  opFilter = {
+    ...defaultOpFilter(),
+    text: "", 
+    priorities: [],
+    statuses: [],
+    maxOnly: false,
+    createdFrom: "",
+    createdTo: "",
+    dueFrom: "",
+    dueTo: "",
+    assignees: [],
+    projects: [],
+  };
+
+  // Forziamo il filtro su ID specifico
+  opFilter.id = id;
+
+  // Modifica applyOpFilters per gestire ID diretto
+  renderOpenPoints();
+}
 
 /* ------------------------------------------------------------
    SEZIONI: CRUD FUNZIONI
@@ -800,6 +1123,94 @@ window.moveSection = function(id, delta) {
     renderSectionsList();
     renderLinks();
 };
+
+function computeCRQNotifications() {
+  const groups = { verde: [], giallo: [], rosso: [] };
+  const today = atMidnight(new Date());
+
+  const lowStates   = new Set(["Bozza", "Richiesta autorizzazione"]);
+  const revState    = "Revisione pianificata";
+  const lateOkStates= new Set(["Approvazione pianificata", "Pianificato", "Implementazione in corso"]);
+
+  (state.crq ?? []).forEach(c => {
+    const id        = c.id;
+    const stato     = getCrqStato(c) || "";
+    const rilStr    = getCrqRilascio(c);
+    const rilDate   = rilStr ? atMidnight(new Date(rilStr)) : null;
+
+    // 1) 🟢 SLOT DA PRENOTARE — no data rilascio + Bozza
+    if (!rilDate && stato === "Bozza") {
+      groups.verde.push({
+        id,
+        icon: "🟢",
+        statoNotifica: "SLOT DA PRENOTARE",
+        rfc: getCrqRFC(c),
+        stato, categoria: getCrqCategoria(c),
+        rilascio: rilStr || "—",
+        rif: getCrqRif(c),
+        prj: getCrqPrj(c),
+        contenuto: getCrqContenuto(c)
+      });
+      return;
+    }
+
+    if (!rilDate) return; // niente altre regole senza data
+
+    const tuePrev = tuesdayOfPreviousWeek(rilDate);
+
+    // 2) 🟡/🔴 Bozza o Richiesta autorizzazione rispetto al martedì della settimana precedente
+    if (lowStates.has(stato)) {
+      if (today < tuePrev) {
+        groups.giallo.push({
+          id, icon: "🟡", statoNotifica: "PORTARE IN PIANIFICAZIONE IN CORSO",
+          rfc: getCrqRFC(c), stato, categoria: getCrqCategoria(c),
+          rilascio: rilStr, rif: getCrqRif(c), prj: getCrqPrj(c),
+          contenuto: getCrqContenuto(c)
+        });
+      } else { // oggi >= martedì prev week → red
+        groups.rosso.push({
+          id, icon: "🔴", statoNotifica: "DA RIPIANIFICARE - TERMINE CAMBIO STATO PASSATO",
+          rfc: getCrqRFC(c), stato, categoria: getCrqCategoria(c),
+          rilascio: rilStr, rif: getCrqRif(c), prj: getCrqPrj(c),
+          contenuto: getCrqContenuto(c)
+        });
+      }
+      return;
+    }
+
+    // 3) 🟡/🔴 Revisione pianificata vs giorno rilascio
+    if (stato === revState) {
+      if (today < rilDate) {
+        groups.giallo.push({
+          id, icon: "🟡", statoNotifica: "PORTARE IN APPROVAZIONE PIANIFICATA",
+          rfc: getCrqRFC(c), stato, categoria: getCrqCategoria(c),
+          rilascio: rilStr, rif: getCrqRif(c), prj: getCrqPrj(c),
+          contenuto: getCrqContenuto(c)
+        });
+      } else { // oggi >= rilascio
+        groups.rosso.push({
+          id, icon: "🔴", statoNotifica: "RIPIANIFICARE - TERMINE CAMBIO STATO PASSATO",
+          rfc: getCrqRFC(c), stato, categoria: getCrqCategoria(c),
+          rilascio: rilStr, rif: getCrqRif(c), prj: getCrqPrj(c),
+          contenuto: getCrqContenuto(c)
+        });
+      }
+      return;
+    }
+
+    // 4) 🟢 Approvazione pianificata / Pianificato / Implementazione in corso con rilascio passato/oggi
+    if (lateOkStates.has(stato) && today >= rilDate) {
+      groups.verde.push({
+        id, icon: "🟢", statoNotifica: "CONTROLLARE - GIORNO RILASCIO PASSATO",
+        rfc: getCrqRFC(c), stato, categoria: getCrqCategoria(c),
+        rilascio: rilStr, rif: getCrqRif(c), prj: getCrqPrj(c),
+        contenuto: getCrqContenuto(c)
+      });
+    }
+  });
+
+  return groups;
+}
 
 // Delete section
 window.deleteSection = function(id) {
@@ -1600,6 +2011,12 @@ function inDateRange(val, from, to) {
 }
 
 function applyOpFilters(rows) {
+	
+	// Filtro diretto per ID singolo (clic da notifiche)
+	if (opFilter.id) {
+	  return rows.filter(o => o.id === opFilter.id);
+	}
+
     const f = opFilter || defaultOpFilter();
 
     return rows.filter(o => {
@@ -2980,6 +3397,12 @@ function inRange(val, from, to) {
 }
 
 function applyCrqFilters(rows) {
+	
+	// Filtro diretto per ID (clic da notifiche)
+    if (crqFilter && crqFilter.id) {
+      return rows.filter(r => r.id === crqFilter.id);
+    }
+  
     const f = crqFilter || defaultCrqFilter();
 
     return rows.filter(o => {
@@ -3326,6 +3749,38 @@ function todayISO() {
     }
 }
 
+// Normalizza a mezzanotte (confronti day-precision)
+function atMidnight(d) {
+  const x = new Date(d);
+  x.setHours(0,0,0,0);
+  return x;
+}
+
+// Lunedì (ISO) della settimana della data
+function startOfISOWeek(d) {
+  const x = atMidnight(d);
+  // getDay(): 0=dom,1=lun,...6=sab → ISO: (0→6,1→0,...)
+  const delta = (x.getDay() + 6) % 7; // 0 se lunedì
+  x.setDate(x.getDate() - delta);
+  return x;
+}
+
+// Martedì della settimana precedente rispetto alla settimana di 'date'
+function tuesdayOfPreviousWeek(date) {
+  const mon = startOfISOWeek(date);  // lunedì settimana rilascio
+  const tuePrev = new Date(mon);
+  tuePrev.setDate(mon.getDate() - 6); // lunedì - 6 = martedì della settimana precedente
+  return atMidnight(tuePrev);
+}
+
+function getCrqRFC(c)        { return c.rfcAperti ?? c.rfc ?? c.RFC ?? ""; }
+function getCrqStato(c)      { return c.stato ?? ""; }
+function getCrqCategoria(c)  { return c.categoria ?? ""; }
+function getCrqRilascio(c)   { return c.dataRilascio ?? c.rilascio ?? ""; }
+function getCrqRif(c)        { return c.rifNostro ?? c.rif ?? ""; }
+function getCrqPrj(c)        { return c.prj ?? c.PRJ ?? c.progetto ?? ""; }
+function getCrqContenuto(c)  { return c.contenuto ?? c.note ?? ""; }
+
 /* ------------------------------------------------------------
    GLOBAL SAVE WRAPPER
    (ensures UI refresh sequencing)
@@ -3342,6 +3797,10 @@ function renderAll() {
     try { renderOpenPoints(); } catch (e) { console.warn("OP render error:", e); }
     try { renderServices(); } catch (e) { console.warn("SVC render error:", e); }
     try { renderCrq(); } catch (e) { console.warn("CRQ render error:", e); }
+	
+	// Aggiorna badge + banner
+	  refreshNotificationsUI();
+
 }
 
 /* ------------------------------------------------------------
@@ -3737,6 +4196,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 4) Mostra Home
     showPane("home");
+	
+	
+    // Inizializza subito la UI delle notifiche
+    refreshNotificationsUI();
+
 
     toast("V5 Neo‑Glass pronta ✨");
 
