@@ -3172,3 +3172,54 @@ dialog::backdrop { background: rgba(5, 8, 18, .58); }
   color: #ff5064;
   text-shadow: 0 0 6px rgba(255,80,100,0.9);
 }
+
+/* ===========================
+   DRAG & DROP – DROP INDICATOR
+   =========================== */
+
+.link-drop-indicator {
+  height: 8px;
+  margin: 4px 0;
+  border-radius: 6px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0,255,255,0),
+    rgba(0,255,255,0.7),
+    rgba(0,255,255,0)
+  );
+
+  box-shadow:
+    0 0 6px rgba(0,255,255,0.5),
+    0 0 12px rgba(0,255,255,0.4),
+    0 0 20px rgba(0,255,255,0.25);
+
+  transition: 0.15s ease;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.link-drop-indicator.active {
+  opacity: 1;
+}
+
+/* Indicator overlay per DnD links */
+#linkDropIndicator {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(180deg, var(--neon-color, #63e6ff), var(--sec, #7b7dff));
+  box-shadow: 0 0 12px var(--neon-color, #63e6ff);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+}
+
+.drop-placeholder {
+  display: block;
+  background: rgba(99, 230, 255, 0.10);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 12px rgba(99, 230, 255, 0.25);
+  margin: 4px;
+}
+
+
