@@ -1557,87 +1557,188 @@ function hideCaret() {
     if (caretEl) caretEl.style.display = "none";
 }
 
+
+let draggedLinkId = null;
+
+/* ------------------------------------------------------------
+   DRAG & DROP LINK – robusto con indicatore luminoso
+------------------------------------------------------------ */
+
+
 function initLinksDragDrop() {
-    // handles
-    $$(".drag-handle").forEach(h => {
-        h.addEventListener("dragstart", e => {
-            dragState.id = h.dataset.id;
-            const card = h.closest(".card");
-            card?.classList.add("dragging");
-            try { e.dataTransfer.setData("text/plain", dragState.id); } catch(_){}
-            if (e.dataTransfer) e.dataTransfer.effectAllowed = "move";
-        });
+  const container = document.getElementById("linksContainer");
+  if (!container) return;
 
-        h.addEventListener("dragend", e => {
-            const card = h.closest(".card");
-            card?.classList.remove("dragging");
-            dragState.id = null;
-            hideCaret();
-        });
+  const cardSelector = ".section .grid > .card";
+  let draggedLinkId = null;
+
+  // === Placeholder — simula una card ma vuota (non muove le altre finché non rilasci) ===
+  let placeholder = document.getElementById("drop-placeholder");
+  if (!placeholder) {
+    placeholder = document.createElement("div");
+    placeholder.id = "drop-placeholder";
+    placeholder.className = "card drop-placeholder";
+    placeholder.style.opacity = "0.35";
+    placeholder.style.border = "2px dashed var(--neon-color, #63e6ff)";
+    placeholder.style.minHeight = "60px";
+    placeholder.style.pointerEvents = "none";
+    placeholder.style.transition = "all .12s ease";
+    placeholder.innerHTML = "";
+  }
+
+  // Rendi draggable le card dei link
+  const cards = [...container.querySelectorAll(cardSelector)];
+  cards.forEach(card => {
+    const cid = card.getAttribute("data-id");
+    if (!cid) return;
+
+    card.setAttribute("draggable", "true");
+
+    card.addEventListener("dragstart", e => {
+      draggedLinkId = cid;
+      card.classList.add("dragging");
+      try {
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", cid);
+      } catch (_) {}
     });
 
-    // over cards
-    $$(".links-container .card").forEach(card => {
-        card.addEventListener("dragover", e => {
-            if (!dragState.id) return;
-            e.preventDefault();
-            placeCaret(card, e.clientX);
-        });
-
-        card.addEventListener("drop", e => {
-            if (!dragState.id) return;
-            e.preventDefault();
-            const targetId = card.dataset.id;
-            const rect = card.getBoundingClientRect();
-            const before = e.clientX < rect.left + rect.width / 2;
-
-            hideCaret();
-
-            if (dragState.id !== targetId)
-                moveLinkRelative(dragState.id, targetId, before ? "before" : "after");
-        });
+    card.addEventListener("dragend", () => {
+      draggedLinkId = null;
+      card.classList.remove("dragging");
+      placeholder.remove();
     });
+  });
 
-    // over sections
-    $$(".links-container .section").forEach(section => {
-        section.addEventListener("dragover", e => {
-            if (!dragState.id) return;
-            e.preventDefault();
+  // Helper: risale fino a una .card FIGLIO DIRETTO della .grid corrente (mai di un’altra grid)
+  function getDirectChildCard(grid, el) {
+    if (!grid || !el) return null;
+    if (el.id === "drop-placeholder") return null;
 
-            const secId = section.dataset.sec;
-            const grid = section.querySelector(".grid");
-            if (!grid) return;
+    let cur = el.closest(".card");
+    while (cur && cur !== grid) {
+      if (cur.parentElement === grid &&
+          cur.matches(".card") &&
+          !cur.classList.contains("dragging") &&
+          cur.id !== "drop-placeholder") {
+        return cur;
+      }
+      const outerCard = cur.parentElement?.closest(".card");
+      cur = outerCard || cur.parentElement;
+    }
+    return null;
+  }
 
-            const last = grid.querySelector(".card:last-child");
-            const caret = ensureCaret();
-            grid.appendChild(caret);
+  // DRAGOVER: posiziona SOLO il placeholder, niente insertBefore su nodi alieni → niente NotFoundError
+  container.addEventListener("dragover", (e) => {
+    if (!draggedLinkId) return;
+    e.preventDefault();
 
-            if (last) {
-                const rect = last.getBoundingClientRect();
-                caret.style.left = (rect.right - grid.getBoundingClientRect().left) + "px";
-                caret.style.top = (rect.top - grid.getBoundingClientRect().top) + "px";
-                caret.style.height = Math.max(24, rect.height) + "px";
+    // Nodo reale sotto il puntatore
+    const target = document.elementFromPoint(e.clientX, e.clientY);
+    if (!target) return;
+
+    // Grid della sezione corrente (HTML: .section > .grid)
+    const grid = target.closest(".section")?.querySelector(".grid");
+    if (!grid) return;
+
+    // Assicura che il placeholder sia in questa grid
+    if (placeholder.parentElement !== grid) {
+      try { placeholder.remove(); } catch (_) {}
+      grid.appendChild(placeholder); // append provvisorio
+    }
+
+    // Card FIGLIO DIRETTO della grid sotto il mouse
+    const directCard = getDirectChildCard(grid, target);
+
+    if (directCard) {
+      const rect = directCard.getBoundingClientRect();
+      const before = e.clientY < rect.top + rect.height / 2;
+
+      if (directCard.parentElement === grid) {
+        if (before) {
+          if (placeholder.nextSibling !== directCard) {
+            grid.insertBefore(placeholder, directCard);
+          }
+        } else {
+          const next = directCard.nextSibling;
+          if (next !== placeholder) {
+            if (next && next.parentElement === grid) {
+              grid.insertBefore(placeholder, next);
             } else {
-                const gRect = grid.getBoundingClientRect();
-                caret.style.left = "8px";
-                caret.style.top = (gRect.top - grid.getBoundingClientRect().top) + "px";
-                caret.style.height = "48px";
+              grid.appendChild(placeholder);
             }
-            caret.style.display = "block";
-        });
+          }
+        }
+      } else {
+        // Riferimento non della grid → append sicuro
+        if (placeholder.parentElement !== grid || placeholder !== grid.lastChild) {
+          grid.appendChild(placeholder);
+        }
+      }
+    } else {
+      // Nessuna card valida sotto il mouse → gestisci inizio/fondo grid
+      const siblings = [...grid.children]
+        .filter(el => el.matches(".card") && !el.classList.contains("dragging") && el.id !== "drop-placeholder");
 
-        section.addEventListener("dragleave", e => {
-            // optional: hide caret on leave
-        });
+      if (siblings.length === 0) {
+        if (placeholder.parentElement !== grid || placeholder !== grid.firstChild) {
+          grid.appendChild(placeholder);
+        }
+        return;
+      }
 
-        section.addEventListener("drop", e => {
-            if (!dragState.id) return;
-            e.preventDefault();
-            hideCaret();
-            const secId = section.dataset.sec;
-            moveLinkToSectionEnd(dragState.id, secId);
-        });
-    });
+      const first = siblings[0];
+      const last  = siblings[siblings.length - 1];
+      const lastRect = last.getBoundingClientRect();
+
+      if (e.clientY >= lastRect.top + lastRect.height / 2) {
+        if (placeholder.parentElement !== grid || placeholder !== grid.lastChild) {
+          grid.appendChild(placeholder);
+        }
+      } else {
+        if (placeholder.nextSibling !== first) {
+          grid.insertBefore(placeholder, first);
+        }
+      }
+    }
+  });
+
+  // DROP: calcola l’indice del placeholder e riordina SOLO ora
+  container.addEventListener("drop", () => {
+    if (!draggedLinkId) return;
+
+    const sectionGrid = placeholder.closest(".grid");
+    if (!sectionGrid) return;
+
+    const section = sectionGrid.closest(".section");
+    const targetSectionId = section?.dataset.sec || null;
+
+    // Ordine “visivo” nella grid (senza il placeholder)
+    const orderedIds = [...sectionGrid.querySelectorAll(".card")]
+      .filter(el => el.id !== "drop-placeholder")
+      .map(el => el.getAttribute("data-id"))
+      .filter(Boolean);
+
+    // Posizione di inserimento = posizione del placeholder tra i figli della grid
+    const dropIndex = [...sectionGrid.children].indexOf(placeholder);
+    orderedIds.splice(Math.min(dropIndex, orderedIds.length), 0, draggedLinkId);
+
+    // Aggiorna sezione del link trascinato (se cambi sezione) e riassembla l’array
+    state.links = state.links.map(link =>
+      link.id === draggedLinkId ? { ...link, sectionId: targetSectionId } : link
+    );
+
+    const inTarget = state.links.filter(l => (l.sectionId || "") === (targetSectionId || ""));
+    const inOther  = state.links.filter(l => (l.sectionId || "") !== (targetSectionId || ""));
+
+    inTarget.sort((a, b) => orderedIds.indexOf(a.id) - orderedIds.indexOf(b.id));
+    state.links = [...inOther, ...inTarget];
+
+    saveState(state);
+    renderLinks();
+    initLinksDragDrop(); // riaggancia i listener alle nuove card
+  });
 }
 
 function placeCaret(card, clientX) {
@@ -3800,9 +3901,12 @@ function renderAll() {
     try { renderOpenPoints(); } catch (e) { console.warn("OP render error:", e); }
     try { renderServices(); } catch (e) { console.warn("SVC render error:", e); }
     try { renderCrq(); } catch (e) { console.warn("CRQ render error:", e); }
-	
+	  
+	  updateNotifTabCounters();
 	// Aggiorna badge + banner
 	  refreshNotificationsUI();
+	  
+	  initLinksDragDrop();
 
 }
 
