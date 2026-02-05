@@ -99,6 +99,21 @@
   ],
   "links": [
     {
+      "id": "8ae1ab53-5b16-48e5-b1b7-16e4a250a686",
+      "title": "PORTALE ENTI CONVENZIONATI - servizi REST",
+      "url": "http://portaleenti-coll-evo-be.gslb-cptf.gbbper.priv/be-portaleenti-sl/swagger-ui/index.html",
+      "desc": "Swagger coll evo (modificando ambiente e indirizzo si possono raggiungere quelli degli altri ambienti ad eccezione di prod)",
+      "tags": [
+        "swagger",
+        "servizi",
+        "portale",
+        "enti",
+        "convenzioni",
+        "convenzionati"
+      ],
+      "sectionId": "fdc49495-babc-450c-aa79-7984c68a7e4e"
+    },
+    {
       "id": "5eac6fd1-e82c-4f61-b727-7415cb460ebe",
       "title": "Team",
       "url": "https://bpergroup.sharepoint.com/:f:/r/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Team%20Sist.%20Anagrafici?csf=1&web=1&e=oFoPW4",
