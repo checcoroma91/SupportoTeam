@@ -1,0 +1,372 @@
+/* crq.css — generated split */
+#crqTable{
+table-layout: fixed;
+}
+
+#crqTable td, 
+#crqTable th{
+white-space: normal !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+#crqTable th:last-child, #crqTable td:last-child{
+white-space: nowrap; width: 96px;
+}
+
+/* CRQ — forza testo chiaro in TUTTI i campi */
+#crqEditorDlg input,
+#crqEditorDlg select,
+#crqEditorDlg textarea,
+#crqEditorDlg label{
+color: var(--txt) !important;
+}
+
+/* Placeholder chiari */
+#crqEditorDlg input::placeholder,
+#crqEditorDlg textarea::placeholder{
+color: color-mix(in srgb, var(--txt), transparent 40%) !important;
+}
+
+/* Input scuri coerenti con gli altri modali */
+#crqEditorDlg input,
+#crqEditorDlg select,
+#crqEditorDlg textarea{
+background: color-mix(in srgb, var(--panel-2), transparent 20%) !important;
+  border: 1px solid color-mix(in srgb, var(--border), transparent 30%) !important;
+}
+
+#crqEditorDlg .form-grid{
+grid-template-columns: repeat(3, 1fr);
+    column-gap: 24px;
+    row-gap: 14px;
+}
+
+#crqEditorDlg #crqPrj{
+min-height: 110px !important;
+    resize: vertical;
+}
+
+/* CRQ: ingrandisce il campo Stato */
+#crqEditorDlg .row label:first-child select{
+min-width: 220px !important;
+}
+
+/* CRQ – grid a 3 colonne */
+#crqEditorDlg .form-grid{
+grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+}
+
+/* PRJ e Contenuto full-width */
+#crqEditorDlg #crqPrj,
+#crqEditorDlg #crqContenuto{
+grid-column: 1 / -1;
+}
+
+#crqEditorDlg #crqStato{
+min-width: 240px;
+}
+
+/* ===== CRQ: layout pulito in 3 colonne ===== */
+#crqEditorDlg .form-grid{
+/* passa da 2 a 3 colonne */
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 10px;
+}
+
+/* le .row "appiattiscono" i campi: facciamole distribuire bene */
+#crqEditorDlg .row{
+display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* ogni riga 3 colonne */
+  gap: 20px;
+}
+
+/* label sempre su una riga (niente spezzamenti brutti) */
+#crqEditorDlg .row label,
+#crqEditorDlg .form-grid > label{
+white-space: nowrap;
+}
+
+/* ma il controllo (input/select/textarea) dentro la label deve allargarsi */
+#crqEditorDlg label > input,
+#crqEditorDlg label > select,
+#crqEditorDlg label > textarea{
+width: 100%;
+}
+
+/* Stato: larghezza minima per leggere tutta la voce */
+#crqEditorDlg #crqStato{
+min-width: 260px;
+}
+
+/* Bhelp: rendiamolo leggibile e allineato alla colonna, non microscopico */
+#crqEditorDlg #crqBhelp{
+min-width: 260px;
+}
+
+/* PRJ e Contenuto come blocchi full-width sotto (una riga intera) */
+#crqEditorDlg #crqPrj,
+#crqEditorDlg #crqContenuto{
+grid-column: 1 / -1;
+}
+
+/* PRJ più alto, coerente con lo stile */
+#crqEditorDlg #crqPrj{
+min-height: 120px;
+  resize: vertical;
+}
+
+/* ===== CRQ — container più largo ===== */
+#crqEditorDlg.modal{
+width: 1100px;         /* aumento contenitore */
+    max-width: 95vw;       /* sicurezza su schermi piccoli */
+}
+
+#crqEditorDlg label{
+white-space: nowrap;
+}
+
+#crqEditorDlg input,
+#crqEditorDlg select,
+#crqEditorDlg textarea{
+width: 100%;
+}
+
+/* ===== FILTRA CRQ: testi chiari ===== */
+#crqFilterDlg,
+#crqFilterDlg label,
+#crqFilterDlg legend,
+#crqFilterDlg input,
+#crqFilterDlg select{
+color: var(--txt) !important;
+}
+
+/* placeholder chiari */
+#crqFilterDlg input::placeholder{
+color: color-mix(in srgb, var(--txt), transparent 40%) !important;
+}
+
+/* ===== FILTRA CRQ: layout a 3 colonne ===== */
+#crqFilterDlg .form-grid{
+display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 16px;
+}
+
+#crqFilterDlg label > input,
+#crqFilterDlg label > select{
+width: 100%;
+}
+
+/* Campi che devono prendere tutta la larghezza */
+#crqFilterDlg #crqfText,
+#crqFilterDlg #crqfContenuto{
+grid-column: 1 / -1;
+}
+
+#crqFilterDlg fieldset{
+border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+#crqFilterDlg fieldset legend{
+font-size: 13px;
+    margin-bottom: 4px;
+}
+
+#crqFilterDlg .checks{
+display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+}
+
+/* ===== FILTRA CRQ — Checkbox in orizzontale ===== */
+
+/* Layout orizzontale per i gruppi checkbox */
+#crqFilterDlg .checks{
+display: flex !important;
+    flex-wrap: wrap;
+    gap: 10px 20px;       /* distanza orizzontale / verticale */
+    align-items: center;
+}
+
+/* Le singole label in linea */
+#crqFilterDlg .checks label{
+display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+/* Input checkbox più leggibile */
+#crqFilterDlg .checks input[type="checkbox"]{
+transform: scale(1.2);   /* opzionale ma più visibile */
+}
+
+/* Fieldset compatti */
+#crqFilterDlg fieldset{
+padding: 6px 10px;
+}
+
+/* Esempio: Chiuso rosso, Completato verde, ecc. */
+.checks label[for="crqf_stato_chiuso"]:has(input:checked),
+#crqfStatiGroup input#crqf_stato_chiuso:checked + label{
+background: rgba(255,80,100,0.22);
+  border-color: #ff5064;
+}
+
+/* ===== CRQ Filter — Stato: span su 3 colonne della form ===== */
+/* il fieldset "Stato" occupa l'intera riga della grid del dialog */
+#crqFilterDlg #crqfStatiGroup,
+#crqFilterDlg #crqfStatiGroup ~ .actions.end, /* se vuoi che i bottoni restino sotto */
+#crqFilterDlg fieldset:has(#crqfStatiGroup){
+grid-column: 1 / -1;
+}
+
+/* ===== CRQ Filter — Stato: layout interno in 3 colonne ===== */
+/* Contenitore a griglia per distribuire i chip su 3 colonne */
+#crqFilterDlg #crqfStatiGroup{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 14px; /* verticale | orizzontale */
+  align-items: start;
+}
+
+/* Manteniamo la resa "chip" sulle label (già definita) e facciamo sì che si allarghino bene */
+#crqFilterDlg #crqfStatiGroup input[type="checkbox"]{
+position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#crqFilterDlg #crqfStatiGroup label{
+display: inline-flex;
+  width: 100%;                  /* il chip riempie la colonna */
+  justify-content: center;      /* testo centrato dentro il chip */
+  white-space: nowrap;
+}
+
+/* Stato selezionato (funziona sia con :has sia con input:checked + label) */
+#crqFilterDlg #crqfStatiGroup label:has(input:checked),
+#crqFilterDlg #crqfStatiGroup input[type="checkbox"]:checked + label{
+transform: scale(1.05);
+  background: rgba(99, 230, 255, 0.18);
+  border-color: rgb(99, 230, 255);
+  box-shadow: 0 0 6px rgba(99, 230, 255, 0.5);
+}
+
+#crqFilterDlg #crqfStatiGroup input[type="checkbox"] + label:hover{
+border-color: rgba(99, 230, 255, 0.5);
+}
+
+/* Ripple già supportato: assicuriamoci che le label contengano l'onda */
+#crqFilterDlg #crqfStatiGroup label{
+position: relative;
+  overflow: hidden;
+}
+
+/* — opzionale —: se vuoi ancora più compatto su schermi larghi */
+
+
+/* ============================================================
+   CRQ Filter — EMERGENZA: span su 3 colonne + 3 colonne interne
+   ============================================================ */
+
+/* Span su tutte le colonne della form */
+#crqFilterDlg fieldset:has(#crqfEmergGroup){
+grid-column: 1 / -1;
+}
+
+/* Tre colonne interne per i chip */
+#crqFilterDlg #crqfEmergGroup{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 14px;
+}
+
+/* Chip pieni di larghezza colonna */
+#crqFilterDlg #crqfEmergGroup label{
+display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  overflow: hidden; /* necessario per ripple */
+  white-space: nowrap;
+}
+
+/* Attivazione chip */
+#crqFilterDlg #crqfEmergGroup label:has(input:checked),
+#crqFilterDlg #crqfEmergGroup input:checked + label{
+transform: scale(1.05);
+  background: rgba(99, 230, 255, 0.18);
+  border-color: rgb(99, 230, 255);
+  box-shadow: 0 0 6px rgba(99, 230, 255, 0.5);
+}
+
+/* ============================================================
+   CRQ Filter — UTILIZZATO: span su 3 colonne + 3 colonne interne
+   ============================================================ */
+
+#crqFilterDlg fieldset:has(#crqfUtilGroup){
+grid-column: 1 / -1;
+}
+
+#crqFilterDlg #crqfUtilGroup{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 14px;
+}
+
+#crqFilterDlg #crqfUtilGroup label{
+display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#crqFilterDlg #crqfUtilGroup label:has(input:checked),
+#crqFilterDlg #crqfUtilGroup input:checked + label{
+transform: scale(1.05);
+  background: rgba(99, 230, 255, 0.18);
+  border-color: rgb(99, 230, 255);
+  box-shadow: 0 0 6px rgba(99, 230, 255, 0.5);
+}
+
+/* ============================================================
+   HELP CRQ — Forza testo e tabella in chiaro (tema NeoGlass)
+   ============================================================ */
+
+#helpCrqDlg,
+#helpCrqDlg *{
+color: var(--txt) !important;
+}
+
+/* Celle tabella in chiaro */
+#helpCrqDlg table td,
+#helpCrqDlg table th{
+color: var(--txt) !important;
+}
+
+/* Sfondo celle coerente con le altre tabelle */
+#helpCrqDlg table td,
+#helpCrqDlg table th{
+background: color-mix(in srgb, var(--panel-2), transparent 20%) !important;
+    border-color: color-mix(in srgb, var(--border), transparent 30%) !important;
+}
+
+/* Testo più leggibile nella colonna note */
+#helpCrqDlg td:last-child{
+color: var(--txt) !important;
+}
+
+/* Legenda / header dialog */
+#helpCrqDlg .modal-head strong,
+#helpCrqDlg .modal-head{
+color: var(--txt) !important;
+}
