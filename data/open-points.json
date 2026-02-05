@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "8dc464ff-56bc-4afa-b43b-ef91bd9b6f1d",
+      "title": "CRQ da creare",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-05",
+      "dueAt": "2026-02-10",
+      "desc": "Creare CRQ per rilasciare modifiche servizio portafogliazione. se necessario rilasciamo anche la parte batch per i flussi CRM",
+      "notes": ""
+    },
+    {
       "id": "5c2132ee-5971-450e-b3d2-d90f3a5b5695",
       "title": "Profili LDAP",
       "project": "Portale Enti Convenzionati",
