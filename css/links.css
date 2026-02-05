@@ -1,0 +1,225 @@
+/* links.css — generated split */
+/* ---------- Links Cards (inline) ---------- */
+.links-container .section{
+margin-bottom: var(--gap-lg);
+  border-radius: var(--radius);
+  overflow: clip;
+  border: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+}
+
+.links-container .section-header{
+padding: 10px 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--panel-2), transparent 10%),
+      color-mix(in srgb, var(--panel-2), transparent 0%));
+  border-bottom: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+}
+
+.links-container .section-title{
+display: flex; align-items: center; gap: 10px;
+}
+
+.links-container .grid{
+display: grid; gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  padding: var(--pad);
+}
+
+.links-container .card{
+border-radius: var(--radius-md);
+  padding: var(--pad);
+  background: color-mix(in srgb, var(--panel), transparent 18%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+  box-shadow: var(--shadow-1);
+}
+
+.links-container .card-head{
+display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; padding: 0; border: none; background: transparent;
+}
+
+.links-container h3{
+margin: 0; font-size: var(--fs-md); font-weight: 700;
+}
+
+.links-container a{
+color: var(--pri); text-decoration: none;
+}
+
+.links-container a:hover{
+text-decoration: underline;
+}
+
+/* Drag handle */
+.drag-handle{
+cursor: grab; user-select: none;
+  border-radius: 8px;
+  padding: 2px 6px;
+  background: color-mix(in srgb, var(--panel-2), transparent 15%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+}
+
+/* ============================================================
+   COLORI PERSONALIZZATI ESTESI PER SEZIONI + CARDS + BADGE
+   ============================================================ */
+
+/* Variabile CSS per la sezione */
+.links-container .section[data-color]{
+--sec-color: var(--section-color);
+}
+
+.section[data-color]{
+--section-color: attr(data-color);
+}
+
+/* Bordo sezione */
+.links-container .section[data-color]{
+border-left: 6px solid var(--sec-color);
+}
+
+/* Header della sezione */
+.links-container .section[data-color] .section-header{
+background: color-mix(in srgb, var(--sec-color), transparent 85%);
+    border-bottom: 1px solid color-mix(in srgb, var(--sec-color), transparent 40%);
+}
+
+/* Titolo sezione */
+.links-container .section[data-color] .section-title span:last-child{
+color: var(--sec-color);
+    font-weight: 700;
+}
+
+/* Icona sezione */
+.links-container .section[data-color] .section-title span:first-child{
+filter: drop-shadow(0 0 6px var(--sec-color));
+}
+
+/* === Bottoni di sezione =============================== */
+.links-container .section[data-color] .section-actions button{
+border: 1px solid color-mix(in srgb, var(--sec-color), transparent 30%);
+    background: color-mix(in srgb, var(--sec-color), transparent 85%);
+    color: var(--sec-color);
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.links-container .section[data-color] .section-actions button:hover{
+border-color: var(--sec-color);
+    background: color-mix(in srgb, var(--sec-color), transparent 70%);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--sec-color), transparent 60%);
+}
+
+/* === Card ============================================ */
+.links-container .section[data-color] .card{
+border: 1px solid color-mix(in srgb, var(--sec-color), transparent 45%);
+    background: color-mix(in srgb, var(--sec-color), transparent 92%);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--sec-color), transparent 85%);
+    transition: 0.25s ease;
+}
+
+.links-container .section[data-color] .card:hover{
+border-color: var(--sec-color);
+    box-shadow: 0 0 25px color-mix(in srgb, var(--sec-color), transparent 60%);
+}
+
+/* Icona nelle card */
+.links-container .section[data-color] .card .card-head h3::before{
+content: "🔗";
+    margin-right: 6px;
+    color: var(--sec-color);
+    filter: drop-shadow(0 0 6px var(--sec-color));
+}
+
+/* === Bottoni dentro le card =========================== */
+.links-container .section[data-color] .card .table-actions button{
+border: 1px solid color-mix(in srgb, var(--sec-color), transparent 40%);
+    background: color-mix(in srgb, var(--sec-color), transparent 88%);
+    color: var(--sec-color);
+}
+
+.links-container .section[data-color] .card .table-actions button:hover{
+border-color: var(--sec-color);
+    background: color-mix(in srgb, var(--sec-color), transparent 70%);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--sec-color), transparent 60%);
+}
+
+/* === Badge =========================================== */
+.links-container .section[data-color] .card .badge{
+border-color: color-mix(in srgb, var(--sec-color), transparent 40%);
+    background: color-mix(in srgb, var(--sec-color), transparent 80%);
+    color: var(--sec-color);
+    font-weight: 600;
+}
+
+/* ============================================================
+   COLORI PERSONALIZZATI DELLE SEZIONI (VERSIONE DEFINITIVA)
+   ============================================================ */
+
+/* JS imposta --sec-color, perciò basta questo */
+.section[data-color]{
+/* lasciato vuoto volontariamente */
+}
+
+/* 2) Bordo sezione */
+.section[data-color]{
+border-left: 6px solid var(--sec-color);
+}
+
+/* 3) Header */
+.section[data-color] .section-header{
+background: color-mix(in srgb, var(--sec-color), transparent 85%);
+    border-bottom: 1px solid color-mix(in srgb, var(--sec-color), transparent 40%);
+}
+
+/* 4) Titolo */
+.section[data-color] .section-title span:last-child{
+color: var(--sec-color);
+    font-weight: 700;
+}
+
+/* 5) Icona sezione */
+.section[data-color] .section-title span:first-child{
+filter: drop-shadow(0 0 6px var(--sec-color));
+}
+
+/* 6) Bottoni della sezione */
+.section[data-color] .section-actions button{
+border: 1px solid color-mix(in srgb, var(--sec-color), transparent 30%);
+    background: color-mix(in srgb, var(--sec-color), transparent 85%);
+    color: var(--sec-color);
+}
+
+.section[data-color] .section-actions button:hover{
+border-color: var(--sec-color);
+    background: color-mix(in srgb, var(--sec-color), transparent 70%);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--sec-color), transparent 60%);
+}
+
+/* 7) CARD */
+.section[data-color] .card{
+border: 1px solid color-mix(in srgb, var(--sec-color), transparent 45%);
+    background: color-mix(in srgb, var(--sec-color), transparent 92%);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--sec-color), transparent 85%);
+}
+
+.section[data-color] .card:hover{
+border-color: var(--sec-color);
+    box-shadow: 0 0 22px color-mix(in srgb, var(--sec-color), transparent 70%);
+}
+
+/* 8) Badge interni */
+.section[data-color] .badge{
+border-color: color-mix(in srgb, var(--sec-color), transparent 40%);
+    background: color-mix(in srgb, var(--sec-color), transparent 80%);
+    color: var(--sec-color);
+}
+
+.drop-placeholder{
+display: block;
+  background: rgba(99, 230, 255, 0.10);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 12px rgba(99, 230, 255, 0.25);
+  margin: 4px;
+}
