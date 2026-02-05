@@ -594,6 +594,26 @@ async function exportLinksAndSectionsWithDialog() {
     }
 }
 
+function autoOpenNotifDialogIfNeeded() {
+  const totalOP  = getOPNotifCount();
+  const totalCRQ = getCRQNotifCount();
+  const total    = totalOP + totalCRQ;
+
+  if (total > 0) {
+    // Render contenuti
+    renderNotifDialog();
+    updateNotifTabCounters();
+
+    // Mostra dialog
+    openDialogById("notifDlg");
+
+    // Inizializza tabs, toggle e click handlers
+    initNotifTabs();
+    initNotifToggles();
+    initNotifClickHandlers();
+  }
+}
+
 // --------------------------
 // DIALOGS: OPEN TRIGGERS
 // --------------------------
@@ -670,23 +690,6 @@ function initUIRouter() {
     initDialogCloseButtons();
     initExportMenu();
 }
-
-// When DOM ready
-document.addEventListener("DOMContentLoaded", () => {
-    initUIRouter();
-	document.getElementById("notifBtn")?.addEventListener("click", () => {
-	  renderNotifDialog();     // <-- genera le notifiche
-	  updateNotifTabCounters();
-	  openDialogById("notifDlg");
-	  
-	  initNotifToggles();      // <— attiva i toggle
-	  initNotifClickHandlers(); // <— per la parte 2
-	  
-	  initNotifTabs();
-
-	});
-    showPane("home"); // default view
-});
 
 /* ============================================================
    V5 LINKS + SEZIONI + CARDS + FILTRI + DRAG&DROP
@@ -4169,39 +4172,60 @@ document.querySelector("[data-do='crqHelp']")
     ?.addEventListener("click", openCrqHelpDialog);
 
 /* ------------------------------------------------------------
-   FINAL GLOBAL INIT
-   ------------------------------------------------------------ */
+   FINAL GLOBAL INIT (UNIFICATO)
+------------------------------------------------------------ */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    // 1) Render UI iniziale
+    // 1) Inizializza UI router (tabs, tiles, dialog system, toolbar)
+    initUIRouter();
+
+    // 2) Render iniziale dell’intera app
     renderAll();
+
+    // 3) Inizializza pulsanti export
     initExportButtons();
 
-    // 2) Bridge tile HTML v3
-    window.handleSave = () => saveToRepo(); 
+    // 4) Bridge tile HTML v3
+    window.handleSave = () => saveToRepo();
     window.reloadFromRepo = (force) => loadFromRepo();
     window.loadFromFolder =
       window.loadFromFolder || (async () => alert("Funzione non disponibile in questo browser"));
 
-    // 3) AUTOLOAD DAL REPO — ritardato di 50 ms
+    // 5) AUTOLOAD DAL REPO — ritardato di 50ms
     setTimeout(async () => {
       try {
-        await loadFromRepo();   // Worker V2 risponde con i veri dati
+        await loadFromRepo();
         toast("Dati caricati dal repository ✔");
       } catch (e) {
         console.warn("Auto-load fallito:", e);
         toast("Impossibile caricare dal repository. Uso dati locali.");
       }
+
+      // Dopo il caricamento → aggiorna notifiche
+      refreshNotificationsUI();
+
+      // E se ci sono notifiche → apri la dialog automaticamente
+      autoOpenNotifDialogIfNeeded();
     }, 50);
 
-    // 4) Mostra Home
+    // 6) Mostra Home
     showPane("home");
-	
-	
-    // Inizializza subito la UI delle notifiche
+
+    // 7) Pulsante Notifiche
+    document.getElementById("notifBtn")?.addEventListener("click", () => {
+      renderNotifDialog();
+      updateNotifTabCounters();
+      openDialogById("notifDlg");
+
+      initNotifTabs();
+      initNotifToggles();
+      initNotifClickHandlers();
+    });
+
+    // 8) Refresh notifiche immediato (prima del load async)
     refreshNotificationsUI();
 
-
+    // 9) Toast
     toast("V5 Neo‑Glass pronta ✨");
 
   } catch (e) {
