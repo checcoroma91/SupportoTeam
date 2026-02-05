@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Team Sistemi Anagrafici</title>
+  <title>BPER - Team Sistemi Anagrafici</title>
 
   <!-- Favicon (opzionale) -->
   <link rel="icon" href="data:,">
@@ -16,12 +16,18 @@
   <header class="app-header">
     <div class="brand" role="banner" aria-label="Team Sistemi Anagrafici">
       <span class="dot" aria-hidden="true"></span>
-      <strong>Team Sistemi Anagrafici</strong>
+      <strong>BPER - Team Sistemi Anagrafici</strong>
     </div>
 
     <!-- Toolbar azioni principali -->
     <div class="toolbar" role="toolbar" aria-label="Azioni principali">
-      <button class="btn"        data-do="saveRepo"   title="Salva su repository remoto">☁️ Salva repo</button>
+	  <button class="btn" id="notifBtn" title="Mostra notifiche">🔔 Notifiche<span id="notifBadge" class="badge" style="display:none;"></span></button>
+      	  <!-- Banner luminoso sopra al bottone Notifiche -->
+	  <div id="notifBanner" class="notif-banner" style="display:none;">
+	    <span class="dot"></span>
+	    <span id="notifBannerText">Hai notifiche da controllare</span>
+	  </div>
+	  <button class="btn"        data-do="saveRepo"   title="Salva su repository remoto">☁️ Salva repo</button>
       <button class="btn"        data-do="loadRepo"   title="Carica dal repository remoto">📥 Carica repo</button>
       <button class="btn"        data-do="loadFolder" title="Carica da cartella (links/op/svc/crq)">📁 Carica cartella</button>
       <button class="btn"        data-do="exportMenu" title="Esporta dati">📤 Export</button>
@@ -700,6 +706,45 @@
       </div>
     </div>
   </dialog>
+  
+	<dialog id="notifDlg" class="modal">
+	  <div class="modal-head">
+		  <strong>Notifiche</strong>
+		  <button class="btn ghost" data-close title="Chiudi">✖</button>
+		</div>
+
+		<!-- TAB SWITCHER -->
+		<div class="notif-tabs">
+		  <button class="notif-tab active" data-tab="op">
+			Open Point
+			<span class="notif-tab-counts" id="notifTabCountOP"></span>
+		  </button>
+
+		  <button class="notif-tab" data-tab="crq">
+			CRQ
+			<span class="notif-tab-counts" id="notifTabCountCRQ"></span>
+		  </button>
+		</div>
+
+		<div class="modal-body">
+
+		  <!-- TAB: OPEN POINT -->
+		  <div id="notifTabOP" class="notif-tab-content active">
+			<div id="notifOP" class="notif-list"></div>
+		  </div>
+
+		  <!-- TAB: CRQ -->
+		  <div id="notifTabCRQ" class="notif-tab-content">
+			<div id="notifCRQ" class="notif-list"></div>
+		  </div>
+
+		</div>
+
+		<div class="modal-footer">
+		  <button class="btn primary" data-close>Chiudi</button>
+		</div>
+	</dialog>
+
 
   <!-- Messaggio se JS è disattivato -->
   <noscript>
@@ -707,4 +752,5 @@
   </noscript>
 
   <!-- Motore dell'app: TUTTA la logica è qui -->
+  
   <script src="app.js"></script>
