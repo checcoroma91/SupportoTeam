@@ -1,0 +1,138 @@
+/* core.css — generated split */
+/* ==========================================================================
+   V5 – Neo‑Glass Aurora (cool palette + strong neon)
+   Autore: Romano + Copilot
+   ========================================================================== */
+
+/* ---------- Design Tokens (Cool + Neon) ---------- */
+:root{
+/* Base palette (cool) */
+  --bg-0: #070b1a;
+  --bg-1: #0b1325;
+  --bg-2: #0e1a33;
+  --panel: #0e1328;
+  --panel-2: #0a1022;
+
+  /* Text */
+  --txt: #e8eefb;
+  --muted: #96a2c4;
+
+  /* Accents (cool) */
+  --pri: #4cc9f0; /* cyan */
+  --sec: #7b7dff; /* indigo */
+  --tri: #9a7bff; /* violet */
+
+  /* Danger / Success */
+  --danger: #ff5470;
+  --success: #22c55e;
+
+  /* Glass + Neon controls */
+  --glass-alpha: 0.22;            /* intensità trasparenza pannelli */
+  --blur: 12px;                   /* blur dello sfondo */
+  --border: #23304e;              /* colore bordo pannelli */
+  --radius: 16px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+
+  /* Neon (forte) */
+  --neon-color: #63e6ff;          /* colore base alone */
+  --neon-aux: #7c3aed;            /* alone secondario */
+  --neon-strength: 0.80;          /* 0.3 soft | 0.55 medium | 0.80 strong */
+
+  /* Layout spacing */
+  --pad: clamp(12px, 2.2vw, 18px);
+  --gap: clamp(10px, 2vw, 16px);
+  --gap-lg: clamp(14px, 2.6vw, 22px);
+
+  /* Typography */
+  --fs-sm: clamp(12px, 2.1vw, 14px);
+  --fs-md: clamp(14px, 2.4vw, 16px);
+  --fs-lg: clamp(16px, 2.6vw, 20px);
+
+  /* Elevations */
+  --shadow-1: 0 6px 24px rgba(0, 0, 0, .35);
+  --shadow-2: 0 12px 36px rgba(0, 0, 0, .45);
+}
+
+/* ---------- Reset / Base ---------- */
+*,
+*::before,
+*::after{
+box-sizing: border-box;
+}
+
+html, body{
+height: 100%;
+}
+
+body{
+margin: 0;
+  background:
+    radial-gradient(1200px 800px at 15% -10%, rgba(124, 58, 237, .25), transparent 60%),
+    radial-gradient(1000px 700px at 85% 0%, rgba(99, 230, 255, .25), transparent 60%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-0));
+  color: var(--txt);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.45;
+}
+
+/* ---------- Helpers ---------- */
+.hidden{
+display: none !important;
+}
+
+.muted{
+color: var(--muted);
+}
+
+.row{
+display: flex; gap: var(--gap); align-items: center;
+}
+
+.row.wrap{
+flex-wrap: wrap;
+}
+
+.gap{
+gap: var(--gap);
+}
+
+.mt{
+margin-top: var(--gap);
+}
+
+.end{
+justify-content: flex-end;
+}
+
+.col-2{
+grid-column: span 2;
+}
+
+/* ---------- Neo Glass Core ---------- */
+.glass{
+background: color-mix(in srgb, var(--panel), transparent calc((1 - var(--glass-alpha)) * 100%));
+  border: 1px solid color-mix(in srgb, var(--border), transparent 30%);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(var(--blur));
+}
+
+/* Neon glow (strong) */
+.neon{
+box-shadow:
+    0 0 calc(28px * var(--neon-strength)) color-mix(in srgb, var(--neon-color), transparent 35%),
+    0 0 calc(60px * var(--neon-strength)) color-mix(in srgb, var(--neon-aux), transparent 45%);
+}
+
+/* Divider hairline */
+.hr{
+height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--border), transparent 30%), transparent);
+}
+
+.row2{
+display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
