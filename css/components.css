@@ -1,0 +1,202 @@
+/* components.css — generated split */
+.btn{
+background: color-mix(in srgb, var(--panel-2), transparent 30%);
+  color: var(--txt);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 20%);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.btn:hover{
+transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--neon-color), transparent 55%);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--neon-color), transparent 70%) inset,
+    0 0 18px color-mix(in srgb, var(--neon-aux), transparent 40%);
+}
+
+.btn.primary{
+background: linear-gradient(180deg, color-mix(in srgb, var(--sec), transparent 10%), color-mix(in srgb, var(--panel-2), transparent 10%));
+  border-color: color-mix(in srgb, var(--sec), transparent 45%);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--sec), transparent 55%) inset;
+}
+
+.btn.ghost{
+background: transparent;
+  border-color: color-mix(in srgb, var(--border), transparent 30%);
+}
+
+.btn.danger{
+background: color-mix(in srgb, #300816, transparent 10%);
+  border-color: color-mix(in srgb, #ff6584, transparent 60%);
+  color: #ffd0d6;
+}
+
+.btn:active{
+transform: translateY(0);
+}
+
+.table-actions .btn{
+padding: 6px 8px; border-radius: 8px;
+  background: color-mix(in srgb, var(--panel-2), transparent 15%);
+}
+
+.table-actions .btn.danger{
+border-color: color-mix(in srgb, #ff889e, transparent 55%);
+  background: color-mix(in srgb, #3a0f1d, transparent 10%);
+  color: #ffd6df;
+}
+
+/* Badges */
+.badge{
+display: inline-block; padding: 2px 8px; border-radius: 999px;
+  font-size: 12px; border: 1px solid color-mix(in srgb, var(--border), transparent 15%);
+  background: color-mix(in srgb, var(--panel-2), transparent 20%);
+  color: #cfe3ff;
+}
+
+.badge.state{
+background: color-mix(in srgb, var(--panel-2), transparent 15%);
+  border-color: color-mix(in srgb, var(--border), transparent 20%);
+}
+
+.badge.max{
+background: #5b1c33; color: #ffd1dc; border-color: #7a2a49;
+}
+
+/* ---------- Modals / Dialog ---------- */
+dialog.modal{
+border: none; padding: 0;
+  width: min(980px, 96vw);
+  max-height: 92vh;
+  background: color-mix(in srgb, var(--panel), transparent calc((1 - var(--glass-alpha)) * 100%));
+  border: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+  border-radius: var(--radius);
+  box-shadow:
+    var(--shadow-2),
+    0 0 0 1px color-mix(in srgb, var(--neon-color), transparent 65%) inset,
+    0 0 calc(36px * var(--neon-strength)) color-mix(in srgb, var(--neon-color), transparent 35%),
+    0 0 calc(82px * var(--neon-strength)) color-mix(in srgb, var(--neon-aux), transparent 40%);
+  backdrop-filter: blur(var(--blur));
+}
+
+dialog::backdrop{
+background: rgba(5, 8, 18, .58);
+}
+
+.modal-head{
+display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  padding: var(--pad);
+  border-bottom: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb, #ffffff, transparent 92%),
+      color-mix(in srgb, #ffffff, transparent 96%));
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+
+.modal-body{
+padding: var(--pad); overflow: auto;
+}
+
+.form-grid{
+display: grid; gap: var(--gap);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-grid label{
+display: grid; gap: 6px; font-size: var(--fs-sm); color: var(--muted);
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea{
+width: 100%;
+  background: color-mix(in srgb, var(--panel-2), transparent 20%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+  color: var(--txt);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  outline: none;
+}
+
+.form-grid textarea{
+min-height: 110px; resize: vertical;
+}
+
+.form-grid .checkbox{
+display: flex; align-items: center; gap: 8px;
+}
+
+.menu-grid{
+display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* ---------- Responsive Tweaks ---------- */
+
+
+
+/* PATCH: Forza testo chiaro in tutte le sezioni critiche */
+
+/* Titoli dei modali */
+.modal-head strong,
+.modal-head,
+.modal-head h3{
+color: var(--txt) !important;
+}
+
+/* Label dei campi dentro i dialog */
+.form-grid label{
+color: var(--txt) !important;
+}
+
+/* Bottoni ghost (chiudi modale) */
+.btn.ghost{
+color: var(--txt) !important;
+    border-color: color-mix(in srgb, var(--txt), transparent 40%) !important;
+}
+
+.new-section-row button.btn.primary{
+height: 38px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   FILTRA SEZIONI – Stile Neo‑Glass
+   ============================================================ */
+
+#filterSectionsDlg .modal-body{
+padding: 20px;
+}
+
+/* Footer modale con pulsante in basso a destra */
+.modal-footer{
+display: flex;
+  justify-content: flex-end;
+  padding: var(--pad);
+  border-top: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+  background: color-mix(in srgb, var(--panel-2), transparent 10%);
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+/* Pulsante testuale neon */
+.link-btn{
+background: none;
+  border: none;
+  padding: 0;
+  color: var(--pri);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.link-btn:hover{
+text-decoration: underline;
+}
