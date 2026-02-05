@@ -1,0 +1,755 @@
+/* op.css — generated split */
+/* Colonne larghezza minima (OP/SVC) */
+#opTable th:nth-child(8), #opTable td.col-created{
+white-space: nowrap; min-width: 120px;
+}
+
+#opTable th:nth-child(9), #opTable td.col-due{
+white-space: nowrap; min-width: 120px;
+}
+
+/* ===================================================================
+   FILTRO OPEN POINTS – NeoGlass UI
+   =================================================================== */
+
+/* --- General text & placeholder fix --- */
+#opFilterDlg,
+#opFilterDlg *{
+color: var(--txt) !important;
+}
+
+#opFilterDlg input::placeholder{
+color: color-mix(in srgb, var(--txt), transparent 40%) !important;
+}
+
+/* --- Layout grid --- */
+.opf-grid{
+display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.opf-grid .col-full{
+width: 100%;
+}
+
+/* --- Checkbox groups affiancati --- */
+.opf-groups{
+display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* --- Fieldset neo-glass --- */
+#opFilterDlg fieldset{
+background: color-mix(in srgb, var(--panel-2), transparent 22%);
+    border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    backdrop-filter: blur(10px);
+}
+
+#opFilterDlg legend{
+font-size: 13px !important;
+  margin-bottom: 8px !important;
+  padding: 0 6px !important;
+  white-space: nowrap;
+}
+
+/* Checkbox list */
+#opFilterDlg .checks{
+display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* --- Checkbox neon accent --- */
+#opFilterDlg input[type="checkbox"]{
+accent-color: var(--neon-color);
+}
+
+/* --- Inputs styling uniform --- */
+#opFilterDlg input[type="text"],
+#opFilterDlg input[type="date"],
+#opFilterDlg input:not([type]),
+#opFilterDlg textarea{
+background: color-mix(in srgb, var(--panel-2), transparent 15%);
+    border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    width: 100%;
+}
+
+/* Hover input */
+#opFilterDlg input:hover{
+border-color: color-mix(in srgb, var(--neon-color), transparent 40%);
+}
+
+/* --- Action buttons alignment --- */
+#opFilterDlg .actions{
+display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* ===== OP: Filtra Open Points — testi chiari, layout compatto, checkbox orizzontali ===== */
+
+/* Testi chiari (nel dubbio, forziamo anche i placeholder) */
+#opFilterDlg, 
+#opFilterDlg label,
+#opFilterDlg legend,
+#opFilterDlg input,
+#opFilterDlg select{
+color: var(--txt) !important;
+}
+
+/* Grid più compatta (2 o 3 colonne a seconda dello spazio) */
+#opFilterDlg .opf-grid,
+#opFilterDlg .modal-body{
+display: grid;
+  grid-template-columns: repeat(3, 1fr); /* passa a 3 colonne */
+  column-gap: 20px;
+  row-gap: 12px;
+}
+
+/* I controlli riempiono la colonna */
+#opFilterDlg label > input,
+#opFilterDlg label > select,
+#opFilterDlg .row2 label > input{
+width: 100%;
+}
+
+/* Fieldset compatti */
+#opFilterDlg fieldset{
+border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+#opFilterDlg fieldset legend{
+font-size: 13px;
+  margin-bottom: 4px;
+}
+
+/* ✅ Checkbox in orizzontale per Priorità e Stato */
+#opFilterDlg .checks{
+/* vale per #opfPrioGroup e #opfStatusGroup */
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+}
+
+#opFilterDlg .checks label{
+display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+  border-radius: 20px !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  white-space: nowrap !important;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;  /* per ripple */
+}
+
+/* (opzionale) checkbox un filo più grandi */
+#opFilterDlg .checks input[type="checkbox"]{
+transform: scale(1.1);
+}
+
+/* Riga bottoni finale allineata a destra */
+#opFilterDlg .actions.end{
+grid-column: 1 / -1;
+}
+
+#opFilterDlg label, #svcFilterDlg label{
+white-space: nowrap;
+}
+
+/* Fieldset compatti */
+#crqFilterDlg fieldset,
+#opFilterDlg fieldset,
+#svcFilterDlg fieldset{
+border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+#crqFilterDlg legend,
+#opFilterDlg legend,
+#svcFilterDlg legend{
+font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--txt);
+}
+
+/* (il ripple funziona automaticamente perché le label hanno overflow:hidden) */
+
+/* ============================================================
+   UNIFORMITÀ FILTRI (CRQ • OP • SVC)
+   Applica a OP e SVC lo stesso layout del filtro CRQ
+   ============================================================ */
+
+/* 🔵 1) Griglia a 3 colonne come CRQ */
+#svcFilterDlg .form-grid,
+#opFilterDlg .form-grid{
+display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  column-gap: 20px !important;
+  row-gap: 14px !important;
+}
+
+/* 🔵 2) Label sempre in una riga */
+#svcFilterDlg label,
+#opFilterDlg label{
+white-space: nowrap !important;
+}
+
+/* 🔵 3) Input/select al 100% */
+#svcFilterDlg label > input,
+#svcFilterDlg label > select,
+#opFilterDlg label > input,
+#opFilterDlg label > select{
+width: 100% !important;
+}
+
+/* 🔵 4) Fieldset compatti come CRQ */
+#svcFilterDlg fieldset,
+#opFilterDlg fieldset{
+border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+}
+
+/* 🔵 5) Chip identici a CRQ (full-width se in gruppi di molte voci) */
+#svcFilterDlg .checks label,
+#opFilterDlg .checks label{
+display: inline-flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+/* 🔵 6) Ripple identico (contenitore overflow hidden) */
+#svcFilterDlg .checks label,
+#opFilterDlg .checks label{
+position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 🔵 7) Gruppi checkbox → griglia 3 colonne (come CRQ stati/emerg/util) */
+#svcFilterDlg .checks,
+#opFilterDlg .checks{
+display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 10px 14px !important;
+}
+
+/* 🔵 8) I gruppi più grandi (stato/ambito/etc) prendono tutta la riga */
+#svcFilterDlg fieldset:has(.checks),
+#opFilterDlg fieldset:has(.checks){
+grid-column: 1 / -1 !important;
+}
+
+/* ============================================================
+   OP FILTER — layout compatto a 3 colonne senza sovrapposizioni
+   ============================================================ */
+
+/* 1) La griglia del dialog: 3 colonne stabili e compatte */
+#opFilterDlg .modal-body,
+#opFilterDlg .opf-grid{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  column-gap: 16px !important;      /* un filo più stretto per compattezza */
+  row-gap: 12px !important;
+  align-items: start;                /* evita allineamenti “centrati” che creano buchi */
+}
+
+/* 2) Tutti i controlli riempiono la loro colonna e non sbordano */
+#opFilterDlg label > input,
+#opFilterDlg label > select,
+#opFilterDlg .row2 label > input{
+width: 100% !important;
+  min-width: 0 !important;          /* fondamentale per evitare overflow in grid */
+}
+
+/* 3) Fieldset neo-glass compatti e confinati */
+#opFilterDlg fieldset{
+background: color-mix(in srgb, var(--panel-2), transparent 22%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
+  border-radius: 10px;
+  padding: 10px 12px;               /* compatto */
+  margin: 0;                        /* elimina margini impliciti */
+  min-width: 0;                     /* evita che “spingano” la colonna */
+}
+
+/* 4) Legenda piccola e coerente */
+#opFilterDlg legend{
+font-size: 13px;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+/* 5) Gruppi checkbox SEMPRE a 3 colonne */
+#opFilterDlg .checks{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px 12px !important;        /* compatto ma leggibile */
+  align-items: start;
+  min-width: 0;                      /* evita overflow del gruppo */
+}
+
+/* 6) Chip: centrati, compatti, no overflow */
+#opFilterDlg .checks label{
+display: inline-flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-width: 0;                      /* consente il wrap interno */
+  padding: 6px 12px;                 /* leggermente più stretto del default */
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;                  /* contiene il ripple */
+  white-space: nowrap;               /* chip su una riga */
+}
+
+/* 7) Il checkbox resta nascosto ma “non occupa spazio” */
+#opFilterDlg .checks input[type="checkbox"]{
+position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 8) Se i gruppi sono “importanti”, possiamo farli occupare l’intera riga */
+#opFilterDlg fieldset:has(#opfPrioGroup),
+#opFilterDlg fieldset:has(#opfStatusGroup){
+grid-column: 1 / -1;              /* il blocco si espande su tutta la riga */
+}
+
+/* 9) Stop sovrapposizioni: il dialog contiene tutto e attiva lo scroll quando serve */
+#opFilterDlg.modal{
+max-width: 96vw;                   /* resta nel viewport */
+  max-height: 92vh;
+  overflow: hidden;                  /* il contenitore non “sfora” visivamente */
+}
+
+#opFilterDlg .modal-body{
+overflow-y: auto !important;
+}
+
+/* 10) Micro-tweak: input/placeholder leggibili ma compatti */
+#opFilterDlg input::placeholder{
+color: color-mix(in srgb, var(--txt), transparent 45%);
+}
+
+#opFilterDlg label{
+white-space: nowrap;
+}
+
+/* etichette su una riga */
+
+/* ============================================================
+   OP FILTER — replica ESATTA dello stile compatto CRQ
+   ============================================================ */
+
+/* --- 1) Grid principale: 3 colonne compatte — come CRQ --- */
+#opFilterDlg .modal-body{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  column-gap: 18px !important;
+  row-gap: 14px !important;
+  padding-top: 10px !important;
+  align-items: start !important;
+  min-width: 0 !important;
+}
+
+/* --- 2) Etichette CRQ-style --- */
+#opFilterDlg label{
+font-size: var(--fs-sm) !important;   /* stesso font del CRQ */
+  white-space: nowrap !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+/* --- 3) Input: stessa altezza, stesso font, stessa compattezza --- */
+#opFilterDlg input,
+#opFilterDlg select{
+height: 34px !important;
+  font-size: var(--fs-sm) !important;
+  padding: 6px 10px !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* --- 4) Fieldset identici a CRQ --- */
+#opFilterDlg fieldset{
+grid-column: 1 / -1;                 /* CRQ usa full-row */
+  background: color-mix(in srgb, var(--panel-2), transparent 22%) !important;
+  border: 1px solid color-mix(in srgb, var(--border), transparent 40%) !important;
+  border-radius: 10px !important;
+  padding: 14px !important;
+  min-width: 0 !important;
+}
+
+/* --- 5) CHIP identici CRQ --- */
+#opFilterDlg .checks{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px 12px !important;
+  min-width: 0 !important;
+}
+
+/* Checkbox nascosto, come CRQ */
+#opFilterDlg .checks input[type="checkbox"]{
+position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Chip attivo */
+#opFilterDlg .checks input[type="checkbox"]:checked + label{
+background: rgba(99,230,255,0.18) !important;
+  border-color: rgb(99,230,255) !important;
+  box-shadow: 0 0 6px rgba(99,230,255,0.5) !important;
+}
+
+/* --- 6) Ripple identico CRQ --- */
+#opFilterDlg .checks label::after{
+content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(99,230,255,0.55);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+#opFilterDlg .checks label:active::after{
+opacity: 0.9;
+  transform: scale(14);
+  left: var(--r-x, 50%);
+  top: var(--r-y, 50%);
+}
+
+/* --- 7) Nessuna sovrapposizione nel dialog --- */
+#opFilterDlg.modal{
+max-width: 96vw !important;
+  max-height: 92vh !important;
+  overflow: hidden !important;
+}
+
+/* --- 8) Bottoni finali identici CRQ --- */
+#opFilterDlg .actions.end{
+grid-column: 1 / -1 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+}
+
+/* PRIORITÀ e STATO → fieldset a 3 colonne (full-row) */
+#opFilterDlg fieldset:has(#opfPrioGroup),
+#opFilterDlg fieldset:has(#opfStatusGroup){
+grid-column: 1 / -1 !important;   /* estende il box su tutte le 3 colonne */
+}
+
+/* ============================================================
+   OP FILTER — Forza struttura uguale al CRQ
+   ============================================================ */
+
+/* 1) La grid PRINCIPALE deve essere quella del modal-body */
+#opFilterDlg .modal-body{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  column-gap: 18px !important;
+  row-gap: 14px !important;
+  min-width: 0 !important;
+  align-items: start !important;
+  padding-top: 10px !important;
+}
+
+/* 2) CANCELLA layout indesiderati che rompono la grid */
+#opFilterDlg .opf-grid,
+#opFilterDlg .row2{
+display: contents !important;   /* 🔥 magia: i figli entrano nella grid principale */
+}
+
+/* 3) PRIORITÀ e STATO full-width (3 colonne) */
+#opFilterDlg fieldset:has(#opfPrioGroup),
+#opFilterDlg fieldset:has(#opfStatusGroup){
+grid-column: 1 / -1 !important; /* prende TUTTE le 3 colonne */
+  min-width: 0 !important;
+}
+
+/* 4) Chip layout: 3 colonne interne compatte */
+#opFilterDlg .checks{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+  gap: 10px 12px !important;
+  min-width: 0 !important;
+}
+
+/* 5) Etichette e input uniformi CRQ */
+#opFilterDlg label{
+white-space: nowrap !important;
+  font-size: var(--fs-sm) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+#opFilterDlg input,
+#opFilterDlg select{
+height: 34px !important;
+  padding: 6px 10px !important;
+  font-size: var(--fs-sm) !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* ============================================================
+   OP FILTER — Solo i fieldset con checkbox occupano 3 colonne
+   ============================================================ */
+
+/* 1) Assicurati che il dialog OP usi una grid a 3 colonne */
+#opFilterDlg .modal-body{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px 18px !important;
+  align-items: start !important;
+  min-width: 0 !important;
+}
+
+/* 2) I fieldset Priorità e Stato devono diventare figli diretti della grid */
+#opFilterDlg .opf-grid,
+#opFilterDlg .row2{
+display: contents !important;   /* << IMPORTANTE: non rompe gli altri campi */
+}
+
+/* 3) SOLO Priorità e Stato → span 3 colonne */
+#opFilterDlg fieldset:has(#opfPrioGroup),
+#opFilterDlg fieldset:has(#opfStatusGroup){
+grid-column: 1 / -1 !important;
+    min-width: 0 !important;
+}
+
+/* 4) Internamente i chip restano 3 colonne */
+#opFilterDlg #opfPrioGroup,
+#opFilterDlg #opfStatusGroup{
+display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px 12px !important;
+  min-width: 0 !important;
+}
+
+/* 1) Rendi i fieldset figli diretti della griglia principale */
+#opFilterDlg .opf-grid{
+display: contents !important;
+}
+
+/* 2) Forza la griglia principale a 3 colonne */
+#opFilterDlg .modal-body{
+display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px 18px !important;
+    min-width: 0 !important;
+    align-items: start !important;
+}
+
+/* 1) Rendi opf-groups trasparente alla grid */
+#opFilterDlg .opf-groups{
+display: contents !important;
+}
+
+/* 2) Forza la griglia principale a 3 colonne */
+#opFilterDlg .modal-body.opf-grid{
+display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 14px 18px !important;
+}
+
+/* 3) SOLO questi due fieldset devono span-nare */
+#opFilterDlg fieldset:has(#opfPrioGroup),
+#opFilterDlg fieldset:has(#opfStatusGroup){
+grid-column: 1 / -1 !important;
+}
+
+/* OP & SVC — rimuove contenitori che impediscono lo span */
+#opFilterDlg .opf-grid,
+#opFilterDlg .opf-groups,
+#opFilterDlg .row2,
+#svcFilterDlg .modal-body.form-grid,
+#svcFilterDlg .row,
+#svcFilterDlg .row2{
+display: contents !important;
+}
+
+/* OP */
+#opFilterDlg .modal-body{
+display: grid !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    gap: 14px 18px !important;
+    min-width: 0 !important;
+}
+
+/* OP → Priorità + Stato */
+#opFilterDlg fieldset:has(#opfPrioGroup),
+#opFilterDlg fieldset:has(#opfStatusGroup){
+grid-column: 1 / -1 !important;
+    min-width: 0;
+}
+
+#opFilterDlg fieldset,
+#svcFilterDlg fieldset{
+background: color-mix(in srgb, var(--panel-2), transparent 22%) !important;
+    border: 1px solid color-mix(in srgb, var(--border), transparent 40%) !important;
+    border-radius: 12px !important;
+    padding: 14px 16px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#opFilterDlg legend,
+#svcFilterDlg legend{
+font-size: 13px !important;
+    margin-bottom: 6px !important;
+    padding: 0 6px;
+    color: var(--txt);
+}
+
+/* Nasconde il quadratino */
+#opFilterDlg input[type="checkbox"],
+#svcFilterDlg input[type="checkbox"]{
+position: absolute !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* label come chip CRQ */
+#opFilterDlg label.checkbox,
+#svcFilterDlg label.checkbox{
+display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    cursor: pointer;
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    overflow: hidden !important; /* per ripple */
+}
+
+/* attivo */
+#opFilterDlg input[type="checkbox"]:checked + label,
+#svcFilterDlg input[type="checkbox"]:checked + label{
+background: rgba(99,230,255,0.18) !important;
+    border-color: rgb(99,230,255) !important;
+    box-shadow: 0 0 6px rgba(99,230,255,0.5) !important;
+}
+
+#opFilterDlg label.checkbox::after,
+#svcFilterDlg label.checkbox::after{
+content:"";
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:rgba(99,230,255,0.55);
+    border-radius:50%;
+    opacity:0;
+    transform:scale(1);
+    transition:opacity .45s ease, transform .45s ease;
+}
+
+#opFilterDlg label.checkbox:active::after,
+#svcFilterDlg label.checkbox:active::after{
+opacity:.9;
+    transform:scale(14);
+    left:var(--r-x,50%);
+    top:var(--r-y,50%);
+}
+
+#opFilterDlg label[for="opfMaxOnly"]{
+display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px;
+}
+
+#opfPrioGroup,
+#opfStatusGroup,
+#svcfTipoGroup,
+#svcfStatoGroup{
+display: grid !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    gap: 10px 12px !important;
+    min-width: 0 !important;
+}
+
+/* SOLO per checkbox singoli come "Priorità massima" */
+
+/* L’input resta dentro il label ma invisibile */
+#opFilterDlg label.checkbox input[type="checkbox"]{
+position: absolute;
+    opacity: 0;
+    inset: 0;              /* rimane cliccabile */
+    cursor: pointer;
+}
+
+/* Il label diventa un chip CRQ */
+#opFilterDlg label.checkbox{
+display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Stato attivo */
+#opFilterDlg label.checkbox:has(input[type="checkbox"]:checked){
+background: rgba(99,230,255,0.18);
+    border-color: rgb(99,230,255);
+    box-shadow: 0 0 6px rgba(99,230,255,0.5);
+}
+
+/* Ripple CRQ */
+#opFilterDlg label.checkbox::after{
+content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(99,230,255,0.55);
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity .45s ease, transform .45s ease;
+}
+
+#opFilterDlg label.checkbox:active::after{
+opacity: 0.9;
+    transform: scale(14);
+    left: 50%;
+    top: 50%;
+}
+
+/* OP FILTER — “Solo Priorità massima” su 3 colonne */
+#opFilterDlg label.checkbox:has(#opfMaxOnly){
+grid-column: 1 / -1 !important;   /* span su tutte le 3 colonne */
+    width: 100% !important;
+    justify-content: center !important;  /* centra il chip */
+}
