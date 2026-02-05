@@ -14,21 +14,6 @@
       "dueAt": "",
       "desc": "Richiesto tramite ticket 12558801B i profili LDAP portale enti",
       "notes": ""
-    },
-    {
-      "id": "6a35c308-dd53-4285-adac-84946a550443",
-      "title": "Estrazione CRM",
-      "project": "Poteri di firma",
-      "assignees": [
-        "Fra"
-      ],
-      "priority": "high",
-      "status": "Nuovo",
-      "maxPriority": false,
-      "createdAt": "2026-01-19",
-      "dueAt": "",
-      "desc": "Approvare la richiesta di stima di reactive per la produzione di un flusso per l'invio di tutte le posizioni attive nella poteri al CRM.",
-      "notes": ""
     }
   ]
 }
