@@ -85,6 +85,18 @@
       }
     },
     {
+      "id": "3a4722d6-ff69-42e5-82fa-80cd952e29a0",
+      "name": "WSDL",
+      "desc": "Wsdl esposti",
+      "icon": "🧩",
+      "collapsed": false,
+      "color": {
+        "id": "custom",
+        "c1": "#f0eb4c",
+        "c2": "#f0eb4c"
+      }
+    },
+    {
       "id": "bfe12b9d-e451-4043-9c33-c6592be8215b",
       "name": "Segnalazioni",
       "desc": "Strumenti per segnalazioni progettuali",
@@ -98,6 +110,20 @@
     }
   ],
   "links": [
+    {
+      "id": "2fa99963-f52c-4967-b144-d55e557b8adf",
+      "title": "PORTALE ENTI CONVENZIONATI - servizi SOAP",
+      "url": "http://portaleenti-svil-evo-be.gslb-cptf.gbbper.priv/be-portaleenti-sl/services/convenzioni-cliente?wsdl",
+      "desc": "WSDL servizi esposti SOAP Portale Enti",
+      "tags": [
+        "Soap",
+        "Wsdl",
+        "portale",
+        "enti",
+        "convenzionati"
+      ],
+      "sectionId": "3a4722d6-ff69-42e5-82fa-80cd952e29a0"
+    },
     {
       "id": "8ae1ab53-5b16-48e5-b1b7-16e4a250a686",
       "title": "PORTALE ENTI CONVENZIONATI - servizi REST",
