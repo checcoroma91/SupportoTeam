@@ -9,6 +9,7 @@
 const STORAGE_KEY = "tsa.v5.state";
 const SETTINGS_KEY = "tsa.v5.settings";
 const LAST_SAVE_KEY = "tsa.v5.lastSave";
+const LAST_REMOTE_SAVE_KEY = "tsa.v5.lastRemote";
 const AUTOSAVE_ENDPOINT = "https://supportoteam.francesco-romano2.workers.dev";
 
 // --------------------------
@@ -146,7 +147,7 @@ async function saveToRepo() {
         }
 
         // Avoid spam-save
-        const lastRaw = localStorage.getItem(LAST_SAVE_KEY);
+        const lastRaw = localStorage.getItem(LAST_REMOTE_SAVE_KEY);
         if (lastRaw) {
             const last = Number(lastRaw);
             if (Date.now() - last < 6000) {
@@ -167,7 +168,7 @@ async function saveToRepo() {
             throw new Error(text || "Errore sconosciuto");
         }
 
-        localStorage.setItem(LAST_SAVE_KEY, String(Date.now()));
+        localStorage.setItem(LAST_REMOTE_SAVE_KEY, String(Date.now()));
         toast("Salvato su repository ✔");
     } catch (err) {
         alert("Salvataggio su repository fallito: " + (err && err.message));
