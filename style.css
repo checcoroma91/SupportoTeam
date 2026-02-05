@@ -2718,3 +2718,457 @@ dialog::backdrop { background: rgba(5, 8, 18, .58); }
   font-size: 13px !important;
   border-radius: 20px !important;
 }
+
+.notif-list {
+  display: grid;
+  gap: 12px;
+}
+
+.notif-item {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--panel-2), transparent 20%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+  box-shadow: var(--shadow-1);
+}
+
+.notif-item.critica {
+  border-color: #ff5064;
+  background: rgba(255, 80, 100, 0.1);
+}
+
+.notif-item.avviso {
+  border-color: #ffd452;
+  background: rgba(255, 212, 82, 0.1);
+}
+
+.notif-item.ok {
+  border-color: #4aff72;
+  background: rgba(80, 255, 120, 0.1);
+}
+
+/* Footer modale con pulsante in basso a destra */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--pad);
+  border-top: 1px solid color-mix(in srgb, var(--border), transparent 25%);
+  background: color-mix(in srgb, var(--panel-2), transparent 10%);
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+/* Assicura coerenza con gli altri modali */
+#notifDlg .modal-body {
+  padding: var(--pad);
+}
+
+/* ======= DIALOG NOTIFICHE – TESTI CHIARI ======= */
+
+#notifDlg,
+#notifDlg * {
+  color: var(--txt) !important;
+}
+
+/* Titoli delle sezioni (Open Point / CRQ) */
+#notifDlg h3 {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--txt) !important;
+}
+
+/* Testi interni delle notifiche */
+#notifDlg .notif-item {
+  color: var(--txt) !important;
+}
+
+/* Etichette in grassetto */
+#notifDlg .notif-item strong {
+  color: var(--txt) !important;
+}
+
+/* Messaggio "nessuna notifica" */
+#notifDlg .muted {
+  color: var(--txt) !important;
+  opacity: 0.8;
+}
+
+/* ===============================
+   SEZIONE NOTIFICHE - NEON STYLE
+   =============================== */
+
+/* Sezioni */
+#notifDlg h3 {
+  color: var(--txt) !important;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-shadow: 0 0 6px rgba(99, 230, 255, 0.4);
+}
+
+/* Separatore silver/cyan */
+.notif-sep {
+  margin: 20px 0 12px 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--neon-color), transparent 40%),
+    transparent
+  );
+  box-shadow: 0 0 6px color-mix(in srgb, var(--neon-color), transparent 65%);
+}
+
+/* Contenitore della notifica */
+.notif-item {
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
+  background: color-mix(in srgb, var(--panel-2), transparent 20%);
+  box-shadow: var(--shadow-1);
+  transition: 0.25s ease;
+}
+
+/* Intestazione (icona + testo) */
+.notif-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* Icone neon */
+.notif-icon {
+  font-size: 22px;
+  filter: drop-shadow(0 0 6px var(--neon-color))
+          drop-shadow(0 0 10px color-mix(in srgb, var(--neon-color), transparent 40%));
+}
+
+/* Micro‑glow dei gruppi */
+.notif-item.ok {
+  border-color: #4aff72;
+  box-shadow: 0 0 12px rgba(80, 255, 120, 0.35);
+}
+
+.notif-item.avviso {
+  border-color: #ffd452;
+  box-shadow: 0 0 12px rgba(255, 212, 82, 0.35);
+}
+
+.notif-item.critica {
+  border-color: #ff5064;
+  box-shadow: 0 0 12px rgba(255, 80, 100, 0.35);
+}
+
+/* On hover: aumentiamo il glow */
+.notif-item:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 18px rgba(99, 230, 255, 0.2),
+    0 0 28px rgba(99, 230, 255, 0.15);
+}
+
+/* Campi */
+.notif-field strong {
+  color: var(--txt) !important;
+}
+
+/* Descrizione dell’Open Point nel pannello notifiche */
+.notif-desc {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+
+  background: color-mix(in srgb, var(--panel-2), transparent 10%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+
+  color: var(--txt);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+
+  /* Glow leggerissimo */
+  box-shadow:
+    0 0 6px rgba(99, 230, 255, 0.15),
+    inset 0 0 6px rgba(99, 230, 255, 0.12);
+}
+
+.notif-desc-collapsible {
+  margin-top: 10px;
+}
+
+.notif-desc-content {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--panel-2), transparent 12%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+  box-shadow:
+    0 0 6px rgba(99,230,255,0.15),
+    inset 0 0 6px rgba(99,230,255,0.12);
+  line-height: 1.45;
+}
+
+/* Pulsante testuale neon */
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--pri);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* ================================
+   Banner Notifiche (red neon)
+   ================================ */
+.toolbar {
+  position: relative; /* serve per l'ancoraggio del banner */
+}
+
+/* Contenitore banner */
+#notifBanner.notif-banner {
+  position: absolute;
+  /* posizioniamo il banner in corrispondenza del bottone 'Notifiche' */
+  /* Se vuoi regolarlo finemente, gioca con right/left/top */
+  right: 0;                 /* allineato al bordo destro della toolbar */
+  transform: translateY(-60%); /* sollevato sopra i pulsanti */
+  
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 65, 90, 0.95),
+    rgba(140, 15, 30, 0.92)
+  );
+
+  border: 1px solid rgba(255, 90, 110, 0.9);
+  box-shadow:
+    0 0 12px rgba(255, 70, 90, 0.65),
+    0 0 26px rgba(255, 70, 90, 0.35),
+    0 10px 24px rgba(0, 0, 0, .35);
+
+  backdrop-filter: blur(8px);
+  z-index: 12;
+}
+
+/* Puntino pulsante “allarme” */
+#notifBanner .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 40% 30%, #ff9099, #ff475f);
+  box-shadow:
+    0 0 10px rgba(255, 100, 120, .9),
+    0 0 18px rgba(255, 70, 90, .6);
+  flex: 0 0 auto;
+}
+
+/* Testo del banner */
+#notifBannerText {
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* Variante compatta su schermi stretti */
+@media (max-width: 640px) {
+  #notifBanner.notif-banner {
+    right: 8px;
+    transform: translateY(-55%);
+    padding: 6px 10px;
+  }
+  #notifBannerText {
+    font-size: var(--fs-sm);
+  }
+}
+
+/* Il bottone diventa il riferimento di posizionamento */
+#notifBtn {
+  position: relative;
+}
+
+/* Banner ancorato al bottone */
+#notifBanner.notif-banner {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -8px); /* centrato sopra al bottone, 8px di distanza */
+  z-index: 5;
+}
+
+/* ===== Badge "numero notifiche" nel bottone 🔔 ===== */
+#notifBtn {
+  position: relative; /* per eventuali posizionamenti futuri */
+}
+
+/* Badge visivo (numero) */
+#notifBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  /* dimensioni e tipografia */
+  min-width: 26px;
+  height: 26px;
+  padding: 0 8px;
+
+  font-weight: 800;
+  font-size: 18px;       /* << numero più grosso */
+  line-height: 1;
+  letter-spacing: .2px;
+
+  /* colori "red neon" */
+  color: #fff;
+  background: radial-gradient(circle at 40% 30%, #ff5a6d, #c5162b);
+  border: 1px solid rgba(255, 90, 110, 0.9);
+  border-radius: 999px;
+
+  /* glow */
+  box-shadow:
+    0 0 8px rgba(255, 80, 100, .6),
+    0 0 16px rgba(255, 80, 100, .35);
+}
+
+/* un filo di spazio dal testo "Notifiche" */
+#notifBtn #notifBadge {
+  margin-left: 8px;
+}
+
+/* ================================
+   Bottone Notifiche in stato alert
+   ================================ */
+#notifBtn.alert {
+  border-color: rgba(255, 80, 100, 0.9) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 70, 90, 0.20),
+    rgba(120, 10, 20, 0.25)
+  ) !important;
+  color: #ff9aa7 !important;
+  box-shadow:
+    0 0 12px rgba(255, 80, 100, 0.7),
+    0 0 22px rgba(255, 80, 100, 0.45),
+    inset 0 0 8px rgba(255, 80, 100, 0.35) !important;
+  transition: 0.25s ease;
+}
+
+/* Hover ancora più reattivo */
+#notifBtn.alert:hover {
+  box-shadow:
+    0 0 16px rgba(255, 90, 110, 0.85),
+    0 0 30px rgba(255, 90, 110, 0.55),
+    inset 0 0 12px rgba(255, 80, 100, 0.55) !important;
+  transform: translateY(-1px);
+}
+
+/* ================================
+   ANIMAZIONE PULSE ROSSO-NEON
+   ================================ */
+
+@keyframes notifPulse {
+  0% {
+    box-shadow:
+      0 0 10px rgba(255, 80, 100, 0.6),
+      0 0 20px rgba(255, 80, 100, 0.4),
+      inset 0 0 8px rgba(255, 80, 100, 0.4);
+    border-color: rgba(255, 80, 100, 1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 18px rgba(255, 60, 80, 0.85),
+      0 0 32px rgba(255, 60, 80, 0.45),
+      inset 0 0 12px rgba(255, 90, 110, 0.65);
+    border-color: rgba(255, 120, 140, 1);
+  }
+
+  100% {
+    box-shadow:
+      0 0 10px rgba(255, 80, 100, 0.6),
+      0 0 20px rgba(255, 80, 100, 0.4),
+      inset 0 0 8px rgba(255, 80, 100, 0.4);
+    border-color: rgba(255, 80, 100, 1);
+  }
+}
+
+/* Applichiamo il pulse SOLO quando ci sono notifiche */
+#notifBtn.alert {
+  animation: notifPulse 1.8s infinite ease-in-out;
+}
+
+/* ====== TABS NOTIFICHE ====== */
+
+.notif-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 18px 0;
+}
+
+.notif-tab {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--panel-2), transparent 20%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
+  color: var(--txt);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+  text-align: center;
+}
+
+.notif-tab:hover {
+  background: color-mix(in srgb, var(--panel-2), transparent 10%);
+}
+
+.notif-tab.active {
+  background: rgba(99,230,255,0.15);
+  border-color: rgba(99,230,255,0.85);
+  color: #aaf6ff;
+  box-shadow:
+    0 0 8px rgba(99,230,255,0.5),
+    0 0 16px rgba(99,230,255,0.3);
+}
+
+.notif-tab-content {
+  display: none;
+}
+
+.notif-tab-content.active {
+  display: block;
+}
+
+/* Contenitore dei counter dentro le tab */
+.notif-tab-counts {
+  margin-left: 6px;
+  display: inline-flex;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+/* Icone gruppo neon */
+.notif-count-green {
+  color: #4aff72;
+  text-shadow: 0 0 6px rgba(80,255,120,0.9);
+}
+
+.notif-count-yellow {
+  color: #ffd452;
+  text-shadow: 0 0 6px rgba(255,212,82,0.9);
+}
+
+.notif-count-red {
+  color: #ff5064;
+  text-shadow: 0 0 6px rgba(255,80,100,0.9);
+}
