@@ -1,0 +1,28 @@
+/* responsive.css — all @media blocks */
+@media (max-width: 880px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .brand strong { font-size: 18px; }
+  .tiles { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .tiles { grid-template-columns: 1fr; }
+  .toolbar, .nav { scrollbar-width: thin; }
+}
+
+@media (min-width: 1400px) {
+  #crqFilterDlg #crqfStatiGroup {
+    gap: 8px 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  #notifBanner.notif-banner {
+    right: 8px;
+    transform: translateY(-55%);
+    padding: 6px 10px;
+  }
+  #notifBannerText {
+    font-size: var(--fs-sm);
+  }
+}
