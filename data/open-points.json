@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "8379f07b-7bf9-4a36-9793-88a8ba1fee3f",
+      "title": "Aggiunta codici macrogruppo - Richiesta BStore",
+      "project": "Poteri Di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-06",
+      "dueAt": "2026-02-20",
+      "desc": "BStore chiede l'aggiunta nella matrice dei seguenti codici macrogruppo:\nMG_12\nE dei seguenti codici economato:\n02440958",
+      "notes": ""
+    },
+    {
       "id": "aea9b240-7c24-4f7e-8a42-6a255ce88e67",
       "title": "Meet per servizio particolarità",
       "project": "Portale Enti Convenzionati",
