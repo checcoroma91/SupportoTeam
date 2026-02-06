@@ -11,29 +11,28 @@ import './svc.js';
 import './crq.js';
 
 // ==========================================================
-// AVVIO DELL’APPLICAZIONE
+// AVVIO DELL’APPLICAZIONE (versione compatibile con funzioni su window)
 // ==========================================================
 
 // 1) Render iniziale di tutte le viste
-if (typeof renderAll === "function") {
-    renderAll();
+if (typeof window.renderAll === 'function') {
+  window.renderAll();
 }
 
 // 2) Inizializzazione Router / UI (tabs, tiles, toolbar, dialogs, export menu)
-if (typeof initUIRouter === "function") {
-    initUIRouter();
+if (typeof window.initUIRouter === 'function') {
+  window.initUIRouter();
 }
 
 // 3) Aggiorna badge notifiche + eventuale apertura dialog notifiche
-if (typeof refreshNotificationsUI === "function") {
-    refreshNotificationsUI();
+if (typeof window.refreshNotificationsUI === 'function') {
+  window.refreshNotificationsUI();
 }
-if (typeof autoOpenNotifDialogIfNeeded === "function") {
-    autoOpenNotifDialogIfNeeded();
+if (typeof window.autoOpenNotifDialogIfNeeded === 'function') {
+  window.autoOpenNotifDialogIfNeeded();
 }
 
 // 4) Caricamento automatico da repository (se previsto)
-if (typeof loadFromRepo === "function") {
-    // NON forziamo autoload, evitiamo loop su GitHub Pages.
-    // Lascio la funzione disponibile tramite pulsante.
+if (typeof window.loadFromRepo === 'function') {
+  // lasciata disponibile da pulsante
 }
