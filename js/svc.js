@@ -1,465 +1,601 @@
-/* svc.css — generated split */
-#svcTable{
-table-layout: fixed;
-}
-
-#svcTable td, 
-#svcTable th{
-white-space: normal !important;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-#svcTable th:last-child, #svcTable td:last-child{
-white-space: nowrap; width: 96px;
-}
-
-/* ===== SVC: Filtra Servizi — testi chiari, layout compatto, checkbox orizzontali ===== */
-
-/* Testi chiari */
-#svcFilterDlg,
-#svcFilterDlg label,
-#svcFilterDlg legend,
-#svcFilterDlg input,
-#svcFilterDlg select{
-color: var(--txt) !important;
-}
-
-#svcFilterDlg input::placeholder{
-color: color-mix(in srgb, var(--txt), transparent 40%) !important;
-}
-
-/* Grid più compatta (3 colonne) */
-#svcFilterDlg .form-grid,
-#svcFilterDlg .modal-body.form-grid{
-display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 20px;
-  row-gap: 12px;
-}
-
-/* I controlli riempiono la colonna */
-#svcFilterDlg label > input,
-#svcFilterDlg label > select{
-width: 100%;
-}
-
-/* Fieldset compatti */
-#svcFilterDlg fieldset{
-border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
-  padding: 8px 12px;
-  border-radius: 8px;
-}
-
-#svcFilterDlg fieldset legend{
-font-size: 13px;
-  margin-bottom: 4px;
-}
-
-/* ✅ Checkbox in orizzontale per Tipo e Stato */
-#svcFilterDlg #svcfTipoGroup.checks,
-#svcFilterDlg #svcfStatoGroup.checks{
-display: flex !important;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  align-items: center;
-}
-
-#svcFilterDlg .checks label{
-display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-#svcFilterDlg .checks input[type="checkbox"]{
-transform: scale(1.1);
-}
-
-/* Riga bottoni finale allineata a destra */
-#svcFilterDlg .actions.end{
-grid-column: 1 / -1;
-}
-
-/* SVC */
-#svcFilterDlg .modal-body{
-display: grid !important;
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-    gap: 14px 18px !important;
-    min-width: 0 !important;
-}
-
-/* SVC → Tipo + Stato (se presente) */
-#svcFilterDlg fieldset:has(#svcfTipoGroup),
-#svcFilterDlg fieldset:has(#svcfStatoGroup){
-grid-column: 1 / -1 !important;
-    min-width: 0;
-}
-
 /* ============================================================
-   SERVIZI — COMPACT SERVICE DIALOG
-   Riduce altezza, spazi, textarea, padding, griglia
+   V5 SERVICES — CRUD + FILTERS + SORT + RENDER + EXPORT
+   Cleaned & Fixed Version (2026-02-06)
+   NOTE: assumes helpers present globally: $, $$, escapeHtml, quoteCSV,
+         downloadBlob, saveState, openDialogById, closeDialog, toast,
+         and a global `state` with `services: []`.
    ============================================================ */
 
-/* Dialog meno alto */
-#serviceDialog.modal{
-max-height: 85vh !important;
-    width: min(900px, 92vw) !important;
+'use strict';
+
+/* ------------------------------------------------------------
+   NORMALIZATION
+------------------------------------------------------------ */
+function normalizeService(s = {}) {
+  return {
+    id: s.id ? String(s.id) : (crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random())),
+
+    routine: String(s.routine || '').trim(),
+    tipo: (String(s.tipo || 'REST').toUpperCase() === 'SOAP') ? 'SOAP' : 'REST',
+    servizio: String(s.servizio || '').trim(),
+
+    operation: String(
+      s.operation ||
+      s['operation / parametro'] ||
+      ''
+    ).trim(),
+
+    fallback: String(
+      s.fallback ||
+      s['fallback JDBC/SWP'] ||
+      ''
+    ).trim(),
+
+    descrizione: String(s.descrizione || '').trim(),
+    ambito: String(s.ambito || '').trim(),
+
+    applicativo: String(
+      s.applicativo ||
+      s['applicativo'] ||
+      ''
+    ).trim(),
+
+    paramsIngresso: String(
+      s.paramsIngresso ||
+      s['parametriIngresso'] ||
+      s['paramsIngresso'] ||
+      ''
+    ).trim(),
+
+    outputServizio: String(
+      s.outputServizio ||
+      s['output'] ||
+      ''
+    ).trim(),
+
+    stato: String(s.stato || '').trim(),
+  };
 }
 
-/* Griglia più compatta (da 2 colonne → più dense) */
-#serviceDialog .form-grid{
-gap: 10px !important;                 /* meno spazio verticale */
-    grid-template-columns: repeat(2, 1fr) !important;
+/* ------------------------------------------------------------
+   OPEN SERVICE DIALOG
+------------------------------------------------------------ */
+function openServiceDialog(item) {
+  const dlg = document.getElementById('serviceDialog');
+  if (!dlg) return;
+
+  document.getElementById('svcDlgTitle').textContent = item ? 'Modifica servizio' : 'Nuovo servizio';
+
+  $('#svcRoutine').value = item?.routine || '';
+  $('#svcTipo').value = item?.tipo || 'REST';
+  $('#svcServizio').value = item?.servizio || '';
+  $('#svcOperation').value = item?.operation || '';
+  $('#svcFallback').value = item?.fallback || '';
+  $('#svcDescrizione').value = item?.descrizione || '';
+  $('#svcAmbito').value = item?.ambito || '';
+  $('#svcApplicativo').value = item?.applicativo || '';
+  $('#svcParamsIn').value = item?.paramsIngresso || '';
+  $('#svcOutput').value = item?.outputServizio || '';
+
+  dlg.dataset.editing = item ? String(item.id) : '';
+  openDialogById('serviceDialog');
 }
 
-/* Campi più compatti */
-#serviceDialog .form-grid label{
-gap: 4px !important;                  /* meno spazio label/campo */
+document.getElementById('svcSaveBtn')?.addEventListener('click', saveServiceDialog);
+
+/* ------------------------------------------------------------
+   SAVE SERVICE
+------------------------------------------------------------ */
+function saveServiceDialog() {
+  const dlg = document.getElementById('serviceDialog');
+  const id = dlg?.dataset?.editing || '';
+
+  const obj = normalizeService({
+    routine: $('#svcRoutine').value.trim(),
+    tipo: $('#svcTipo').value.trim(),
+    servizio: $('#svcServizio').value.trim(),
+    operation: $('#svcOperation').value.trim(),
+    fallback: $('#svcFallback').value.trim(),
+    descrizione: $('#svcDescrizione').value.trim(),
+    ambito: $('#svcAmbito').value.trim(),
+    applicativo: $('#svcApplicativo').value.trim(),
+    paramsIngresso: $('#svcParamsIn').value.trim(),
+    outputServizio: $('#svcOutput').value.trim(),
+    stato: ''
+  });
+
+  if (!obj.routine || !obj.servizio) {
+    alert('ROUTINE e SERVIZIO sono obbligatori.');
+    return;
+  }
+
+  state.services = Array.isArray(state.services) ? state.services : [];
+
+  if (id) {
+    const i = state.services.findIndex(x => String(x.id) === String(id));
+    if (i >= 0) state.services[i] = { ...obj, id };
+  } else {
+    state.services.unshift(obj);
+  }
+
+  saveState(state);
+  closeDialog(dlg);
+  renderServices();
 }
 
-/* Input/select più bassi */
-#serviceDialog input,
-#serviceDialog select{
-height: 34px !important;
-    padding: 6px 10px !important;
-    font-size: 13px !important;
+/* ------------------------------------------------------------
+   DELETE SERVICE
+------------------------------------------------------------ */
+window.deleteService = function (id) {
+  if (!confirm('Eliminare questo servizio?')) return;
+  const arr = Array.isArray(state.services) ? state.services : [];
+  state.services = arr.filter(s => String(s.id) !== String(id));
+  saveState(state);
+  renderServices();
+};
+
+/* ------------------------------------------------------------
+   EDIT SERVICE
+------------------------------------------------------------ */
+window.editService = function (id) {
+  const arr = Array.isArray(state.services) ? state.services : [];
+  const it = arr.find(s => String(s.id) === String(id));
+  if (it) openServiceDialog(it);
+};
+
+/* ------------------------------------------------------------
+   FILTER STATE
+------------------------------------------------------------ */
+const SVCF_KEY = 'tsa.v5.svcfilter';
+
+function defaultSvcFilter() {
+  return {
+    text: '',
+    tipi: ['REST', 'SOAP'],
+    ambiti: [],
+    routine: [],
+    servizi: [],
+    applicativi: [],
+    fallback: [],
+    operations: [],
+    params: [],
+    outputs: [],
+    stati: []
+  };
 }
 
-/* Textarea meno alti */
-#serviceDialog textarea{
-min-height: 80px !important;          /* prima era 110px+ */
-    padding: 8px 10px !important;
-    font-size: 13px !important;
-    resize: vertical;
+function loadSvcFilter() {
+  try {
+    const raw = localStorage.getItem(SVCF_KEY);
+    if (!raw) return defaultSvcFilter();
+    return { ...defaultSvcFilter(), ...JSON.parse(raw) };
+  } catch (_) {
+    return defaultSvcFilter();
+  }
 }
 
-/* Riduci padding interno del modal */
-#serviceDialog .modal-body{
-padding: 14px 16px !important;
+function saveSvcFilter(f) {
+  try {
+    localStorage.setItem(SVCF_KEY, JSON.stringify({ ...defaultSvcFilter(), ...f }));
+  } catch (_) {}
 }
 
-/* Head più compatta */
-#serviceDialog .modal-head{
-padding: 12px 16px !important;
+let svcFilter = loadSvcFilter();
+
+/* ------------------------------------------------------------
+   OPEN FILTER DIALOG
+------------------------------------------------------------ */
+window.openSvcFilterDialog = function () {
+  const dlg = document.getElementById('svcFilterDlg');
+  if (!dlg) return;
+
+  populateSvcStatoChips();
+
+  // Stile pills/ripple
+  document.getElementById('svcfTipoGroup')?.classList.add('checks');
+  document.getElementById('svcfStatoGroup')?.classList.add('checks');
+
+  // Forza fieldset full-span
+  const tipoFs = document.querySelector('#svcfTipoGroup')?.closest('fieldset');
+  const statoFs = document.querySelector('#svcfStatoGroup')?.closest('fieldset');
+  tipoFs?.classList.add('full-span');
+  statoFs?.classList.add('full-span');
+
+  // Griglia a 3 colonne nel body
+  const body = dlg.querySelector('.modal-body');
+  if (body) body.classList.add('grid-3');
+
+  // Valori input
+  $('#svcfText').value = svcFilter.text || '';
+  $('#svcfId').value = svcFilter.idContains || '';
+  $('#svcfRoutine').value = (svcFilter.routine || []).join(', ');
+  $('#svcfServizi').value = (svcFilter.servizi || []).join(', ');
+  $('#svcfDescrizione').value = svcFilter.descrizioneContains || '';
+  $('#svcfAmbiti').value = (svcFilter.ambiti || []).join(', ');
+  $('#svcfApplicativi').value = (svcFilter.applicativi || []).join(', ');
+  $('#svcfFallback').value = (svcFilter.fallback || []).join(', ');
+  $('#svcfOperation').value = (svcFilter.operations || []).join(', ');
+  $('#svcfParamsIn').value = (svcFilter.params || []).join(', ');
+  $('#svcfOutput').value = (svcFilter.outputs || []).join(', ');
+
+  // Tipi
+  $$('#svcfTipoGroup input[type=checkbox]').forEach(cb => {
+    cb.checked = (svcFilter.tipi || []).includes(cb.value);
+  });
+
+  // Stati
+  $$('#svcfStatoGroup input[type=checkbox]').forEach(cb => {
+    cb.checked = (svcFilter.stati || []).includes(cb.value);
+  });
+
+  openDialogById('svcFilterDlg');
+};
+
+// Chips dinamiche per Stato Servizi
+function populateSvcStatoChips() {
+  const grp = document.getElementById('svcfStatoGroup');
+  if (!grp) return;
+  const stati = ['OK', 'KO', 'ATTIVO', 'ERRORE'];
+  grp.innerHTML = stati
+    .map(st => `
+      <div class="svc-chip">
+        <input type="checkbox" id="svcf_stato_${st.toLowerCase()}" value="${st}">
+        <label for="svcf_stato_${st.toLowerCase()}">${st}</label>
+      </div>
+    `)
+    .join('');
 }
 
-/* ============================================================
-   SERVIZI — FORM A 3 COLONNE + CAMPI LONG FORM A SPAN 3
-   ============================================================ */
+document.getElementById('svcfResetBtn')?.addEventListener('click', () => {
+  svcFilter = defaultSvcFilter();
+  saveSvcFilter(svcFilter);
+  renderServices();
+  closeDialog(document.getElementById('svcFilterDlg'));
+});
 
-/* 1) La griglia principale diventa a 3 colonne */
-#serviceDialog .form-grid{
-display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    column-gap: 18px !important;
-    row-gap: 14px !important;
-    align-items: start !important;
+document.getElementById('svcfApplyBtn')?.addEventListener('click', () => {
+  function splitList(v) {
+    return String(v || '')
+      .split(',')
+      .map(x => x.trim())
+      .filter(Boolean);
+  }
+  function getChecked(id) {
+    return $$('#' + id + ' input[type=checkbox]')
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+  }
+
+  svcFilter = {
+    text: $('#svcfText').value.trim().toLowerCase(),
+    idContains: $('#svcfId').value.trim(),
+    routine: splitList($('#svcfRoutine').value),
+    servizi: splitList($('#svcfServizi').value),
+    tipi: getChecked('svcfTipoGroup'),
+    descrizioneContains: $('#svcfDescrizione').value.trim().toLowerCase(),
+    ambiti: splitList($('#svcfAmbiti').value).map(s => s.toLowerCase()),
+    applicativi: splitList($('#svcfApplicativi').value).map(s => s.toLowerCase()),
+    fallback: splitList($('#svcfFallback').value).map(s => s.toLowerCase()),
+    operations: splitList($('#svcfOperation').value).map(s => s.toLowerCase()),
+    params: splitList($('#svcfParamsIn').value).map(s => s.toLowerCase()),
+    outputs: splitList($('#svcfOutput').value).map(s => s.toLowerCase()),
+    stati: getChecked('svcfStatoGroup'),
+  };
+
+  saveSvcFilter(svcFilter);
+  renderServices();
+  closeDialog(document.getElementById('svcFilterDlg'));
+});
+
+/* ------------------------------------------------------------
+   FILTER LOGIC
+------------------------------------------------------------ */
+function applySvcFilters(rows) {
+  const f = { ...defaultSvcFilter(), ...svcFilter };
+  const list = Array.isArray(rows) ? rows : [];
+
+  return list.filter(s => {
+    const bag = [
+      s.routine, s.tipo, s.servizio, s.operation,
+      s.fallback, s.descrizione, s.ambito,
+      s.applicativo, s.paramsIngresso, s.outputServizio, s.stato
+    ]
+      .map(x => String(x || ''))
+      .join(' ')
+      .toLowerCase();
+
+    if (f.text && !bag.includes(f.text)) return false;
+
+    if (f.idContains) {
+      if (!String(s.id || '').includes(f.idContains)) return false;
+    }
+
+    // routine
+    if (f.routine.length) {
+      const val = String(s.routine || '').toLowerCase();
+      if (!f.routine.some(x => val.includes(String(x).toLowerCase()))) return false;
+    }
+
+    // servizi
+    if (f.servizi.length) {
+      const val = String(s.servizio || '').toLowerCase();
+      if (!f.servizi.some(x => val.includes(String(x).toLowerCase()))) return false;
+    }
+
+    // tipi
+    if (f.tipi.length && !f.tipi.includes(String(s.tipo))) return false;
+
+    // descrizione contains
+    if (f.descrizioneContains) {
+      if (!String(s.descrizione || '').toLowerCase().includes(f.descrizioneContains)) return false;
+    }
+
+    // ambiti
+    if (f.ambiti.length) {
+      const val = String(s.ambito || '').toLowerCase();
+      if (!f.ambiti.some(x => val.includes(x))) return false;
+    }
+
+    // applicativi
+    if (f.applicativi.length) {
+      const val = String(s.applicativo || '').toLowerCase();
+      if (!f.applicativi.some(x => val.includes(x))) return false;
+    }
+
+    // fallback (match su token, separatori newline/comma)
+    if (f.fallback.length) {
+      const vals = String(s.fallback || '')
+        .toLowerCase()
+        .split(/[\n,]+/)
+        .map(x => x.trim())
+        .filter(Boolean);
+      if (!f.fallback.some(x => vals.includes(x))) return false;
+    }
+
+    // operations
+    if (f.operations.length) {
+      const vals = String(s.operation || '')
+        .toLowerCase()
+        .split(/[\n,]+/)
+        .map(x => x.trim())
+        .filter(Boolean);
+      if (!f.operations.some(x => vals.includes(x))) return false;
+    }
+
+    // params
+    if (f.params.length) {
+      const vals = String(s.paramsIngresso || '')
+        .toLowerCase()
+        .split(/[\n,]+/)
+        .map(x => x.trim())
+        .filter(Boolean);
+      if (!f.params.some(x => vals.includes(x))) return false;
+    }
+
+    // outputs
+    if (f.outputs.length) {
+      const vals = String(s.outputServizio || '')
+        .toLowerCase()
+        .split(/[\n,]+/)
+        .map(x => x.trim())
+        .filter(Boolean);
+      if (!f.outputs.some(x => vals.includes(x))) return false;
+    }
+
+    // stati (match esatto, case-sensitive come UI)
+    if (f.stati.length) {
+      const val = String(s.stato || '').trim();
+      if (!f.stati.includes(val)) return false;
+    }
+
+    return true;
+  });
 }
 
-/* 2) Rende tutti i label “normali” a 1 colonna */
-#serviceDialog .form-grid > label{
-grid-column: span 1 !important;
-    min-width: 0;
+/* ------------------------------------------------------------
+   SORTING
+------------------------------------------------------------ */
+let svcSort = { key: 'routine', dir: 'asc' };
+
+window.setSvcSort = function (k) {
+  if (svcSort.key === k) {
+    svcSort.dir = (svcSort.dir === 'asc' ? 'desc' : 'asc');
+  } else {
+    svcSort.key = k;
+    svcSort.dir = 'asc';
+  }
+  renderServices();
+};
+
+function sortSvcRows(rows) {
+  const k = svcSort.key;
+  const d = svcSort.dir === 'desc' ? -1 : 1;
+  const list = Array.isArray(rows) ? rows.slice() : [];
+  return list.sort((a, b) => String(a?.[k] || '').localeCompare(String(b?.[k] || '')) * d);
 }
 
-/* 3) I campi lunghi (già col-2) diventano SPAN 3 */
-#serviceDialog .form-grid > label.col-2{
-grid-column: 1 / -1 !important;   /* span su tutte e 3 le colonne */
+/* ------------------------------------------------------------
+   RENDER TABLE
+------------------------------------------------------------ */
+function renderServices() {
+  const tbl = document.getElementById('svcTable');
+  if (!tbl) return;
+
+  const all = Array.isArray(state.services) ? state.services : [];
+  const rows = sortSvcRows(applySvcFilters(all));
+
+  $('#svcCount').textContent = `${rows.length} risultati su ${all.length}`;
+
+  function th(k, label) {
+    return `<th class='sortable' onclick="setSvcSort('${k}')">` +
+      label + (svcSort.key === k ? ` <span class='arrow'>${svcSort.dir === 'asc' ? '↑' : '↓'}</span>` : '') +
+      `</th>`;
+  }
+
+  let thead =
+    '<thead><tr>' +
+    th('routine', 'ROUTINE') +
+    th('tipo', 'TIPO') +
+    th('servizio', 'SERVIZIO') +
+    th('operation', 'OPERATION / PARAM') +
+    th('fallback', 'FALLBACK JDBC/SWP') +
+    th('descrizione', 'DESCRIZIONE') +
+    th('ambito', 'AMBITO') +
+    th('applicativo', 'APPLICATIVO') +
+    th('paramsIngresso', 'PARAM IN') +
+    th('outputServizio', 'OUTPUT') +
+    th('stato', 'STATO') +
+    '<th>Azioni</th>' +
+    '</tr></thead>';
+
+  if (!rows.length) {
+    tbl.innerHTML = thead +
+      "<tbody><tr><td colspan='13'><div class='muted'>Nessun servizio</div></td></tr></tbody>";
+    return;
+  }
+
+  const tbody = '<tbody>' +
+    rows.map(s =>
+      '<tr>' +
+      '<td>' + escapeHtml(s.routine) + '</td>' +
+      '<td>' + escapeHtml(s.tipo) + '</td>' +
+      '<td>' + escapeHtml(s.servizio) + '</td>' +
+      "<td class='col-multiline'>" + escapeHtml(s.operation) + '</td>' +
+      '<td>' + escapeHtml(s.fallback) + '</td>' +
+      "<td class='col-multiline'>" + escapeHtml(s.descrizione) + '</td>' +
+      '<td>' + escapeHtml(s.ambito) + '</td>' +
+      '<td>' + escapeHtml(s.applicativo) + '</td>' +
+      "<td class='col-multiline'>" + escapeHtml(s.paramsIngresso) + '</td>' +
+      "<td class='col-multiline'>" + escapeHtml(s.outputServizio) + '</td>' +
+      '<td>' + escapeHtml(s.stato || '') + '</td>' +
+      "<td><div class='table-actions'>" +
+      `<button onclick="editService('${String(s.id)}')">✏️</button>` +
+      `<button class='danger' onclick="deleteService('${String(s.id)}')">🗑️</button>` +
+      '</div></td>' +
+      '</tr>'
+    ).join('') +
+    '</tbody>';
+
+  tbl.innerHTML = thead + tbody;
 }
 
-/* EXTRA: migliora compattezza dei textarea */
-#serviceDialog textarea{
-min-height: 80px !important;
-    resize: vertical;
-}
+/* ------------------------------------------------------------
+   EXPORT JSON
+------------------------------------------------------------ */
+document.querySelector("[data-do='svcSave']")?.addEventListener('click', () => {
+  const blob = new Blob([
+    JSON.stringify({ services: Array.isArray(state.services) ? state.services : [] }, null, 2)
+  ], { type: 'application/json' });
+  downloadBlob(blob, 'services.json');
+});
 
-/* SVC Filter — grid principale a 3 colonne */
-#svcFilterDlg .modal-body{
-display: grid !important;
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-    column-gap: 18px !important;
-    row-gap: 14px !important;
-    align-items: start !important;
-    min-width: 0 !important;
-}
+/* ------------------------------------------------------------
+   IMPORT JSON
+------------------------------------------------------------ */
+window.importServicesFromFile = async function () {
+  try {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'application/json';
+    inp.onchange = async () => {
+      const file = inp.files?.[0];
+      if (!file) return;
+      const txt = await file.text();
+      const json = JSON.parse(txt);
+      const arr = Array.isArray(json) ? json : (Array.isArray(json?.services) ? json.services : []);
+      state.services = arr.map(s => normalizeService(s));
+      saveState(state);
+      renderServices();
+      toast('Servizi caricati ✔');
+    };
+    inp.click();
+  } catch (e) {
+    alert('Errore import Servizi: ' + (e && e.message));
+  }
+};
 
-/* Rende i wrapper invisibili alla griglia */
-#svcFilterDlg .row,
-#svcFilterDlg .row2,
-#svcFilterDlg .form-grid{
-display: contents !important;
-}
+document.querySelector("[data-do='svcLoad']")?.addEventListener('click', importServicesFromFile);
 
-/* Tutti i label/field normali occupano 1 colonna */
-#svcFilterDlg .modal-body > label{
-grid-column: span 1 !important;
-    min-width: 0 !important;
-}
+/* ------------------------------------------------------------
+   EXPORT CSV
+------------------------------------------------------------ */
+document.querySelector("[data-do='svcCSV']")?.addEventListener('click', () => {
+  const rows = sortSvcRows(applySvcFilters(Array.isArray(state.services) ? state.services : []));
+  const head = [
+    'ID','Routine','Tipo','Servizio','Operation',
+    'Fallback','Descrizione','Ambito','Applicativo',
+    'Param IN','Output','Stato'
+  ];
+  const csv = [head.join(';')]
+    .concat(rows.map(s => [
+      s.id, s.routine, s.tipo, s.servizio,
+      s.operation, s.fallback, s.descrizione,
+      s.ambito, s.applicativo, s.paramsIngresso,
+      s.outputServizio, s.stato
+    ].map(v => quoteCSV(v)).join(';')))
+    .join('\n');
 
-/* Tipo e Stato — gruppi checkbox span su 3 colonne */
-#svcFilterDlg fieldset:has(#svcfTipoGroup),
-#svcFilterDlg fieldset:has(#svcfStatoGroup){
-grid-column: 1 / -1 !important;
-    min-width: 0 !important;
-}
+  downloadBlob(new Blob([csv], { type: 'text/csv;charset=utf-8;' }), 'services.csv');
+});
 
-/* Imposta i gruppi checkbox a 3 colonne interne */
-#svcFilterDlg #svcfTipoGroup,
-#svcFilterDlg #svcfStatoGroup{
-display: grid !important;
-    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-    gap: 10px 12px !important;
-    min-width: 0 !important;
-}
+/* ------------------------------------------------------------
+   EXPORT EXCEL (.xls XML Spreadsheet 2003)
+------------------------------------------------------------ */
+document.querySelector("[data-do='svcXLS']")?.addEventListener('click', () => {
+  const rows = sortSvcRows(applySvcFilters(Array.isArray(state.services) ? state.services : []));
 
-/* Nasconde l’input ma resta cliccabile */
-#svcFilterDlg input[type="checkbox"]{
-position: absolute !important;
-    opacity: 0 !important;
-    inset: 0 !important;
-}
+  function xmlEsc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+  function cell(v, type) {
+    return `<Cell><Data ss:Type="${type || 'String'}">${xmlEsc(v)}</Data></Cell>`;
+  }
 
-/* Label come chip */
-#svcFilterDlg label[for^="svcf_"],
-#svcFilterDlg #svcfTipoGroup label,
-#svcFilterDlg #svcfStatoGroup label{
-display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    padding: 6px 14px;
-    font-size: 13px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.15);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-}
+  const head = [
+    'ID','Routine','Tipo','Servizio','Operation',
+    'Fallback','Descrizione','Ambito','Applicativo',
+    'Param IN','Output','Stato'
+  ];
 
-/* Stato attivo */
-#svcFilterDlg input[type="checkbox"]:checked + label{
-background: rgba(99,230,255,0.18);
-    border-color: rgb(99,230,255);
-    box-shadow: 0 0 6px rgba(99,230,255,0.5);
-}
+  let xml =
+    `<?xml version="1.0"?>\n` +
+    `<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" ` +
+    `xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n` +
+    `<Worksheet ss:Name="Servizi"><Table>`;
 
-/* Ripple */
-#svcFilterDlg label::after{
-content:"";
-    position:absolute;
-    width:8px;
-    height:8px;
-    background:rgba(99,230,255,0.55);
-    border-radius:50%;
-    opacity:0;
-    transform:scale(1);
-    transition:opacity .45s ease, transform .45s ease;
-}
+  xml += `<Row>` + head.map(h => cell(h)).join('') + `</Row>`;
 
-#svcFilterDlg label:active::after{
-opacity:0.9;
-    transform:scale(14);
-    left:var(--r-x,50%);
-    top:var(--r-y,50%);
-}
+  rows.forEach(s => {
+    xml += `<Row>`
+      + cell(s.id)
+      + cell(s.routine)
+      + cell(s.tipo)
+      + cell(s.servizio)
+      + cell(s.operation)
+      + cell(s.fallback)
+      + cell(s.descrizione)
+      + cell(s.ambito)
+      + cell(s.applicativo)
+      + cell(s.paramsIngresso)
+      + cell(s.outputServizio)
+      + cell(s.stato)
+      + `</Row>`;
+  });
 
-#svcFilterDlg fieldset{
-background: color-mix(in srgb, var(--panel-2), transparent 22%) !important;
-    border: 1px solid color-mix(in srgb, var(--border), transparent 40%) !important;
-    border-radius: 12px;
-    padding: 14px 16px !important;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+  xml += `</Table></Worksheet></Workbook>`;
 
-#svcFilterDlg legend{
-font-size: 13px !important;
-  margin-bottom: 6px !important;
-  padding: 0 6px;
-  color: var(--txt);
-  white-space: nowrap;
-}
+  downloadBlob(new Blob([xml], { type: 'application/vnd.ms-excel' }), 'services.xls');
+});
 
-/* ============================================================
-   SVC FILTER — Griglia 3 colonne + gruppi checkbox full width
-   Replica stile/struttura CRQ
-   ============================================================ */
-
-/* A. Impone la griglia a 3 colonne sul body del dialog */
-#svcFilterDlg .modal-body{
-display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  column-gap: 18px !important;
-  row-gap: 14px !important;
-  align-items: start !important;
-  min-width: 0 !important;
-}
-
-/* B. Rende trasparenti i wrapper intermedi (così i figli entrano nella grid) */
-#svcFilterDlg form,
-#svcFilterDlg .form,
-#svcFilterDlg .form-grid,
-#svcFilterDlg .row,
-#svcFilterDlg .row2,
-#svcFilterDlg .svcf-grid{
-display: contents !important;
-}
-
-/* C. Tutti i campi "normali" occupano 1 colonna */
-#svcFilterDlg .modal-body > label,
-#svcFilterDlg .modal-body > .field,
-#svcFilterDlg .modal-body > .control{
-grid-column: span 1 !important;
-  min-width: 0 !important;
-}
-
-/* D. Fieldset stile CRQ */
-#svcFilterDlg fieldset{
-background: color-mix(in srgb, var(--panel-2), transparent 22%) !important;
-  border: 1px solid color-mix(in srgb, var(--border), transparent 40%) !important;
-  border-radius: 12px !important;
-  padding: 14px 16px !important;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 0 !important;
-}
-
-/* E. GRUPPI CHECKBOX = 3 colonne interne (chips) */
-#svcFilterDlg #svcfTipoGroup,
-#svcFilterDlg #svcfStatoGroup{
-display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 10px 12px !important;
-  min-width: 0 !important;
-}
-
-/* F. Checkbox → chip (stile CRQ) */
-#svcFilterDlg input[type="checkbox"]{
-position: absolute !important;
-  opacity: 0 !important;
-  inset: 0 !important;
-  pointer-events: none !important;  /* il click va sulla label */
-}
-
-#svcFilterDlg #svcfTipoGroup label,
-#svcFilterDlg #svcfStatoGroup label,
-#svcFilterDlg label[for^="svcf_"]{
-display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 6px 14px !important;
-  font-size: 13px !important;
-  border-radius: 20px !important;
-  background: rgba(255,255,255,0.06) !important;
-  border: 1px solid rgba(255,255,255,0.15) !important;
-  cursor: pointer !important;
-  position: relative !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
-}
-
-#svcFilterDlg input[type="checkbox"]:checked + label{
-background: rgba(99,230,255,0.18) !important;
-  border-color: rgb(99,230,255) !important;
-  box-shadow: 0 0 6px rgba(99,230,255,0.5) !important;
-}
-
-/* Ripple */
-#svcFilterDlg #svcfTipoGroup label::after,
-#svcFilterDlg #svcfStatoGroup label::after,
-#svcFilterDlg label[for^="svcf_"]::after{
-content:"";
-  position:absolute;
-  width:8px; height:8px; border-radius:50%;
-  background:rgba(99,230,255,0.55);
-  opacity:0; transform:scale(1);
-  transition:opacity .45s ease, transform .45s ease;
-}
-
-#svcFilterDlg #svcfTipoGroup label:active::after,
-#svcFilterDlg #svcfStatoGroup label:active::after,
-#svcFilterDlg label[for^="svcf_"]:active::after{
-opacity:.9; transform:scale(14);
-  left:var(--r-x,50%); top:var(--r-y,50%);
-}
-
-/* G. SPAN 3 COLONNE dei gruppi checkbox (con fallback a classe JS) */
-#svcFilterDlg fieldset:has(#svcfTipoGroup),
-#svcFilterDlg fieldset:has(#svcfStatoGroup),
-#svcFilterDlg fieldset.full-span{
-grid-column: 1 / -1 !important;  /* ← full width */
-}
-
-#svcFilterDlg .modal-body.grid-3{
-display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  column-gap: 18px !important;
-  row-gap: 14px !important;
-}
-
-/* ============================================================
-   SERVIZI — Checkbox Tipo & Stato → 4 colonne interne
-   ============================================================ */
-
-#svcFilterDlg #svcfTipoGroup,
-#svcFilterDlg #svcfStatoGroup{
-display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important; /* DA 3 → 4 COLONNE */
-    gap: 10px 12px !important;
-    min-width: 0 !important;
-}
-
-#svcFilterDlg #svcfTipoGroup,
-#svcFilterDlg #svcfStatoGroup{
-display: grid !important;
-    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
-    gap: 10px 12px !important;
-}
-
-#svcFilterDlg .svc-chip{
-display: contents !important; /* così input+label restano fratelli ma sotto la grid */
-}
-
-)
-   ============================================================ */
-
-/* A) I due gruppi (Tipo, Stato) diventano griglie a 4 colonne */
-#svcFilterDlg #svcfTipoGroup.checks,
-#svcFilterDlg #svcfStatoGroup.checks,
-#svcFilterDlg fieldset:has(#svcfTipoGroup) .checks,
-#svcFilterDlg fieldset:has(#svcfStatoGroup) .checks{
-display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 10px 12px !important;
-  align-items: start !important;
-  min-width: 0 !important;
-}
-
-/* B) Le “pill” si allargano alla larghezza della propria colonna e
-      il testo è centrato (come nei CRQ) */
-#svcFilterDlg #svcfTipoGroup.checks label,
-#svcFilterDlg #svcfStatoGroup.checks label,
-#svcFilterDlg fieldset:has(#svcfTipoGroup) .checks label,
-#svcFilterDlg fieldset:has(#svcfStatoGroup) .checks label{
-width: 100% !important;
-  justify-content: center !important;
-  white-space: nowrap !important;
-}
-
-/* C) I fieldset di Tipo e Stato restano “full row” (3 colonne del dialog) */
-#svcFilterDlg fieldset:has(#svcfTipoGroup),
-#svcFilterDlg fieldset:has(#svcfStatoGroup){
-grid-column: 1 / -1 !important;
-  min-width: 0 !important;
-}
-
-/* Stessa altezza e font dei CRQ */
-#svcFilterDlg .checks label{
-padding: 6px 14px !important;
-  font-size: 13px !important;
-  border-radius: 20px !important;
-}
+/* ------------------------------------------------------------
+   CLEAR ALL SERVICES
+------------------------------------------------------------ */
+document.querySelector("[data-do='svcClear']")?.addEventListener('click', () => {
+  if (!confirm('Confermi? Saranno eliminati TUTTI i Servizi.')) return;
+  state.services = [];
+  saveState(state);
+  renderServices();
+});
