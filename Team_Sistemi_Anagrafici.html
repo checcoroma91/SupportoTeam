@@ -717,9 +717,27 @@
   </dialog>
   
 	<dialog id="notifDlg" class="modal">
-	  <div class="modal-head">
+	  <div class="modal-head notif-head">
 		  <strong>Notifiche</strong>
-		  <button class="btn ghost" data-close title="Chiudi">✖</button>
+
+		  <div class="notif-head-right">
+			<!-- ▼ Filtro assegnatario nell'HEADER -->
+			<label class="notif-head-filter" for="notifAssigneeFilter" title="Filtra per assegnatario">
+			  <span class="ico" aria-hidden="true" title="Assegnatario">
+				  <!-- Person icon SVG -->
+				  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+					   style="display:block;filter: drop-shadow(0 0 6px color-mix(in srgb, var(--neon-color), transparent 40%));">
+					<path d="M12 12c2.761 0 5-2.686 5-6s-2.239-6-5-6-5 2.686-5 6 2.239 6 5 6zm0 2c-4.418 0-8 3.134-8 7v1h16v-1c0-3.866-3.582-7-8-7z"/>
+				  </svg>
+				</span>
+			  <select id="notifAssigneeFilter" aria-label="Assegnatario">
+				<!-- Opzioni inserite da JS -->
+			  </select>
+			</label>
+
+			<!-- Pulsante chiudi -->
+			<button class="btn ghost notif-close" data-close title="Chiudi">✖</button>
+		  </div>
 		</div>
 
 		<!-- TAB SWITCHER -->
