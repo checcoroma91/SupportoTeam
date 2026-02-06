@@ -619,6 +619,8 @@ function autoOpenNotifDialogIfNeeded() {
     // Render contenuti
     renderNotifDialog();
     updateNotifTabCounters();
+	
+	populateNotifAssigneeFilter();
 
     // Mostra dialog
     openDialogById("notifDlg");
@@ -844,6 +846,58 @@ function computeOPNotifications() {
   return groups;
 }
 
+// Filtro assegnatario notifiche (default: TUTTI)
+let notifAssignee = "TUTTI";
+
+// Estrae l'assegnatario "CRQ" dalle proprietà disponibili (fallback robusto)
+function getCrqAssignee(c) {
+  // Prova i campi più probabili in ordine
+  // (adegua se nel tuo schema usi un campo specifico)
+  return (c.bhelp || c.operatore || c.assegnatario || c.assignee || "").trim();
+}
+
+// Raccoglie TUTTI gli assegnatari unici da OP e CRQ
+function collectAllAssignees() {
+  const set = new Set();
+
+  // OP: array o stringa "a, b, c"
+  (state.openPoints || []).forEach(op => {
+    if (Array.isArray(op.assignees)) {
+      op.assignees.filter(Boolean).forEach(a => set.add(String(a).trim()));
+    } else if (op.assignees) {
+      String(op.assignees).split(",").map(s => s.trim()).filter(Boolean).forEach(a => set.add(a));
+    }
+  });
+
+  // CRQ: usa helper getCrqAssignee
+  (state.crq || []).forEach(c => {
+    const a = getCrqAssignee(c);
+    if (a) set.add(a);
+  });
+
+  return Array.from(set).sort((a,b) => a.localeCompare(b, "it", {sensitivity:"base"}));
+}
+
+// Popola la tendina del filtro nel dialog Notifiche
+function populateNotifAssigneeFilter() {
+  const sel = document.getElementById("notifAssigneeFilter");
+  if (!sel) return;
+
+  const all = collectAllAssignees();
+  const options = ["TUTTI", ...all];
+
+  sel.innerHTML = options.map(v =>
+    `<option value="${v.replace(/"/g, "&quot;")}" ${v===notifAssignee?'selected':''}>${v}</option>`
+  ).join("");
+
+  sel.onchange = () => {
+    notifAssignee = sel.value || "TUTTI";
+    // Rirenderizza le notifiche con il filtro selezionato
+    renderNotifDialog();
+    updateNotifTabCounters();
+  };
+}
+
 function getOPNotifCount() {
   const groups = computeOPNotifications();
   return (groups.verde?.length || 0) + (groups.giallo?.length || 0) + (groups.rosso?.length || 0);
@@ -898,6 +952,38 @@ function refreshNotificationsUI() {
 function renderNotifDialog() {
   const op = computeOPNotifications();
   const cq = computeCRQNotifications();
+  
+  // Applica il filtro assegnatario (se diverso da TUTTI)
+	function filterByAssignee(arr, isCrq) {
+	  if (notifAssignee === "TUTTI") return arr;
+	  if (!Array.isArray(arr)) return arr;
+
+	  // OP: item.assignees può essere array o stringa
+	  // CRQ: item.assignee è una stringa singola
+	  return arr.filter(item => {
+		if (isCrq) {
+		  return (item.assignee || "").trim().toLowerCase() === notifAssignee.trim().toLowerCase();
+		} else {
+		  if (Array.isArray(item.assignees)) {
+			return item.assignees.some(a => String(a).trim().toLowerCase() === notifAssignee.trim().toLowerCase());
+		  }
+		  if (typeof item.assignees === "string") {
+			return item.assignees.split(",").map(s => s.trim().toLowerCase()).includes(notifAssignee.trim().toLowerCase());
+		  }
+		  return false;
+		}
+	  });
+	}
+
+	// Filtra i gruppi OP
+	op.verde  = filterByAssignee(op.verde,  false);
+	op.giallo = filterByAssignee(op.giallo, false);
+	op.rosso  = filterByAssignee(op.rosso,  false);
+
+	// Filtra i gruppi CRQ (usa isCrq=true)
+	cq.verde  = filterByAssignee(cq.verde,  true);
+	cq.giallo = filterByAssignee(cq.giallo, true);
+	cq.rosso  = filterByAssignee(cq.rosso,  true);
 
   const elOP  = document.getElementById("notifOP");
   const elCRQ = document.getElementById("notifCRQ");
@@ -947,6 +1033,7 @@ function renderNotifDialog() {
           <div class="notif-field"><strong>Rilascio:</strong> ${c.rilascio || "—"}</div>
           <div class="notif-field"><strong>Rif Nostro:</strong> ${c.rif || "-"}</div>
           <div class="notif-field"><strong>PRJ:</strong> ${c.prj || "-"}</div>
+		  <div class=\"notif-field\"><strong>Assegnatario:</strong> " + (c.assignee || "—") + "</div>
 
           ${c.contenuto ? `
             <div class="notif-desc-collapsible">
@@ -1176,7 +1263,8 @@ function computeCRQNotifications() {
         rilascio: rilStr || "—",
         rif: getCrqRif(c),
         prj: getCrqPrj(c),
-        contenuto: getCrqContenuto(c)
+        contenuto: getCrqContenuto(c),
+		assignee: getCrqAssignee(c)
       });
       return;
     }
