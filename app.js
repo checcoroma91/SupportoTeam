@@ -524,7 +524,146 @@ function initToolbar() {
 	//PULISCI SOLO OPENPOINT
 	const elOpClear = byDo("opClear");
 	if (elOpClear) elOpClear.addEventListener("click", clearOpenPoints);
+	
+	
+	 const elLinksShowAll = byDo("linksShowAll");
+	  if (elLinksShowAll) elLinksShowAll.addEventListener("click", showAllLinks);
+
+	  const elOpShowAll = byDo("opShowAll");
+	  if (elOpShowAll) elOpShowAll.addEventListener("click", showAllOP);
+
+	  const elCrqShowAll = byDo("crqShowAll");
+	  if (elCrqShowAll) elCrqShowAll.addEventListener("click", showAllCRQ);
+
+	  const elSvcShowAll = byDo("svcShowAll");
+	  if (elSvcShowAll) elSvcShowAll.addEventListener("click", showAllSVC);
+
 }
+
+/* ============================================================
+   VISUALIZZA TUTTI — reset filtri e rerender (LINK • OP • CRQ • SVC)
+   ============================================================ */
+
+function resetNotifAssigneeFilter() {
+  try {
+    notifAssignee = "TUTTI";
+    const sel = document.getElementById("notifAssigneeFilter");
+    if (sel) sel.value = "TUTTI";
+    renderNotifDialog();
+    updateNotifTabCounters();
+  } catch (_) {}
+}
+
+/* 1) LINK: mostra tutte le sezioni (rimuove il filtro sezioni) */
+function showAllLinks() {
+  try {
+    // usa la tua chiave già definita
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem("tsa.v5.secfilter"); // SECFILTER_KEY
+    }
+    renderLinks();
+    toast("Filtri link azzerati ✓");
+  } catch (_) {
+    renderLinks();
+  }
+}
+
+/* 2) OPEN POINTS: reset completo del filtro OP */
+function showAllOP() {
+	resetNotifAssigneeFilter();
+  try {
+    // ripristina il filtro ai default noti
+    if (typeof defaultOpFilter === "function") {
+      opFilter = defaultOpFilter();
+    } else {
+      // fallback robusto
+      opFilter = {
+        text: "",
+        priorities: ["low", "medium", "high", "critical"],
+        statuses: ["Nuovo","Da fare","In corso","Schedulato","Completato"],
+        maxOnly: false,
+        createdFrom: "", createdTo: "",
+        dueFrom: "", dueTo: "",
+        assignees: [], projects: []
+      };
+    }
+    if (typeof saveOpFilter === "function") saveOpFilter(opFilter);
+    // rimuovi eventuale filtro "single OP" impostato da notifiche
+    delete opFilter.id;
+    renderOpenPoints();
+    toast("Filtri Open Points azzerati ✓");
+  } catch (e) {
+    console.warn("OP reset error:", e);
+    renderOpenPoints();
+  }
+}
+
+/* 3) CRQ: reset completo del filtro CRQ */
+function showAllCRQ() {
+	resetNotifAssigneeFilter();
+  try {
+    // Prova a usare le tue funzioni se esistono
+    if (typeof defaultCrqFilter === "function") {
+      window.crqFilter = defaultCrqFilter();
+    } else {
+      // fallback robusto
+      window.crqFilter = {
+        text: "",
+        rfc: "",
+        aperturaFrom: "", aperturaTo: "",
+        anno: "",
+        emergenza: ["No","Sì"],      // es. ["No","Sì"]
+        utilizzato: ["No","Sì"],     // es. ["Si","No"]
+        stati: [],          // se vuoto = tutti
+        categoria: "",
+        rilFrom: "", rilTo: "",
+        rif: "",
+        prj: "",
+        contenuto: ""
+      };
+    }
+    // salva se presente
+    if (typeof saveCrqFilter === "function") saveCrqFilter(window.crqFilter);
+    renderCrq();
+    toast("Filtri CRQ azzerati ✓");
+  } catch (e) {
+    console.warn("CRQ reset error:", e);
+    renderCrq();
+  }
+}
+
+/* 4) SERVIZI: reset filtro servizi */
+function showAllSVC() {
+  try {
+    if (typeof defaultSvcFilter === "function") {
+      window.svcFilter = defaultSvcFilter();
+    } else {
+      // fallback: azzera ogni campo noto
+      window.svcFilter = {
+        text: "",
+        id: "",
+        routine: [],
+        servizi: [],
+        tipo: ["REST","SOAP"],     // ["REST","SOAP"]
+        stato: ["OK","ATTIVO","KO","ERRORE","NON ATTIVO","DEPRECATO"],    // "OK","ATTIVO","KO","ERRORE","NON ATTIVO","DEPRECATO" se li usi
+        descrizione: "",
+        ambiti: [],
+        applicativi: [],
+        fallback: [],
+        operation: [],
+        paramsIn: [],
+        output: []
+      };
+    }
+    if (typeof saveSvcFilter === "function") saveSvcFilter(window.svcFilter);
+    renderServices();
+    toast("Filtri Servizi azzerati ✓");
+  } catch (e) {
+    console.warn("SVC reset error:", e);
+    renderServices();
+  }
+}
+
 
 function exportLinksAndSections() {
     const data = {
