@@ -853,7 +853,7 @@ function initLinksDragDrop() {
   const cardSelector = ".section .grid > .card";
   let draggedLinkId = null;
 
-  // === Placeholder — simula una card ma vuota (non muove le altre finché non rilasci) ===
+  // === Placeholder ===
   let placeholder = document.getElementById("drop-placeholder");
   if (!placeholder) {
     placeholder = document.createElement("div");
@@ -867,7 +867,6 @@ function initLinksDragDrop() {
     placeholder.innerHTML = "";
   }
 
-  // Rendi draggable le card dei link
   const cards = [...container.querySelectorAll(cardSelector)];
   cards.forEach(card => {
     const cid = card.getAttribute("data-id");
@@ -891,79 +890,71 @@ function initLinksDragDrop() {
     });
   });
 
-  // Helper: risale fino a una .card FIGLIO DIRETTO della .grid corrente (mai di un’altra grid)
   function getDirectChildCard(grid, el) {
     if (!grid || !el) return null;
     if (el.id === "drop-placeholder") return null;
 
     let cur = el.closest(".card");
     while (cur && cur !== grid) {
-      if (cur.parentElement === grid &&
-          cur.matches(".card") &&
-          !cur.classList.contains("dragging") &&
-          cur.id !== "drop-placeholder") {
+      if (
+        cur.parentElement === grid &&
+        cur.matches(".card") &&
+        !cur.classList.contains("dragging") &&
+        cur.id !== "drop-placeholder"
+      ) {
         return cur;
       }
-      const outerCard = cur.parentElement?.closest(".card");
-      cur = outerCard || cur.parentElement;
+      const outer = cur.parentElement?.closest(".card");
+      cur = outer || cur.parentElement;
     }
     return null;
   }
 
-  // DRAGOVER: posiziona SOLO il placeholder, niente insertBefore su nodi alieni → niente NotFoundError
   container.addEventListener("dragover", (e) => {
     if (!draggedLinkId) return;
     e.preventDefault();
 
-    // Nodo reale sotto il puntatore
     const target = document.elementFromPoint(e.clientX, e.clientY);
     if (!target) return;
 
-    // Grid della sezione corrente (HTML: .section > .grid)
     const grid = target.closest(".section")?.querySelector(".grid");
     if (!grid) return;
 
-    // Assicura che il placeholder sia in questa grid
     if (placeholder.parentElement !== grid) {
       try { placeholder.remove(); } catch (_) {}
-      grid.appendChild(placeholder); // append provvisorio
+      grid.appendChild(placeholder);
     }
 
-    // Card FIGLIO DIRETTO della grid sotto il mouse
     const directCard = getDirectChildCard(grid, target);
 
     if (directCard) {
       const rect = directCard.getBoundingClientRect();
       const before = e.clientY < rect.top + rect.height / 2;
 
-      if (directCard.parentElement === grid) {
-        if (before) {
-          if (placeholder.nextSibling !== directCard) {
-            grid.insertBefore(placeholder, directCard);
-          }
-        } else {
-          const next = directCard.nextSibling;
-          if (next !== placeholder) {
-            if (next && next.parentElement === grid) {
-              grid.insertBefore(placeholder, next);
-            } else {
-              grid.appendChild(placeholder);
-            }
-          }
+      if (before) {
+        if (placeholder.nextSibling !== directCard) {
+          grid.insertBefore(placeholder, directCard);
         }
       } else {
-        // Riferimento non della grid → append sicuro
-        if (placeholder.parentElement !== grid || placeholder !== grid.lastChild) {
-          grid.appendChild(placeholder);
+        const next = directCard.nextSibling;
+        if (next !== placeholder) {
+          if (next && next.parentElement === grid) {
+            grid.insertBefore(placeholder, next);
+          } else {
+            grid.appendChild(placeholder);
+          }
         }
       }
     } else {
-      // Nessuna card valida sotto il mouse → gestisci inizio/fondo grid
-      const siblings = [...grid.children]
-        .filter(el => el.matches(".card") && !el.classList.contains("dragging") && el.id !== "drop-placeholder");
+      const siblings = [...grid.children].filter(
+        x =>
+          x.matches(".card") &&
+          !x.classList.contains("dragging") &&
+          x.id !== "drop-placeholder"
+      );
 
       if (siblings.length === 0) {
-        if (placeholder.parentElement !== grid || placeholder !== grid.firstChild) {
+        if (placeholder.parentElement !== grid) {
           grid.appendChild(placeholder);
         }
         return;
@@ -974,9 +965,7 @@ function initLinksDragDrop() {
       const lastRect = last.getBoundingClientRect();
 
       if (e.clientY >= lastRect.top + lastRect.height / 2) {
-        if (placeholder.parentElement !== grid || placeholder !== grid.lastChild) {
-          grid.appendChild(placeholder);
-        }
+        grid.appendChild(placeholder);
       } else {
         if (placeholder.nextSibling !== first) {
           grid.insertBefore(placeholder, first);
@@ -985,7 +974,6 @@ function initLinksDragDrop() {
     }
   });
 
-  // DROP: calcola l’indice del placeholder e riordina SOLO ora
   container.addEventListener("drop", () => {
     if (!draggedLinkId) return;
 
@@ -995,66 +983,35 @@ function initLinksDragDrop() {
     const section = sectionGrid.closest(".section");
     const targetSectionId = section?.dataset.sec || null;
 
-    // Ordine “visivo” nella grid (senza il placeholder)
     const orderedIds = [...sectionGrid.querySelectorAll(".card")]
-      .filter(el => el.id !== "drop-placeholder")
-      .map(el => el.getAttribute("data-id"))
+      .filter(x => x.id !== "drop-placeholder")
+      .map(x => x.getAttribute("data-id"))
       .filter(Boolean);
 
-    // Posizione di inserimento = posizione del placeholder tra i figli della grid
     const dropIndex = [...sectionGrid.children].indexOf(placeholder);
     orderedIds.splice(Math.min(dropIndex, orderedIds.length), 0, draggedLinkId);
 
-    // Aggiorna sezione del link trascinato (se cambi sezione) e riassembla l’array
     state.links = state.links.map(link =>
       link.id === draggedLinkId ? { ...link, sectionId: targetSectionId } : link
     );
 
-    const inTarget = state.links.filter(l => (l.sectionId || "") === (targetSectionId || ""));
-    const inOther  = state.links.filter(l => (l.sectionId || "") !== (targetSectionId || ""));
+    const inTarget = state.links.filter(
+      l => (l.sectionId || "") === (targetSectionId || "")
+    );
+    const inOther = state.links.filter(
+      l => (l.sectionId || "") !== (targetSectionId || "")
+    );
 
-    inTarget.sort((a, b) => orderedIds.indexOf(a.id) - orderedIds.indexOf(b.id));
+    inTarget.sort(
+      (a, b) => orderedIds.indexOf(a.id) - orderedIds.indexOf(b.id)
+    );
+
     state.links = [...inOther, ...inTarget];
 
     saveState(state);
     renderLinks();
-    initLinksDragDrop(); // riaggancia i listener alle nuove card
+    initLinksDragDrop();
   });
-}
-
-    const caret = ensureCaret();
-    grid.appendChild(caret);
-
-    const left = before ? rect.left : rect.right;
-    caret.style.left = (left - grid.getBoundingClientRect().left) + "px";
-    caret.style.top = (rect.top - grid.getBoundingClientRect().top) + "px";
-    caret.style.height = Math.max(24, rect.height) + "px";
-    caret.style.display = "block";
-}
-
-
-    state.links.splice(di, 1);
-
-    let insertAt;
-    if (where === "after") {
-        insertAt = ti + (di < ti ? 0 : 1);
-    } else {
-        insertAt = ti - (di < ti ? 1 : 0);
-    }
-
-    insertAt = Math.max(0, Math.min(insertAt, state.links.length));
-    state.links.splice(insertAt, 0, dragged);
-
-    saveState(state);
-    renderLinks();
-}
-
-
-    const insertAt = last === -1 ? state.links.length : last + 1;
-    state.links.splice(insertAt, 0, dragged);
-
-    saveState(state);
-    renderLinks();
 }
 
 /* ------------------------------------------------------------
