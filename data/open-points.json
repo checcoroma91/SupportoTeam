@@ -11,7 +11,7 @@
       "status": "Da fare",
       "maxPriority": false,
       "createdAt": "2026-02-06",
-      "dueAt": "",
+      "dueAt": "2026-02-20",
       "desc": "BStore chiede l'aggiunta nella matrice dei seguenti codici macrogruppo:\nMG_12\nE dei seguenti codici economato:\n02440958",
       "notes": ""
     },
@@ -23,12 +23,12 @@
         "Fra"
       ],
       "priority": "high",
-      "status": "Da fare",
+      "status": "Completato",
       "maxPriority": true,
       "createdAt": "2026-02-05",
       "dueAt": "2026-02-06",
       "desc": "Creare meet per mettere di fronte Reactive Anagrafe e Reactive Poteri per parlare del servizio",
-      "notes": ""
+      "notes": "- nome chiarito\n- ricerca specifica particolarità\n- paginazione\n- info aggiunte"
     },
     {
       "id": "8dc464ff-56bc-4afa-b43b-ef91bd9b6f1d",
