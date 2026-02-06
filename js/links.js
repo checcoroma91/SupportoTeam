@@ -842,20 +842,6 @@ function renderLinks() {
 }
 
 /* ------------------------------------------------------------
-   DRAG & DROP (NEON CARET)
-   ------------------------------------------------------------ */
-
-
-
-
-    return caretEl;
-}
-
-
-
-let draggedLinkId = null;
-
-/* ------------------------------------------------------------
    DRAG & DROP LINK – robusto con indicatore luminoso
 ------------------------------------------------------------ */
 
@@ -1093,3 +1079,4 @@ function getSectionColor(sec) {
     if (typeof sec.color === "string") return sec.color; // compat vecchi json
     return sec.color.c1 || null;
 }
+
