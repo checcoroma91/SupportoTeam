@@ -430,15 +430,24 @@
           <option value="REST" selected>REST</option>
           <option value="SOAP">SOAP</option>
         </select>
-      </label>
       <label>SERVIZIO *<input id="svcServizio" placeholder="SERVIZIO *" /></label>
       <label class="col-2">OPERATION / PARAMETRI (una per riga)<textarea id="svcOperation"></textarea></label>
       <label>Fallback JDBC/SWP<input id="svcFallback" /></label>
 	  <label>Ambito<input id="svcAmbito" /></label>
       <label>Applicativo<input id="svcApplicativo" /></label>
-      <label class="col-2">Descrizione<textarea id="svcDescrizione"></textarea></label>
+      <label class="col-2">Descrizione<input id="svcDescrizione"/></label>
       <label class="col-2">Parametri ingresso (uno per riga)<textarea id="svcParamsIn"></textarea></label>
       <label class="col-2">Output del servizio (uno per riga)<textarea id="svcOutput"></textarea></label>
+	  </label>
+	  <label>Stato
+		<select id="svcStato">
+			<option value="">n/d</option>
+			<option value="OK">OK</option>
+			<option value="ATTIVO">ATTIVO</option>
+			<option value="NON ATTIVO">NON ATTIVO</option>
+			<option value="DEPRECATO">DEPRECATO</option>
+		</select>
+	  </label>
       <div class="actions end">
         <button class="btn" data-close>Annulla</button>
         <button class="btn primary" id="svcSaveBtn">Salva</button>
