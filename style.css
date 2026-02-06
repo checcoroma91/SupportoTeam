@@ -3307,3 +3307,54 @@ dialog::backdrop { background: rgba(5, 8, 18, .58); }
     border-color: #4aff73 !important;
     color: #b2ffcb !important;
 }
+
+/* ============================================================
+   SERVIZI — COLORI RIGHE (come OP/CRQ) + NEON PULSE
+   ============================================================ */
+
+/* Rosso: NON ATTIVO */
+.svc-row-red {
+  --row-color: #ff5064;
+  background: rgba(255, 80, 100, 0.15) !important;
+  border-left: 4px solid var(--row-color) !important;
+  animation: svcNeonRed 2.6s infinite ease-in-out;
+}
+
+/* Giallo: DEPRECATO */
+.svc-row-yellow {
+  --row-color: #ffd250;
+  background: rgba(255, 210, 80, 0.14) !important;
+  border-left: 4px solid var(--row-color) !important;
+  animation: svcNeonYellow 2.6s infinite ease-in-out;
+}
+
+/* Verde: ATTIVO / OK */
+.svc-row-green {
+  --row-color: #4aff73;
+  background: rgba(80, 255, 120, 0.14) !important;
+  border-left: 4px solid var(--row-color) !important;
+  animation: svcNeonGreen 2.6s infinite ease-in-out;
+}
+
+@keyframes svcNeonRed   { 0%,100%{ box-shadow:0 0 6px rgba(255,80,100,.5);} 50%{box-shadow:0 0 14px rgba(255,80,100,.8);} }
+@keyframes svcNeonYellow{ 0%,100%{ box-shadow:0 0 6px rgba(255,210,80,.45);} 50%{box-shadow:0 0 14px rgba(255,210,80,.75);} }
+@keyframes svcNeonGreen { 0%,100%{ box-shadow:0 0 6px rgba(74,255,115,.45);} 50%{box-shadow:0 0 14px rgba(74,255,115,.75);} }
+
+/* ============================================================
+   SERVIZI — BADGE STATO (coerenti con OP/CRQ)
+   ============================================================ */
+.badge.svc-state-red {
+  background: rgba(255, 80, 100, 0.18) !important;
+  border-color: #ff5064 !important;
+  color: #ff99a6 !important;
+}
+.badge.svc-state-yellow {
+  background: rgba(255, 210, 80, 0.20) !important;
+  border-color: #ffd250 !important;
+  color: #ffe8a6 !important;
+}
+.badge.svc-state-green {
+  background: rgba(80, 255, 120, 0.20) !important;
+  border-color: #4aff73 !important;
+  color: #b2ffcb !important;
+}
