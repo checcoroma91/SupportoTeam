@@ -1,38 +1,42 @@
 // ==========================================================
-// V5 MAIN — ENTRYPOINT MODULARE (NESSUNA FUNZIONE DEFINITA QUI)
+// AVVIO DELL’APPLICAZIONE (fallback: global window o import dinamico)
 // ==========================================================
+async function boot() {
+  // Se non ci sono su window, prova import dinamico da core.js
+  let renderAllFn  = window.renderAll;
+  let initUIFn     = window.initUIRouter;
+  let refreshNotif = window.refreshNotificationsUI;
+  let autoOpenNotif= window.autoOpenNotifDialogIfNeeded;
 
-// Import dei moduli (caricano funzioni, stato, UI, router)
-import './core.js';
-import './router.js';
-import './links.js';
-import './op.js';
-import './svc.js';
-import './crq.js';
+  try {
+    if (!renderAllFn || !initUIFn) {
+      const core = await import('./core.js');
+      renderAllFn   = renderAllFn   || core.renderAll;
+      initUIFn      = initUIFn      || core.initUIRouter;
+      refreshNotif  = refreshNotif  || core.refreshNotificationsUI;
+      autoOpenNotif = autoOpenNotif || core.autoOpenNotifDialogIfNeeded;
+    }
+  } catch (e) {
+    console.warn('core.js non esporta ESM o path errato:', e);
+  }
 
-// ==========================================================
-// AVVIO DELL’APPLICAZIONE (versione compatibile con funzioni su window)
-// ==========================================================
+  // 1) Render iniziale
+  if (typeof renderAllFn === 'function') {
+    renderAllFn();
+  } else {
+    console.warn('renderAll non disponibile (né su window né come export).');
+  }
 
-// 1) Render iniziale di tutte le viste
-if (typeof window.renderAll === 'function') {
-  window.renderAll();
+  // 2) Router/UI
+  if (typeof initUIFn === 'function') {
+    initUIFn();
+  } else {
+    console.warn('initUIRouter non disponibile.');
+  }
+
+  // 3) Notifiche
+  if (typeof refreshNotif === 'function') refreshNotif();
+  if (typeof autoOpenNotif === 'function') autoOpenNotif();
 }
 
-// 2) Inizializzazione Router / UI (tabs, tiles, toolbar, dialogs, export menu)
-if (typeof window.initUIRouter === 'function') {
-  window.initUIRouter();
-}
-
-// 3) Aggiorna badge notifiche + eventuale apertura dialog notifiche
-if (typeof window.refreshNotificationsUI === 'function') {
-  window.refreshNotificationsUI();
-}
-if (typeof window.autoOpenNotifDialogIfNeeded === 'function') {
-  window.autoOpenNotifDialogIfNeeded();
-}
-
-// 4) Caricamento automatico da repository (se previsto)
-if (typeof window.loadFromRepo === 'function') {
-  // lasciata disponibile da pulsante
-}
+boot();
