@@ -411,6 +411,24 @@ function closeDialog(dlg) {
     if (!dlg) return;
     dlg.close();
     document.body.style.overflow = "";
+	
+	
+  // reset dedicato per opDialog (opzionale)
+	if (dlg.id === "opDialog") {
+		dlg.dataset.editing = "";
+		document.getElementById("opDlgTitle").textContent = "Nuovo open point";
+		document.getElementById("opTitle").value = "";
+		document.getElementById("opProject").value = "";
+		document.getElementById("opAssignees").value = "";
+		document.getElementById("opPriority").value = "medium";
+		document.getElementById("opStatus").value = "Nuovo";
+		document.getElementById("opMaxPrio").checked = false;
+		document.getElementById("opCreatedAt").value = todayISO();
+		document.getElementById("opDueAt").value = "";
+		document.getElementById("opDesc").value = "";
+		document.getElementById("opNotes").value = "";
+	  }
+
 }
 
 // Close when clicking buttons with data-close
@@ -641,6 +659,14 @@ function initDialogOpenButtons() {
         openFilterSectionsDialog();
         return;
       }
+	  
+	  
+	// === ECCEZIONE: editor Open Point (nuovo/blank) ===
+	  if (dlgId === "opDialog") {
+		openOpDialog(); // <-- apre con campi puliti
+		return;
+	  }
+
 
       // === ECCEZIONE 4: editor CRQ
       if (dlgId === "crqEditorDlg") {
