@@ -2344,24 +2344,44 @@ function renderOpenPoints() {
     // TBODY
     const tbody = "<tbody>"
         + rows.map(o => {
+
+            // === COLORE RIGA ===
+            let rowColor = "";
+            let badgeClass = "";
+
+            switch (o.status) {
+                case "Nuovo":
+                case "Da fare":
+                    rowColor = "row-red";
+                    badgeClass = "state-red";
+                    break;
+
+                case "In corso":
+                case "Schedulato":
+                    rowColor = "row-yellow";
+                    badgeClass = "state-yellow";
+                    break;
+
+                case "Completato":
+                    rowColor = "row-green";
+                    badgeClass = "state-green";
+                    break;
+            }
+
             const assTxt = Array.isArray(o.assignees)
                 ? o.assignees.join(", ")
                 : (o.assignees || "");
 
             return ""
-                + "<tr>"
+                + "<tr class='" + rowColor + "'>"
                 + "<td class='col-title'><strong>" + escapeHtml(o.title) + "</strong>"
-                    + (o.desc
-                        ? "<br><span class='muted'>" + escapeHtml(o.desc) + "</span>"
-                        : "")
-                    + (o.notes
-                        ? "<br><span class='muted'><em>Note:</em> " + escapeHtml(o.notes) + "</span>"
-                        : "")
+                    + (o.desc ? "<br><span class='muted'>" + escapeHtml(o.desc) + "</span>" : "")
+                    + (o.notes ? "<br><span class='muted'><em>Note:</em> " + escapeHtml(o.notes) + "</span>" : "")
                 + "</td>"
                 + "<td>" + escapeHtml(o.project || "") + "</td>"
                 + "<td>" + escapeHtml(assTxt) + "</td>"
                 + "<td><span class='badge'>" + escapeHtml((o.priority||"medium").toUpperCase()) + "</span></td>"
-                + "<td><span class='badge state'>" + escapeHtml(o.status||"Nuovo") + "</span></td>"
+                + "<td><span class='badge state " + badgeClass + "'>" + escapeHtml(o.status||"Nuovo") + "</span></td>"
                 + "<td>" + (o.maxPriority ? "<span class='badge max'>MAX</span>" : "") + "</td>"
                 + "<td class='col-created'>" + escapeHtml(o.createdAt || "") + "</td>"
                 + "<td class='col-due'>" + escapeHtml(o.dueAt || "") + "</td>"
@@ -2661,7 +2681,8 @@ function openServiceDialog(item) {
     $("#svcApplicativo").value  = (item && item.applicativo) || "";
     $("#svcParamsIn").value     = (item && item.paramsIngresso) || "";
     $("#svcOutput").value       = (item && item.outputServizio) || "";
-
+	$("#svcStato").value       = (item && item.stato) || "";
+	
     dlg.dataset.editing = item ? item.id : "";
     openDialogById("serviceDialog");
 }
@@ -2687,7 +2708,7 @@ function saveServiceDialog() {
         applicativo: $("#svcApplicativo").value.trim(),
         paramsIngresso: $("#svcParamsIn").value.trim(),
         outputServizio: $("#svcOutput").value.trim(),
-        stato: ""   // lo stato può essere esteso in futuro
+        stato: $("#svcStato").value.trim()
     });
 
     if (!obj.routine || !obj.servizio) {
@@ -2820,7 +2841,7 @@ function populateSvcStatoChips() {
     const grp = document.getElementById("svcfStatoGroup");
     if (!grp) return;
 
-    const stati = ["OK", "KO", "ATTIVO", "ERRORE"];
+    const stati = ["n/d","OK", "NON ATTIVO", "ATTIVO", "DEPRECATO"];
 
     grp.innerHTML = stati.map(st => `
         <div class="svc-chip">
@@ -3015,7 +3036,7 @@ function renderServices() {
         th("applicativo","APPLICATIVO") +
         th("paramsIngresso","PARAM IN") +
         th("outputServizio","OUTPUT") +
-        th("stato","STATO") +
+		th("stato","STATO") +
         "<th>Azioni</th>" +
         "</tr></thead>";
 
@@ -3049,6 +3070,22 @@ function renderServices() {
 
     tbl.innerHTML = thead + tbody;
 }
+
+function svcBadgeClass(stato) {
+    switch ((stato || "").toUpperCase()) {
+        case "OK":
+        case "ATTIVO":
+            return "svc-state-green";
+
+        case "KO":
+        case "ERRORE":
+            return "svc-state-red";
+
+        default:
+            return "svc-state-yellow";
+    }
+}
+
 
 /* ------------------------------------------------------------
    EXPORT JSON
@@ -3664,21 +3701,49 @@ function renderCrq() {
     const tbody =
         "<tbody>" +
         rows.map(o => {
+
+            // === COLORE RIGA ===
+            let rowColor = "";
+            let badgeClass = "";
+
+            switch (o.stato) {
+                case "Bozza":
+                case "Richiesta autorizzazione":
+                    rowColor = "row-red";
+                    badgeClass = "state-red";
+                    break;
+
+                case "Pianificazione in corso":
+                case "Revisione pianificata":
+                case "Approvazione pianificata":
+                    rowColor = "row-yellow";
+                    badgeClass = "state-yellow";
+                    break;
+
+                case "Pianificato":
+                case "Implementazione in corso":
+                case "Completato":
+                case "Chiuso":
+                    rowColor = "row-green";
+                    badgeClass = "state-green";
+                    break;
+            }
+
             return (
-                "<tr>" +
-                "<td><strong>" + escapeHtml(o.rfcAperti) + "</strong></td>" +
-                "<td><span class='badge state'>" + escapeHtml(o.stato) + "</span></td>" +
-                "<td>" + escapeHtml(o.dataApertura || "") + "</td>" +
-                "<td>" + escapeHtml(o.emerg || "") + "</td>" +
-                "<td>" + escapeHtml(o.categoria || "") + "</td>" +
-                "<td>" + escapeHtml(o.dataRilascio || "") + "</td>" +
-                "<td>" + escapeHtml(o.rifNostro || "") + "</td>" +
-                "<td>" + escapeHtml(o.prj || "") + "</td>" +
-                "<td class='col-multiline'>" + escapeHtml(o.contenuto || "") + "</td>" +
-                "<td><div class='table-actions'>" +
-                    "<button onclick=\"openCrqEditorById('" + o.id + "')\">✏️</button>" +
-                    "<button class='danger' onclick=\"deleteCrq('" + o.id + "')\">🗑️</button>" +
-                "</div></td>" +
+                "<tr class='" + rowColor + "'>" +
+                    "<td><strong>" + escapeHtml(o.rfcAperti) + "</strong></td>" +
+                    "<td><span class='badge state " + badgeClass + "'>" + escapeHtml(o.stato) + "</span></td>" +
+                    "<td>" + escapeHtml(o.dataApertura || "") + "</td>" +
+                    "<td>" + escapeHtml(o.emerg || "") + "</td>" +
+                    "<td>" + escapeHtml(o.categoria || "") + "</td>" +
+                    "<td>" + escapeHtml(o.dataRilascio || "") + "</td>" +
+                    "<td>" + escapeHtml(o.rifNostro || "") + "</td>" +
+                    "<td>" + escapeHtml(o.prj || "") + "</td>" +
+                    "<td class='col-multiline'>" + escapeHtml(o.contenuto || "") + "</td>" +
+                    "<td><div class='table-actions'>" +
+                        "<button onclick=\"openCrqEditorById('" + o.id + "')\">✏️</button>" +
+                        "<button class='danger' onclick=\"deleteCrq('" + o.id + "')\">🗑️</button>" +
+                    "</div></td>" +
                 "</tr>"
             );
         }).join("") +
