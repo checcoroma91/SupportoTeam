@@ -3222,4 +3222,88 @@ dialog::backdrop { background: rgba(5, 8, 18, .58); }
   margin: 4px;
 }
 
+/* =====================================================================
+   COLORI RIGHE TABELLE (OPEN POINTS + CRQ)
+   ===================================================================== */
 
+/* Rosso */
+.row-red {
+    background: rgba(255, 80, 100, 0.18) !important;
+    border-left: 4px solid #ff5064 !important;
+}
+
+/* Giallo */
+.row-yellow {
+    background: rgba(255, 210, 80, 0.15) !important;
+    border-left: 4px solid #ffd250 !important;
+}
+
+/* Verde */
+.row-green {
+    background: rgba(80, 255, 120, 0.16) !important;
+    border-left: 4px solid #4aff73 !important;
+}
+
+/* ============================================================
+   NEON ROW EFFECT (Open Points + CRQ)
+   ============================================================ */
+
+.row-red {
+    --row-color: #ff5064;
+    background: rgba(255, 80, 100, 0.15) !important;
+    border-left: 4px solid var(--row-color) !important;
+    animation: neonPulseRed 2.6s infinite ease-in-out;
+}
+
+.row-yellow {
+    --row-color: #ffd250;
+    background: rgba(255, 210, 80, 0.14) !important;
+    border-left: 4px solid var(--row-color) !important;
+    animation: neonPulseYellow 2.6s infinite ease-in-out;
+}
+
+.row-green {
+    --row-color: #4aff73;
+    background: rgba(80, 255, 120, 0.14) !important;
+    border-left: 4px solid var(--row-color) !important;
+    animation: neonPulseGreen 2.6s infinite ease-in-out;
+}
+
+/* Neon animations */
+@keyframes neonPulseRed {
+    0%, 100% { box-shadow: 0 0 6px rgba(255,80,100,0.5); }
+    50%      { box-shadow: 0 0 14px rgba(255,80,100,0.8); }
+}
+
+@keyframes neonPulseYellow {
+    0%, 100% { box-shadow: 0 0 6px rgba(255,210,80,0.45); }
+    50%      { box-shadow: 0 0 14px rgba(255,210,80,0.75); }
+}
+
+@keyframes neonPulseGreen {
+    0%, 100% { box-shadow: 0 0 6px rgba(74,255,115,0.45); }
+    50%      { box-shadow: 0 0 14px rgba(74,255,115,0.75); }
+}
+
+
+/* ============================================================
+   BADGE COLORATI PER LO STATO
+   ============================================================ */
+
+.badge.state-red {
+    background: rgba(255, 80, 100, 0.18) !important;
+    border-color: #ff5064 !important;
+    color: #ff99a6 !important;
+}
+
+.badge.state-yellow {
+    background: rgba(255, 210, 80, 0.20) !important;
+    border-color: #ffd250 !important;
+    color: #ffe8a6 !important;
+}
+
+.badge.state-green {
+    background: rgba(80, 255, 120, 0.20) !important;
+    border-color: #4aff73 !important;
+    color: #b2ffcb !important;
+}
