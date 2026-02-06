@@ -13,7 +13,7 @@
       "createdAt": "2026-02-06",
       "dueAt": "",
       "desc": "BStore chiede l'aggiunta nella matrice dei seguenti codici macrogruppo:\nMG_12\nE dei seguenti codici economato:\n02440958",
-      "notes": ""
+      "notes": "Controllo da parte di reactive per errore (sono stati aggiunti i codici richiesti ma in presenza di altri codici mancanti restituisce lo stesso errore)"
     },
     {
       "id": "aea9b240-7c24-4f7e-8a42-6a255ce88e67",
