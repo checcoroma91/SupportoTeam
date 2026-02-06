@@ -364,7 +364,7 @@ window.setCrqSort = function (k) {
 };
 function sortCrqRows(rows) {
   const k = crqSort.key;
-  the d = crqSort.dir === 'desc' ? -1 : 1;
+  const d = crqSort.dir === 'desc' ? -1 : 1;
   const list = Array.isArray(rows) ? rows.slice() : [];
   return list.sort((x, y) => {
     let r = 0;
