@@ -3358,3 +3358,234 @@ dialog::backdrop { background: rgba(5, 8, 18, .58); }
   border-color: #4aff73 !important;
   color: #b2ffcb !important;
 }
+
+/* Notifiche: filtro assegnatario */
+.notif-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 6px 0 10px;
+  background: color-mix(in srgb, var(--panel-2), transparent 20%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 30%);
+  border-radius: 10px;
+}
+.notif-filter label {
+  font-size: 13px;
+  color: var(--txt);
+  white-space: nowrap;
+}
+#notifAssigneeFilter {
+  background: color-mix(in srgb, var(--panel-2), transparent 20%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 30%);
+  color: var(--txt);
+  padding: 6px 10px;
+  border-radius: 8px;
+  height: 34px;
+  min-width: 220px;
+  outline: none;
+}
+#notifAssigneeFilter:hover {
+  border-color: color-mix(in srgb, var(--neon-color), transparent 50%);
+}
+
+/* ============================
+   NOTIFICHE — HEADER LAYOUT
+   ============================ */
+.notif-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.notif-head-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ============================
+   SELECT NELL'HEADER (NEON)
+   ============================ */
+.notif-head-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel-2), transparent 18%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--neon-color), transparent 75%) inset,
+              0 0 16px color-mix(in srgb, var(--neon-color), transparent 70%);
+}
+
+.notif-head-filter .ico {
+  font-size: 14px;
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--neon-color), transparent 40%));
+}
+
+/* Tipografia: usa il font dell’app (già impostato a livello body) ma un filo più "deciso" */
+#notifAssigneeFilter {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  letter-spacing: .2px;
+
+  color: var(--txt);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--border), transparent 65%);
+  border-radius: 999px;
+  padding: 6px 28px 6px 12px;
+
+  /* Piccola caret custom */
+  background-image:
+    radial-gradient(circle at right 12px center, color-mix(in srgb, var(--neon-color), transparent 45%) 0 2px, transparent 3px),
+    radial-gradient(circle at right 18px center, color-mix(in srgb, var(--neon-color), transparent 45%) 0 2px, transparent 3px);
+  background-repeat: no-repeat;
+}
+
+#notifAssigneeFilter:hover {
+  border-color: color-mix(in srgb, var(--neon-color), transparent 35%);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 60%);
+}
+
+#notifAssigneeFilter:focus {
+  outline: none;
+  border-color: var(--neon-color);
+  box-shadow: 0 0 0 1px var(--neon-color) inset,
+              0 0 18px color-mix(in srgb, var(--neon-color), transparent 40%);
+}
+
+/* "Pulse" molto leggero per richiamare il tema neon */
+@keyframes neonBreath {
+  0%,100% { box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 70%);}
+  50%     { box-shadow: 0 0 18px color-mix(in srgb, var(--neon-color), transparent 50%);}
+}
+.notif-head-filter { animation: neonBreath 3.4s ease-in-out infinite; }
+
+/* Il bottone X resta a destra, invariato ma con allineamento migliore */
+.notif-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+}
+.notif-close:hover {
+  border-color: color-mix(in srgb, var(--neon-color), transparent 45%);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 55%);
+}
+
+/* ============================================================
+   NOTIFICHE: Select "Assegnatario" nell'HEADER (stile neon) 
+   ============================================================ */
+
+/* Contenitore (pill neon) */
+.notif-head-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel-2), transparent 18%);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--neon-color), transparent 75%) inset,
+    0 0 16px color-mix(in srgb, var(--neon-color), transparent 70%);
+  animation: neonBreath 3.4s ease-in-out infinite;
+}
+
+/* 👤 Icona più chiara + glow */
+.notif-head-filter .ico {
+  font-size: 15px;
+  color: color-mix(in srgb, var(--neon-color), white 20%);
+  filter:
+    drop-shadow(0 0 6px color-mix(in srgb, var(--neon-color), transparent 30%))
+    drop-shadow(0 0 12px color-mix(in srgb, var(--neon-color), transparent 55%));
+  opacity: 0.95;
+}
+
+/* Select (valore corrente) */
+#notifAssigneeFilter {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color-scheme: dark; /* aiuta i menu nativi scuri */
+
+  background: color-mix(in srgb, var(--panel-2), transparent 6%);
+  color: var(--txt);
+  border: 1px solid color-mix(in srgb, var(--border), transparent 60%);
+  border-radius: 999px;
+  padding: 6px 28px 6px 12px;
+  height: 34px;
+  min-width: 190px;
+
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: .2px;
+
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+
+  /* caret “doppio puntino” neon */
+  background-image:
+    radial-gradient(circle at right 12px center, color-mix(in srgb, var(--neon-color), transparent 35%) 0 2px, transparent 3px),
+    radial-gradient(circle at right 18px center, color-mix(in srgb, var(--neon-color), transparent 35%) 0 2px, transparent 3px);
+  background-repeat: no-repeat;
+}
+
+/* Hover/Focus più “neon” */
+#notifAssigneeFilter:hover {
+  border-color: color-mix(in srgb, var(--neon-color), transparent 35%);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 55%);
+}
+#notifAssigneeFilter:focus {
+  border-color: var(--neon-color);
+  box-shadow:
+    0 0 0 1px var(--neon-color) inset,
+    0 0 18px color-mix(in srgb, var(--neon-color), transparent 40%);
+}
+
+/* Z-index per far stare la lista sopra l'header */
+#notifAssigneeFilter { position: relative; z-index: 2; }
+
+/* ============================================================
+   LISTA OPZIONI (dropdown nativo) — tema scuro leggibile
+   (Supporto: Chromium, Safari, FF recente)
+   ============================================================ */
+#notifAssigneeFilter option {
+  background-color: color-mix(in srgb, var(--panel-2), transparent 10%) !important;
+  color: var(--txt) !important;
+}
+
+/* Alcuni browser usano il menù di sistema: forziamo un minimo */
+#notifAssigneeFilter::-ms-expand { display: none; } /* vecchio Edge/IE */
+#notifAssigneeFilter:focus::-ms-value {
+  background-color: color-mix(in srgb, var(--panel-2), transparent 10%);
+  color: var(--txt);
+}
+
+/* “Breath” neon del contenitore */
+@keyframes neonBreath {
+  0%,100% { box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 70%);}
+  50%     { box-shadow: 0 0 18px color-mix(in srgb, var(--neon-color), transparent 50%);}
+}
+
+/* Bottone X coerente (già presente, ritocco contrasto) */
+.notif-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border), transparent 35%);
+}
+.notif-close:hover {
+  border-color: color-mix(in srgb, var(--neon-color), transparent 45%);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 55%);
+}
