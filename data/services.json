@@ -12,7 +12,7 @@
       "applicativo": "Poteri di Firma",
       "paramsIngresso": "{\n  \"ndgPg\": \"123456789\",\n  \"abi\": \"05387\",\n  \"potere\": \"OA\",\n  \"ndgPf\": \"8745123\"\n}",
       "outputServizio": "lista possibili firmatari",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "02f62070-15cc-48e0-b2fe-a9395ea0a00a",
@@ -26,7 +26,7 @@
       "applicativo": "Poteri di Firma",
       "paramsIngresso": "{\n  \"ndg\": \"123456789\",\n  \"abi\": \"05387\",\n  \"canale\": \"DISPOSITIVA\",\n  \"prodotti\": [\n    {\n      \"prodottoModulo\": \"P\",\n      \"codiceCategoria\": \"string\",\n      \"codiceMacroGruppo\": \"string\",\n      \"codiceEconomato\": \"string\"\n    }\n  ]\n}",
       "outputServizio": "lista possibili firmatari",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "9351d656-df14-4ca3-ad72-b0f9ddd51699",
@@ -40,7 +40,7 @@
       "applicativo": "Poteri di Firma",
       "paramsIngresso": "bankCode\nndg",
       "outputServizio": "lista possibili firmatari",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "21ebfe58-0bbe-4a16-9f37-2ea6bb479f0d",
@@ -54,7 +54,7 @@
       "applicativo": "Poteri Di Firma",
       "paramsIngresso": "prodottoModulo\ncodiceCategoria\ncodiceMacroGruppo\ncodiceEconomato",
       "outputServizio": "{\n  \"poteri\": [\n    \"string\"\n  ]\n}",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "4d862318-1b95-453c-a437-08f4f7e0879b",
@@ -68,7 +68,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "589df1e0-88b9-44cc-b5c9-5e39730a28f4",
@@ -82,7 +82,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "e660fdd5-556a-400a-a25d-fe864cc37e89",
@@ -96,7 +96,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "e5e316a0-14ac-4daa-b215-5e4684347e53",
@@ -110,7 +110,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "79ad6236-6242-408f-9da9-9eabe4969a3f",
@@ -124,7 +124,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "3431bd0c-c264-4fcd-a21c-3ebec953961e",
@@ -138,7 +138,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "1bdeb184-1aff-4af7-b0a2-e0bf212dfc0b",
@@ -152,7 +152,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "5b91bb2c-0f3a-4ee9-84cc-b06a4c135e9b",
@@ -166,7 +166,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "4b08ea72-1784-4739-9f52-dbd1c02f994f",
@@ -180,7 +180,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "fd9bbef2-1d66-4c3b-8183-da4c28a99a54",
@@ -194,7 +194,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "f3a5d5ea-d66a-4eef-a341-1ebe5594307a",
@@ -208,7 +208,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "33eddd9a-fc67-47a2-914c-41389ed32f68",
@@ -222,7 +222,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "c235fff8-0074-4e38-8364-6ad2c335f401",
@@ -236,7 +236,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "af3c5a6e-556c-46c0-99c8-fe50b686e8c3",
@@ -250,7 +250,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "86af2385-843b-4851-a2da-2641f85e1bb4",
@@ -264,7 +264,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "b5a46fa3-ee78-46b5-a460-c5cefe2ab369",
@@ -278,7 +278,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "bb1172bb-6007-47dd-9795-4019f1d675d8",
@@ -292,7 +292,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "057ad7cf-32e1-411d-9cc3-d433e91b1135",
@@ -306,7 +306,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "fe6a19e0-a1ed-4998-8f74-53564a7ef3a1",
@@ -320,7 +320,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "2ea3207f-961e-40ce-8523-a346ce812d7a",
@@ -334,7 +334,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "8bb1b6ce-346b-46f0-b09f-65633cb270ac",
@@ -348,7 +348,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "57d27585-c153-4710-b549-12a294307022",
@@ -362,7 +362,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "16d8560c-cf02-4539-a687-c614fc4b4229",
@@ -376,7 +376,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "da523aec-ab21-44c0-acfd-06895b294c08",
@@ -390,7 +390,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "14b6509d-88b7-49c5-884a-9a8fdfa19936",
@@ -404,7 +404,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "d622e708-6dda-4321-bb1b-e95091dd2b21",
@@ -418,7 +418,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "56b14414-e0b1-418d-8f3a-e0eb7daccfd4",
@@ -432,7 +432,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "f17a4dcb-d6ba-466b-8bd5-4e25335d512e",
@@ -446,7 +446,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "61cda254-aa8b-4ec8-ac55-aefbdff6d266",
@@ -460,7 +460,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "d4d96742-3b96-4631-9b17-4b543565db21",
@@ -474,7 +474,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "00847c4c-b534-496d-a0d5-4c77505682a6",
@@ -488,7 +488,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "69fb1d9e-fc09-4149-8585-212d5f8a3b6d",
@@ -502,7 +502,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "77dc0584-ed52-4fa8-8901-e0579ec7cfb9",
@@ -516,7 +516,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "6c1ee238-3d6e-49a4-b1e4-865d1c2c1caf",
@@ -530,7 +530,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "602eac95-2ef1-4d83-8df2-f8bae278d9bc",
@@ -544,7 +544,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "9fb9e19b-5728-4d6c-8059-5554dd40e811",
@@ -558,7 +558,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "934a4e08-290e-46d2-99dc-8790ab302532",
@@ -572,7 +572,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "6cb3a341-11b2-47b7-8455-22a557053253",
@@ -586,7 +586,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "49995b79-9954-4361-ba31-d997c4da608f",
@@ -600,7 +600,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "93b2ede6-b564-469f-ab75-5b614f08b3d9",
@@ -614,7 +614,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "a8f3cd4c-c2b9-4a3a-b398-0c2be267aa64",
@@ -628,7 +628,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "30c80be7-eca4-4d3a-9007-006958ec1d46",
@@ -642,7 +642,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "283870be-4438-4631-86fa-283cf6ac292e",
@@ -656,7 +656,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     },
     {
       "id": "bf688a13-409a-4124-98c3-7edd6847adbf",
@@ -670,7 +670,7 @@
       "applicativo": "Anagrafe",
       "paramsIngresso": "",
       "outputServizio": "",
-      "stato": ""
+      "stato": "ATTIVO"
     }
   ]
 }
