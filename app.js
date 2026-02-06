@@ -3046,26 +3046,32 @@ function renderServices() {
         return;
     }
 
-    const tbody = "<tbody>" +
-        rows.map(s =>
-            "<tr>" +
-            "<td>" + escapeHtml(s.routine) + "</td>" +
-            "<td>" + escapeHtml(s.tipo) + "</td>" +
-            "<td>" + escapeHtml(s.servizio) + "</td>" +
+        const tbody = "<tbody>" +
+        rows.map(s => {
+			const rowCls = svcRowClass(s.stato);
+			const badgeCls = svcBadgeClass(s.stato);
+			
+			return "" +
+            "<tr class='" + rowCls + "'>" +
+            "<td><strong>" + escapeHtml(s.routine || "") + "</strong></td>" +
+            "<td>" + escapeHtml(s.tipo || "") + "</td>" +
+			 
+								   
+            "<td>" + escapeHtml(s.servizio || "") + "</td>" +
             "<td class='col-multiline'>" + escapeHtml(s.operation) + "</td>" +
             "<td>" + escapeHtml(s.fallback) + "</td>" +
-            "<td class='col-multiline'>" + escapeHtml(s.descrizione) + "</td>" +
-            "<td>" + escapeHtml(s.ambito) + "</td>" +
-            "<td>" + escapeHtml(s.applicativo) + "</td>" +
+            "<td class='col-multiline'>" + escapeHtml(s.descrizione || "") + "</td>" +
+            "<td>" + escapeHtml(s.ambito || "") + "</td>" +
+			"<td>" + escapeHtml(s.applicativo || "") + "</td>" +
             "<td class='col-multiline'>" + escapeHtml(s.paramsIngresso) + "</td>" +
             "<td class='col-multiline'>" + escapeHtml(s.outputServizio) + "</td>" +
-            "<td>" + escapeHtml(s.stato || "") + "</td>" +
+            "<td><span class='badge state " + badgeCls + "'>" + escapeHtml(s.stato || "n/d") + "</span></td>" +
             "<td><div class='table-actions'>" +
             "<button onclick=\"editService('" + s.id + "')\">✏️</button>" +
             "<button class='danger' onclick=\"deleteService('" + s.id + "')\">🗑️</button>" +
             "</div></td>" +
             "</tr>"
-        ).join("") +
+        }).join("") +
         "</tbody>";
 
     tbl.innerHTML = thead + tbody;
@@ -4013,6 +4019,31 @@ function renderAll() {
 		//try { debouncedRemoteSave(); } catch (_) {}
     };
 })();
+
+// Normalizza e mappa lo stato servizio a classi riga/badge
+function svcNormalizeState(s) {
+  return String(s || "").trim().toUpperCase();
+}
+
+function svcRowClass(stato) {
+  switch (svcNormalizeState(stato)) {
+    case "NON ATTIVO":  return "svc-row-red";    // Rosso
+    case "DEPRECATO":   return "svc-row-yellow"; // Giallo
+    case "ATTIVO":
+    case "OK":          return "svc-row-green";  // Verde
+    default:            return "";               // Nessun colore
+  }
+}
+
+function svcBadgeClass(stato) {
+  switch (svcNormalizeState(stato)) {
+    case "NON ATTIVO":  return "svc-state-red";
+    case "DEPRECATO":   return "svc-state-yellow";
+    case "ATTIVO":
+    case "OK":          return "svc-state-green";
+    default:            return ""; // badge neutro già stilato da .badge.state
+  }
+}
 
 /* ------------------------------------------------------------
    INIT DIALOG CLOSE WITH ESCAPE + BACKDROP
