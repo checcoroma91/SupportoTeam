@@ -3589,3 +3589,14 @@ dialog::backdrop { background: rgba(5, 8, 18, .58); }
   border-color: color-mix(in srgb, var(--neon-color), transparent 45%);
   box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 55%);
 }
+
+/* Pulsante ghost con neon leggero */
+.btn.ghost {
+  color: var(--txt);
+  border-color: color-mix(in srgb, var(--border), transparent 30%);
+}
+
+.btn.ghost:hover {
+  border-color: color-mix(in srgb, var(--neon-color), transparent 45%);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--neon-color), transparent 55%);
+}
