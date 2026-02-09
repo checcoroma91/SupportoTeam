@@ -273,9 +273,9 @@
     {
       "id": "645487da-2d8b-44a2-8e1e-4dd4c8ee031d",
       "rfcAperti": "CRQ000000004581",
-      "stato": "Pianificazione in corso",
+      "stato": "Approvazione pianificata",
       "dataApertura": "2026-01-26",
-      "anno": "2026.0",
+      "anno": "",
       "bhelp": "",
       "emerg": "No",
       "utilizzato": "",
