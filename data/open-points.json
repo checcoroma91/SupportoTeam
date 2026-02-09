@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "c6b13099-c5af-4a47-81a4-8d361ea175e1",
+      "title": "ALM per CRQ000000005608",
+      "project": "Poteri Di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-09",
+      "dueAt": "2026-02-12",
+      "desc": "Fare ALM per il rilascio. Inserire un test a open point",
+      "notes": ""
+    },
+    {
       "id": "8379f07b-7bf9-4a36-9793-88a8ba1fee3f",
       "title": "Aggiunta codici macrogruppo - Richiesta BStore",
       "project": "Poteri Di Firma",
