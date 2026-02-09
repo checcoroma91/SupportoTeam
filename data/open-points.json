@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "7b68e211-91ac-43dd-9971-4c06d1fcfa1c",
+      "title": "Richiesta Censimento codici economato STANCIU",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "critical",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-09",
+      "dueAt": "2026-02-10",
+      "desc": "Mail della stanciu! fare dp appena possibile",
+      "notes": ""
+    },
+    {
       "id": "c6b13099-c5af-4a47-81a4-8d361ea175e1",
       "title": "ALM per CRQ000000005608",
       "project": "Poteri Di Firma",
