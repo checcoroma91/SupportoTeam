@@ -13,7 +13,7 @@
       "dataRilascio": "2026-02-18",
       "rifNostro": "Fra",
       "prj": "Poteri Di Firma",
-      "contenuto": "Rilascio in produzione per fix servizi portafogliazione utilizzati che attualmente non funzionano e bloccano un'operatività della procedura.\nEsecuzione ddl oracle per popolamento tabella stati per monitoraggio CRIF. L'attuale situazione, blocca l'inserimento in monitoraggio delle posizioni.\nL'applicativo è in fase pilota."
+      "contenuto": "- ddl oracle :\n            -Tabella stati MONITORAGGIO\n            - Stai alle posizioni in monitoraggio già a db\n            - Unique tabelle\n- modifiche su IL per servizio portafoglio"
     },
     {
       "id": "2bbe413d-7754-4f8c-a6e6-6c5892377be7",
