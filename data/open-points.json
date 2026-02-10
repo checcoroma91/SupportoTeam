@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "7b228621-6f5f-44a7-8e21-7fd2df6deead",
+      "title": "ESTRAZIONE CRM",
+      "project": "Poteri Di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "critical",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-10",
+      "dueAt": "2026-02-13",
+      "desc": "SELECT\n    ac.abi as abi,\n    ac.filiale as filiale,\n    ac.ndg as ndg,\n    ac.intestazione as intestazione,\n    at.abi as abiCollegamento,\n    at.filiale as filialeCollegamento,\n    at.ndg as ndgCollegamento,\n    at.intestazione as intestazioneColleamento,\n    pc.data_inizio_validita as dataConvalida,\n    tc.codice as codiceCollegamento\nFROM\n    DELPOT.pof_poteri_cedenti pc\n    left join DELPOT.pof_anagrafica ac on (ac.id = pc.id_anagrafica)\n    join DELPOT.pof_d_stato_poteri_cedenti st on (st.id = pc.id_stato)\n    join DELPOT.pof_collegamenti_rilevanti pcr on (pcr.id_potere_cedente = pc.id)\n    left join DELPOT.pof_anagrafica at on (at.id = pcr.id_anag_traente) \n    join DELPOT.pof_d_tipo_collegamenti tc on (tc.id = pcr.id_tipo_collegamento)\nWHERE\n    st.codice = 'ATTIVO'\n    and pc.flag_cancellazione_logica <> 1\n    --and pc.crmReport <> 'S'\nORDER BY\n    pc.data_inizio_validita desc;",
+      "notes": ""
+    },
+    {
       "id": "d5387a43-7fb7-43a5-90aa-d45689c8a262",
       "title": "Creare CRQ per estrazione CRM",
       "project": "Poteri di Firma",
