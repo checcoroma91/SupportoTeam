@@ -3,7 +3,7 @@
     {
       "id": "6ecefa41-c103-4659-9585-6d864a57b9c5",
       "rfcAperti": "CRQ000000005608",
-      "stato": "Pianificazione in corso",
+      "stato": "Approvazione pianificata",
       "dataApertura": "2026-02-09",
       "anno": "",
       "bhelp": "",
@@ -258,9 +258,9 @@
     {
       "id": "bbb950e0-ce1f-41b5-912c-96bc34fbf472",
       "rfcAperti": "CRQ000000004617",
-      "stato": "Pianificazione in corso",
+      "stato": "Pianificato",
       "dataApertura": "2026-01-23",
-      "anno": "2026.0",
+      "anno": "",
       "bhelp": "",
       "emerg": "No",
       "utilizzato": "",
@@ -273,7 +273,7 @@
     {
       "id": "645487da-2d8b-44a2-8e1e-4dd4c8ee031d",
       "rfcAperti": "CRQ000000004581",
-      "stato": "Approvazione pianificata",
+      "stato": "Pianificato",
       "dataApertura": "2026-01-26",
       "anno": "",
       "bhelp": "",
