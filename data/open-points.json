@@ -17,7 +17,7 @@
     },
     {
       "id": "d5387a43-7fb7-43a5-90aa-d45689c8a262",
-      "title": "Creare CRQ per estrazione CRM",
+      "title": "Creare CRQ",
       "project": "Poteri di Firma",
       "assignees": [
         "Fra"
@@ -27,8 +27,8 @@
       "maxPriority": false,
       "createdAt": "2026-02-10",
       "dueAt": "2026-02-16",
-      "desc": "Creare le seguenti CRQ:\n- schedulazione per generazione file batch\n- schedulazione + sterling per trasferimento file\n- dipartimentale per rilascio nuovo batch su bh",
-      "notes": ""
+      "desc": "Creare le seguenti CRQ:\n- schedulazione per generazione file batch\n- schedulazione + sterling per trasferimento file\n- dipartimentale per rilascio nuovo batch su bh\n\nInserire anche CRQ per aggiunta fase a YPF01 per eliminazione notifiche vecchie\nper la parte dipartimentale si può sfruttare quello per CRM",
+      "notes": "per estrazione CRM e per Notifiche vecchie"
     },
     {
       "id": "7b68e211-91ac-43dd-9971-4c06d1fcfa1c",
