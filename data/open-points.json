@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "05756e67-ce71-4995-bec2-22bca169ecb8",
+      "title": "Punto Partitari Ingaggiati",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Completato",
+      "maxPriority": false,
+      "createdAt": "2026-02-12",
+      "dueAt": "",
+      "desc": "Da contattare:\n- Bstore\n- Genera e firma\n- Canali digitali\n- Pef\n- Ovidio\n- Pulli",
+      "notes": "Contattati. Attesa risposte"
+    },
+    {
       "id": "7b228621-6f5f-44a7-8e21-7fd2df6deead",
       "title": "ESTRAZIONE CRM",
       "project": "Poteri Di Firma",
