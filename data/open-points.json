@@ -1,6 +1,36 @@
 {
   "openPoints": [
     {
+      "id": "96eda0dc-7743-4e85-b67f-c8b78a265e81",
+      "title": "TICKET giunzioni ambienti minori",
+      "project": "Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-13",
+      "dueAt": "2026-02-13",
+      "desc": "Richiedere Giunzione webseal",
+      "notes": ""
+    },
+    {
+      "id": "b5b3d0a1-ccde-4762-ad36-f313995be99f",
+      "title": "RECAP Riunione BStore",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-13",
+      "dueAt": "2026-02-13",
+      "desc": "Recap con vic. \nDefinire anche il comportamento del FE pannello amministrazione.",
+      "notes": ""
+    },
+    {
       "id": "05756e67-ce71-4995-bec2-22bca169ecb8",
       "title": "Punto Partitari Ingaggiati",
       "project": "Poteri di Firma",
