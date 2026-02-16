@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "2a6b633f-6afb-4c12-ac70-6f8c05724094",
+      "title": "Attività con GABRI",
+      "project": "Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Nuovo",
+      "maxPriority": false,
+      "createdAt": "2026-02-16",
+      "dueAt": "2026-02-17",
+      "desc": "- rilascio in CERT FE PORTALE ENTI\n- test servizio factory",
+      "notes": ""
+    },
+    {
       "id": "96eda0dc-7743-4e85-b67f-c8b78a265e81",
       "title": "TICKET giunzioni ambienti minori",
       "project": "Portale Enti Convenzionati",
