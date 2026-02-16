@@ -1,6 +1,21 @@
 {
   "crq": [
     {
+      "id": "f7ae5872-6e80-4ba1-8069-0f07e80cabe6",
+      "rfcAperti": "CRQ000000005995",
+      "stato": "Richiesta autorizzazione",
+      "dataApertura": "2026-02-16",
+      "anno": "",
+      "bhelp": "",
+      "emerg": "",
+      "utilizzato": "",
+      "categoria": "Schedulazione (TWS/JCL)",
+      "dataRilascio": "2026-02-25",
+      "rifNostro": "Fra",
+      "prj": "Poteri Di Firma",
+      "contenuto": "Si richiedel'aggiunta della fase YPF0130, successore della fase 20, al piano batch dipartimentale YPF01\nLo script per la produzione è in PROG.PF.OPCLANCI (YPF0130)"
+    },
+    {
       "id": "6ecefa41-c103-4659-9585-6d864a57b9c5",
       "rfcAperti": "CRQ000000005608",
       "stato": "Approvazione pianificata",
