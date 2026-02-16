@@ -99,6 +99,20 @@
   ],
   "links": [
     {
+      "id": "3d441763-a15e-4104-a776-bf6145dcfa3e",
+      "title": "POTERI DI FIRMA - Caricamento CRM",
+      "url": "https://dxcportal.sharepoint.com/:f:/s/BPER-AMSTeam/IgDO6w8fkA_vTaV2G12oOdUuAehKNBFQ3_1eYmtojy_xx3E?e=LvDnBc",
+      "desc": "Link per caricamento estrazione settimanale CRM",
+      "tags": [
+        "CRM",
+        "poteri",
+        "firma",
+        "share",
+        "csv"
+      ],
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+    },
+    {
       "id": "5eac6fd1-e82c-4f61-b727-7415cb460ebe",
       "title": "Team",
       "url": "https://bpergroup.sharepoint.com/:f:/r/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Team%20Sist.%20Anagrafici?csf=1&web=1&e=oFoPW4",
