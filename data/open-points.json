@@ -72,7 +72,7 @@
       "maxPriority": false,
       "createdAt": "2026-02-10",
       "dueAt": "2026-02-16",
-      "desc": "Creare le seguenti CRQ:\n- schedulazione per generazione file batch\n- schedulazione + sterling per trasferimento file\n- dipartimentale per rilascio nuovo batch su bh\n\nInserire anche CRQ per aggiunta fase a YPF01 per eliminazione notifiche vecchie\nper la parte dipartimentale si può sfruttare quello per CRM",
+      "desc": "Creare le seguenti CRQ:\n- schedulazione per generazione file batch\n- schedulazione + sterling per trasferimento file\n- dipartimentale per rilascio nuovo batch su bh\n\nInserire anche CRQ per aggiunta fase a YPF01 per eliminazione notifiche vecchie - ✅ \nper la parte dipartimentale si può sfruttare quello per CRM",
       "notes": "per estrazione CRM e per Notifiche vecchie"
     },
     {
