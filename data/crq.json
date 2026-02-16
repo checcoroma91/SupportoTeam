@@ -1,6 +1,21 @@
 {
   "crq": [
     {
+      "id": "9c8e018d-5ce5-4a41-bf23-c3a86615815f",
+      "rfcAperti": "CRQ000000006104",
+      "stato": "Bozza",
+      "dataApertura": "2026-02-16",
+      "anno": "",
+      "bhelp": "",
+      "emerg": "",
+      "utilizzato": "",
+      "categoria": "Dipartimentale",
+      "dataRilascio": "2026-02-25",
+      "rifNostro": "Fra",
+      "prj": "Poteri Di Firma",
+      "contenuto": "Rilascio bh-deleghepoteri (layer batch openshift dipartimentale) per:\n- creazione batch per generazione csv flusso CRM\n- creazione batch per pulizia notifiche vecchie di 30 giorni"
+    },
+    {
       "id": "f7ae5872-6e80-4ba1-8069-0f07e80cabe6",
       "rfcAperti": "CRQ000000005995",
       "stato": "Pianificazione in corso",
