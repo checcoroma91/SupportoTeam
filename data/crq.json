@@ -1,6 +1,21 @@
 {
   "crq": [
     {
+      "id": "eae49e07-82c4-4950-80ca-1b2be49bea28",
+      "rfcAperti": "CRQ000000006121",
+      "stato": "Pianificazione in corso",
+      "dataApertura": "2026-02-17",
+      "anno": "",
+      "bhelp": "",
+      "emerg": "No",
+      "utilizzato": "",
+      "categoria": "Schedulazione (TWS/JCL)",
+      "dataRilascio": "2026-02-27",
+      "rifNostro": "Fra",
+      "prj": "Poteri Di Firma",
+      "contenuto": "Si richiede la creazione del piano batch dipartimentali:\n- PF0DW\ngli script per la produzione sono in PROG.PF.OPCLANCI\n\nInoltre Scambio Flussi Poteri di firma - CRM"
+    },
+    {
       "id": "9c8e018d-5ce5-4a41-bf23-c3a86615815f",
       "rfcAperti": "CRQ000000006104",
       "stato": "Pianificazione in corso",
