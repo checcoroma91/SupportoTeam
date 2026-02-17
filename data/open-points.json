@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "bff17d80-3739-41be-9c70-bd46519c66b6",
+      "title": "Sentire Baraldi per invio FLUSSI CRM",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-17",
+      "dueAt": "2026-02-18",
+      "desc": "Sentire poi allegare file a crq",
+      "notes": ""
+    },
+    {
       "id": "4e87dc8e-18cc-4f5b-9946-e8301e4aa62e",
       "title": "Estrazione DI e Condomini",
       "project": "Poteri di Firma",
@@ -8,7 +23,7 @@
         "Fra"
       ],
       "priority": "medium",
-      "status": "Nuovo",
+      "status": "Da fare",
       "maxPriority": false,
       "createdAt": "2026-02-17",
       "dueAt": "2026-02-20",
@@ -23,7 +38,7 @@
         "Fra"
       ],
       "priority": "medium",
-      "status": "Nuovo",
+      "status": "Da fare",
       "maxPriority": false,
       "createdAt": "2026-02-16",
       "dueAt": "2026-02-19",
