@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "4e87dc8e-18cc-4f5b-9946-e8301e4aa62e",
+      "title": "Estrazione DI e Condomini",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Nuovo",
+      "maxPriority": false,
+      "createdAt": "2026-02-17",
+      "dueAt": "2026-02-20",
+      "desc": "Fai estrazione.\nEstrazione successiva per il mercoledì successivo",
+      "notes": ""
+    },
+    {
       "id": "2a6b633f-6afb-4c12-ac70-6f8c05724094",
       "title": "Attività con GABRI",
       "project": "Portale Enti Convenzionati",
@@ -11,7 +26,7 @@
       "status": "Nuovo",
       "maxPriority": false,
       "createdAt": "2026-02-16",
-      "dueAt": "2026-02-17",
+      "dueAt": "2026-02-19",
       "desc": "- rilascio in CERT FE PORTALE ENTI\n- test servizio factory",
       "notes": ""
     },
@@ -86,9 +101,9 @@
       "status": "In corso",
       "maxPriority": false,
       "createdAt": "2026-02-10",
-      "dueAt": "2026-02-16",
-      "desc": "Creare le seguenti CRQ:\n- schedulazione per generazione file batch (crmReport)\n- schedulazione + sterling per trasferimento file\n- dipartimentale per rilascio nuovo batch su bh - ✅ \n\nInserire anche CRQ per aggiunta fase a YPF01 per eliminazione notifiche vecchie - ✅ \nper la parte dipartimentale si può sfruttare quello per CRM - ✅",
-      "notes": "per estrazione CRM e per Notifiche vecchie"
+      "dueAt": "2026-02-20",
+      "desc": "per estrazione CRM e per Notifiche vecchie creare le seguenti CRQ:\n- schedulazione per generazione file batch (crmReport) - ✅ \n- schedulazione + sterling per trasferimento file - ✅ \n- dipartimentale per rilascio nuovo batch su bh - ✅ \n\nInserire anche CRQ per aggiunta fase a YPF01 per eliminazione notifiche vecchie - ✅ \nper la parte dipartimentale si può sfruttare quello per CRM - ✅",
+      "notes": "Manca da allegare il file excel per Sterling e gli script di sterling per Sched"
     },
     {
       "id": "7b68e211-91ac-43dd-9971-4c06d1fcfa1c",
