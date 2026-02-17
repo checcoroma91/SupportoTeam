@@ -1,6 +1,36 @@
 {
   "openPoints": [
     {
+      "id": "0a893f81-3d1e-45fb-af78-75300c6b3a13",
+      "title": "TAG CRQ",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-17",
+      "dueAt": "2026-02-18",
+      "desc": "inserisci nella crq tag e ddl oracle",
+      "notes": ""
+    },
+    {
+      "id": "c9251dee-72a6-49c1-a507-046ae085575b",
+      "title": "QG Bilanci AI",
+      "project": "Riclassificazione Bilanci AI",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-17",
+      "dueAt": "2026-02-18",
+      "desc": "Rivedi slide 8 e sollecita righi",
+      "notes": ""
+    },
+    {
       "id": "bff17d80-3739-41be-9c70-bd46519c66b6",
       "title": "Sentire Baraldi per invio FLUSSI CRM",
       "project": "Poteri di Firma",
@@ -102,7 +132,7 @@
       "maxPriority": true,
       "createdAt": "2026-02-10",
       "dueAt": "2026-02-20",
-      "desc": "ALTER SESSION SET NLS_DATE_FORMAT     = 'YYYY-MM-DD HH24:MI:SS';\n\nSELECT\n    ac.abi as \"ABI PG\",\n    ac.filiale as \"Filiale PG\",\n    LTRIM(ac.ndg, '0') as \"NDG PG\",\n    ac.intestazione as \"Intestazione PG\",\n    tc.codice as \"Codice Collegamento\",\n    at.abi as \"ABI PF\",\n    at.filiale as \"Filiale PF\",\n    LTRIM(at.ndg, '0') as \"NDG PF\",\n    at.intestazione as \"Intestazione PF\",\n    pc.data_inizio_validita as \"Data di convalida posizione\",\n    ac.abi || '___' || LTRIM(ac.ndg, '0') || '___' || at.abi || '___' || LTRIM(at.ndg, '0') || '___' || tc.codice as \"PK_PoteriFirma\"\nFROM\n    DELPOT.pof_poteri_cedenti pc\n    left join DELPOT.pof_anagrafica ac on (ac.id = pc.id_anagrafica)\n    join DELPOT.pof_d_stato_poteri_cedenti st on (st.id = pc.id_stato)\n    join DELPOT.pof_collegamenti_rilevanti pcr on (pcr.id_potere_cedente = pc.id)\n    left join DELPOT.pof_anagrafica at on (at.id = pcr.id_anag_traente) \n    join DELPOT.pof_d_tipo_collegamenti tc on (tc.id = pcr.id_tipo_collegamento)\nWHERE\n    st.codice = 'ATTIVO'\n    and pc.flag_cancellazione_logica <> 1\n    --and pc.crmReport <> 'S'\nORDER BY\n    pc.data_inizio_validita desc;",
+      "desc": "ALTER SESSION SET NLS_DATE_FORMAT     = 'YYYY-MM-DD HH24:MI:SS';\n\nSELECT\n    ac.abi as \"ABI PG\",\n    ac.filiale as \"Filiale PG\",\n    ac.ndg as \"NDG PG\",\n    ac.intestazione as \"Intestazione PG\",\n    tc.codice as \"Codice Collegamento\",\n    at.abi as \"ABI PF\",\n    at.filiale as \"Filiale PF\",\n    at.ndg as \"NDG PF\",\n    at.intestazione as \"Intestazione PF\",\n    pc.data_inizio_validita as \"Data di convalida posizione\",\n    ac.abi || '___' || ac.ndg || '___' || at.abi || '___' || at.ndg || '___' || tc.codice as \"PK_PoteriFirma\"\nFROM\n    DELPOT.pof_poteri_cedenti pc\n    left join DELPOT.pof_anagrafica ac on (ac.id = pc.id_anagrafica)\n    join DELPOT.pof_d_stato_poteri_cedenti st on (st.id = pc.id_stato)\n    join DELPOT.pof_collegamenti_rilevanti pcr on (pcr.id_potere_cedente = pc.id)\n    left join DELPOT.pof_anagrafica at on (at.id = pcr.id_anag_traente) \n    join DELPOT.pof_d_tipo_collegamenti tc on (tc.id = pcr.id_tipo_collegamento)\nWHERE\n    st.codice = 'ATTIVO'\n    and pc.flag_cancellazione_logica <> 1\n    and pcr.flag_cancellazione_logica <> 1\n    --and pc.crmReport <> 'S'\nORDER BY\n    pc.data_inizio_validita desc;",
       "notes": "13-02-2026 - COMPLETATA"
     },
     {
