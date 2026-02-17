@@ -714,6 +714,40 @@
       "sectionId": "59ee6268-a3f7-47f5-a426-a36fb9c23212"
     },
     {
+      "id": "546fe3ae-a3df-49df-a74b-8f062f86ab6d",
+      "title": "Poteri di firma w1",
+      "url": "https://bpergroup.sharepoint.com/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fm365%2Ddg%2D2943%2DTeamSist%2EAnagrafici%2FShared%20Documents%2FPoteri%20Di%20Firma%20w1%5F2024%2D5520&viewid=6cc27ab9%2D915b%2D46d9%2Dae42%2Dc052f37f6b33&csf=1&web=1&e=dss3oN&CID=e43202ee%2D7049%2D4910%2D8378%2Db14b2369e5d9&FolderCTID=0x012000687A7E50B2181E42AC97E16FB9FBD1C9",
+      "desc": "Documentazione poteri di firma w1",
+      "tags": [
+        "sharepoint",
+        "poteri",
+        "firma",
+        "w1"
+      ],
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+    },
+    {
+      "id": "0a330a6d-d514-4ee7-91d5-3a9d0cd66a35",
+      "title": "AMLETO - Implementazioni IT",
+      "url": "https://bpergroup.sharepoint.com/sites/G365-Amleto-ImplementazioniIT/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FG365%2DAmleto%2DImplementazioniIT%2FShared%20Documents%2FAmleto%20%2D%20Implementazioni%20IT&p=true&ct=1766055344714&or=Teams%2DHL&ga=1&LOF=1",
+      "desc": "Documentazione IT amleto - GAP",
+      "tags": [
+        "sharepoint",
+        "gap",
+        "amleto",
+        "it"
+      ],
+      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
+    },
+    {
+      "id": "141eba4f-0aff-4112-ab66-7b880bc72b08",
+      "title": "Kibana - Poteri di Firma ESB",
+      "url": "https://elk-kibana-prod.gbbper.priv:5601/app/discover#/?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:now-24h%2Fh,to:now))&_a=(columns:!(CONSUMER,document_type,service,operation,request_body,response_body,response_status_code),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',key:document_type,negate:!f,params:(query:'esb-audit-log*'),type:phrase),query:(match_phrase:(document_type:'esb-audit-log*'))),('$state':(store:appState),meta:(alias:!n,disabled:!f,field:message,index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',key:message,negate:!f,params:(query:'*deleghePoteriFirma*'),type:phrase),query:(match_phrase:(message:'*deleghePoteriFirma*')))),index:'87fa0010-dfcd-11eb-882d-35a4f28440b7',interval:auto,query:(language:kuery,query:''),sort:!(!('@timestamp',desc)))",
+      "desc": "Log ESB dei servizi esposti della Poteri Di Firma",
+      "tags": [],
+      "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
+    },
+    {
       "id": "6c1fdee3-bf14-41fa-baf6-7c1068347ea8",
       "title": "Grafana - KAFKA",
       "url": "http://192.168.81.8:3000/d/jwPKIsniz/kafka-exporter-overview?orgId=1&from=1747403089322&to=1747404889323&var-cluster=UNIF&var-job=kafka&var-topic=anbkpa01.moandb01.mo.antbtana&var-ClusterTopic=All&var-consumergroup=be-anagrafe-cdc-stream&var-cgtopic=All&var-LagThr=1000000&refresh=30s",
@@ -800,32 +834,6 @@
         "servizi"
       ],
       "sectionId": "225d513e-a3a9-4304-bd52-6ca9add12142"
-    },
-    {
-      "id": "546fe3ae-a3df-49df-a74b-8f062f86ab6d",
-      "title": "Poteri di firma w1",
-      "url": "https://bpergroup.sharepoint.com/sites/m365-dg-2943-TeamSist.Anagrafici/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fm365%2Ddg%2D2943%2DTeamSist%2EAnagrafici%2FShared%20Documents%2FPoteri%20Di%20Firma%20w1%5F2024%2D5520&viewid=6cc27ab9%2D915b%2D46d9%2Dae42%2Dc052f37f6b33&csf=1&web=1&e=dss3oN&CID=e43202ee%2D7049%2D4910%2D8378%2Db14b2369e5d9&FolderCTID=0x012000687A7E50B2181E42AC97E16FB9FBD1C9",
-      "desc": "Documentazione poteri di firma w1",
-      "tags": [
-        "sharepoint",
-        "poteri",
-        "firma",
-        "w1"
-      ],
-      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
-    },
-    {
-      "id": "0a330a6d-d514-4ee7-91d5-3a9d0cd66a35",
-      "title": "AMLETO - Implementazioni IT",
-      "url": "https://bpergroup.sharepoint.com/sites/G365-Amleto-ImplementazioniIT/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FG365%2DAmleto%2DImplementazioniIT%2FShared%20Documents%2FAmleto%20%2D%20Implementazioni%20IT&p=true&ct=1766055344714&or=Teams%2DHL&ga=1&LOF=1",
-      "desc": "Documentazione IT amleto - GAP",
-      "tags": [
-        "sharepoint",
-        "gap",
-        "amleto",
-        "it"
-      ],
-      "sectionId": "d8e9fec7-90bc-4699-9c86-33a02d3bf029"
     }
   ]
 }
