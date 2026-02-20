@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "0185426a-ff64-4026-a6b7-6e34c7e3b03e",
+      "title": "CRQ per DI",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-20",
+      "dueAt": "2026-02-23",
+      "desc": "aprire crq",
+      "notes": ""
+    },
+    {
       "id": "3fe9d3e9-9741-46fa-abf3-eb4e94af85c8",
       "title": "Problemi giunzione SVILUPPO",
       "project": "Portale Enti Convenzionati",
@@ -53,7 +68,7 @@
         "Fra"
       ],
       "priority": "high",
-      "status": "Da fare",
+      "status": "Completato",
       "maxPriority": true,
       "createdAt": "2026-02-17",
       "dueAt": "2026-02-18",
@@ -71,7 +86,7 @@
       "status": "Da fare",
       "maxPriority": false,
       "createdAt": "2026-02-17",
-      "dueAt": "2026-02-20",
+      "dueAt": "2026-03-03",
       "desc": "Fai estrazione.\nEstrazione successiva per il mercoledì successivo",
       "notes": ""
     },
@@ -158,12 +173,12 @@
         "Fra"
       ],
       "priority": "high",
-      "status": "In corso",
+      "status": "Completato",
       "maxPriority": false,
       "createdAt": "2026-02-10",
       "dueAt": "2026-02-20",
       "desc": "per estrazione CRM e per Notifiche vecchie creare le seguenti CRQ:\n- schedulazione per generazione file batch (crmReport) - ✅ \n- schedulazione + sterling per trasferimento file - ✅ \n- dipartimentale per rilascio nuovo batch su bh - ✅ \n\nInserire anche CRQ per aggiunta fase a YPF01 per eliminazione notifiche vecchie - ✅ \nper la parte dipartimentale si può sfruttare quello per CRM - ✅",
-      "notes": "Manca da allegare il file excel per Sterling e gli script di sterling per Sched"
+      "notes": ""
     },
     {
       "id": "7b68e211-91ac-43dd-9971-4c06d1fcfa1c",
