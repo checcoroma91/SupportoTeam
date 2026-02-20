@@ -161,9 +161,9 @@
       "status": "Da fare",
       "maxPriority": true,
       "createdAt": "2026-02-10",
-      "dueAt": "2026-02-20",
+      "dueAt": "2026-02-27",
       "desc": "ALTER SESSION SET NLS_DATE_FORMAT     = 'YYYY-MM-DD HH24:MI:SS';\n\nSELECT\n    ac.abi as \"ABI PG\",\n    ac.filiale as \"Filiale PG\",\n    LTRIM(ac.ndg, '0') as \"NDG PG\",\n    ac.intestazione as \"Intestazione PG\",\n    tc.codice as \"Codice Collegamento\",\n    at.abi as \"ABI PF\",\n    at.filiale as \"Filiale PF\",\n    LTRIM(at.ndg, '0') as \"NDG PF\",\n    at.intestazione as \"Intestazione PF\",\n    pc.data_inizio_validita as \"Data di convalida posizione\",\n    ac.abi || '___' || LTRIM(ac.ndg, '0') || '___' || at.abi || '___' || LTRIM(at.ndg, '0') || '___' || tc.codice as \"PK_PoteriFirma\"\nFROM\n    DELPOT.pof_poteri_cedenti pc\n    left join DELPOT.pof_anagrafica ac on (ac.id = pc.id_anagrafica)\n    join DELPOT.pof_d_stato_poteri_cedenti st on (st.id = pc.id_stato)\n    join DELPOT.pof_collegamenti_rilevanti pcr on (pcr.id_potere_cedente = pc.id)\n    left join DELPOT.pof_anagrafica at on (at.id = pcr.id_anag_traente) \n    join DELPOT.pof_d_tipo_collegamenti tc on (tc.id = pcr.id_tipo_collegamento)\nWHERE\n    st.codice = 'ATTIVO'\n    and pc.flag_cancellazione_logica <> 1\n    and pcr.flag_cancellazione_logica <> 1\n    --and pc.crmReport <> 'S'\nORDER BY\n    pc.data_inizio_validita desc;",
-      "notes": "13-02-2026 - COMPLETATA"
+      "notes": "13-02-2026 - ✅ \n20-02-2026 - ✅"
     },
     {
       "id": "d5387a43-7fb7-43a5-90aa-d45689c8a262",
