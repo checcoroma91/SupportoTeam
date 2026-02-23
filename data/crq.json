@@ -1,6 +1,21 @@
 {
   "crq": [
     {
+      "id": "cf43c6f1-ee54-48a8-b2df-41a332d68960",
+      "rfcAperti": "CRQ000000006381",
+      "stato": "Pianificazione in corso",
+      "dataApertura": "2026-02-20",
+      "anno": "",
+      "bhelp": "",
+      "emerg": "No",
+      "utilizzato": "",
+      "categoria": "Openshift",
+      "dataRilascio": "2026-03-06",
+      "rifNostro": "Fra",
+      "prj": "Poteri Di Firma",
+      "contenuto": "Importazione massiva ditte individuali da anagrafe generale con rispettivi titolari (collegamento 103) secondo le caratteristiche fornite da ORGA."
+    },
+    {
       "id": "eae49e07-82c4-4950-80ca-1b2be49bea28",
       "rfcAperti": "CRQ000000006121",
       "stato": "Pianificazione in corso",
@@ -33,7 +48,7 @@
     {
       "id": "f7ae5872-6e80-4ba1-8069-0f07e80cabe6",
       "rfcAperti": "CRQ000000005995",
-      "stato": "Pianificazione in corso",
+      "stato": "Approvazione pianificata",
       "dataApertura": "2026-02-16",
       "anno": "",
       "bhelp": "",
