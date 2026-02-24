@@ -1,6 +1,51 @@
 {
   "openPoints": [
     {
+      "id": "c1cc92ec-c54f-4969-bfce-7a32d9f75923",
+      "title": "Sentire Galli per DB",
+      "project": "Concert",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-24",
+      "dueAt": "2026-02-25",
+      "desc": "Contattare Galli per definire",
+      "notes": ""
+    },
+    {
+      "id": "1000550d-83f2-49c0-9813-c35733454b05",
+      "title": "TAG RILASCIO",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "critical",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-24",
+      "dueAt": "2026-02-25",
+      "desc": "R: Poteri di Firma - CRQ000000006104 - Rilascio 25/02/2026 - Elenco correttive pianificate",
+      "notes": ""
+    },
+    {
+      "id": "c516581e-23bb-4566-aadf-13dc046e0c76",
+      "title": "Disegno Architetturale",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "critical",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-02-24",
+      "dueAt": "2026-02-25",
+      "desc": "Rispondere mail martella\nR: Iter di gestione delle Terze Parti n. 2025_0730 - Attività da svolgere",
+      "notes": ""
+    },
+    {
       "id": "0185426a-ff64-4026-a6b7-6e34c7e3b03e",
       "title": "CRQ per DI",
       "project": "Poteri di Firma",
