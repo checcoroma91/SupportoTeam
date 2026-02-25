@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "451ec54f-85ac-4095-bb9b-ed9f03c35ec1",
+      "title": "Accessi BSpace",
+      "project": "Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-25",
+      "dueAt": "",
+      "desc": "richiedere tramite ticket",
+      "notes": ""
+    },
+    {
       "id": "583744df-5dde-41af-b130-a6c7880ccffd",
       "title": "Verifica invio flussi",
       "project": "Poteri di Firma",
