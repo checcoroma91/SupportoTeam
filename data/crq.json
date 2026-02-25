@@ -48,7 +48,7 @@
     {
       "id": "f7ae5872-6e80-4ba1-8069-0f07e80cabe6",
       "rfcAperti": "CRQ000000005995",
-      "stato": "Pianificato",
+      "stato": "Chiuso",
       "dataApertura": "2026-02-16",
       "anno": "",
       "bhelp": "",
@@ -63,7 +63,7 @@
     {
       "id": "6ecefa41-c103-4659-9585-6d864a57b9c5",
       "rfcAperti": "CRQ000000005608",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-02-09",
       "anno": "",
       "bhelp": "",
@@ -78,7 +78,7 @@
     {
       "id": "2bbe413d-7754-4f8c-a6e6-6c5892377be7",
       "rfcAperti": "CRQ000000002332",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-03",
       "anno": "",
       "bhelp": "",
@@ -93,7 +93,7 @@
     {
       "id": "e5d4c872-492b-474b-8594-424f046a7766",
       "rfcAperti": "CRQ000000002450",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-05",
       "anno": "",
       "bhelp": "",
@@ -108,7 +108,7 @@
     {
       "id": "3c68a618-1272-49d0-89bb-a7336d39bacd",
       "rfcAperti": "CRQ000000003216",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-09",
       "anno": "",
       "bhelp": "",
@@ -123,7 +123,7 @@
     {
       "id": "6d71b0f5-82c2-4e87-8b23-6a560b39db91",
       "rfcAperti": "CRQ000000003226",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-17",
       "anno": "",
       "bhelp": "",
@@ -138,7 +138,7 @@
     {
       "id": "e509de9f-47ae-466a-8d1a-d434733b6b2e",
       "rfcAperti": "CRQ000000002661",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-11",
       "anno": "",
       "bhelp": "",
@@ -168,7 +168,7 @@
     {
       "id": "3afbb5dd-5c95-4b9a-a26a-3ffca207fb07",
       "rfcAperti": "CRQ000000003226",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-23",
       "anno": "",
       "bhelp": "",
@@ -183,7 +183,7 @@
     {
       "id": "8ac6e4ca-9236-4691-acb0-94f668ed211c",
       "rfcAperti": "CRQ000000002964",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-17",
       "anno": "",
       "bhelp": "",
@@ -198,7 +198,7 @@
     {
       "id": "7d8423bb-07c6-429d-8bbb-660d8c1df942",
       "rfcAperti": "CRQ000000003704",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-08",
       "anno": "",
       "bhelp": "",
@@ -213,7 +213,7 @@
     {
       "id": "a620d3fa-f5d4-457a-839b-080a9bc7a5fe",
       "rfcAperti": "CRQ000000004036",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-14",
       "anno": "",
       "bhelp": "",
@@ -228,7 +228,7 @@
     {
       "id": "4c2096ea-6bc6-43f4-8f8b-02daef4eafda",
       "rfcAperti": "CRQ000000004088",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-15",
       "anno": "",
       "bhelp": "",
@@ -243,7 +243,7 @@
     {
       "id": "e175b260-8d26-40b8-ac95-f51553a5c979",
       "rfcAperti": "CRQ000000004355",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-20",
       "anno": "",
       "bhelp": "",
@@ -258,7 +258,7 @@
     {
       "id": "3379786e-5fc0-44e9-ac3d-d1e48084ecd3",
       "rfcAperti": "CRQ000000004351",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-20",
       "anno": "",
       "bhelp": "",
@@ -273,7 +273,7 @@
     {
       "id": "d80e2592-b6ca-4a70-8cca-e244ebdd383d",
       "rfcAperti": "CRQ000000001826",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-11-18",
       "anno": "",
       "bhelp": "",
@@ -288,7 +288,7 @@
     {
       "id": "de392b66-2196-4108-abd7-b261da6e90f8",
       "rfcAperti": "CRQ000000004517",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-22",
       "anno": "",
       "bhelp": "",
@@ -303,7 +303,7 @@
     {
       "id": "e3de6053-981c-4a43-b7ff-e35ac7537271",
       "rfcAperti": "CRQ000000004616",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-23",
       "anno": "",
       "bhelp": "",
@@ -318,7 +318,7 @@
     {
       "id": "bbb950e0-ce1f-41b5-912c-96bc34fbf472",
       "rfcAperti": "CRQ000000004617",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-23",
       "anno": "",
       "bhelp": "",
@@ -333,7 +333,7 @@
     {
       "id": "645487da-2d8b-44a2-8e1e-4dd4c8ee031d",
       "rfcAperti": "CRQ000000004581",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-26",
       "anno": "",
       "bhelp": "",
@@ -348,7 +348,7 @@
     {
       "id": "b85fb30c-e4af-4c51-8ed7-2f24b953574d",
       "rfcAperti": "CRQ000000001860",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-11-19",
       "anno": "",
       "bhelp": "",
@@ -363,7 +363,7 @@
     {
       "id": "65004133-6531-4aec-b852-aac84dd154c5",
       "rfcAperti": "CRQ000000001800",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-11-19",
       "anno": "",
       "bhelp": "",
@@ -378,7 +378,7 @@
     {
       "id": "a41d6b07-635f-4f81-85d0-7f5e7f67d1d5",
       "rfcAperti": "CRQ000000001901",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-11-19",
       "anno": "",
       "bhelp": "",
@@ -423,7 +423,7 @@
     {
       "id": "d324d648-9fbb-49e5-9a67-cba217f25cbf",
       "rfcAperti": "CRQ000000001865",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-19",
       "anno": "",
       "bhelp": "",
@@ -438,7 +438,7 @@
     {
       "id": "6fc153e4-df48-419c-a451-0562406d8f5d",
       "rfcAperti": "CRQ000000002557",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-10",
       "anno": "",
       "bhelp": "",
@@ -453,7 +453,7 @@
     {
       "id": "6991d7e4-91be-4a32-b871-b6e1c08d2ba8",
       "rfcAperti": "CRQ000000003054",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2025-12-18",
       "anno": "",
       "bhelp": "",
@@ -468,7 +468,7 @@
     {
       "id": "5b231e84-8041-4300-85c4-fbee3ce014d4",
       "rfcAperti": "CRQ000000003788",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-09",
       "anno": "",
       "bhelp": "",
@@ -483,7 +483,7 @@
     {
       "id": "29e35ea8-b563-452c-bb53-8fe29a76e298",
       "rfcAperti": "CRQ000000003964",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-13",
       "anno": "",
       "bhelp": "",
@@ -498,7 +498,7 @@
     {
       "id": "3207fca4-ae6e-4325-99b8-dc180d00834f",
       "rfcAperti": "CRQ000000004271",
-      "stato": "Completato",
+      "stato": "Chiuso",
       "dataApertura": "2026-01-20",
       "anno": "",
       "bhelp": "",
