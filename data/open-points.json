@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "583744df-5dde-41af-b130-a6c7880ccffd",
+      "title": "Verifica invio flussi",
+      "project": "Poteri di Firma",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Nuovo",
+      "maxPriority": false,
+      "createdAt": "2026-02-25",
+      "dueAt": "",
+      "desc": "chiedere contenuto cartelle tramite ticket",
+      "notes": ""
+    },
+    {
       "id": "c1cc92ec-c54f-4969-bfce-7a32d9f75923",
       "title": "Sentire Galli per DB",
       "project": "Concert",
