@@ -1,6 +1,21 @@
 {
   "crq": [
     {
+      "id": "ed2574a9-0a30-42a3-b523-3b5717ae8d99",
+      "rfcAperti": "CRQ000000006652",
+      "stato": "Pianificazione in corso",
+      "dataApertura": "2026-02-26",
+      "anno": "",
+      "bhelp": "",
+      "emerg": "No",
+      "utilizzato": "",
+      "categoria": "Dipartimentale",
+      "dataRilascio": "2026-03-13",
+      "rifNostro": "Fra",
+      "prj": "Poteri Di Firma",
+      "contenuto": "Importazione massiva Condomini da anagrafe generale secondo le caratteristiche fornite da ORGA."
+    },
+    {
       "id": "cf43c6f1-ee54-48a8-b2df-41a332d68960",
       "rfcAperti": "CRQ000000006381",
       "stato": "Pianificazione in corso",
@@ -514,7 +529,7 @@
       "id": "a27e8408-ed00-4d63-8ba3-c40dc10348a4",
       "rfcAperti": "CRQ000000004664",
       "stato": "Chiuso",
-      "dataApertura": "2026-02-27",
+      "dataApertura": "2026-01-27",
       "anno": "",
       "bhelp": "",
       "emerg": "No",
