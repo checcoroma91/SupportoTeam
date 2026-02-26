@@ -53,12 +53,12 @@
         "Fra"
       ],
       "priority": "high",
-      "status": "Da fare",
+      "status": "Completato",
       "maxPriority": false,
       "createdAt": "2026-02-24",
       "dueAt": "2026-02-25",
       "desc": "Contattare Galli per definire",
-      "notes": ""
+      "notes": "Si è sentito con ricky"
     },
     {
       "id": "1000550d-83f2-49c0-9813-c35733454b05",
