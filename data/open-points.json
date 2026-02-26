@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "b4902a05-a32f-473d-8537-90ef51c30730",
+      "title": "Monitorare codici PPM",
+      "project": "Poteri Di Firma, Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "In corso",
+      "maxPriority": false,
+      "createdAt": "2026-02-25",
+      "dueAt": "",
+      "desc": "Richiesti ma non ancora evasi",
+      "notes": ""
+    },
+    {
       "id": "a030d0e7-83e2-4ba0-aa6f-a29a6f2c388a",
       "title": "CRQ per prossima settimana",
       "project": "Poteri di Firma",
