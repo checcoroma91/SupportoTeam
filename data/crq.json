@@ -18,7 +18,7 @@
     {
       "id": "eae49e07-82c4-4950-80ca-1b2be49bea28",
       "rfcAperti": "CRQ000000006121",
-      "stato": "Approvazione pianificata",
+      "stato": "Pianificato",
       "dataApertura": "2026-02-17",
       "anno": "",
       "bhelp": "",
@@ -28,7 +28,7 @@
       "dataRilascio": "2026-02-27",
       "rifNostro": "Fra",
       "prj": "Poteri Di Firma",
-      "contenuto": "Si richiede la creazione del piano batch dipartimentali:\n- PF0DW\ngli script per la produzione sono in PROG.PF.OPCLANCI\n\nInoltre Scambio Flussi Poteri di firma - CRM"
+      "contenuto": "Si richiede la creazione del piano batch dipartimentali:\n- PF0DW\ngli script per la produzione sono in PROG.PF.OPCLANCI\nSi richiede la modifica della fase YPF0130 del piano batch dipartimentale YPF01. gli script per la produzione sono in PROG.PF.OPCLANCI (YPF0130)\nInoltre Scambio Flussi Poteri di firma - CRM"
     },
     {
       "id": "9c8e018d-5ce5-4a41-bf23-c3a86615815f",
