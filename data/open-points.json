@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "26ff66c6-a099-4dea-bc58-941c279218c4",
+      "title": "Inserimento in monitoraggio",
+      "project": "Poteri Di Firma, Portale Enti Convenzionati",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Da fare",
+      "maxPriority": false,
+      "createdAt": "2026-02-26",
+      "dueAt": "",
+      "desc": "richiedere inserimento in monitoraggio applicativi dynatrace",
+      "notes": ""
+    },
+    {
       "id": "b4902a05-a32f-473d-8537-90ef51c30730",
       "title": "Monitorare codici PPM",
       "project": "Poteri Di Firma, Portale Enti Convenzionati",
