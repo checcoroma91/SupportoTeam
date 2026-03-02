@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "ffe2b968-0be5-4f1a-a556-02cf76bc4813",
+      "title": "Senti Marchesiello",
+      "project": "Servizio DeleghePoteri",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "medium",
+      "status": "Nuovo",
+      "maxPriority": false,
+      "createdAt": "2026-03-02",
+      "dueAt": "",
+      "desc": "Sentire marchesiello per soluzione servizio",
+      "notes": ""
+    },
+    {
       "id": "26ff66c6-a099-4dea-bc58-941c279218c4",
       "title": "Inserimento in monitoraggio",
       "project": "Poteri Di Firma, Portale Enti Convenzionati",
