@@ -1,6 +1,21 @@
 {
   "openPoints": [
     {
+      "id": "57e4b1fb-faa2-4da3-854a-08f6cf7a0098",
+      "title": "CRQ per rilascio portaleenti e CRQ per Poteri prossima sett",
+      "project": "Multipli",
+      "assignees": [
+        "Fra"
+      ],
+      "priority": "high",
+      "status": "Da fare",
+      "maxPriority": true,
+      "createdAt": "2026-03-06",
+      "dueAt": "",
+      "desc": "",
+      "notes": ""
+    },
+    {
       "id": "ffe2b968-0be5-4f1a-a556-02cf76bc4813",
       "title": "Senti Marchesiello",
       "project": "Servizio DeleghePoteri",
