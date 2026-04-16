@@ -3,7 +3,7 @@
     {
       "id": "ed2574a9-0a30-42a3-b523-3b5717ae8d99",
       "rfcAperti": "CRQ000000006652",
-      "stato": "Pianificazione in corso",
+      "stato": "Chiuso",
       "dataApertura": "2026-02-26",
       "anno": "",
       "bhelp": "",
@@ -18,7 +18,7 @@
     {
       "id": "cf43c6f1-ee54-48a8-b2df-41a332d68960",
       "rfcAperti": "CRQ000000006381",
-      "stato": "Implementazione in corso",
+      "stato": "Chiuso",
       "dataApertura": "2026-02-20",
       "anno": "",
       "bhelp": "",
